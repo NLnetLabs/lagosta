@@ -1,2 +1,3 @@
 # lagosta
-A user interface for Krill
+
+Lagosta is the user interface for Krill.
