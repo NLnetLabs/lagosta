@@ -1,0 +1,56 @@
+{
+  "errors": {
+    "2003": "Insert a customized error message here."
+  },
+  "login": {
+    "password": "Password",
+    "placeholder": "Your password",
+    "signin": "Sign In",
+    "required": "Please insert your password",
+    "error": "The password you specified is wrong."
+  },
+  "cas": {
+    "loading": "Loading Certificate Authorities",
+    "cas": "Certificate Authorities",
+    "search": "Search CAs...",
+    "noCas": "There are currently no Certificate Authorities defined."
+  },
+  "caDetails": {
+    "loading": "Loading {handle}",
+    "download": "Download PEM",
+    "noRoas": "No Route Authorizations found.",
+    "noResources": "No resources found.",
+    "noChildren": "No children found.",
+    "addRoa": "Add ROA",
+    "roas": "Route Authorizations",
+    "resources": "Resources",
+    "parents": "Parents",
+    "repo": "Repository",
+    "type": "Type",
+    "properties": "Properties",
+    "property": "Property",
+    "value": "Value",
+    "kind": "Kind",
+    "resource": "Resource",
+    "children": "Children",
+    "handle": "Handle",
+    "maxLength": "Max Length",
+    "confirm": {
+      "title": "Warning",
+      "message": "This will remove the route authorization. Continue?",
+      "added": "ROA added.",
+      "retired": "ROA removed.",
+      "retiredSuccess": "The route authorization has been removed successfully.",
+      "addedSuccess": "The route authorization has been added successfully.",
+      "ok": "OK",
+      "cancel": "Cancel"
+    },
+    "form": {
+      "required": "This field is required",
+      "asn_format": "This is not a valid ASN",
+      "prefix_format": "Please enter a valid IPv4 or IPv6 prefix",
+      "confirm": "Confirm",
+      "cancel": "Cancel"
+    }
+  }
+}

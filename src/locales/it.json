@@ -1,0 +1,56 @@
+{
+  "errors": {
+    "2003": "Inserire un messaggio di errore qui."
+  },
+  "login": {
+    "password": "Password",
+    "placeholder": "La tua password",
+    "signin": "Login",
+    "required": "Inserire la propria password",
+    "error": "La password inserita e' errata."
+  },
+  "cas": {
+    "loading": "Certificate Authorities in caricamento....",
+    "cas": "Certificate Authorities",
+    "search": "Cerca CAs...",
+    "noCas": "Al momento non ci sono Certificate Authorities."
+  },
+  "caDetails": {
+    "loading": "{handle} in caricamento...",
+    "download": "Download PEM",
+    "noRoas": "Nessun Route Authorizations trovato.",
+    "noResources": "Nessuna risorsa trovata.",
+    "noChildren": "Nessun discendente trovato.",
+    "addRoa": "Aggiungi ROA",
+    "roas": "Route Authorizations",
+    "resources": "Risorse",
+    "parents": "Parenti",
+    "repo": "Repository",
+    "type": "Tipo",
+    "properties": "Proprieta'",
+    "property": "Proprieta'",
+    "value": "Valore",
+    "kind": "Tipo",
+    "resource": "Risorsa",
+    "children": "Discendenti",
+    "handle": "Handle",
+    "maxLength": "Lunghezza Massima",
+    "confirm": {
+      "title": "Attenzione",
+      "message": "Stai per rimuovere la route authorization. Continuare?",
+      "added": "ROA aggiunta.",
+      "retired": "ROA rimossa.",
+      "retiredSuccess": "La route authorization e' stata rimossa.",
+      "addedSuccess": "La route authorization e' stata aggiunta.",
+      "ok": "OK",
+      "cancel": "Cancella"
+    },
+    "form": {
+      "required": "Campo obbligatorio",
+      "asn_format": "Si prega di inserire un ASN valido",
+      "prefix_format": "Si prega di inserire un prefisso IPv4 o IPv6 valido",
+      "confirm": "Conferma",
+      "cancel": "Cancella"
+    }
+  }
+}
