@@ -1,4 +1,4 @@
-![Build](https://github.com/NLnetLabs/lagosta/workflows/Build/badge.svg)
+[![GitHub Actions Build Status](https://github.com/NLnetLabs/lagosta/workflows/Build/badge.svg)](https://github.com/NLnetLabs/lagosta/actions?query=workflow%3ABuild)
 
 # Lagosta
 
