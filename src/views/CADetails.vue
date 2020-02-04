@@ -337,9 +337,10 @@ export default {
               type: "success"
             });
             this.getROAs();
+            this.resetForm("addROAForm");
           }).catch((error) => {
-            let e = self.$t('errors.' + error.data.code);
-            if (e === 'errors.' + error.data.code) {
+            let e = self.$t("errors." + error.data.code);
+            if (e === "errors." + error.data.code) {
               e = error.data.msg;
             }
             self.error = e;
