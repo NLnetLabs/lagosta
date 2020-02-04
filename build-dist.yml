@@ -1,0 +1,31 @@
+name: Build
+
+on:
+  [push, pull_request]:
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    strategy:
+      matrix:
+        node-version: [8.x, 10.x, 12.x]
+
+    steps:
+    - name: Checkout Lagosta
+      uses: actions/checkout@v2
+    
+    - name: Use Node.js ${{ matrix.node-version }}
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install dependencies
+      run: yarn install
+
+    - name: Build Lagosta
+      run: yarn run build
+
+    - name: Publish artifact
+      uses: actions/upload-artifact@v1
+      with:
+        name: lagosta-dist
+        path: dist
