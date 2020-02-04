@@ -1,4 +1,4 @@
-[Build](https://github.com/NLnetLabs/lagosta/workflows/Build/badge.svg)
+![Build](https://github.com/NLnetLabs/lagosta/workflows/Build/badge.svg)
 
 # Lagosta
 
