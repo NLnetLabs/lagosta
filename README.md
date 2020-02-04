@@ -1,3 +1,5 @@
+![Build](https://github.com/NLnetLabs/lagosta/workflows/Build/badge.svg)
+
 # Lagosta
 
 Lagosta is the user interface for [Krill](https://github.com/NLnetLabs/krill).
