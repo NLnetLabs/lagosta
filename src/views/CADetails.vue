@@ -329,6 +329,18 @@ export default {
     next();
   },
   methods: {
+    parseError(error) {
+      let e = error.data.label
+        ? this.$t("errors." + error.data.label, error.data.args)
+        : this.$t("errors." + error.data.code);
+      if (
+        e ===
+        "errors." + (error.data.label ? error.data.label : error.data.code)
+      ) {
+        e = error.data.msg;
+      }
+      this.error = e;
+    },
     getContent() {
       this.loading = true;
       this.loadingRoas = true;
@@ -404,11 +416,7 @@ export default {
           this.getROAs();
         })
         .catch(function(error) {
-          let e = self.$t("errors." + error.data.code);
-          if (e === "errors." + error.data.code) {
-            e = error.data.msg;
-          }
-          self.error = e;
+          self.parseError(error);
         });
     },
     deleteROA: function(row) {
@@ -436,11 +444,7 @@ export default {
               this.resetForm("addROAForm");
             })
             .catch(error => {
-              let e = self.$t("errors." + error.data.code);
-              if (e === "errors." + error.data.code) {
-                e = error.data.msg;
-              }
-              self.error = e;
+              self.parseError(error);
             });
         })
         .catch(() => {});

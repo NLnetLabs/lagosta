@@ -1,6 +1,7 @@
 {
   "errors": {
-    "2003": "Inserire un messaggio di errore qui."
+    "2003": "Inserire un messaggio di errore qui.",
+    "ca-auth-duplicate": "Autorizzazione duplicata '{prefix}-{max_length} => {asn}' per il CA '{ca}'"
   },
   "login": {
     "password": "Password",

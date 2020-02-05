@@ -1,6 +1,7 @@
 {
   "errors": {
-    "2003": "Insert a customized error message here."
+    "2003": "Insert a customized error message here.",
+    "ca-auth-duplicate": "Duplicate authorization '{prefix}-{max_length} => {asn}' for CA '{ca}'"
   },
   "login": {
     "password": "Password",
