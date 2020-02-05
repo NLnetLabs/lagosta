@@ -164,13 +164,14 @@
       :title="$t('caDetails.addRoa')"
       :visible.sync="addROAFormVisible"
       :close-on-click-modal="false"
+      @close="resetForm('addROAForm')"
     >
       <el-form :model="form" :rules="rules" ref="addROAForm">
         <el-form-item label="ASN" prop="asn">
           <el-input v-model="form.asn" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="Prefix" placeholder="ie. 10.1.0.0/22" prop="prefix">
-          <el-input v-model="form.prefix" autocomplete="off"></el-input>
+          <el-input v-model="form.prefix" autocomplete="off" @input="updateMaxLength($event)"></el-input>
         </el-form-item>
         <el-form-item :label="$t('caDetails.maxLength')" placeholder="ie. 24" prop="maxLength">
           <el-input v-model="form.maxLength" autocomplete="off" type="number" min="4" max="64"></el-input>
@@ -457,6 +458,11 @@ export default {
       this.error = "";
       this.addROAFormVisible = false;
       this.$refs[formName].resetFields();
+    },
+    updateMaxLength(value) {
+      if (value.indexOf("/") > -1) {
+        this.form.maxLength = value.split("/")[1];
+      }
     }
   }
 };
