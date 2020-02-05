@@ -2,10 +2,26 @@
   <div>
     <el-card class="box-card" v-if="ca.handle">
       <div slot="header" class="clearfix">
-        <el-breadcrumb separator-class="el-icon-arrow-right">
-          <el-breadcrumb-item :to="{ path: '/' }">{{ $t("cas.cas") }}</el-breadcrumb-item>
-          <el-breadcrumb-item>{{ handle }}</el-breadcrumb-item>
-        </el-breadcrumb>
+        <el-row>
+          <el-col :span="18">
+            <h3>
+              {{ $t("cas.ca") }}
+              <strong>{{ handle }}</strong>
+            </h3>
+          </el-col>
+          <el-col :span="6">
+            <div class="switcher">
+              <el-select
+                v-model="handle"
+                placeholder="Current CA"
+                size="small"
+                @change="getContent()"
+              >
+                <el-option v-for="ca in CAs" :key="ca.handle" :value="ca.handle" :label="ca.handle"></el-option>
+              </el-select>
+            </div>
+          </el-col>
+        </el-row>
       </div>
       <div class="text item">
         <span v-if="loading">
@@ -14,7 +30,6 @@
         </span>
 
         <div v-if="!loading && ca" class="main">
-
           <div class="title">{{ $t("caDetails.repo") }}</div>
 
           <el-table v-if="properties.length" :data="properties" style="width: 100%">
@@ -23,7 +38,8 @@
               <template slot-scope="scope">
                 <ul>
                   <li :key="prop.prop" v-for="prop in properties[scope.$index].props">
-                    {{ prop.prop }}: <a :href="prop.value" target="_blank">{{ prop.value }}</a>
+                    {{ prop.prop }}:
+                    <a :href="prop.value" target="_blank">{{ prop.value }}</a>
                   </li>
                 </ul>
               </template>
@@ -39,22 +55,29 @@
                   v-if="ca.parents[scope.$index].kind === 'rfc6492'"
                   placement="right"
                   width="400"
-                  trigger="click">
+                  trigger="click"
+                >
                   <i class="el-icon-loading" v-if="loadingParent"></i>
                   <el-table :data="parentDetails">
                     <el-table-column property="prop" :label="$t('caDetails.property')"></el-table-column>
                     <el-table-column property="value" :label="$t('caDetails.value')"></el-table-column>
                   </el-table>
-                  <el-button type="text" slot="reference" @click="getParent(ca.parents[scope.$index])">{{ ca.parents[scope.$index].handle }}</el-button>
+                  <el-button
+                    type="text"
+                    slot="reference"
+                    @click="getParent(ca.parents[scope.$index])"
+                  >{{ ca.parents[scope.$index].handle }}</el-button>
                 </el-popover>
-                <span v-if="ca.parents[scope.$index].kind !== 'rfc6492'">{{ ca.parents[scope.$index].handle }}</span>
+                <span
+                  v-if="ca.parents[scope.$index].kind !== 'rfc6492'"
+                >{{ ca.parents[scope.$index].handle }}</span>
               </template>
             </el-table-column>
             <el-table-column prop="kind" :label="$t('caDetails.kind')"></el-table-column>
           </el-table>
 
           <div class="title">{{ $t("caDetails.resources") }}</div>
-          
+
           <el-table v-if="resourcesArray.length" :data="resourcesArray" style="width: 100%">
             <el-table-column prop="prop" :label="$t('caDetails.resource')"></el-table-column>
             <el-table-column prop="value" :label="$t('caDetails.value')"></el-table-column>
@@ -68,42 +91,45 @@
             <el-table-column prop="handle" :label="$t('caDetails.handle')"></el-table-column>
           </el-table>
 
+          <div class="title">
+            {{ $t("caDetails.roas") }}
+            <i class="el-icon-loading" v-if="loadingRoas"></i>
+          </div>
+
+          <el-table v-if="!loadingRoas && roas.length" :data="roas" style="width: 100%">
+            <el-table-column prop="asn" label="ASN"></el-table-column>
+            <el-table-column prop="prefix" label="Prefix"></el-table-column>
+            <el-table-column prop="max_length" :label="$t('caDetails.maxLength')"></el-table-column>
+            <el-table-column label width="80">
+              <template slot-scope="scope">
+                <el-button
+                  size="mini"
+                  icon="el-icon-delete"
+                  type="primary"
+                  round
+                  @click="deleteROA(scope.row)"
+                ></el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+
+          <div v-if="!loadingRoas && roas.length === 0" class="empty">{{ $t("caDetails.noRoas") }}</div>
+
+          <el-button
+            class="addRoa"
+            size="mini"
+            type="primary"
+            @click="addROAFormVisible = true"
+          >{{ $t("caDetails.addRoa") }}</el-button>
         </div>
-
-
-        <!-- <pre v-text="JSON.stringify(ca, null, 2)"></pre> -->
-
-        <div class="title">{{ $t("caDetails.roas") }} <i class="el-icon-loading" v-if="loadingRoas"></i></div>
-
-        <el-table v-if="!loadingRoas && roas.length" :data="roas" style="width: 100%">
-          <el-table-column prop="asn" label="ASN"></el-table-column>
-          <el-table-column prop="prefix" label="Prefix"></el-table-column>
-          <el-table-column prop="max_length" :label="$t('caDetails.maxLength')"></el-table-column>
-          <el-table-column label="" width="80">
-            <template slot-scope="scope">
-              <el-button
-                size="mini"
-                icon="el-icon-delete"
-                type="primary"
-                round
-                @click="deleteROA(scope.row)"></el-button>
-            </template>
-          </el-table-column>
-        </el-table>
-
-        <div v-if="!loadingRoas && roas.length === 0" class="empty">{{ $t("caDetails.noRoas") }}</div>
-        
-        <el-button
-          class="addRoa"
-          size="mini"
-          type="primary"
-          @click="addROAFormVisible = true">{{ $t("caDetails.addRoa") }}</el-button>
-
-        
       </div>
     </el-card>
 
-    <el-dialog :title="$t('caDetails.addRoa')" :visible.sync="addROAFormVisible" :close-on-click-modal="false">
+    <el-dialog
+      :title="$t('caDetails.addRoa')"
+      :visible.sync="addROAFormVisible"
+      :close-on-click-modal="false"
+    >
       <el-form :model="form" :rules="rules" ref="addROAForm">
         <el-form-item label="ASN" prop="asn">
           <el-input v-model="form.asn" autocomplete="off"></el-input>
@@ -132,14 +158,18 @@
 <script>
 import router from "@/router";
 import APIService from "@/services/APIService.js";
-const cidrRegex = require('cidr-regex');
+const cidrRegex = require("cidr-regex");
 export default {
   data() {
     const checkASN = (rule, value, callback) => {
       if (value === "") {
         callback(new Error(this.$t("caDetails.form.required")));
       } else {
-        if (new RegExp('^([1-9]|[1-8][0-9]|9[0-9]|[1-8][0-9]{2}|9[0-8][0-9]|99[0-9]|[1-8][0-9]{3}|9[0-8][0-9]{2}|99[0-8][0-9]|999[0-9]|[1-8][0-9]{4}|9[0-8][0-9]{3}|99[0-8][0-9]{2}|999[0-8][0-9]|9999[0-9]|[12][0-9]{5}|3[0-8][0-9]{4}|39[0-8][0-9]{3}|399[01][0-9]{2}|3992[0-5][0-9]|399260)$').test(value)) {
+        if (
+          new RegExp(
+            "^([1-9]|[1-8][0-9]|9[0-9]|[1-8][0-9]{2}|9[0-8][0-9]|99[0-9]|[1-8][0-9]{3}|9[0-8][0-9]{2}|99[0-8][0-9]|999[0-9]|[1-8][0-9]{4}|9[0-8][0-9]{3}|99[0-8][0-9]{2}|999[0-8][0-9]|9999[0-9]|[12][0-9]{5}|3[0-8][0-9]{4}|39[0-8][0-9]{3}|399[01][0-9]{2}|3992[0-5][0-9]|399260)$"
+          ).test(value)
+        ) {
           callback();
         } else {
           callback(new Error(this.$t("caDetails.form.asn_format")));
@@ -150,7 +180,7 @@ export default {
       if (value === "") {
         callback(new Error(this.$t("caDetails.form.required")));
       } else {
-        if (cidrRegex({exact: true}).test(value)) {
+        if (cidrRegex({ exact: true }).test(value)) {
           callback();
         } else {
           callback(new Error(this.$t("caDetails.form.prefix_format")));
@@ -164,6 +194,8 @@ export default {
       loadingRoas: false,
       loadingRepo: false,
       loadingParent: false,
+      loadingCAs: false,
+      CAs: [],
       ca: {},
       roas: {},
       repo: {},
@@ -176,15 +208,19 @@ export default {
         maxLength: ""
       },
       rules: {
-        asn: [{
-          required: true,
-          validator: checkASN,
-          message: this.$t("caDetails.form.asn_format")
-        }],
-        prefix: [{
-          validator: checkPrefix,
-          required: true
-        }]
+        asn: [
+          {
+            required: true,
+            validator: checkASN,
+            message: this.$t("caDetails.form.asn_format")
+          }
+        ],
+        prefix: [
+          {
+            validator: checkPrefix,
+            required: true
+          }
+        ]
       }
     };
   },
@@ -192,26 +228,33 @@ export default {
     properties: function() {
       if (this.repo) {
         if (this.repo.embedded) {
-          return [{
-            type: "Embedded",
-            props: [{
-                prop: "Base URI",
-                value: this.repo.embedded.base_uri
-              },
-              {
-                prop: "RPKI Notify",
-                value: this.repo.embedded.rpki_notify
-              }
-            ]
-          }]
+          return [
+            {
+              type: "Embedded",
+              props: [
+                {
+                  prop: "Base URI",
+                  value: this.repo.embedded.base_uri
+                },
+                {
+                  prop: "RPKI Notify",
+                  value: this.repo.embedded.rpki_notify
+                }
+              ]
+            }
+          ];
         } else if (this.repo.rfc8181) {
-          return [{
-            type: "Remote",
-            props: [{
-              prop: "Service URI",
-              value: this.repo.rfc8181.service_uri
-            }]
-          }]
+          return [
+            {
+              type: "Remote",
+              props: [
+                {
+                  prop: "Service URI",
+                  value: this.repo.rfc8181.service_uri
+                }
+              ]
+            }
+          ];
         }
       }
       return [];
@@ -220,7 +263,7 @@ export default {
       let resArray = [];
       if (this.ca) {
         let res = this.ca.resources;
-        Object.keys(res).forEach((k) => {
+        Object.keys(res).forEach(k => {
           resArray.push({
             prop: k,
             value: res[k]
@@ -230,12 +273,14 @@ export default {
       return resArray;
     },
     childrenArray: function() {
-      return this.ca ? this.ca.children.map((c) => {
-        return {
-          handle: c
-        }
-      }) : [];
-    },
+      return this.ca
+        ? this.ca.children.map(c => {
+            return {
+              handle: c
+            };
+          })
+        : [];
+    }
   },
   created() {
     this.getContent();
@@ -259,6 +304,7 @@ export default {
         this.repo = response.data.contact;
       });
       this.getROAs();
+      this.loadCAs();
     },
     getROAs() {
       APIService.getROAs(this.handle).then(response => {
@@ -272,7 +318,8 @@ export default {
       APIService.getParentContact(this.handle, row.handle).then(response => {
         this.loadingParent = false;
         if (response.data.rfc6492) {
-          this.parentDetails = [{
+          this.parentDetails = [
+            {
               prop: "Parent handle",
               value: response.data.rfc6492.parent_handle
             },
@@ -288,19 +335,28 @@ export default {
         }
       });
     },
+    loadCAs: function() {
+      APIService.getCAs().then(response => {
+        this.loadingCAs = false;
+        this.CAs = response.data.cas;
+      });
+    },
     loadCA: function(row) {
       router.push("/cas/" + row.handle);
     },
     addROA: function() {
       const self = this;
       APIService.updateROAs(this.handle, {
-          added: [{
-            "asn": parseInt(this.form.asn),
-            "prefix": this.form.prefix,
-            "max_length": parseInt(this.form.maxLength) || 0
-          }],
-          removed: []
-        }).then(() => {
+        added: [
+          {
+            asn: parseInt(this.form.asn),
+            prefix: this.form.prefix,
+            max_length: parseInt(this.form.maxLength) || 0
+          }
+        ],
+        removed: []
+      })
+        .then(() => {
           this.$notify({
             title: this.$t("caDetails.confirm.added"),
             message: this.$t("caDetails.confirm.addedSuccess"),
@@ -310,8 +366,8 @@ export default {
           this.getROAs();
         })
         .catch(function(error) {
-          let e = self.$t('errors.' + error.data.code);
-          if (e === 'errors.' + error.data.code) {
+          let e = self.$t("errors." + error.data.code);
+          if (e === "errors." + error.data.code) {
             e = error.data.msg;
           }
           self.error = e;
@@ -320,33 +376,36 @@ export default {
     deleteROA: function(row) {
       const self = this;
       this.$confirm(
-          this.$t("caDetails.confirm.message"),
-          this.$t("caDetails.confirm.title"), {
-            confirmButtonText: this.$t("caDetails.confirm.ok"),
-            cancelButtonText: this.$t("caDetails.confirm.cancel")
-          }
-        )
+        this.$t("caDetails.confirm.message"),
+        this.$t("caDetails.confirm.title"),
+        {
+          confirmButtonText: this.$t("caDetails.confirm.ok"),
+          cancelButtonText: this.$t("caDetails.confirm.cancel")
+        }
+      )
         .then(() => {
           APIService.updateROAs(this.handle, {
             added: [],
             removed: [row]
-          }).then(() => {
-            this.$notify({
-              title: this.$t("caDetails.confirm.retired"),
-              message: this.$t("caDetails.confirm.retiredSuccess"),
-              type: "success"
+          })
+            .then(() => {
+              this.$notify({
+                title: this.$t("caDetails.confirm.retired"),
+                message: this.$t("caDetails.confirm.retiredSuccess"),
+                type: "success"
+              });
+              this.getROAs();
+              this.resetForm("addROAForm");
+            })
+            .catch(error => {
+              let e = self.$t("errors." + error.data.code);
+              if (e === "errors." + error.data.code) {
+                e = error.data.msg;
+              }
+              self.error = e;
             });
-            this.getROAs();
-            this.resetForm("addROAForm");
-          }).catch((error) => {
-            let e = self.$t("errors." + error.data.code);
-            if (e === "errors." + error.data.code) {
-              e = error.data.msg;
-            }
-            self.error = e;
-          });
-        }).catch(() => {});
-        
+        })
+        .catch(() => {});
     },
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
@@ -358,17 +417,22 @@ export default {
       });
     },
     resetForm(formName) {
-      this.error = '';
+      this.error = "";
       this.addROAFormVisible = false;
       this.$refs[formName].resetFields();
     }
   }
-}; 
+};
 </script>
 
 <style lang="scss" scoped>
+h3 {
+  font-weight: 300;
+  margin: 0;
+  padding-top: 0.3rem;
+}
 a {
-  color: #F63107;
+  color: #f63107;
   &:hover {
     color: #f85a39;
   }
@@ -382,9 +446,9 @@ a {
   margin-top: 4rem;
   margin-bottom: 1rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid #F9EADD;
+  border-bottom: 1px solid #f9eadd;
   text-decoration: underline;
-  text-decoration-color: #F63107;
+  text-decoration-color: #f63107;
 }
 
 .main .title:first-child {
@@ -404,4 +468,7 @@ ul {
   margin-top: 1rem;
 }
 
+.switcher {
+  text-align: right;
+}
 </style>

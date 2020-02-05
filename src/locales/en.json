@@ -11,6 +11,7 @@
   },
   "cas": {
     "loading": "Loading Certificate Authorities",
+    "ca": "Certificate Authority",
     "cas": "Certificate Authorities",
     "search": "Search CAs...",
     "noCas": "There are currently no Certificate Authorities defined."

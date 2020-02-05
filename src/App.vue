@@ -11,18 +11,6 @@
             </router-link>
           </el-col>
           <el-col :span="14">
-            <el-menu
-            v-if="user"
-            :router="true"
-            :default-active="activeIndex"
-            mode="horizontal"
-            background-color="#f63107"
-            text-color="#fff"
-            active-text-color="#fff">
-              <el-menu-item index="1" :route="{ name: 'cas'}">
-                {{ $t("cas.cas") }}
-              </el-menu-item>
-            </el-menu>
             &nbsp;
           </el-col>
           <el-col :span="6">

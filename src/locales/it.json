@@ -11,6 +11,7 @@
   },
   "cas": {
     "loading": "Certificate Authorities in caricamento....",
+    "ca": "Certificate Authority",
     "cas": "Certificate Authorities",
     "search": "Cerca CAs...",
     "noCas": "Al momento non ci sono Certificate Authorities."

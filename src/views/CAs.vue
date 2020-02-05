@@ -43,7 +43,7 @@
           </el-table-column>
         </el-table>
 
-        <div v-if="CAs.length === 0" class="empty">{{ $t("cas.noCas") }}</div>
+        <div v-if="!loading && CAs.length === 0" class="empty">{{ $t("cas.noCas") }}</div>
       </div>
     </el-card>
   </div>
