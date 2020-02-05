@@ -11,9 +11,10 @@
           </el-col>
           <el-col :span="6">
             <div class="switcher">
+              <span class="label">{{ $t('caDetails.current') }}</span>
               <el-select
                 v-model="handle"
-                placeholder="Current CA"
+                placeholder="$t('caDetails.current')"
                 size="small"
                 @change="getContent()"
               >
@@ -30,97 +31,131 @@
         </span>
 
         <div v-if="!loading && ca" class="main">
-          <div class="title">{{ $t("caDetails.repo") }}</div>
+          <el-tabs v-model="activeTab">
+            <el-tab-pane :label="$t('caDetails.resources')" name="resources">
+              <el-table
+                size="small"
+                v-if="resourcesArray.length"
+                :data="resourcesArray"
+                style="width: 100%"
+              >
+                <el-table-column prop="prop" :label="$t('caDetails.resource')"></el-table-column>
+                <el-table-column prop="value" :label="$t('caDetails.value')"></el-table-column>
+              </el-table>
 
-          <el-table v-if="properties.length" :data="properties" style="width: 100%">
-            <el-table-column prop="type" :label="$t('caDetails.type')"></el-table-column>
-            <el-table-column prop="props" :label="$t('caDetails.properties')">
-              <template slot-scope="scope">
-                <ul>
-                  <li :key="prop.prop" v-for="prop in properties[scope.$index].props">
-                    {{ prop.prop }}:
-                    <a :href="prop.value" target="_blank">{{ prop.value }}</a>
-                  </li>
-                </ul>
-              </template>
-            </el-table-column>
-          </el-table>
+              <div
+                v-if="resourcesArray.length === 0"
+                class="empty"
+              >{{ $t("caDetails.noResources") }}</div>
 
-          <div class="title">{{ $t("caDetails.parents") }}</div>
-
-          <el-table v-if="ca.parents.length" :data="ca.parents" style="width: 100%">
-            <el-table-column prop="handle" label="Handle">
-              <template slot-scope="scope">
-                <el-popover
-                  v-if="ca.parents[scope.$index].kind === 'rfc6492'"
-                  placement="right"
-                  width="400"
-                  trigger="click"
-                >
-                  <i class="el-icon-loading" v-if="loadingParent"></i>
-                  <el-table :data="parentDetails">
-                    <el-table-column property="prop" :label="$t('caDetails.property')"></el-table-column>
-                    <el-table-column property="value" :label="$t('caDetails.value')"></el-table-column>
+              <el-tabs v-model="activeTabInner" class="inner-tab">
+                <el-tab-pane :label="$t('caDetails.roas')" name="roas">
+                  <i class="el-icon-loading" v-if="loadingRoas"></i>
+                  <el-table
+                    size="small"
+                    v-if="!loadingRoas && roas.length"
+                    :data="roas"
+                    style="width: 100%"
+                  >
+                    <el-table-column prop="asn" label="ASN"></el-table-column>
+                    <el-table-column prop="prefix" label="Prefix"></el-table-column>
+                    <el-table-column prop="max_length" :label="$t('caDetails.maxLength')"></el-table-column>
+                    <el-table-column label width="80">
+                      <template slot-scope="scope">
+                        <el-button
+                          size="mini"
+                          icon="el-icon-delete"
+                          type="primary"
+                          round
+                          @click="deleteROA(scope.row)"
+                        ></el-button>
+                      </template>
+                    </el-table-column>
                   </el-table>
-                  <el-button
-                    type="text"
-                    slot="reference"
-                    @click="getParent(ca.parents[scope.$index])"
-                  >{{ ca.parents[scope.$index].handle }}</el-button>
-                </el-popover>
-                <span
-                  v-if="ca.parents[scope.$index].kind !== 'rfc6492'"
-                >{{ ca.parents[scope.$index].handle }}</span>
-              </template>
-            </el-table-column>
-            <el-table-column prop="kind" :label="$t('caDetails.kind')"></el-table-column>
-          </el-table>
+                </el-tab-pane>
+              </el-tabs>
 
-          <div class="title">{{ $t("caDetails.resources") }}</div>
+              <div
+                v-if="!loadingRoas && roas.length === 0"
+                class="empty"
+              >{{ $t("caDetails.noRoas") }}</div>
 
-          <el-table v-if="resourcesArray.length" :data="resourcesArray" style="width: 100%">
-            <el-table-column prop="prop" :label="$t('caDetails.resource')"></el-table-column>
-            <el-table-column prop="value" :label="$t('caDetails.value')"></el-table-column>
-          </el-table>
-
-          <div v-if="resourcesArray.length === 0" class="empty">{{ $t("caDetails.noResources") }}</div>
-
-          <div class="title" v-if="childrenArray.length">{{ $t('caDetails.children') }}</div>
-
-          <el-table v-if="childrenArray.length" :data="childrenArray" style="width: 100%">
-            <el-table-column prop="handle" :label="$t('caDetails.handle')"></el-table-column>
-          </el-table>
-
-          <div class="title">
-            {{ $t("caDetails.roas") }}
-            <i class="el-icon-loading" v-if="loadingRoas"></i>
-          </div>
-
-          <el-table v-if="!loadingRoas && roas.length" :data="roas" style="width: 100%">
-            <el-table-column prop="asn" label="ASN"></el-table-column>
-            <el-table-column prop="prefix" label="Prefix"></el-table-column>
-            <el-table-column prop="max_length" :label="$t('caDetails.maxLength')"></el-table-column>
-            <el-table-column label width="80">
-              <template slot-scope="scope">
-                <el-button
-                  size="mini"
-                  icon="el-icon-delete"
-                  type="primary"
-                  round
-                  @click="deleteROA(scope.row)"
-                ></el-button>
-              </template>
-            </el-table-column>
-          </el-table>
-
-          <div v-if="!loadingRoas && roas.length === 0" class="empty">{{ $t("caDetails.noRoas") }}</div>
-
-          <el-button
-            class="addRoa"
-            size="mini"
-            type="primary"
-            @click="addROAFormVisible = true"
-          >{{ $t("caDetails.addRoa") }}</el-button>
+              <el-button
+                class="addRoa"
+                size="mini"
+                type="primary"
+                @click="addROAFormVisible = true"
+              >{{ $t("caDetails.addRoa") }}</el-button>
+            </el-tab-pane>
+            <el-tab-pane :label="$t('caDetails.parents')" name="parents">
+              <el-table
+                size="small"
+                v-if="ca.parents.length"
+                :data="ca.parents"
+                style="width: 100%"
+              >
+                <el-table-column prop="handle" label="Handle">
+                  <template slot-scope="scope">
+                    <el-popover
+                      v-if="ca.parents[scope.$index].kind === 'rfc6492'"
+                      placement="right"
+                      width="400"
+                      trigger="click"
+                    >
+                      <i class="el-icon-loading" v-if="loadingParent"></i>
+                      <el-table :data="parentDetails">
+                        <el-table-column property="prop" :label="$t('caDetails.property')"></el-table-column>
+                        <el-table-column property="value" :label="$t('caDetails.value')"></el-table-column>
+                      </el-table>
+                      <el-button
+                        type="text"
+                        slot="reference"
+                        @click="getParent(ca.parents[scope.$index])"
+                      >{{ ca.parents[scope.$index].handle }}</el-button>
+                    </el-popover>
+                    <span
+                      v-if="ca.parents[scope.$index].kind !== 'rfc6492'"
+                    >{{ ca.parents[scope.$index].handle }}</span>
+                  </template>
+                </el-table-column>
+                <el-table-column prop="kind" :label="$t('caDetails.kind')"></el-table-column>
+              </el-table>
+            </el-tab-pane>
+            <el-tab-pane
+              :label="$t('caDetails.children')"
+              name="children"
+              v-if="childrenArray.length"
+            >
+              <el-table
+                size="small"
+                v-if="childrenArray.length"
+                :data="childrenArray"
+                style="width: 100%"
+              >
+                <el-table-column prop="handle" :label="$t('caDetails.handle')"></el-table-column>
+              </el-table>
+            </el-tab-pane>
+            <el-tab-pane :label="$t('caDetails.repo')" name="repo">
+              <el-table
+                size="small"
+                v-if="properties.length"
+                :data="properties"
+                style="width: 100%"
+              >
+                <el-table-column prop="type" :label="$t('caDetails.type')"></el-table-column>
+                <el-table-column prop="props" :label="$t('caDetails.properties')">
+                  <template slot-scope="scope">
+                    <ul>
+                      <li :key="prop.prop" v-for="prop in properties[scope.$index].props">
+                        {{ prop.prop }}:
+                        <a :href="prop.value" target="_blank">{{ prop.value }}</a>
+                      </li>
+                    </ul>
+                  </template>
+                </el-table-column>
+              </el-table>
+            </el-tab-pane>
+          </el-tabs>
         </div>
       </div>
     </el-card>
@@ -189,6 +224,8 @@ export default {
     };
 
     return {
+      activeTab: "resources",
+      activeTabInner: "roas",
       handle: this.$route.params.handle,
       loading: false,
       loadingRoas: false,
@@ -438,7 +475,9 @@ a {
   }
 }
 .box-card {
-  margin: 2rem;
+  margin: 0;
+  border: 0;
+  box-shadow: none !important;
 }
 
 .title {
@@ -470,5 +509,13 @@ ul {
 
 .switcher {
   text-align: right;
+  .label {
+    font-size: 0.8rem;
+    padding-right: 0.5rem;
+  }
+}
+
+.inner-tab {
+  margin-top: 2rem;
 }
 </style>

@@ -18,6 +18,7 @@
   },
   "caDetails": {
     "loading": "{handle} in caricamento...",
+    "current": "Seleziona CA",
     "download": "Download PEM",
     "noRoas": "Nessun Route Authorizations trovato.",
     "noResources": "Nessuna risorsa trovata.",
