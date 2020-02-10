@@ -5,7 +5,8 @@ import Login from "./views/Login.vue";
 import CAs from "./views/CAs.vue";
 import CADetails from "./views/CADetails.vue";
 import Interstitial from "./views/Interstitial.vue";
-import Onboarding from "./views/Onboarding.vue";
+import CreateCA from "./views/CreateCA.vue";
+import PageNotFound from "./views/404.vue";
 import APIService from "./services/APIService.js";
 
 Vue.use(Router);
@@ -25,7 +26,12 @@ const router = new Router({
     {
       path: "/onboarding",
       name: "onboarding",
-      component: Onboarding
+      component: CreateCA
+    },
+    {
+      path: "/createca",
+      name: "createca",
+      component: CreateCA
     },
     {
       path: "/cas",
@@ -33,7 +39,7 @@ const router = new Router({
       component: CAs
     },
     {
-      path: "/cas/:handle",
+      path: "/cas/:handle/:tab?",
       name: "caDetails",
       component: CADetails
     },
@@ -41,7 +47,8 @@ const router = new Router({
       path: "/login",
       name: "login",
       component: Login
-    }
+    },
+    { path: "*", component: PageNotFound }
   ]
 });
 

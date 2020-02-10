@@ -24,7 +24,15 @@ export default {
       APIService.getCAs().then(response => {
         this.loading = false;
         if (response.data.cas && response.data.cas.length > 0) {
-          router.push("/cas/" + response.data.cas[0]["handle"]);
+          let handle = response.data.cas[0]["handle"];
+          if (handle !== "ta") {
+            if (localStorage.lagostaLastCA) {
+              handle = localStorage.lagostaLastCA;
+            }
+            router.push("/cas/" + handle);
+          } else {
+            router.push("/onboarding");
+          }
         } else {
           router.push("/onboarding");
         }

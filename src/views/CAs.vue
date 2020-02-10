@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <el-card class="box-card">
       <div slot="header" class="clearfix">
         <el-breadcrumb separator-class="el-icon-arrow-right">
@@ -26,12 +25,7 @@
           <i class="el-icon-loading"></i>
           {{ $t("cas.loading") }}
         </span>
-        <el-table
-          v-if="CAs.length > 0"
-          :data="filteredCAs"
-          @row-click="loadCA"
-          style="width: 100%"
-        >
+        <el-table v-if="CAs.length > 0" :data="filteredCAs" @row-click="loadCA" style="width: 100%">
           <el-table-column label="Handle" v-if="!loading">
             <template slot-scope="scope">
               <router-link
@@ -58,7 +52,7 @@ export default {
       loading: false,
       CAs: [],
       search: "",
-      error: "",
+      error: ""
     };
   },
   computed: {

@@ -3,20 +3,20 @@
     <el-card class="box-card" v-if="ca.handle">
       <div slot="header" class="clearfix">
         <el-row>
-          <el-col :span="18">
+          <el-col :xs="24" :sm="18">
             <h3>
               {{ $t("cas.ca") }}
               <strong>{{ handle }}</strong>
             </h3>
           </el-col>
-          <el-col :span="6">
-            <div class="switcher">
+          <el-col :xs="24" :sm="6">
+            <div class="switcher" v-if="CAs.length > 1">
               <span class="label">{{ $t('caDetails.current') }}</span>
               <el-select
                 v-model="handle"
                 placeholder="$t('caDetails.current')"
                 size="small"
-                @change="getContent()"
+                @change="switchCA()"
               >
                 <el-option v-for="ca in CAs" :key="ca.handle" :value="ca.handle" :label="ca.handle"></el-option>
               </el-select>
@@ -30,26 +30,17 @@
           <span v-t="{ path: 'caDetails.loading', args: { handle: handle } }"></span>
         </span>
 
+        <div class="onboarding" v-if="initializeRepo && initializeParent">
+          <p>{{ $t('caDetails.onboardingWarning') }}</p>
+        </div>
+
         <div v-if="!loading && ca" class="main">
           <el-tabs v-model="activeTab">
-            <el-tab-pane :label="$t('caDetails.resources')" name="resources">
-              <el-table
-                size="small"
-                v-if="resourcesArray.length"
-                :data="resourcesArray"
-                style="width: 100%"
-              >
-                <el-table-column prop="prop" :label="$t('caDetails.resource')"></el-table-column>
-                <el-table-column prop="value" :label="$t('caDetails.value')"></el-table-column>
-              </el-table>
+            <el-tab-pane :label="$t('caDetails.roas')" name="roas">
+              <h5 v-if="initializeParent || initializeRepo">{{ $t('caDetails.initialize') }}</h5>
 
-              <div
-                v-if="resourcesArray.length === 0"
-                class="empty"
-              >{{ $t("caDetails.noResources") }}</div>
-
-              <el-tabs v-model="activeTabInner" class="inner-tab">
-                <el-tab-pane :label="$t('caDetails.roas')" name="roas">
+              <el-row v-if="!initializeParent && !initializeRepo">
+                <el-col :xs="24" :sm="16">
                   <i class="el-icon-loading" v-if="loadingRoas"></i>
                   <el-table
                     size="small"
@@ -72,25 +63,69 @@
                       </template>
                     </el-table-column>
                   </el-table>
-                </el-tab-pane>
-              </el-tabs>
+                  <div
+                    v-if="!loadingRoas && roas.length === 0 && !initializeRepo && !initializeParent"
+                    class="empty"
+                  >{{ $t("caDetails.noRoas") }}</div>
 
-              <div
-                v-if="!loadingRoas && roas.length === 0"
-                class="empty"
-              >{{ $t("caDetails.noRoas") }}</div>
+                  <el-button
+                    class="mt-1"
+                    size="mini"
+                    type="primary"
+                    v-if="!initializeParent && !initializeRepo && !emptyResources"
+                    @click="addROAFormVisible = true"
+                  >{{ $t("caDetails.addRoa") }}</el-button>
 
-              <el-button
-                class="addRoa"
-                size="mini"
-                type="primary"
-                @click="addROAFormVisible = true"
-              >{{ $t("caDetails.addRoa") }}</el-button>
+                  <div v-if="!initializeParent && !initializeRepo && emptyResources">
+                    {{ $t('caDetails.noResourcesYet') }}
+                    <a
+                      href="javascript: void(0)"
+                      @click="getContent()"
+                    >{{ $('caDetails.clickToRefresh') }}</a>
+                  </div>
+                </el-col>
+                <el-col :span="6" :offset="2" class="hidden-xs-only">
+                  <el-card class="resource-card">
+                    <el-table
+                      size="small"
+                      v-if="resourcesArray.length"
+                      :data="resourcesArray"
+                      style="width: 100%"
+                    >
+                      <el-table-column prop="prop" :label="$t('caDetails.resource')"></el-table-column>
+                      <el-table-column prop="value" :label="$t('caDetails.value')"></el-table-column>
+                    </el-table>
+
+                    <div
+                      v-if="resourcesArray.length === 0"
+                      class="empty"
+                    >{{ $t("caDetails.noResources") }}</div>
+                  </el-card>
+                </el-col>
+                <el-col :span="24" class="hidden-sm-and-up">
+                  <el-card class="mt-3">
+                    <el-table
+                      size="small"
+                      v-if="resourcesArray.length"
+                      :data="resourcesArray"
+                      style="width: 100%"
+                    >
+                      <el-table-column prop="prop" :label="$t('caDetails.resource')"></el-table-column>
+                      <el-table-column prop="value" :label="$t('caDetails.value')"></el-table-column>
+                    </el-table>
+
+                    <div
+                      v-if="resourcesArray.length === 0"
+                      class="empty"
+                    >{{ $t("caDetails.noResources") }}</div>
+                  </el-card>
+                </el-col>
+              </el-row>
             </el-tab-pane>
             <el-tab-pane :label="$t('caDetails.parents')" name="parents">
               <el-table
                 size="small"
-                v-if="ca.parents.length"
+                v-if="ca.parents.length && !showAddParent"
                 :data="ca.parents"
                 style="width: 100%"
               >
@@ -120,6 +155,76 @@
                 </el-table-column>
                 <el-table-column prop="kind" :label="$t('caDetails.kind')"></el-table-column>
               </el-table>
+              <el-button
+                class="mt-1"
+                size="mini"
+                type="primary"
+                v-if="!initializeParent && !initializeRepo && !showAddParent"
+                @click="addAdditionalParent()"
+              >{{ $t("caDetails.parentsTab.addParent") }}</el-button>
+
+              <el-form
+                :model="initializeParentForm"
+                ref="initializeParentForm"
+                v-if="initializeParent || showAddParent"
+              >
+                <el-form-item :label="$t('caDetails.parentsTab.request')" prop="xml">
+                  <prism-editor :code="initializeParentForm.xml" language="xml" :readonly="true"></prism-editor>
+                </el-form-item>
+                <el-row type="flex">
+                  <el-form-item>
+                    <el-button
+                      type="primary"
+                      :title="$t('common.copy')"
+                      @click="copyXML(initializeParentForm.xml)"
+                    >
+                      <font-awesome-icon icon="clipboard" />
+                    </el-button>
+                    <el-button
+                      type="primary"
+                      :title="$t('common.download')"
+                      @click="downloadXML(initializeParentForm.xml, 'lagosta_parent')"
+                    >
+                      <font-awesome-icon icon="download" />
+                    </el-button>
+                  </el-form-item>
+                </el-row>
+
+                <el-form-item
+                  :label="$t('caDetails.parentsTab.response')"
+                  prop="response"
+                  class="mt-3"
+                >
+                  <el-row class="mt-3" :gutter="10">
+                    <el-col :xs="24" :sm="12">
+                      <div style="height:180px">
+                        <prism-editor v-model="initializeParentForm.response" language="xml"></prism-editor>
+                      </div>
+                    </el-col>
+                    <el-col :xs="24" :sm="12">
+                      <el-upload
+                        drag
+                        action
+                        :before-upload="beforeUploadParent"
+                        :file-list="fileList"
+                      >
+                        <i class="el-icon-upload"></i>
+                        <div class="el-upload__text" v-html="$t('common.dropOrClick')"></div>
+                      </el-upload>
+                    </el-col>
+                  </el-row>
+                </el-form-item>
+
+                <el-row type="flex" class="modal-footer">
+                  <el-form-item>
+                    <el-button
+                      @click="showAddParent = false"
+                      v-if="showAddParent"
+                    >{{ $t('common.cancel') }}</el-button>
+                    <el-button type="primary" @click="addParent()">{{ $t('common.confirm') }}</el-button>
+                  </el-form-item>
+                </el-row>
+              </el-form>
             </el-tab-pane>
             <el-tab-pane
               :label="$t('caDetails.children')"
@@ -136,6 +241,59 @@
               </el-table>
             </el-tab-pane>
             <el-tab-pane :label="$t('caDetails.repo')" name="repo">
+              <el-form :model="initializeRepoForm" ref="initializeRepoForm" v-if="initializeRepo">
+                <el-form-item :label="$t('caDetails.repoTab.request')" prop="xml">
+                  <prism-editor v-model="initializeRepoForm.xml" language="xml" :readonly="true"></prism-editor>
+                </el-form-item>
+                <el-row type="flex">
+                  <el-form-item>
+                    <el-button
+                      type="primary"
+                      :title="$t('common.copy')"
+                      @click="copyXML(initializeRepoForm.xml)"
+                    >
+                      <font-awesome-icon icon="clipboard" />
+                    </el-button>
+                    <el-button
+                      type="primary"
+                      :title="$t('common.download')"
+                      @click="downloadXML(initializeRepoForm.xml, 'lagosta_repo')"
+                    >
+                      <font-awesome-icon icon="download" />
+                    </el-button>
+                  </el-form-item>
+                </el-row>
+                <el-form-item
+                  :label="$t('caDetails.repoTab.response')"
+                  prop="response"
+                  class="mt-3"
+                >
+                  <el-row class="mt-3" :gutter="10">
+                    <el-col :xs="24" :sm="12">
+                      <div style="height:180px">
+                        <prism-editor v-model="initializeRepoForm.response" language="xml"></prism-editor>
+                      </div>
+                    </el-col>
+                    <el-col :xs="24" :sm="12">
+                      <el-upload
+                        drag
+                        action
+                        :before-upload="beforeUploadRepo"
+                        :file-list="fileList"
+                      >
+                        <i class="el-icon-upload"></i>
+                        <div class="el-upload__text" v-html="$t('common.dropOrClick')"></div>
+                      </el-upload>
+                    </el-col>
+                  </el-row>
+                </el-form-item>
+                <el-row type="flex">
+                  <el-form-item>
+                    <el-button type="primary" @click="addRepo()">{{ $t('common.confirm') }}</el-button>
+                  </el-form-item>
+                </el-row>
+              </el-form>
+
               <el-table
                 size="small"
                 v-if="properties.length"
@@ -166,24 +324,30 @@
       :close-on-click-modal="false"
       @close="resetForm('addROAForm')"
     >
-      <el-form :model="form" :rules="rules" ref="addROAForm">
+      <el-form :model="addROAForm" :rules="addROAFormRules" ref="addROAForm">
         <el-form-item label="ASN" prop="asn">
-          <el-input v-model="form.asn" autocomplete="off"></el-input>
+          <el-input v-model="addROAForm.asn" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="Prefix" placeholder="ie. 10.1.0.0/22" prop="prefix">
-          <el-input v-model="form.prefix" autocomplete="off" @input="updateMaxLength($event)"></el-input>
+          <el-input v-model="addROAForm.prefix" autocomplete="off" @input="updateMaxLength($event)"></el-input>
         </el-form-item>
         <el-form-item :label="$t('caDetails.maxLength')" placeholder="ie. 24" prop="maxLength">
-          <el-input v-model="form.maxLength" autocomplete="off" type="number" min="4" max="64"></el-input>
+          <el-input
+            v-model="addROAForm.maxLength"
+            autocomplete="off"
+            type="number"
+            min="4"
+            max="64"
+          ></el-input>
         </el-form-item>
         <el-alert type="error" v-if="error" :closable="false">{{error}}</el-alert>
         <el-row type="flex" class="modal-footer" justify="end">
           <el-form-item>
-            <el-button @click="resetForm('addROAForm')">{{ $t('caDetails.form.cancel') }}</el-button>
+            <el-button @click="resetForm('addROAForm')">{{ $t('common.cancel') }}</el-button>
             <el-button
               type="primary"
               @click="submitForm('addROAForm')"
-            >{{ $t('caDetails.form.confirm') }}</el-button>
+            >{{ $t('common.confirm') }}</el-button>
           </el-form-item>
         </el-row>
       </el-form>
@@ -192,6 +356,7 @@
 </template>
 
 <script>
+import "element-ui/lib/theme-chalk/display.css";
 import router from "@/router";
 import APIService from "@/services/APIService.js";
 const cidrRegex = require("cidr-regex");
@@ -199,7 +364,7 @@ export default {
   data() {
     const checkASN = (rule, value, callback) => {
       if (value === "") {
-        callback(new Error(this.$t("caDetails.form.required")));
+        callback(new Error(this.$t("caDetails.addROAForm.required")));
       } else {
         if (
           new RegExp(
@@ -208,24 +373,24 @@ export default {
         ) {
           callback();
         } else {
-          callback(new Error(this.$t("caDetails.form.asn_format")));
+          callback(new Error(this.$t("caDetails.addROAForm.asn_format")));
         }
       }
     };
     const checkPrefix = (rule, value, callback) => {
       if (value === "") {
-        callback(new Error(this.$t("caDetails.form.required")));
+        callback(new Error(this.$t("caDetails.addROAForm.required")));
       } else {
         if (cidrRegex({ exact: true }).test(value)) {
           callback();
         } else {
-          callback(new Error(this.$t("caDetails.form.prefix_format")));
+          callback(new Error(this.$t("caDetails.addROAForm.prefix_format")));
         }
       }
     };
 
     return {
-      activeTab: "resources",
+      activeTab: this.$route.params.tab ? this.$route.params.tab : "roas",
       activeTabInner: "roas",
       handle: this.$route.params.handle,
       loading: false,
@@ -240,17 +405,17 @@ export default {
       parentDetails: [],
       error: "",
       addROAFormVisible: false,
-      form: {
+      addROAForm: {
         asn: "",
         prefix: "",
         maxLength: ""
       },
-      rules: {
+      addROAFormRules: {
         asn: [
           {
             required: true,
             validator: checkASN,
-            message: this.$t("caDetails.form.asn_format")
+            message: this.$t("caDetails.addROAForm.asn_format")
           }
         ],
         prefix: [
@@ -259,7 +424,19 @@ export default {
             required: true
           }
         ]
-      }
+      },
+      initializeRepo: false,
+      initializeRepoForm: {
+        xml: "",
+        response: ""
+      },
+      showAddParent: false,
+      initializeParent: false,
+      initializeParentForm: {
+        xml: "",
+        response: ""
+      },
+      fileList: []
     };
   },
   computed: {
@@ -318,6 +495,15 @@ export default {
             };
           })
         : [];
+    },
+    emptyResources: function() {
+      let empty = true;
+      this.resourcesArray.forEach(r => {
+        if (r.value !== "") {
+          empty = false;
+        }
+      });
+      return empty;
     }
   },
   created() {
@@ -325,34 +511,73 @@ export default {
   },
   beforeRouteUpdate(to, from, next) {
     this.handle = to.params.handle;
+    this.activeTab = to.params.tab;
     this.getContent();
     next();
   },
   methods: {
-    parseError(error) {
-      let e = error.data.label
-        ? this.$t("errors." + error.data.label, error.data.args)
-        : this.$t("errors." + error.data.code);
-      if (
-        e ===
-        "errors." + (error.data.label ? error.data.label : error.data.code)
-      ) {
-        e = error.data.msg;
+    parseError(error, notify) {
+      let e = error;
+      if (error.data) {
+        e = error.data.label
+          ? this.$t("errors." + error.data.label, error.data.args)
+          : this.$t("errors." + error.data.code);
+        if (
+          e ===
+          "errors." + (error.data.label ? error.data.label : error.data.code)
+        ) {
+          e = error.data.msg;
+        }
       }
+
       this.error = e;
+      if (notify) {
+        this.$notify({
+          title: this.$t("common.error"),
+          message: this.error,
+          type: "error"
+        });
+      }
     },
     getContent() {
+      this.activeTab = this.$route.params.tab ? this.$route.params.tab : "roas";
       this.loading = true;
       this.loadingRoas = true;
       this.loadingRepo = true;
+      this.initializeParent = false;
+      this.initializeRepo = false;
+      this.CAs = [];
+      this.ca = {};
+      this.roas = {};
+      this.repo = {};
+      this.parentDetails = [];
+      localStorage.lagostaLastCA = this.handle;
       APIService.getCA(this.handle).then(response => {
         this.loading = false;
         this.ca = response.data;
+        if (!this.ca.parents || this.ca.parents.length === 0) {
+          this.initializeParent = true;
+          if (this.activeTab === "roas") {
+            this.activeTab = "parents";
+          }
+          APIService.getChildRequestXML(this.handle).then(response => {
+            this.initializeParentForm.xml = response.data;
+          });
+        }
       });
-      APIService.getRepo(this.handle).then(response => {
-        this.loadingRepo = false;
-        this.repo = response.data.contact;
-      });
+      APIService.getRepo(this.handle)
+        .then(response => {
+          this.loadingRepo = false;
+          this.repo = response.data.contact;
+        })
+        .catch(() => {
+          this.initializeRepo = true;
+          this.activeTab = "repo";
+          APIService.getRepoRequestXML(this.handle).then(response => {
+            this.initializeRepoForm.xml = response.data;
+          });
+        });
+
       this.getROAs();
       this.loadCAs();
     },
@@ -394,26 +619,29 @@ export default {
     loadCA: function(row) {
       router.push("/cas/" + row.handle);
     },
+    switchCA: function() {
+      router.push("/cas/" + this.handle);
+    },
     addROA: function() {
       const self = this;
       APIService.updateROAs(this.handle, {
         added: [
           {
-            asn: parseInt(this.form.asn),
-            prefix: this.form.prefix,
-            max_length: parseInt(this.form.maxLength) || 0
+            asn: parseInt(this.addROAForm.asn),
+            prefix: this.addROAForm.prefix,
+            max_length: parseInt(this.addROAForm.maxLength) || 0
           }
         ],
         removed: []
       })
         .then(() => {
-          this.$notify({
-            title: this.$t("caDetails.confirm.added"),
-            message: this.$t("caDetails.confirm.addedSuccess"),
+          self.$notify({
+            title: this.$t("caDetails.confirmation.added"),
+            message: this.$t("caDetails.confirmation.addedSuccess"),
             type: "success"
           });
-          this.addROAFormVisible = false;
-          this.getROAs();
+          self.addROAFormVisible = false;
+          self.getROAs();
         })
         .catch(function(error) {
           self.parseError(error);
@@ -422,11 +650,11 @@ export default {
     deleteROA: function(row) {
       const self = this;
       this.$confirm(
-        this.$t("caDetails.confirm.message"),
-        this.$t("caDetails.confirm.title"),
+        this.$t("caDetails.confirmation.message"),
+        this.$t("caDetails.confirmation.title"),
         {
-          confirmButtonText: this.$t("caDetails.confirm.ok"),
-          cancelButtonText: this.$t("caDetails.confirm.cancel")
+          confirmButtonText: this.$t("common.ok"),
+          cancelButtonText: this.$t("common.cancel")
         }
       )
         .then(() => {
@@ -435,13 +663,13 @@ export default {
             removed: [row]
           })
             .then(() => {
-              this.$notify({
-                title: this.$t("caDetails.confirm.retired"),
-                message: this.$t("caDetails.confirm.retiredSuccess"),
+              self.$notify({
+                title: this.$t("caDetails.confirmation.retired"),
+                message: this.$t("caDetails.confirmation.retiredSuccess"),
                 type: "success"
               });
-              this.getROAs();
-              this.resetForm("addROAForm");
+              self.getROAs();
+              self.resetForm("addROAForm");
             })
             .catch(error => {
               self.parseError(error);
@@ -465,8 +693,92 @@ export default {
     },
     updateMaxLength(value) {
       if (value.indexOf("/") > -1) {
-        this.form.maxLength = value.split("/")[1];
+        this.addROAForm.maxLength = value.split("/")[1];
       }
+    },
+    copyXML(xml) {
+      const self = this;
+      this.$copyText(xml).then(function() {
+        self.$notify({
+          title: self.$t("common.success"),
+          message: self.$t("caDetails.copySuccess"),
+          type: "success"
+        });
+      });
+    },
+    downloadXML(xml, filename) {
+      const url = window.URL.createObjectURL(new Blob([xml]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", filename + new Date().getTime() + ".xml");
+      document.body.appendChild(link);
+      link.click();
+    },
+    beforeUpload(file, what) {
+      const self = this;
+      var reader = new FileReader();
+
+      reader.onload = (function() {
+        return function(e) {
+          if (what === "repo") {
+            self.initializeRepoForm.response = atob(
+              e.target.result.substring(21)
+            );
+          } else {
+            self.initializeParentForm.response = atob(
+              e.target.result.substring(21)
+            );
+          }
+        };
+      })(file);
+
+      reader.readAsDataURL(file);
+      return false;
+    },
+    beforeUploadRepo(file) {
+      return this.beforeUpload(file, "repo");
+    },
+    beforeUploadParent(file) {
+      return this.beforeUpload(file, "parent");
+    },
+    addAdditionalParent() {
+      APIService.getChildRequestXML(this.handle).then(response => {
+        this.initializeParentForm.xml = response.data;
+      });
+      this.showAddParent = true;
+    },
+    addParent() {
+      const self = this;
+      APIService.addParentResponse(
+        this.handle,
+        this.initializeParentForm.response
+      )
+        .then(() => {
+          this.$notify({
+            title: this.$t("common.success"),
+            message: this.$t("caDetails.parentsTab.addParentSuccess"),
+            type: "success"
+          });
+          this.getContent();
+        })
+        .catch(error => {
+          self.parseError(error, true);
+        });
+    },
+    addRepo() {
+      const self = this;
+      APIService.addRepoResponse(this.handle, this.initializeRepoForm.response)
+        .then(() => {
+          this.$notify({
+            title: this.$t("common.success"),
+            message: this.$t("caDetails.repoTab.addRepoSuccess"),
+            type: "success"
+          });
+          this.getContent();
+        })
+        .catch(error => {
+          self.parseError(error, true);
+        });
     }
   }
 };
@@ -478,12 +790,7 @@ h3 {
   margin: 0;
   padding-top: 0.3rem;
 }
-a {
-  color: #f63107;
-  &:hover {
-    color: #f85a39;
-  }
-}
+
 .box-card {
   margin: 0;
   border: 0;
@@ -513,8 +820,16 @@ ul {
   padding-left: 0;
 }
 
-.addRoa {
+.mt-1 {
   margin-top: 1rem;
+}
+
+.mt-2 {
+  margin-top: 2rem;
+}
+
+.mt-3 {
+  margin-top: 3rem;
 }
 
 .switcher {
@@ -525,7 +840,15 @@ ul {
   }
 }
 
-.inner-tab {
-  margin-top: 2rem;
+.onboarding {
+  padding: 8px 16px;
+  background-color: #fef0f0;
+  border-radius: 4px;
+  border-left: 5px solid #f63107;
+  margin: 20px 0;
+}
+
+.resource-card {
+  min-height: calc(100vh - 310px);
 }
 </style>

@@ -19,7 +19,11 @@
                 ></el-input>
               </el-form-item>
               <el-form-item>
-                <el-button type="primary" @click="submitForm" v-loading="loading">{{ $t("login.signin") }}</el-button>
+                <el-button
+                  type="primary"
+                  @click="submitForm"
+                  v-loading="loading"
+                >{{ $t("login.signin") }}</el-button>
               </el-form-item>
             </el-form>
           </div>
@@ -32,10 +36,10 @@
       </el-col>
     </el-row>
     <div class="route-left">
-      <img src="@/assets/images/route_left.svg">
+      <img src="@/assets/images/route_left.svg" />
     </div>
     <div class="route-right">
-      <img src="@/assets/images/route_right.svg">
+      <img src="@/assets/images/route_right.svg" />
     </div>
   </div>
 </template>
@@ -69,8 +73,7 @@ export default {
         if (success) {
           this.$emit("authEvent");
           router.push(this.returnUrl);
-        }
-        else {
+        } else {
           self.error = this.$t("login.error");
           self.loading = false;
         }
