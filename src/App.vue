@@ -33,9 +33,10 @@
 
       <el-footer height="40px">
         <el-row>
-          <el-col
-            :span="12"
-          >&copy; {{ (new Date().getFullYear() )}} Stichting NLnet Labs - Krill v0.50, Lagosta v{{ version }}</el-col>
+          <el-col :span="12">
+            &copy; {{ (new Date().getFullYear() )}} Stichting NLnet Labs - Lagosta v{{ lagostaVersion }}
+            <span v-if="krillVersion !== ''" :title="krillStarted">, Krill v{{ krillVersion }}</span>
+          </el-col>
           <el-col :span="12" class="text-right">
             <a
               href="https://rpki.readthedocs.io/en/latest/krill/index.html"
@@ -55,11 +56,14 @@
 <script>
 import router from "@/router";
 import APIService from "@/services/APIService.js";
+import * as moment from "moment";
 
 export default {
   data() {
     return {
-      version: process.env.PACKAGE_VERSION || "0",
+      lagostaVersion: process.env.PACKAGE_VERSION || "0",
+      krillVersion: "0",
+      krillStarted: "",
       user: null,
       langs: [
         { iso: "en", label: "English" },
@@ -70,15 +74,30 @@ export default {
   watch: {
     "$i18n.locale"(locale) {
       localStorage.lagostaLocale = locale;
+      moment.locale(locale);
+      this.loadStats();
     }
   },
   created() {
+    this.loadStats();
     this.loadUser();
     if (localStorage.lagostaLocale) {
       this.$i18n.locale = localStorage.lagostaLocale;
     }
+    moment.locale(this.$i18n.locale);
   },
   methods: {
+    loadStats() {
+      APIService.getKrillStats().then(stats => {
+        if (stats && stats.data) {
+          this.krillVersion = stats.data.version;
+          this.krillStarted =
+            this.$t("common.started") +
+            " " +
+            moment(stats.data.started * 1000).format("MMMM Do YYYY, h:mm:ss a");
+        }
+      });
+    },
     loadUser() {
       this.user = JSON.parse(localStorage.getItem("user"));
     },

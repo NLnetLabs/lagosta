@@ -84,5 +84,8 @@ export default {
   },
   addRepoResponse(handle, xml) {
     return apiClient.post("/api/v1/cas/" + handle + "/repo", xml);
+  },
+  getKrillStats() {
+    return apiClient.get('/stats/info');
   }
 };
