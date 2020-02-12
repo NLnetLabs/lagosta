@@ -116,7 +116,7 @@ export default {
             .then(() => {
               APIService.createCA(this.addCAForm.handle)
                 .then(() => {
-                  router.push("/cas/" + this.addCAForm.handle + "/repo");
+                  router.push("/cas/" + this.addCAForm.handle);
                 })
                 .catch(error => {
                   self.parseError(error, true);

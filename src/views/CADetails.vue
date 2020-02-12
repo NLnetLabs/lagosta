@@ -14,7 +14,7 @@
               <span class="label">{{ $t('caDetails.current') }}</span>
               <el-select
                 v-model="handle"
-                placeholder="$t('caDetails.current')"
+                :placeholder="$t('caDetails.current')"
                 size="small"
                 @change="switchCA()"
               >
@@ -64,7 +64,7 @@
                     </el-table-column>
                   </el-table>
                   <div
-                    v-if="!loadingRoas && roas.length === 0 && !initializeRepo && !initializeParent"
+                    v-if="!loadingRoas && roas.length === 0 && !initializeRepo && !initializeParent && !emptyResources"
                     class="empty"
                   >{{ $t("caDetails.noRoas") }}</div>
 
@@ -76,12 +76,12 @@
                     @click="addROAFormVisible = true"
                   >{{ $t("caDetails.addRoa") }}</el-button>
 
-                  <div v-if="!initializeParent && !initializeRepo && emptyResources">
+                  <div v-if="!initializeParent && !initializeRepo && emptyResources" class="empty">
                     {{ $t('caDetails.noResourcesYet') }}
                     <a
                       href="javascript: void(0)"
                       @click="getContent()"
-                    >{{ $('caDetails.clickToRefresh') }}</a>
+                    >{{ $t('caDetails.clickToRefresh') }}</a>
                   </div>
                 </el-col>
                 <el-col :span="6" :offset="2" class="hidden-xs-only">
@@ -183,7 +183,7 @@
                     <el-button
                       type="primary"
                       :title="$t('common.download')"
-                      @click="downloadXML(initializeParentForm.xml, 'lagosta_parent')"
+                      @click="downloadXML(initializeParentForm.xml, 'child_request')"
                     >
                       <font-awesome-icon icon="download" />
                     </el-button>
@@ -257,7 +257,7 @@
                     <el-button
                       type="primary"
                       :title="$t('common.download')"
-                      @click="downloadXML(initializeRepoForm.xml, 'lagosta_repo')"
+                      @click="downloadXML(initializeRepoForm.xml, 'repository_request')"
                     >
                       <font-awesome-icon icon="download" />
                     </el-button>
@@ -344,10 +344,7 @@
         <el-row type="flex" class="modal-footer" justify="end">
           <el-form-item>
             <el-button @click="resetForm('addROAForm')">{{ $t('common.cancel') }}</el-button>
-            <el-button
-              type="primary"
-              @click="submitForm('addROAForm')"
-            >{{ $t('common.confirm') }}</el-button>
+            <el-button type="primary" @click="submitForm('addROAForm')">{{ $t('common.confirm') }}</el-button>
           </el-form-item>
         </el-row>
       </el-form>
@@ -391,7 +388,6 @@ export default {
 
     return {
       activeTab: this.$route.params.tab ? this.$route.params.tab : "roas",
-      activeTabInner: "roas",
       handle: this.$route.params.handle,
       loading: false,
       loadingRoas: false,
@@ -546,6 +542,7 @@ export default {
       this.loadingRepo = true;
       this.initializeParent = false;
       this.initializeRepo = false;
+      this.showAddParent = false;
       this.CAs = [];
       this.ca = {};
       this.roas = {};
@@ -568,6 +565,9 @@ export default {
       APIService.getRepo(this.handle)
         .then(response => {
           this.loadingRepo = false;
+          if (this.initializeParent) {
+            this.activeTab = "parents";
+          }
           this.repo = response.data.contact;
         })
         .catch(() => {
@@ -710,7 +710,7 @@ export default {
       const url = window.URL.createObjectURL(new Blob([xml]));
       const link = document.createElement("a");
       link.href = url;
-      link.setAttribute("download", filename + new Date().getTime() + ".xml");
+      link.setAttribute("download", filename + ".xml");
       document.body.appendChild(link);
       link.click();
     },

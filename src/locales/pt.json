@@ -21,7 +21,7 @@
   },
   "onboarding": {
     "welcome": "Welcome to Krill.",
-    "welcomeHtml": "Let's start by creating your RPKI Certificate Authority (CA). It will be used to configure Delegated RPKI with one or multiple parent CAs, usually your Regional or National Internet Registry.<br><br>The handle you select is not published in the RPKI but used as identification to parent and child CAs you interact with. Please choose a handle that helps others recognise your organisation. Once set, the handle cannot be changed. <a href='https://rpki.readthedocs.io/en/latest/krill/manage-cas.html#add-a-ca'>Learn more...</a>",
+    "welcomeHtml": "Let's start by creating your RPKI Certificate Authority (CA). It will be used to configure Delegated RPKI with one or multiple parent CAs, usually your Regional or National Internet Registry.<br><br>The handle you select is not published in the RPKI but used as identification to parent and child CAs you interact with. Please choose a handle that helps others recognise your organisation. Once set, the handle cannot be changed. <a href='https://rpki.readthedocs.io/en/latest/krill/manage-cas.html#adding-your-ca' target='_blank'>Learn more...</a>",
     "addCAForm": {
       "required": "This field is required",
       "format": "This is not a valid CA name.",
