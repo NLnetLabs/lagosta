@@ -10,7 +10,7 @@
     "copy": "Copy to clipboard",
     "download": "Download",
     "dropOrClick": "Drop file here or <em>click to upload</em>",
-    "started": "Krill started on"
+    "started": "Krill has been running since"
   },
   "login": {
     "password": "Password",
@@ -21,7 +21,7 @@
   },
   "onboarding": {
     "welcome": "Welcome to Krill",
-    "welcomeHtml": "Let's start by creating your RPKI Certificate Authority (CA). It will be used to configure Delegated RPKI with one or multiple parent CAs, usually your Regional or National Internet Registry.<br><br>The handle you select is not published in the RPKI but used as identification to parent and child CAs you interact with. Please choose a handle that helps others recognise your organisation. Once set, the handle cannot be changed. <a href='https://rpki.readthedocs.io/en/latest/krill/manage-cas.html#adding-your-ca' target='_blank'>Learn more...</a>",
+    "welcomeHtml": "Let's start by creating your RPKI Certificate Authority (CA). It will be used to configure Delegated RPKI with one or multiple parent CAs, usually your Regional or National Internet Registry.<br><br>The handle you choose will identify your CA in interactions with parent and child CAs. It will not be published in the RPKI. Please choose a handle that helps others recognise your organisation. Once set, the handle cannot be changed. <a href='https://rpki.readthedocs.io/en/latest/krill/manage-cas.html#adding-your-ca' target='_blank'>Learn more...</a>",
     "addCAForm": {
       "required": "This field is required",
       "format": "This is not a valid CA name",
@@ -100,22 +100,22 @@
     "ca-duplicate": "CA '{ca}' was already initialised",
     "ca-unknown": "CA '{ca}' is unknown",
     "ca-repo-same": "This repository is already in use",
-    "ca-repo-issue": "Got error from repository: {cause}",
+    "ca-repo-issue": "Received error from repository: {cause}",
     "ca-repo-response-invalid-xml": "Got invalid repository response xml",
     "ca-repo-response-wrong-xml": "Got parent instead of repository response",
     "ca-parent-duplicate": "You already have a parent named '{parent}'",
-    "ca-parent-unknown": "You do not have any parent named '{parent}'",
-    "ca-parent-issue": "Got error from parent '{parent}': {cause}",
+    "ca-parent-unknown": "You do not have a parent named '{parent}'",
+    "ca-parent-issue": "Received error fromm parent '{parent}': {cause}",
     "ca-parent-response-invalid-xml": "Got invalid parent response xml",
     "ca-parent-response-wrong-xml": "Got repository response when adding parent",
     "ca-child-duplicate": "You already have a child CA named '{child}'",
-    "ca-child-unknown": "You do not have any child CA named '{child}'",
+    "ca-child-unknown": "You do not have a child CA named '{child}'",
     "ca-child-resources-required": "You must specify resources for Child CA '{child}'",
     "ca-auth-unknown": "Cannot remove unknown ROA '{prefix}-{max_length} => {asn}'",
     "ca-auth-duplicate": "Duplicate ROA '{prefix}-{max_length} => {asn}'",
     "ca-auth-invalid-max-length": "Invalid max length in ROA '{prefix}-{max_length} => {asn}'",
     "ca-auth-not-entitled": "ROA prefix '{prefix}' is not on any of your current certificates",
-    "ta-not-allowed": "Functionality not supported by the test Trust Anchor",
+    "ta-not-allowed": "This functionality is not supported by the test Trust Anchor",
     "ta-name-reserved": "Name reserved"
   }
 }
