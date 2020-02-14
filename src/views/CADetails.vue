@@ -3,13 +3,13 @@
     <el-card class="box-card" v-if="ca.handle">
       <div slot="header" class="clearfix">
         <el-row>
-          <el-col :xs="24" :sm="18">
+          <el-col :xs="24" :sm="14">
             <h3>
               {{ $t("cas.ca") }}
               <strong>{{ handle }}</strong>
             </h3>
           </el-col>
-          <el-col :xs="24" :sm="6">
+          <el-col :xs="24" :sm="10">
             <div class="switcher" v-if="CAs.length > 1">
               <span class="label">{{ $t('caDetails.current') }}</span>
               <el-select
@@ -340,7 +340,7 @@
             max="64"
           ></el-input>
         </el-form-item>
-        <el-alert type="error" v-if="error" :closable="false">{{error}}</el-alert>
+        <el-alert type="error" v-if="error" :closable="false" class="mb-1">{{error}}</el-alert>
         <el-row type="flex" class="modal-footer" justify="end">
           <el-form-item>
             <el-button @click="resetForm('addROAForm')">{{ $t('common.cancel') }}</el-button>
@@ -536,6 +536,7 @@ export default {
       }
     },
     getContent() {
+      const self = this;
       this.activeTab = this.$route.params.tab ? this.$route.params.tab : "roas";
       this.loading = true;
       this.loadingRoas = true;
@@ -561,6 +562,10 @@ export default {
             this.initializeParentForm.xml = response.data;
           });
         }
+      }).catch(error => {
+        self.parseError(error);
+        localStorage.removeItem('lagostaLastCA');
+        router.push("/interstitial");
       });
       APIService.getRepo(this.handle)
         .then(response => {
@@ -830,6 +835,10 @@ ul {
 
 .mt-3 {
   margin-top: 3rem;
+}
+
+.mb-1 {
+  margin-bottom: 1rem;
 }
 
 .switcher {
