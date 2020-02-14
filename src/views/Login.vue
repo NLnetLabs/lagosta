@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <el-row type="flex" justify="center">
+    <el-row type="flex" class="row-index" justify="center">
       <el-col :span="10">
         <el-card class="box-card">
           <div class="text item">
@@ -30,7 +30,7 @@
         </el-card>
       </el-col>
     </el-row>
-    <el-row type="flex" class="alert-row" justify="center">
+    <el-row type="flex" class="row-index alert-row" justify="center">
       <el-col :span="10">
         <el-alert type="error" v-if="error" :closable="false">{{error}}</el-alert>
       </el-col>
@@ -107,6 +107,9 @@ export default {
 }
 .alert-row {
   margin-top: 1rem;
+}
+.row-index {
+  z-index: 3;
 }
 .route-left {
   position: fixed;

@@ -79,6 +79,7 @@ export default {
     }
   },
   created() {
+    window.addEventListener("beforeunload", this.beforeUnload);
     this.loadStats();
     this.loadUser();
     if (localStorage.lagostaLocale) {
@@ -87,6 +88,9 @@ export default {
     moment.locale(this.$i18n.locale);
   },
   methods: {
+    beforeUnload() {
+      localStorage.removeItem("user");
+    },
     loadStats() {
       APIService.getKrillStats().then(stats => {
         if (stats && stats.data) {
