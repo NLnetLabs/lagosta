@@ -25,7 +25,7 @@ console.log('        / /||\\ \\');
 console.log('        \\:_/\\_:/ ');
 console.log(' ');
 
-const result = dotenv.config()
+const result = dotenv.config();
 if (result.error) {
   console.log('Lagosta needs a .env file with the properties PROXY_BASE_URL and SERVE_FOLDER set to function properly.');
   process.exit(0);
@@ -33,12 +33,16 @@ if (result.error) {
   app.use(express.static(process.env.SERVE_FOLDER ? process.env.SERVE_FOLDER : 'dist'));
   const krillBase = process.env.PROXY_BASE_URL ? process.env.PROXY_BASE_URL : 'https://localhost:3000';
 
-  app.use('/api',proxy({
+  const proxyConf = {
     target: krillBase,
     changeOrigin: true,
     secure: false,
     logLevel: 'debug'
-  }));
+  };
+
+  app.use('/api', proxy(proxyConf));
+
+  app.use('/stats', proxy(proxyConf));
 
   app.get('/', (req, res) => {
     res.send('Lagosta should be running by now. If not, shrimp happens.');
