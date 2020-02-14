@@ -111,10 +111,10 @@
     "ca-child-duplicate": "You already have a child CA named '{child}'",
     "ca-child-unknown": "You do not have a child CA named '{child}'",
     "ca-child-resources-required": "You must specify resources for Child CA '{child}'",
-    "ca-auth-unknown": "Cannot remove unknown ROA '{prefix}-{max_length} => {asn}'",
-    "ca-auth-duplicate": "Duplicate ROA '{prefix}-{max_length} => {asn}'",
-    "ca-auth-invalid-max-length": "Invalid max length in ROA '{prefix}-{max_length} => {asn}'",
-    "ca-auth-not-entitled": "ROA prefix '{prefix}' is not on any of your current certificates",
+    "ca-roa-unknown": "Cannot remove unknown ROA '{prefix}-{max_length} => {asn}'",
+    "ca-roa-duplicate": "Duplicate ROA '{prefix}-{max_length} => {asn}'",
+    "ca-roa-invalid-max-length": "Invalid max length in ROA '{prefix}-{max_length} => {asn}'",
+    "ca-roa-not-entitled": "ROA prefix '{prefix}' is not on any of your current certificates",
     "ta-not-allowed": "This functionality is not supported by the test Trust Anchor",
     "ta-name-reserved": "Name reserved"
   }

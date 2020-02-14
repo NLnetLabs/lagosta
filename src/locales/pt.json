@@ -111,10 +111,10 @@
     "ca-child-duplicate": "Você já possui uma CA-filha chamada '{child}'",
     "ca-child-unknown": "Você não tem uma CA-filha chamada '{child}'",
     "ca-child-resources-required": "Você deve especificar recursos para sua CA-filha '{child}'",
-    "ca-auth-unknown": "Impossível remover ROA desconhecida '{prefix}-{max_length} => {asn}'",
-    "ca-auth-duplicate": "ROA duplicada '{prefix}-{max_length} => {asn}'",
-    "ca-auth-invalid-max-length": "Comprimento máximo inválido na ROA '{prefix}-{max_length} => {asn}'",
-    "ca-auth-not-entitled": "Prefixo da ROA '{prefix}' não pertence a nenhum de seus certificados atuais",
+    "ca-roa-unknown": "Impossível remover ROA desconhecida '{prefix}-{max_length} => {asn}'",
+    "ca-roa-duplicate": "ROA duplicada '{prefix}-{max_length} => {asn}'",
+    "ca-roa-invalid-max-length": "Comprimento máximo inválido na ROA '{prefix}-{max_length} => {asn}'",
+    "ca-roa-not-entitled": "Prefixo da ROA '{prefix}' não pertence a nenhum de seus certificados atuais",
     "ta-not-allowed": "Esta funcionalidade não é suportada pelo Trust Anchor de testes",
     "ta-name-reserved": "Nome reservado"
   }
