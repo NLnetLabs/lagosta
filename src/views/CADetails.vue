@@ -187,6 +187,12 @@
                     >
                       <font-awesome-icon icon="download" />
                     </el-button>
+                    <el-switch
+                      class="ml-1"
+                      v-model="initializeParentForm.ARINCompatible"
+                      :active-text="$t('caDetails.parentsTab.arin')"
+                      inactive-text="">
+                    </el-switch>
                   </el-form-item>
                 </el-row>
 
@@ -357,6 +363,7 @@ import "element-ui/lib/theme-chalk/display.css";
 import router from "@/router";
 import APIService from "@/services/APIService.js";
 const cidrRegex = require("cidr-regex");
+const xml2js = require('xml2js');
 export default {
   data() {
     const checkASN = (rule, value, callback) => {
@@ -430,7 +437,9 @@ export default {
       initializeParent: false,
       initializeParentForm: {
         xml: "",
-        response: ""
+        originalXml: "",
+        response: "",
+        ARINCompatible: false
       },
       fileList: []
     };
@@ -500,6 +509,32 @@ export default {
         }
       });
       return empty;
+    }
+  },
+  watch: {
+    "initializeParentForm.ARINCompatible"(enable) {
+      const self = this;
+      if (enable) {
+        this.initializeParentForm.originalXml = this.initializeParentForm.xml;
+        xml2js.parseString(this.initializeParentForm.xml, function (err, result) {
+            const builder = new xml2js.Builder();
+            const ARINxmlObj = {
+              identity: {
+                '$': {
+                  'xmlns': 'http://www.hactrn.net/uris/rpki/myrpki/',
+                  'version': '2',
+                  'handle': result.child_request.$.child_handle
+                },
+                child_bpki_ta: result.child_request.child_bpki_ta
+              }
+            }
+            const ARINxml = builder.buildObject(ARINxmlObj).split('\n');
+            ARINxml.shift();
+            self.initializeParentForm.xml = ARINxml.join('\n');
+        });
+      } else {
+        self.initializeParentForm.xml = this.initializeParentForm.originalXml;
+      }
     }
   },
   created() {
@@ -839,6 +874,10 @@ ul {
 
 .mb-1 {
   margin-bottom: 1rem;
+}
+
+.ml-1 {
+  margin-left: 1rem;
 }
 
 .switcher {
