@@ -67,7 +67,7 @@ export default {
       user: null,
       langs: [
         { iso: "en", label: "English" },
-        { iso: "pt", label: "Portuguese" }
+        { iso: "pt", label: "Português" }
       ]
     };
   },
