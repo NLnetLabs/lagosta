@@ -332,7 +332,7 @@
     >
       <el-form :model="addROAForm" :rules="addROAFormRules" ref="addROAForm">
         <el-form-item label="ASN" prop="asn">
-          <el-input v-model="addROAForm.asn" autocomplete="off"></el-input>
+          <el-input v-model="addROAForm.asn" autocomplete="off" @change="removeAS()"></el-input>
         </el-form-item>
         <el-form-item label="Prefix" placeholder="ie. 10.1.0.0/22" prop="prefix">
           <el-input v-model="addROAForm.prefix" autocomplete="off" @input="updateMaxLength($event)"></el-input>
@@ -370,11 +370,10 @@ export default {
       if (value === "") {
         callback(new Error(this.$t("caDetails.addROAForm.required")));
       } else {
-        if (
-          new RegExp(
-            "^([1-9]|[1-8][0-9]|9[0-9]|[1-8][0-9]{2}|9[0-8][0-9]|99[0-9]|[1-8][0-9]{3}|9[0-8][0-9]{2}|99[0-8][0-9]|999[0-9]|[1-8][0-9]{4}|9[0-8][0-9]{3}|99[0-8][0-9]{2}|999[0-8][0-9]|9999[0-9]|[12][0-9]{5}|3[0-8][0-9]{4}|39[0-8][0-9]{3}|399[01][0-9]{2}|3992[0-5][0-9]|399260)$"
-          ).test(value)
-        ) {
+        if (value.toLowerCase().indexOf('as') === 0) {
+          value = value.substr(2)*1;
+        }
+        if (value >= 0 && value <= 4294967295) {
           callback();
         } else {
           callback(new Error(this.$t("caDetails.addROAForm.asn_format")));
@@ -716,6 +715,11 @@ export default {
             });
         })
         .catch(() => {});
+    },
+    removeAS() {
+      if (this.addROAForm.asn.toLowerCase().indexOf('as') === 0){
+        this.addROAForm.asn = this.addROAForm.asn.substr(2);
+      }
     },
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
