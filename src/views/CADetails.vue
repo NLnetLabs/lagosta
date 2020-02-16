@@ -263,7 +263,7 @@
                     <el-button
                       type="primary"
                       :title="$t('common.download')"
-                      @click="downloadXML(initializeRepoForm.xml, 'repository_request')"
+                      @click="downloadXML(initializeRepoForm.xml, 'publisher_request')"
                     >
                       <font-awesome-icon icon="download" />
                     </el-button>
