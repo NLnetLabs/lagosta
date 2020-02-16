@@ -17,7 +17,8 @@
     "placeholder": "Your password",
     "signin": "Sign In",
     "required": "Please enter your password",
-    "error": "The password you specified is wrong"
+    "error": "The password you specified is wrong",
+    "copied": "You should not get your passwords from https://xkcd.com/936/"
   },
   "onboarding": {
     "welcome": "Welcome to Krill",

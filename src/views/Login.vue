@@ -4,11 +4,10 @@
       <el-col :span="10">
         <el-card class="box-card">
           <div class="text item">
-            <el-form :model="form" :inline="true" ref="loginForm">
+            <el-form :model="form" :rules="rules"  :inline="true" ref="loginForm">
               <el-form-item
                 :label="$t('login.password')"
                 prop="token"
-                :rules="[{ required: true, message: $t('login.required')}]"
               >
                 <el-input
                   type="password"
@@ -50,9 +49,28 @@ import APIService from "@/services/APIService.js";
 
 export default {
   data() {
+    const checkToken = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error(this.$t("login.required")));
+      } else {
+        if (value.toLowerCase().replace(/-/gi, '').indexOf('correcthorsebatterystaple') === 0) {
+          callback(new Error(this.$t("login.copied")));
+        } else {
+          callback();
+        }
+      }
+    };
     return {
       form: {
         token: ""
+      },
+      rules: {
+        token: [
+          {
+            required: true,
+            validator: checkToken,
+          }
+        ]
       },
       submitted: false,
       loading: false,
