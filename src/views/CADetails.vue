@@ -782,6 +782,9 @@ export default {
       return this.beforeUpload(file, "parent");
     },
     addAdditionalParent() {
+      this.initializeParentForm.xml = "";
+      this.initializeParentForm.response = "";
+      this.initializeParentForm.ARINCompatible = false;
       APIService.getChildRequestXML(this.handle).then(response => {
         this.initializeParentForm.xml = response.data;
       });
