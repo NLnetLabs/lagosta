@@ -7,7 +7,7 @@
             <img src="@/assets/images/welcome.svg" />
           </div>
 
-          <h3>{{ $t('onboarding.welcome') }}</h3>
+          <h3>{{ $t("onboarding.welcome") }}</h3>
         </div>
         <p v-html="$t('onboarding.welcomeHtml')"></p>
 
@@ -15,14 +15,13 @@
           <el-form-item label="CA Handle" prop="handle">
             <el-input v-model="addCAForm.handle" autocomplete="off"></el-input>
           </el-form-item>
-          <el-alert type="error" v-if="error" :closable="false">{{error}}</el-alert>
+          <el-alert type="error" v-if="error" :closable="false">{{ error }}</el-alert>
           <el-row type="flex" class="modal-footer" justify="end">
             <el-form-item>
-              <el-button @click="resetForm('addCAForm')">{{ $t('common.cancel') }}</el-button>
-              <el-button
-                type="primary"
-                @click="submitForm('addCAForm')"
-              >{{ $t('onboarding.addCAForm.confirm') }}</el-button>
+              <el-button @click="resetForm('addCAForm')">{{ $t("common.cancel") }}</el-button>
+              <el-button type="primary" @click="submitForm('addCAForm')">{{
+                $t("onboarding.addCAForm.confirm")
+              }}</el-button>
             </el-form-item>
           </el-row>
         </el-form>
@@ -84,10 +83,7 @@ export default {
         e = error.data.label
           ? this.$t("errors." + error.data.label, error.data.args)
           : this.$t("errors." + error.data.code);
-        if (
-          e ===
-          "errors." + (error.data.label ? error.data.label : error.data.code)
-        ) {
+        if (e === "errors." + (error.data.label ? error.data.label : error.data.code)) {
           e = error.data.msg;
         }
       }
@@ -135,7 +131,6 @@ export default {
   }
 };
 </script>
-
 
 <style lang="scss" scoped>
 .text-center {

@@ -85,7 +85,8 @@
       "addParentSuccess": "Pai adicionado",
       "arin": "Compatível com ARIN",
       "name": "Parent Name",
-      "namerequired": "The parent name is required"
+      "namerequired": "The parent name is required",
+      "nameformat": "This is not a valid Parent name"
     },
     "repoTab": {
       "request": "Requisição de Repositório",

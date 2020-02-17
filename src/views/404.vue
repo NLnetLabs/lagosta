@@ -1,6 +1,7 @@
 <template>
   <h1 class="center">
-    <div class="emoji animated infinite tada">&#x1F364;</div>Oh no! Krill is lost.
+    <div class="emoji animated infinite tada">&#x1F364;</div>
+    Oh no! Krill is lost.
   </h1>
 </template>
 

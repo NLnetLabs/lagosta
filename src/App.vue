@@ -4,7 +4,7 @@
       <el-header>
         <el-row>
           <el-col :span="4">
-            <router-link :to="{ name: 'home'}">
+            <router-link :to="{ name: 'home' }">
               <div class="logo">
                 <img src="@/assets/images/krill_logo_white.svg" />
               </div>
@@ -34,18 +34,21 @@
       <el-footer height="40px">
         <el-row>
           <el-col :span="12">
-            &copy; {{ (new Date().getFullYear() )}} Stichting NLnet Labs - Lagosta v{{ lagostaVersion }}
-            <span v-if="krillVersion !== ''" :title="krillStarted">, Krill v{{ krillVersion }}</span>
+            &copy; {{ new Date().getFullYear() }} Stichting NLnet Labs - Lagosta v{{
+              lagostaVersion
+            }}
+            <span v-if="krillVersion !== ''" :title="krillStarted"
+              >, Krill v{{ krillVersion }}</span
+            >
           </el-col>
           <el-col :span="12" class="text-right">
-            <a
-              href="https://rpki.readthedocs.io/en/latest/krill/index.html"
-              target="_blank"
-            >{{ $t('common.readthedocs') }}</a> -
-            <a
-              href="https://github.com/NLnetLabs/krill/issues/new"
-              target="_blank"
-            >{{ $t('common.report') }}</a>
+            <a href="https://rpki.readthedocs.io/en/latest/krill/index.html" target="_blank">{{
+              $t("common.readthedocs")
+            }}</a>
+            -
+            <a href="https://github.com/NLnetLabs/krill/issues/new" target="_blank">{{
+              $t("common.report")
+            }}</a>
           </el-col>
         </el-row>
       </el-footer>
@@ -114,7 +117,6 @@ export default {
   }
 };
 </script>
-
 
 <style lang="scss">
 html,

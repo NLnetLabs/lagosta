@@ -199,6 +199,7 @@
 
               <el-form
                 :model="initializeParentForm"
+                :rules="initializeParentFormRules"
                 ref="initializeParentForm"
                 v-if="initializeParent || showAddParent"
               >
@@ -266,22 +267,12 @@
                 <el-form-item :label="$t('caDetails.parentsTab.name')" prop="name">
                   <el-row class="mt-3" :gutter="10">
                     <el-col :xs="24" :sm="12">
-                      <el-input
-                        v-model="initializeParentForm.name"
-                        autocomplete="off"
-                        :rules="[
-                          {
-                            required: true,
-                            validator: checkHandle,
-                            message: $t('caDetails.parentsTab.namerequired')
-                          }
-                        ]"
-                      ></el-input>
+                      <el-input v-model="initializeParentForm.name" autocomplete="off"></el-input>
                     </el-col>
                   </el-row>
                 </el-form-item>
 
-                <el-row type="flex" class="modal-footer">
+                <el-row type="flex" class="modal-footer mt-3">
                   <el-form-item>
                     <el-button @click="showAddParent = false" v-if="showAddParent">{{
                       $t("common.cancel")
@@ -469,12 +460,12 @@ export default {
     };
     const checkHandle = (rule, value, callback) => {
       if (value === "") {
-        callback(new Error(this.$t("onboarding.addCAForm.required")));
+        callback(new Error(this.$t("caDetails.parentsTab.namerequired")));
       } else {
         if (new RegExp(/^[a-zA-Z0-9-_]+$/).test(value)) {
           callback();
         } else {
-          callback(new Error(this.$t("onboarding.addCAForm.format")));
+          callback(new Error(this.$t("caDetails.parentsTab.nameformat")));
         }
       }
     };
@@ -527,6 +518,14 @@ export default {
         response: "",
         ARINCompatible: false,
         name: ""
+      },
+      initializeParentFormRules: {
+        name: [
+          {
+            required: true,
+            validator: checkHandle
+          }
+        ]
       },
       fileList: []
     };

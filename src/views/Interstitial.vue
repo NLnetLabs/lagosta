@@ -24,9 +24,7 @@ export default {
       APIService.getCAs().then(response => {
         this.loading = false;
         if (response.data.cas && response.data.cas.length > 0) {
-          let filtered = response.data.cas
-            .map(ca => ca.handle)
-            .filter(ca => ca !== "ta");
+          let filtered = response.data.cas.map(ca => ca.handle).filter(ca => ca !== "ta");
           if (filtered.length > 0) {
             let handle = filtered[0];
             if (localStorage.lagostaLastCA) {
@@ -44,7 +42,6 @@ export default {
   }
 };
 </script>
-
 
 <style lang="scss" scoped>
 .loading {

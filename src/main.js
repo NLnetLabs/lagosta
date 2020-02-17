@@ -4,11 +4,7 @@ import router from "./router";
 import "./plugins/element.js";
 import i18n from "./i18n";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import {
-  faSignOutAlt,
-  faDownload,
-  faClipboard
-} from "@fortawesome/free-solid-svg-icons";
+import { faSignOutAlt, faDownload, faClipboard } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import(/* webpackPreload: true */ "typeface-lato/index.css");
 import(/* webpackPreload: true */ "typeface-source-code-pro/index.css");

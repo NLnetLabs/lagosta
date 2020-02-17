@@ -29,7 +29,7 @@
           <el-table-column label="Handle" v-if="!loading">
             <template slot-scope="scope">
               <router-link
-                :to="{ name: 'caDetails', params: { handle: filteredCAs[scope.$index].handle }}"
+                :to="{ name: 'caDetails', params: { handle: filteredCAs[scope.$index].handle } }"
               >
                 <el-button type="text">{{ filteredCAs[scope.$index].handle }}</el-button>
               </router-link>

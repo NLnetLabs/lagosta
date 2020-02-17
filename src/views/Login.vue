@@ -4,11 +4,8 @@
       <el-col :span="10">
         <el-card class="box-card">
           <div class="text item">
-            <el-form :model="form" :rules="rules"  :inline="true" ref="loginForm">
-              <el-form-item
-                :label="$t('login.password')"
-                prop="token"
-              >
+            <el-form :model="form" :rules="rules" :inline="true" ref="loginForm">
+              <el-form-item :label="$t('login.password')" prop="token">
                 <el-input
                   type="password"
                   :placeholder="$t('login.placeholder')"
@@ -18,11 +15,9 @@
                 ></el-input>
               </el-form-item>
               <el-form-item>
-                <el-button
-                  type="primary"
-                  @click="submitForm"
-                  v-loading="loading"
-                >{{ $t("login.signin") }}</el-button>
+                <el-button type="primary" @click="submitForm" v-loading="loading">{{
+                  $t("login.signin")
+                }}</el-button>
               </el-form-item>
             </el-form>
           </div>
@@ -31,7 +26,7 @@
     </el-row>
     <el-row type="flex" class="row-index alert-row" justify="center">
       <el-col :span="10">
-        <el-alert type="error" v-if="error" :closable="false">{{error}}</el-alert>
+        <el-alert type="error" v-if="error" :closable="false">{{ error }}</el-alert>
       </el-col>
     </el-row>
     <div class="route-left">
@@ -53,7 +48,12 @@ export default {
       if (value === "") {
         callback(new Error(this.$t("login.required")));
       } else {
-        if (value.toLowerCase().replace(/-/gi, '').indexOf('correcthorsebatterystaple') === 0) {
+        if (
+          value
+            .toLowerCase()
+            .replace(/-/gi, "")
+            .indexOf("correcthorsebatterystaple") === 0
+        ) {
           callback(new Error(this.$t("login.copied")));
         } else {
           callback();
@@ -68,7 +68,7 @@ export default {
         token: [
           {
             required: true,
-            validator: checkToken,
+            validator: checkToken
           }
         ]
       },
