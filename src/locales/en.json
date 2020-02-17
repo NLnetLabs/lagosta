@@ -83,7 +83,9 @@
       "response": "Parent Response",
       "addParent": "Add an additional Parent",
       "addParentSuccess": "Parent added",
-      "arin": "ARIN Compatible"
+      "arin": "ARIN Compatible",
+      "name": "Parent Name",
+      "namerequired": "The parent name is required"
     },
     "repoTab": {
       "request": "Repository Request",

@@ -11,14 +11,19 @@
           </el-col>
           <el-col :xs="24" :sm="10">
             <div class="switcher" v-if="CAs.length > 1">
-              <span class="label">{{ $t('caDetails.current') }}</span>
+              <span class="label">{{ $t("caDetails.current") }}</span>
               <el-select
                 v-model="handle"
                 :placeholder="$t('caDetails.current')"
                 size="small"
                 @change="switchCA()"
               >
-                <el-option v-for="ca in CAs" :key="ca.handle" :value="ca.handle" :label="ca.handle"></el-option>
+                <el-option
+                  v-for="ca in CAs"
+                  :key="ca.handle"
+                  :value="ca.handle"
+                  :label="ca.handle"
+                ></el-option>
               </el-select>
             </div>
           </el-col>
@@ -31,13 +36,13 @@
         </span>
 
         <div class="onboarding" v-if="initializeRepo && initializeParent">
-          <p>{{ $t('caDetails.onboardingWarning') }}</p>
+          <p>{{ $t("caDetails.onboardingWarning") }}</p>
         </div>
 
         <div v-if="!loading && ca" class="main">
           <el-tabs v-model="activeTab">
             <el-tab-pane :label="$t('caDetails.roas')" name="roas">
-              <h5 v-if="initializeParent || initializeRepo">{{ $t('caDetails.initialize') }}</h5>
+              <h5 v-if="initializeParent || initializeRepo">{{ $t("caDetails.initialize") }}</h5>
 
               <el-row v-if="!initializeParent && !initializeRepo">
                 <el-col :xs="24" :sm="16">
@@ -50,7 +55,10 @@
                   >
                     <el-table-column prop="asn" label="ASN"></el-table-column>
                     <el-table-column prop="prefix" label="Prefix"></el-table-column>
-                    <el-table-column prop="max_length" :label="$t('caDetails.maxLength')"></el-table-column>
+                    <el-table-column
+                      prop="max_length"
+                      :label="$t('caDetails.maxLength')"
+                    ></el-table-column>
                     <el-table-column label width="80">
                       <template slot-scope="scope">
                         <el-button
@@ -64,9 +72,17 @@
                     </el-table-column>
                   </el-table>
                   <div
-                    v-if="!loadingRoas && roas.length === 0 && !initializeRepo && !initializeParent && !emptyResources"
+                    v-if="
+                      !loadingRoas &&
+                        roas.length === 0 &&
+                        !initializeRepo &&
+                        !initializeParent &&
+                        !emptyResources
+                    "
                     class="empty"
-                  >{{ $t("caDetails.noRoas") }}</div>
+                  >
+                    {{ $t("caDetails.noRoas") }}
+                  </div>
 
                   <el-button
                     class="mt-1"
@@ -74,14 +90,14 @@
                     type="primary"
                     v-if="!initializeParent && !initializeRepo && !emptyResources"
                     @click="addROAFormVisible = true"
-                  >{{ $t("caDetails.addRoa") }}</el-button>
+                    >{{ $t("caDetails.addRoa") }}</el-button
+                  >
 
                   <div v-if="!initializeParent && !initializeRepo && emptyResources" class="empty">
-                    {{ $t('caDetails.noResourcesYet') }}
-                    <a
-                      href="javascript: void(0)"
-                      @click="getContent()"
-                    >{{ $t('caDetails.clickToRefresh') }}</a>
+                    {{ $t("caDetails.noResourcesYet") }}
+                    <a href="javascript: void(0)" @click="getContent()">{{
+                      $t("caDetails.clickToRefresh")
+                    }}</a>
                   </div>
                 </el-col>
                 <el-col :span="6" :offset="2" class="hidden-xs-only">
@@ -92,14 +108,19 @@
                       :data="resourcesArray"
                       style="width: 100%"
                     >
-                      <el-table-column prop="prop" :label="$t('caDetails.resource')"></el-table-column>
-                      <el-table-column prop="value" :label="$t('caDetails.value')"></el-table-column>
+                      <el-table-column
+                        prop="prop"
+                        :label="$t('caDetails.resource')"
+                      ></el-table-column>
+                      <el-table-column
+                        prop="value"
+                        :label="$t('caDetails.value')"
+                      ></el-table-column>
                     </el-table>
 
-                    <div
-                      v-if="resourcesArray.length === 0"
-                      class="empty"
-                    >{{ $t("caDetails.noResources") }}</div>
+                    <div v-if="resourcesArray.length === 0" class="empty">
+                      {{ $t("caDetails.noResources") }}
+                    </div>
                   </el-card>
                 </el-col>
                 <el-col :span="24" class="hidden-sm-and-up">
@@ -110,14 +131,19 @@
                       :data="resourcesArray"
                       style="width: 100%"
                     >
-                      <el-table-column prop="prop" :label="$t('caDetails.resource')"></el-table-column>
-                      <el-table-column prop="value" :label="$t('caDetails.value')"></el-table-column>
+                      <el-table-column
+                        prop="prop"
+                        :label="$t('caDetails.resource')"
+                      ></el-table-column>
+                      <el-table-column
+                        prop="value"
+                        :label="$t('caDetails.value')"
+                      ></el-table-column>
                     </el-table>
 
-                    <div
-                      v-if="resourcesArray.length === 0"
-                      class="empty"
-                    >{{ $t("caDetails.noResources") }}</div>
+                    <div v-if="resourcesArray.length === 0" class="empty">
+                      {{ $t("caDetails.noResources") }}
+                    </div>
                   </el-card>
                 </el-col>
               </el-row>
@@ -139,18 +165,25 @@
                     >
                       <i class="el-icon-loading" v-if="loadingParent"></i>
                       <el-table :data="parentDetails">
-                        <el-table-column property="prop" :label="$t('caDetails.property')"></el-table-column>
-                        <el-table-column property="value" :label="$t('caDetails.value')"></el-table-column>
+                        <el-table-column
+                          property="prop"
+                          :label="$t('caDetails.property')"
+                        ></el-table-column>
+                        <el-table-column
+                          property="value"
+                          :label="$t('caDetails.value')"
+                        ></el-table-column>
                       </el-table>
                       <el-button
                         type="text"
                         slot="reference"
                         @click="getParent(ca.parents[scope.$index])"
-                      >{{ ca.parents[scope.$index].handle }}</el-button>
+                        >{{ ca.parents[scope.$index].handle }}</el-button
+                      >
                     </el-popover>
-                    <span
-                      v-if="ca.parents[scope.$index].kind !== 'rfc6492'"
-                    >{{ ca.parents[scope.$index].handle }}</span>
+                    <span v-if="ca.parents[scope.$index].kind !== 'rfc6492'">{{
+                      ca.parents[scope.$index].handle
+                    }}</span>
                   </template>
                 </el-table-column>
                 <el-table-column prop="kind" :label="$t('caDetails.kind')"></el-table-column>
@@ -161,7 +194,8 @@
                 type="primary"
                 v-if="!initializeParent && !initializeRepo && !showAddParent"
                 @click="addAdditionalParent()"
-              >{{ $t("caDetails.parentsTab.addParent") }}</el-button>
+                >{{ $t("caDetails.parentsTab.addParent") }}</el-button
+              >
 
               <el-form
                 :model="initializeParentForm"
@@ -169,7 +203,11 @@
                 v-if="initializeParent || showAddParent"
               >
                 <el-form-item :label="$t('caDetails.parentsTab.request')" prop="xml">
-                  <prism-editor :code="initializeParentForm.xml" language="xml" :readonly="true"></prism-editor>
+                  <prism-editor
+                    :code="initializeParentForm.xml"
+                    language="xml"
+                    :readonly="true"
+                  ></prism-editor>
                 </el-form-item>
                 <el-row type="flex">
                   <el-form-item>
@@ -191,7 +229,8 @@
                       class="ml-1"
                       v-model="initializeParentForm.ARINCompatible"
                       :active-text="$t('caDetails.parentsTab.arin')"
-                      inactive-text="">
+                      inactive-text=""
+                    >
                     </el-switch>
                   </el-form-item>
                 </el-row>
@@ -204,7 +243,10 @@
                   <el-row class="mt-3" :gutter="10">
                     <el-col :xs="24" :sm="12">
                       <div style="height:180px">
-                        <prism-editor v-model="initializeParentForm.response" language="xml"></prism-editor>
+                        <prism-editor
+                          v-model="initializeParentForm.response"
+                          language="xml"
+                        ></prism-editor>
                       </div>
                     </el-col>
                     <el-col :xs="24" :sm="12">
@@ -221,13 +263,32 @@
                   </el-row>
                 </el-form-item>
 
+                <el-form-item :label="$t('caDetails.parentsTab.name')" prop="name">
+                  <el-row class="mt-3" :gutter="10">
+                    <el-col :xs="24" :sm="12">
+                      <el-input
+                        v-model="initializeParentForm.name"
+                        autocomplete="off"
+                        :rules="[
+                          {
+                            required: true,
+                            validator: checkHandle,
+                            message: $t('caDetails.parentsTab.namerequired')
+                          }
+                        ]"
+                      ></el-input>
+                    </el-col>
+                  </el-row>
+                </el-form-item>
+
                 <el-row type="flex" class="modal-footer">
                   <el-form-item>
-                    <el-button
-                      @click="showAddParent = false"
-                      v-if="showAddParent"
-                    >{{ $t('common.cancel') }}</el-button>
-                    <el-button type="primary" @click="addParent()">{{ $t('common.confirm') }}</el-button>
+                    <el-button @click="showAddParent = false" v-if="showAddParent">{{
+                      $t("common.cancel")
+                    }}</el-button>
+                    <el-button type="primary" @click="addParent()">{{
+                      $t("common.confirm")
+                    }}</el-button>
                   </el-form-item>
                 </el-row>
               </el-form>
@@ -249,7 +310,11 @@
             <el-tab-pane :label="$t('caDetails.repo')" name="repo">
               <el-form :model="initializeRepoForm" ref="initializeRepoForm" v-if="initializeRepo">
                 <el-form-item :label="$t('caDetails.repoTab.request')" prop="xml">
-                  <prism-editor v-model="initializeRepoForm.xml" language="xml" :readonly="true"></prism-editor>
+                  <prism-editor
+                    v-model="initializeRepoForm.xml"
+                    language="xml"
+                    :readonly="true"
+                  ></prism-editor>
                 </el-form-item>
                 <el-row type="flex">
                   <el-form-item>
@@ -277,7 +342,10 @@
                   <el-row class="mt-3" :gutter="10">
                     <el-col :xs="24" :sm="12">
                       <div style="height:180px">
-                        <prism-editor v-model="initializeRepoForm.response" language="xml"></prism-editor>
+                        <prism-editor
+                          v-model="initializeRepoForm.response"
+                          language="xml"
+                        ></prism-editor>
                       </div>
                     </el-col>
                     <el-col :xs="24" :sm="12">
@@ -295,7 +363,9 @@
                 </el-form-item>
                 <el-row type="flex">
                   <el-form-item>
-                    <el-button type="primary" @click="addRepo()">{{ $t('common.confirm') }}</el-button>
+                    <el-button type="primary" @click="addRepo()">{{
+                      $t("common.confirm")
+                    }}</el-button>
                   </el-form-item>
                 </el-row>
               </el-form>
@@ -335,7 +405,11 @@
           <el-input v-model="addROAForm.asn" autocomplete="off" @change="removeAS()"></el-input>
         </el-form-item>
         <el-form-item label="Prefix" placeholder="ie. 10.1.0.0/22" prop="prefix">
-          <el-input v-model="addROAForm.prefix" autocomplete="off" @input="updateMaxLength($event)"></el-input>
+          <el-input
+            v-model="addROAForm.prefix"
+            autocomplete="off"
+            @input="updateMaxLength($event)"
+          ></el-input>
         </el-form-item>
         <el-form-item :label="$t('caDetails.maxLength')" placeholder="ie. 24" prop="maxLength">
           <el-input
@@ -346,11 +420,13 @@
             max="64"
           ></el-input>
         </el-form-item>
-        <el-alert type="error" v-if="error" :closable="false" class="mb-1">{{error}}</el-alert>
+        <el-alert type="error" v-if="error" :closable="false" class="mb-1">{{ error }}</el-alert>
         <el-row type="flex" class="modal-footer" justify="end">
           <el-form-item>
-            <el-button @click="resetForm('addROAForm')">{{ $t('common.cancel') }}</el-button>
-            <el-button type="primary" @click="submitForm('addROAForm')">{{ $t('common.confirm') }}</el-button>
+            <el-button @click="resetForm('addROAForm')">{{ $t("common.cancel") }}</el-button>
+            <el-button type="primary" @click="submitForm('addROAForm')">{{
+              $t("common.confirm")
+            }}</el-button>
           </el-form-item>
         </el-row>
       </el-form>
@@ -363,15 +439,15 @@ import "element-ui/lib/theme-chalk/display.css";
 import router from "@/router";
 import APIService from "@/services/APIService.js";
 const cidrRegex = require("cidr-regex");
-const xml2js = require('xml2js');
+const xml2js = require("xml2js");
 export default {
   data() {
     const checkASN = (rule, value, callback) => {
       if (value === "") {
         callback(new Error(this.$t("caDetails.addROAForm.required")));
       } else {
-        if (value.toLowerCase().indexOf('as') === 0) {
-          value = value.substr(2)*1;
+        if (value.toLowerCase().indexOf("as") === 0) {
+          value = value.substr(2) * 1;
         }
         if (value >= 0 && value <= 4294967295) {
           callback();
@@ -388,6 +464,17 @@ export default {
           callback();
         } else {
           callback(new Error(this.$t("caDetails.addROAForm.prefix_format")));
+        }
+      }
+    };
+    const checkHandle = (rule, value, callback) => {
+      if (value === "") {
+        callback(new Error(this.$t("onboarding.addCAForm.required")));
+      } else {
+        if (new RegExp(/^[a-zA-Z0-9-_]+$/).test(value)) {
+          callback();
+        } else {
+          callback(new Error(this.$t("onboarding.addCAForm.format")));
         }
       }
     };
@@ -438,7 +525,8 @@ export default {
         xml: "",
         originalXml: "",
         response: "",
-        ARINCompatible: false
+        ARINCompatible: false,
+        name: ""
       },
       fileList: []
     };
@@ -511,25 +599,33 @@ export default {
     }
   },
   watch: {
+    "initializeParentForm.response"(xml) {
+      const self = this;
+      xml2js.parseString(xml, function(err, result) {
+        if (result && result.parent_response) {
+          self.initializeParentForm.name = result.parent_response.$.parent_handle;
+        }
+      });
+    },
     "initializeParentForm.ARINCompatible"(enable) {
       const self = this;
       if (enable) {
         this.initializeParentForm.originalXml = this.initializeParentForm.xml;
-        xml2js.parseString(this.initializeParentForm.xml, function (err, result) {
-            const builder = new xml2js.Builder();
-            const ARINxmlObj = {
-              identity: {
-                '$': {
-                  'xmlns': 'http://www.hactrn.net/uris/rpki/myrpki/',
-                  'version': '2',
-                  'handle': result.child_request.$.child_handle
-                },
-                child_bpki_ta: result.child_request.child_bpki_ta
-              }
+        xml2js.parseString(this.initializeParentForm.xml, function(err, result) {
+          const builder = new xml2js.Builder();
+          const ARINxmlObj = {
+            identity: {
+              $: {
+                xmlns: "http://www.hactrn.net/uris/rpki/myrpki/",
+                version: "2",
+                handle: result.child_request.$.child_handle
+              },
+              child_bpki_ta: result.child_request.child_bpki_ta
             }
-            const ARINxml = builder.buildObject(ARINxmlObj).split('\n');
-            ARINxml.shift();
-            self.initializeParentForm.xml = ARINxml.join('\n');
+          };
+          const ARINxml = builder.buildObject(ARINxmlObj).split("\n");
+          ARINxml.shift();
+          self.initializeParentForm.xml = ARINxml.join("\n");
         });
       } else {
         self.initializeParentForm.xml = this.initializeParentForm.originalXml;
@@ -552,10 +648,7 @@ export default {
         e = error.data.label
           ? this.$t("errors." + error.data.label, error.data.args)
           : this.$t("errors." + error.data.code);
-        if (
-          e ===
-          "errors." + (error.data.label ? error.data.label : error.data.code)
-        ) {
+        if (e === "errors." + (error.data.label ? error.data.label : error.data.code)) {
           e = error.data.msg;
         }
       }
@@ -584,23 +677,25 @@ export default {
       this.repo = {};
       this.parentDetails = [];
       localStorage.lagostaLastCA = this.handle;
-      APIService.getCA(this.handle).then(response => {
-        this.loading = false;
-        this.ca = response.data;
-        if (!this.ca.parents || this.ca.parents.length === 0) {
-          this.initializeParent = true;
-          if (this.activeTab === "roas") {
-            this.activeTab = "parents";
+      APIService.getCA(this.handle)
+        .then(response => {
+          this.loading = false;
+          this.ca = response.data;
+          if (!this.ca.parents || this.ca.parents.length === 0) {
+            this.initializeParent = true;
+            if (this.activeTab === "roas") {
+              this.activeTab = "parents";
+            }
+            APIService.getChildRequestXML(this.handle).then(response => {
+              this.initializeParentForm.xml = response.data;
+            });
           }
-          APIService.getChildRequestXML(this.handle).then(response => {
-            this.initializeParentForm.xml = response.data;
-          });
-        }
-      }).catch(error => {
-        self.parseError(error);
-        localStorage.removeItem('lagostaLastCA');
-        router.push("/interstitial");
-      });
+        })
+        .catch(error => {
+          self.parseError(error);
+          localStorage.removeItem("lagostaLastCA");
+          router.push("/interstitial");
+        });
       APIService.getRepo(this.handle)
         .then(response => {
           this.loadingRepo = false;
@@ -717,7 +812,7 @@ export default {
         .catch(() => {});
     },
     removeAS() {
-      if (this.addROAForm.asn.toLowerCase().indexOf('as') === 0){
+      if (this.addROAForm.asn.toLowerCase().indexOf("as") === 0) {
         this.addROAForm.asn = this.addROAForm.asn.substr(2);
       }
     },
@@ -765,13 +860,9 @@ export default {
       reader.onload = (function() {
         return function(e) {
           if (what === "repo") {
-            self.initializeRepoForm.response = atob(
-              e.target.result.substring(21)
-            );
+            self.initializeRepoForm.response = atob(e.target.result.substring(21));
           } else {
-            self.initializeParentForm.response = atob(
-              e.target.result.substring(21)
-            );
+            self.initializeParentForm.response = atob(e.target.result.substring(21));
           }
         };
       })(file);
@@ -798,7 +889,8 @@ export default {
       const self = this;
       APIService.addParentResponse(
         this.handle,
-        this.initializeParentForm.response
+        this.initializeParentForm.response,
+        this.initializeParentForm.name
       )
         .then(() => {
           this.$notify({

@@ -53,20 +53,18 @@ export default {
     return apiClient.get("/api/v1/cas/" + handle + "/parents/" + parent);
   },
   updateROAs(handle, delta) {
-    return apiClient
-      .post("/api/v1/cas/" + handle + "/routes", delta)
-      .catch(error => {
-        if (error.response && error.response.data) {
-          return Promise.reject({
-            data: error.response.data
-          });
-        }
+    return apiClient.post("/api/v1/cas/" + handle + "/routes", delta).catch(error => {
+      if (error.response && error.response.data) {
         return Promise.reject({
-          data: {
-            code: -1
-          }
+          data: error.response.data
         });
+      }
+      return Promise.reject({
+        data: {
+          code: -1
+        }
       });
+    });
   },
   createCA(handle) {
     return apiClient.post("/api/v1/cas", {
@@ -76,8 +74,8 @@ export default {
   getChildRequestXML(handle) {
     return apiClient.get("/api/v1/cas/" + handle + "/child_request.xml");
   },
-  addParentResponse(handle, xml) {
-    return apiClient.post("/api/v1/cas/" + handle + "/parents", xml);
+  addParentResponse(handle, xml, name) {
+    return apiClient.post("/api/v1/cas/" + handle + "/parents-xml/" + name, xml);
   },
   getRepoRequestXML(handle) {
     return apiClient.get("/api/v1/cas/" + handle + "/repo/request.xml");
@@ -86,6 +84,6 @@ export default {
     return apiClient.post("/api/v1/cas/" + handle + "/repo", xml);
   },
   getKrillStats() {
-    return apiClient.get('/stats/info');
+    return apiClient.get("/stats/info");
   }
 };
