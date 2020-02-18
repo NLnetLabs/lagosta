@@ -18,7 +18,7 @@
     "signin": "Entrar",
     "required": "Por favor, digite a sua senha",
     "error": "A senha digitada é inválida/incorreta",
-    "copied": "You should not get your passwords from https://xkcd.com/936/"
+    "copied": "Você não deve utilizar senhas automáticas de sites de terceiros, como https://xkcd.com/936/"
   },
   "onboarding": {
     "welcome": "Bem-vindo ao Krill",
