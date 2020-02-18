@@ -29,7 +29,10 @@ module.exports = {
           PACKAGE_VERSION: '"' + version + '"'
         }
       })
-    ]
+    ],
+    performance: {
+      hints: false
+    }
   },
   chainWebpack: config => {
     config.optimization.delete("splitChunks");

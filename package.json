@@ -55,6 +55,8 @@
     "**/**/set-value": "^2.0.1",
     "**/**/mem": "^4.0.0",
     "**/**/eslint-utils": "^1.4.1",
-    "**/**/serialize-javascript": "^2.1.1"
+    "**/**/serialize-javascript": "^2.1.1",
+    "**/**/browserslist": "4.8.3",
+    "**/**/caniuse-lite": "1.0.30001020"
   }
 }
