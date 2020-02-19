@@ -18,7 +18,7 @@
     "signin": "Entrar",
     "required": "Por favor, digite a sua senha",
     "error": "A senha digitada é inválida/incorreta",
-    "copied": "Você não deve utilizar senhas automáticas de sites de terceiros, como https://xkcd.com/936/"
+    "copied": "Você não deve utilizar senhas de https://xkcd.com/936/"
   },
   "onboarding": {
     "welcome": "Bem-vindo ao Krill",
@@ -75,7 +75,7 @@
       "prefix_format": "Por favor, entre um prefixo IPv4 ou IPv6 válido"
     },
     "onboardingWarning": "Você deve conectar sua Autoridade Certificadora (CA) a um repositório RPKI público, onde será possível publicar seu certificado e ROAs. Assim que a configuração com o Pai estiver finalizada, imediatamente os softwares de validação ('relying party') terão acesso ao seus certificado e ROAs criados neste repositório.",
-    "initialize": "Por favor, initialize o repositório RPKI repository e/ou Pai primeiro.",
+    "initialize": "Por favor, initialize o repositório RPKI e/ou Pai primeiro.",
     "noResourcesYet": "Você não recebeu nenhum recurso ainda",
     "clickToRefresh": "Clique aqui para atualizar",
     "parentsTab": {
@@ -84,9 +84,9 @@
       "addParent": "Incluir um Pai adicional",
       "addParentSuccess": "Pai adicionado",
       "arin": "Compatível com ARIN",
-      "name": "Parent Name",
-      "namerequired": "The parent name is required",
-      "nameformat": "This is not a valid Parent name"
+      "name": "Nome da CA-Pai",
+      "namerequired": "O nome da CA-Pai é requerido",
+      "nameformat": "Este não é um nome de CA-Pai válido"
     },
     "repoTab": {
       "request": "Requisição de Repositório",
@@ -108,11 +108,11 @@
     "ca-repo-issue": "Erro recebido do repositório: {cause}",
     "ca-repo-response-invalid-xml": "Recebido um XML repository_response inválido",
     "ca-repo-response-wrong-xml": "Recebido um XML parent_response ao invés de repository_response",
-    "ca-parent-duplicate": "Você já possui um Pai chamado '{parent}'",
-    "ca-parent-unknown": "Você não tem um Pai chamado '{parent}'",
-    "ca-parent-issue": "Erro recebido do Pai '{parent}': {cause}",
+    "ca-parent-duplicate": "Você já possui uma CA-pai chamada '{parent}'",
+    "ca-parent-unknown": "Você não tem uma CA-pai chamada '{parent}'",
+    "ca-parent-issue": "Erro recebido da CA-pai '{parent}': {cause}",
     "ca-parent-response-invalid-xml": "Xml parent_response inválido",
-    "ca-parent-response-wrong-xml": "Resposta do repositório após adicionar Pai",
+    "ca-parent-response-wrong-xml": "Resposta do repositório após adicionar a CA-pai",
     "ca-child-duplicate": "Você já possui uma CA-filha chamada '{child}'",
     "ca-child-unknown": "Você não tem uma CA-filha chamada '{child}'",
     "ca-child-resources-required": "Você deve especificar recursos para sua CA-filha '{child}'",
