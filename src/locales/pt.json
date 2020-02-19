@@ -22,7 +22,7 @@
   },
   "onboarding": {
     "welcome": "Bem-vindo ao Krill",
-    "welcomeHtml": "O primeiro passo é criar uma Autoridade Certificadora (CA) RPKI. Ela será usada para configurar o RPKI delegado com uma ou mais CAs-pai, geralmente uma Autoridade Nacional de Internet (NIR) ou mesmo uma Autoridade Regional de Internet (RIR).<br><br>Você deve definir um identificador que vinculará sua CA nas operações com a CA-pai e CAs-filhas. Este identificador não será usado nas publicações RPKI. Por favor, defina um identificador que ajude outras pessoas a identificar sua empresa/organização. Uma vez configurado, este identificador não poderá ser alterado. <a href='https://rpki.readthedocs.io/en/latest/krill/manage-cas.html#adding-your-ca' target='_blank'>Saiba mais...</a>",
+    "welcomeHtml": "O primeiro passo é criar uma Autoridade Certificadora (CA) RPKI. Ela será usada para configurar o RPKI delegado com uma ou mais CAs-pai, geralmente uma Autoridade Nacional de Internet (NIR) ou mesmo uma Autoridade Regional de Internet (RIR).<br><br>Você deve definir um identificador que vinculará sua CA nas operações com a CA-pai e CAs-filhas. Este identificador não será usado nas publicações RPKI. Por favor, defina um identificador que ajude outras pessoas a identificar sua empresa/organização. Uma vez configurado, este identificador não poderá ser alterado.",
     "addCAForm": {
       "required": "Este campo é obrigatório",
       "format": "Este não é um nome de CA válido",
