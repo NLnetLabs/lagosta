@@ -619,7 +619,7 @@ export default {
                 version: "2",
                 handle: result.child_request.$.child_handle
               },
-              child_bpki_ta: result.child_request.child_bpki_ta
+              bpki_ta: result.child_request.child_bpki_ta
             }
           };
           const ARINxml = builder.buildObject(ARINxmlObj).split("\n");
