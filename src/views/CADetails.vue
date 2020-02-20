@@ -55,10 +55,20 @@
                   >
                     <el-table-column prop="asn" label="ASN"></el-table-column>
                     <el-table-column prop="prefix" label="Prefix"></el-table-column>
-                    <el-table-column
-                      prop="max_length"
-                      :label="$t('caDetails.maxLength')"
-                    ></el-table-column>
+                    <el-table-column prop="max_length">
+                      <template slot="header">
+                        <el-tooltip
+                          effect="dark"
+                          :content="$t('caDetails.maxLengthTooltip')"
+                          placement="top"
+                        >
+                          <span>{{ $t("caDetails.maxLength") }}</span>
+                        </el-tooltip>
+                      </template>
+                      <template slot-scope="scope">
+                        {{ scope.row.max_length ? scope.row.max_length : "-" }}
+                      </template>
+                    </el-table-column>
                     <el-table-column label width="80">
                       <template slot-scope="scope">
                         <el-button
@@ -106,6 +116,7 @@
                       size="small"
                       v-if="resourcesArray.length"
                       :data="resourcesArray"
+                      :show-header="false"
                       style="width: 100%"
                     >
                       <el-table-column

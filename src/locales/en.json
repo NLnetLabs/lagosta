@@ -63,6 +63,7 @@
     "children": "Children",
     "handle": "Handle",
     "maxLength": "Max Length",
+    "maxLengthTooltip": "If max length is not specified (-), it defaults to the prefix length.",
     "confirmation": {
       "title": "Warning",
       "message": "This will remove the ROA. Continue?",

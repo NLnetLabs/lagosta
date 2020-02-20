@@ -63,6 +63,7 @@
     "children": "Filhos",
     "handle": "Identificador",
     "maxLength": "Comprimento máximo",
+    "maxLengthTooltip": "If max length is not specified (-), it defaults to the prefix length.",
     "confirmation": {
       "title": "Aviso",
       "message": "Esta operação irá remover a ROA. Continuar?",
