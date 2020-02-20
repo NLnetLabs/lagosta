@@ -37,11 +37,34 @@
             &copy; {{ new Date().getFullYear() }} Stichting NLnet Labs - Lagosta v{{
               lagostaVersion
             }}
+
+            <!-- <el-tooltip class="item" effect="dark" :content="lagostaLatestVersion" placement="top" v-if="lagostaLatestVersion !== '' && lagostaLatestVersion !== lagostaVersion">
+              <a :href="lagostaLatestVersionURL" target="_blank">({{$t("common.newversion")}})</a>
+            </el-tooltip> -->
+
             <span v-if="krillVersion !== ''" :title="krillStarted"
               >, Krill v{{ krillVersion }}</span
             >
+
+            <el-tooltip
+              class="item"
+              effect="dark"
+              :content="krillLatestVersion"
+              placement="top"
+              v-if="
+                krillVersion !== '' &&
+                  krillLatestVersion !== '' &&
+                  krillLatestVersion !== krillVersion
+              "
+            >
+              <a :href="krillLatestVersionURL" target="_blank"> - {{ $t("common.newversion") }}</a>
+            </el-tooltip>
           </el-col>
           <el-col :span="12" class="text-right">
+            <a href="https://nlnetlabs.nl/services/contracts/" target="_blank">{{
+              $t("common.supportcontracts")
+            }}</a>
+            -
             <a href="https://rpki.readthedocs.io/en/latest/krill/index.html" target="_blank">{{
               $t("common.readthedocs")
             }}</a>
@@ -65,7 +88,11 @@ export default {
   data() {
     return {
       lagostaVersion: process.env.PACKAGE_VERSION || "0",
-      krillVersion: "0",
+      lagostaLatestVersion: "",
+      lagostaLatestVersionURL: "",
+      krillVersion: "",
+      krillLatestVersion: "",
+      krillLatestVersionURL: "",
       krillStarted: "",
       user: null,
       langs: [
@@ -89,8 +116,27 @@ export default {
       this.$i18n.locale = localStorage.lagostaLocale;
     }
     moment.locale(this.$i18n.locale);
+    this.checkLatestVersions();
   },
   methods: {
+    checkLatestVersions() {
+      APIService.getLatestLagostaVersion()
+        .then(success => {
+          const gh = success.data;
+          this.lagostaLatestVersion =
+            gh.tag_name.indexOf("v") === 0 ? gh.tag_name.substr(1) : gh.tag_name;
+          this.lagostaLatestVersionURL = gh.html_url;
+        })
+        .catch(() => {});
+      APIService.getLatestKrillVersion()
+        .then(success => {
+          const gh = success.data;
+          this.krillLatestVersion =
+            gh.tag_name.indexOf("v") === 0 ? gh.tag_name.substr(1) : gh.tag_name;
+          this.krillLatestVersionURL = gh.html_url;
+        })
+        .catch(() => {});
+    },
     beforeUnload() {
       localStorage.removeItem("user");
     },

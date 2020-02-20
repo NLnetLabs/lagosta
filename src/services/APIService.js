@@ -6,6 +6,8 @@ const apiClient = axios.create({
   headers: authHeader()
 });
 
+const simpleClient = axios.create();
+
 export default {
   isAuthorized() {
     return apiClient
@@ -85,5 +87,11 @@ export default {
   },
   getKrillStats() {
     return apiClient.get("/stats/info");
+  },
+  getLatestLagostaVersion() {
+    return simpleClient.get("https://api.github.com/repos/nlnetlabs/lagosta/releases/latest");
+  },
+  getLatestKrillVersion() {
+    return simpleClient.get("https://api.github.com/repos/nlnetlabs/krill/releases/latest");
   }
 };

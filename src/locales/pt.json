@@ -10,7 +10,9 @@
     "copy": "Copiar para a Área de transferência",
     "download": "Download",
     "dropOrClick": "Arraste o arquivo aqui, ou <em>clique para upload</em>",
-    "started": "Krill rodando desde"
+    "started": "Krill rodando desde",
+    "newversion": "New version available!",
+    "supportcontracts": "Support contracts"
   },
   "login": {
     "password": "Senha",
