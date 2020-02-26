@@ -20,7 +20,7 @@
     "signin": "Sign In",
     "required": "Please enter your password",
     "error": "The password you specified is wrong",
-    "copied": "You should not get your passwords from https://xkcd.com/936/"
+    "copied": "You should not get your passwords from <a href='https://xkcd.com/936/' target='_blank'>https://xkcd.com/936/</a>"
   },
   "onboarding": {
     "welcome": "Welcome to Krill",
@@ -82,7 +82,7 @@
     "noResourcesYet": "You have not received any resources yet",
     "clickToRefresh": "Click here to refresh",
     "parentsTab": {
-      "request": "Parent Request",
+      "request": "Child Request",
       "response": "Parent Response",
       "addParent": "Add an additional parent",
       "addParentSuccess": "Parent added",

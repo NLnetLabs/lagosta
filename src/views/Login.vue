@@ -13,6 +13,9 @@
                   clearable
                   @keyup.enter.native="submitForm"
                 ></el-input>
+                <div class="el-form-item__error" slot="error" slot-scope="scope">
+                  <span v-html="scope.error"></span>
+                </div>
               </el-form-item>
               <el-form-item>
                 <el-button type="primary" @click="submitForm" v-loading="loading">{{
@@ -121,6 +124,9 @@ export default {
     .el-form-item {
       margin-bottom: 0 !important;
     }
+  }
+  .el-form-item__error {
+    line-height: 18px !important;
   }
 }
 .alert-row {

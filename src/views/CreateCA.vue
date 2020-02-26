@@ -13,13 +13,17 @@
 
         <el-form :model="addCAForm" :rules="rules" ref="addCAForm">
           <el-form-item label="CA Handle" prop="handle">
-            <el-input v-model="addCAForm.handle" autocomplete="off"></el-input>
+            <el-input
+              ref="handle"
+              v-model="addCAForm.handle"
+              autocomplete="off"
+              @keyup.enter.native="submitForm(true)"
+            ></el-input>
           </el-form-item>
           <el-alert type="error" v-if="error" :closable="false">{{ error }}</el-alert>
           <el-row type="flex" class="modal-footer" justify="end">
             <el-form-item>
-              <el-button @click="resetForm('addCAForm')">{{ $t("common.cancel") }}</el-button>
-              <el-button type="primary" @click="submitForm('addCAForm')">{{
+              <el-button type="primary" @click="submitForm()">{{
                 $t("onboarding.addCAForm.confirm")
               }}</el-button>
             </el-form-item>
@@ -60,7 +64,8 @@ export default {
             message: this.$t("onboarding.addCAForm.format")
           }
         ]
-      }
+      },
+      enterPressed: false
     };
   },
   created() {
@@ -75,6 +80,9 @@ export default {
         }
       });
     }
+  },
+  mounted() {
+    this.$refs.handle.$refs.input.focus();
   },
   methods: {
     parseError(error, notify) {
@@ -97,36 +105,37 @@ export default {
         });
       }
     },
-    submitForm(formName) {
+    submitForm(fromKeyboard = false) {
       const self = this;
-      this.$refs[formName].validate(valid => {
-        if (valid) {
-          this.$confirm(
-            this.$t("onboarding.addCAForm.confirmation.message"),
-            this.$t("onboarding.addCAForm.confirmation.title"),
-            {
-              confirmButtonText: this.$t("common.ok"),
-              cancelButtonText: this.$t("common.cancel")
-            }
-          )
-            .then(() => {
-              APIService.createCA(this.addCAForm.handle)
-                .then(() => {
-                  router.push("/cas/" + this.addCAForm.handle);
-                })
-                .catch(error => {
-                  self.parseError(error, true);
-                });
-            })
-            .catch(() => {});
-        } else {
-          return false;
-        }
-      });
-    },
-    resetForm(formName) {
-      this.error = "";
-      this.$refs[formName].resetFields();
+      if (!self.enterPressed) {
+        this.$refs["addCAForm"].validate(valid => {
+          if (valid) {
+            this.$confirm(
+              this.$t("onboarding.addCAForm.confirmation.message"),
+              this.$t("onboarding.addCAForm.confirmation.title"),
+              {
+                confirmButtonText: this.$t("common.ok"),
+                cancelButtonText: this.$t("common.cancel")
+              }
+            )
+              .then(() => {
+                APIService.createCA(this.addCAForm.handle)
+                  .then(() => {
+                    router.push("/cas/" + this.addCAForm.handle);
+                  })
+                  .catch(error => {
+                    self.parseError(error, true);
+                  });
+              })
+              .catch(() => {
+                self.enterPressed = false;
+              });
+          } else {
+            return false;
+          }
+        });
+      }
+      self.enterPressed = fromKeyboard;
     }
   }
 };

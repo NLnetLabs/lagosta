@@ -20,7 +20,7 @@
     "signin": "Entrar",
     "required": "Por favor, digite a sua senha",
     "error": "A senha digitada é inválida/incorreta",
-    "copied": "Você não deve utilizar senhas de https://xkcd.com/936/"
+    "copied": "Você não deve utilizar senhas de <a href='https://xkcd.com/936/' target='_blank'>https://xkcd.com/936/</a>"
   },
   "onboarding": {
     "welcome": "Bem-vindo ao Krill",
@@ -82,7 +82,7 @@
     "noResourcesYet": "Você não recebeu nenhum recurso ainda",
     "clickToRefresh": "Clique aqui para atualizar",
     "parentsTab": {
-      "request": "Requisição do Pai",
+      "request": "Requisição da CA-filha",
       "response": "Resposta do Pai",
       "addParent": "Incluir um Pai adicional",
       "addParentSuccess": "Pai adicionado",
