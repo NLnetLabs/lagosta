@@ -92,7 +92,7 @@
       "nameformat": "Este não é um nome de CA-Pai válido"
     },
     "repoTab": {
-      "request": "Requisição de Repositório",
+      "request": "Requisição de Publicador",
       "response": "Resposta do Repositório",
       "addRepoSuccess": "Repositório adicionado"
     },
