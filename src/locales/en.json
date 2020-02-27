@@ -92,7 +92,7 @@
       "nameformat": "This is not a valid parent name"
     },
     "repoTab": {
-      "request": "Repository Request",
+      "request": "Publisher Request",
       "response": "Repository Response",
       "addRepoSuccess": "Repository added"
     },
