@@ -11,12 +11,12 @@
     "download": "Download",
     "dropOrClick": "Arraste o arquivo aqui, ou <em>clique para upload</em>",
     "started": "Krill rodando desde",
-    "newversion": "New version available!",
+    "newversion": "Nova versão disponível!",
     "supportcontracts": "Support contracts"
   },
   "login": {
     "password": "Senha",
-    "placeholder": "Sua senha",
+    "placeholder": "Sua senha (token de autenticação)",
     "signin": "Entrar",
     "required": "Por favor, digite a sua senha",
     "error": "A senha digitada é inválida/incorreta",
@@ -24,14 +24,14 @@
   },
   "onboarding": {
     "welcome": "Bem-vindo ao Krill",
-    "welcomeHtml": "O primeiro passo é criar uma Autoridade Certificadora (CA) RPKI. Ela será usada para configurar o RPKI delegado com uma ou mais CAs-pai, geralmente uma Autoridade Nacional de Internet (NIR) ou mesmo uma Autoridade Regional de Internet (RIR).<br><br>Você deve definir um identificador que vinculará sua CA nas operações com a CA-pai e CAs-filhas. Este identificador não será usado nas publicações RPKI. Por favor, defina um identificador que ajude outras pessoas a identificar sua empresa/organização. Uma vez configurado, este identificador não poderá ser alterado.",
+    "welcomeHtml": "O primeiro passo é criar uma Autoridade Certificadora (CA) RPKI. Ela será usada para configurar o RPKI delegado com uma ou mais CAs-pai, geralmente uma Autoridade Nacional de Internet (NIR) ou mesmo uma Autoridade Regional de Internet (RIR).<br/><br/>Você deve definir um identificador que vinculará sua CA nas operações com a CA-pai e CAs-filhas. Este identificador não será usado nas publicações RPKI. Por favor, defina um identificador que ajude outras pessoas a identificar sua empresa/organização. Uma vez configurado, este identificador não poderá ser alterado.",
     "addCAForm": {
       "required": "Este campo é obrigatório",
       "format": "Este não é um nome de CA válido",
       "confirm": "Criar CA",
       "confirmation": {
         "title": "Aviso",
-        "message": "Uma vez configurado, este identificador não poderá ser alterado. Continuar?"
+        "message": "Uma vez configurado, este identificador não poderá ser alterado. Deseja continuar?"
       }
     }
   },
@@ -52,7 +52,7 @@
     "addRoa": "Adicionar ROA",
     "roas": "ROAs",
     "resources": "Recursos",
-    "parents": "Pais",
+    "parents": "CAs-pai",
     "repo": "Repositório",
     "type": "Tipo",
     "properties": "Propriedades",
@@ -77,22 +77,22 @@
       "asn_format": "Este não é um ASN válido",
       "prefix_format": "Por favor, entre um prefixo IPv4 ou IPv6 válido"
     },
-    "onboardingWarning": "Você deve conectar sua Autoridade Certificadora (CA) a um repositório RPKI público, onde será possível publicar seu certificado e ROAs. Assim que a configuração com o Pai estiver finalizada, imediatamente os softwares de validação ('relying party') terão acesso ao seus certificado e ROAs criados neste repositório.",
+    "onboardingWarning": "Você deve conectar sua Autoridade Certificadora (CA) a um repositório RPKI público, onde será possível publicar seu certificado e ROAs.<br/><br/>Assim que a configuração com a CA-pai for finalizada, imediatamente os softwares de validação ('relying parties') terão acesso aos certificado(s) e ROA(s) criados neste repositório.",
     "initialize": "Por favor, initialize o repositório RPKI e/ou Pai primeiro.",
-    "noResourcesYet": "Você não recebeu nenhum recurso ainda",
+    "noResourcesYet": "Você ainda não recebeu nenhum recurso",
     "clickToRefresh": "Clique aqui para atualizar",
     "parentsTab": {
       "request": "Requisição da CA-filha",
-      "response": "Resposta do Pai",
-      "addParent": "Incluir um Pai adicional",
-      "addParentSuccess": "Pai adicionado",
+      "response": "Resposta da CA-pai",
+      "addParent": "Incluir uma nova CA-pai",
+      "addParentSuccess": "CA-pai adicionada",
       "arin": "Compatível com ARIN",
-      "name": "Nome da CA-Pai",
-      "namerequired": "O nome da CA-Pai é requerido",
-      "nameformat": "Este não é um nome de CA-Pai válido"
+      "name": "Nome da CA-pai",
+      "namerequired": "O nome da CA-pai é obrigatório",
+      "nameformat": "Este não é um nome de CA-pai válido"
     },
     "repoTab": {
-      "request": "Requisição de Publicador",
+      "request": "Requisição do Publicador",
       "response": "Resposta do Repositório",
       "addRepoSuccess": "Repositório adicionado"
     },
