@@ -6,13 +6,13 @@
     "cancel": "Cancelar",
     "ok": "OK",
     "error": "Error",
-    "success": "ĄÉxito!",
+    "success": "Éxito!",
     "copy": "Copiar al portapapeles",
     "download": "Descargar",
     "dropOrClick": "Colocar el archivo aquí o hacer <em>clic para cargarlo</em>",
     "started": "Krill está corriendo desde"
-    "newversion": "New version available!",
-    "supportcontracts": "Support contracts"
+    "newversion": "¡Hay una nueva versión disponible!",
+    "supportcontracts": "Contratos de soporte y mantenimiento"
   },
   "login": {
     "password": "Contraseńa",
@@ -20,7 +20,7 @@
     "signin": "Iniciar sesión",
     "required": "Ingrese su contraseńa",
     "error": "La contrasaeńa que ingresó es incorrecta"
-    "copied": "You should not get your passwords from <a href='https://xkcd.com/936/' target='_blank'>https://xkcd.com/936/</a>"
+    "copied": "NO deberías crear tus claves como en <a href='https://xkcd.com/936/' target='_blank'>https://xkcd.com/936/</a>"
   },
   "onboarding": {
     "welcome": "Bienvenido a Krill",
@@ -63,7 +63,7 @@
     "children": "Hijos",
     "handle": "Identificador",
     "maxLength": "Largo máx",
-    "maxLengthTooltip": "If max length is not specified (-), it defaults to the prefix length.",
+    "maxLengthTooltip": "Si el largo máximo no es especificado (-), se toma por defecto el largo del prefijo.",
     "confirmation": {
       "title": "Advertencia",
       "message": "Esto eliminará el ROA. żDesea continuar?",
@@ -86,10 +86,10 @@
       "response": "Respuesta padre",
       "addParent": "Agregar otro padre",
       "addParentSuccess": "Se agregó el padre"
-      "arin": "ARIN Compatible",
-      "name": "Parent Name",
-      "namerequired": "The parent name is required",
-      "nameformat": "This is not a valid parent name"
+      "arin": "Compatible con ARIN",
+      "name": "Nombre del padre",
+      "namerequired": "El nombre del padre es un dato necesario",
+      "nameformat": "Este nombre de padre no es válido"
     },
     "repoTab": {
       "request": "Solicitud repositorio",
