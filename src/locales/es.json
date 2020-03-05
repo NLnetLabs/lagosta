@@ -11,6 +11,8 @@
     "download": "Descargar",
     "dropOrClick": "Colocar el archivo aquí o hacer <em>clic para cargarlo</em>",
     "started": "Krill está corriendo desde"
+    "newversion": "New version available!",
+    "supportcontracts": "Support contracts"
   },
   "login": {
     "password": "Contraseńa",
@@ -18,6 +20,7 @@
     "signin": "Iniciar sesión",
     "required": "Ingrese su contraseńa",
     "error": "La contrasaeńa que ingresó es incorrecta"
+    "copied": "You should not get your passwords from <a href='https://xkcd.com/936/' target='_blank'>https://xkcd.com/936/</a>"
   },
   "onboarding": {
     "welcome": "Bienvenido a Krill",
@@ -60,6 +63,7 @@
     "children": "Hijos",
     "handle": "Identificador",
     "maxLength": "Largo máx",
+    "maxLengthTooltip": "If max length is not specified (-), it defaults to the prefix length.",
     "confirmation": {
       "title": "Advertencia",
       "message": "Esto eliminará el ROA. żDesea continuar?",
@@ -82,6 +86,10 @@
       "response": "Respuesta padre",
       "addParent": "Agregar otro padre",
       "addParentSuccess": "Se agregó el padre"
+      "arin": "ARIN Compatible",
+      "name": "Parent Name",
+      "namerequired": "The parent name is required",
+      "nameformat": "This is not a valid parent name"
     },
     "repoTab": {
       "request": "Solicitud repositorio",
@@ -111,10 +119,10 @@
     "ca-child-duplicate": "Ya tiene una CA hijo con el nombre '{child}'",
     "ca-child-unknown": "No tiene ninguna CA hijo con el nombre '{child}'",
     "ca-child-resources-required": "Debe especificar los recursos para la CA hijo '{child}'",
-    "ca-auth-unknown": "No se puede eliminar el ROA desconocido '{prefix}-{max_length} => {asn}'",
-    "ca-auth-duplicate": "ROA duplicado '{prefix}-{max_length} => {asn}'",
-    "ca-auth-invalid-max-length": "Largo máximo inválido en ROA '{prefix}-{max_length} => {asn}'",
-    "ca-auth-not-entitled": "El prefijo '{prefix}' contenido en el ROA no está en ninguno de sus certificados actuales",
+    "ca-roa-unknown": "No se puede eliminar el ROA desconocido '{prefix}-{max_length} => {asn}'",
+    "ca-roa-duplicate": "ROA duplicado '{prefix}-{max_length} => {asn}'",
+    "ca-roa-invalid-max-length": "Largo máximo inválido en ROA '{prefix}-{max_length} => {asn}'",
+    "ca-roa-not-entitled": "El prefijo '{prefix}' contenido en el ROA no está en ninguno de sus certificados actuales",
     "ta-not-allowed": "Esta funcionalidad no es compatible con el ancla de confianza de prueba",
     "ta-name-reserved": "Nombre reservado"
   }
