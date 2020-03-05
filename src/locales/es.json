@@ -10,7 +10,7 @@
     "copy": "Copiar al portapapeles",
     "download": "Descargar",
     "dropOrClick": "Colocar el archivo aquí o hacer <em>clic para cargarlo</em>",
-    "started": "Krill está corriendo desde"
+    "started": "Krill está corriendo desde",
     "newversion": "¡Hay una nueva versión disponible!",
     "supportcontracts": "Contratos de soporte y mantenimiento"
   },
@@ -19,7 +19,7 @@
     "placeholder": "Su contraseńa",
     "signin": "Iniciar sesión",
     "required": "Ingrese su contraseńa",
-    "error": "La contrasaeńa que ingresó es incorrecta"
+    "error": "La contrasaeńa que ingresó es incorrecta",
     "copied": "NO deberías crear tus claves como en <a href='https://xkcd.com/936/' target='_blank'>https://xkcd.com/936/</a>"
   },
   "onboarding": {
@@ -85,7 +85,7 @@
       "request": "Solicitud padre",
       "response": "Respuesta padre",
       "addParent": "Agregar otro padre",
-      "addParentSuccess": "Se agregó el padre"
+      "addParentSuccess": "Se agregó el padre",
       "arin": "Compatible con ARIN",
       "name": "Nombre del padre",
       "namerequired": "El nombre del padre es un dato necesario",
