@@ -83,6 +83,7 @@
 import router from "@/router";
 import APIService from "@/services/APIService.js";
 import * as moment from "moment";
+import { LOCALSTORAGE_NAME } from "@/auth-header";
 
 export default {
   data() {
@@ -98,9 +99,20 @@ export default {
       langs: [
         { iso: "en", label: "English" },
         { iso: "es", label: "Español" },
-        { iso: "pt", label: "Português" },
+        { iso: "pt", label: "Português" }
       ]
     };
+  },
+  onIdle() {
+    if (this.$route.name !== "login") {
+      this.$notify({
+        title: this.$t("common.warning"),
+        message: this.$t("common.idle"),
+        type: "warning",
+        duration: 0
+      });
+      this.logout();
+    }
   },
   watch: {
     "$i18n.locale"(locale) {
@@ -110,7 +122,6 @@ export default {
     }
   },
   created() {
-    window.addEventListener("beforeunload", this.beforeUnload);
     this.loadStats();
     this.loadUser();
     if (localStorage.lagostaLocale) {
@@ -139,7 +150,7 @@ export default {
         .catch(() => {});
     },
     beforeUnload() {
-      localStorage.removeItem("user");
+      localStorage.removeItem(LOCALSTORAGE_NAME);
     },
     loadStats() {
       APIService.getKrillStats().then(stats => {
@@ -153,7 +164,7 @@ export default {
       });
     },
     loadUser() {
-      this.user = JSON.parse(localStorage.getItem("user"));
+      this.user = JSON.parse(localStorage.getItem(LOCALSTORAGE_NAME));
     },
     logout() {
       return APIService.logout().then(() => {

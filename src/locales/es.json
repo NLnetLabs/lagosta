@@ -12,7 +12,9 @@
     "dropOrClick": "Colocar el archivo aquí o hacer <em>clic para cargarlo</em>",
     "started": "Krill está corriendo desde",
     "newversion": "¡Hay una nueva versión disponible!",
-    "supportcontracts": "Contratos de soporte y mantenimiento"
+    "supportcontracts": "Contratos de soporte y mantenimiento",
+    "warning": "Warning",
+    "idle": "You have been logged out because of inactivity."
   },
   "login": {
     "password": "Contraseńa",

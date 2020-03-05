@@ -8,6 +8,7 @@ import Interstitial from "./views/Interstitial.vue";
 import CreateCA from "./views/CreateCA.vue";
 import PageNotFound from "./views/404.vue";
 import APIService from "./services/APIService.js";
+import { LOCALSTORAGE_NAME } from "./auth-header";
 
 Vue.use(Router);
 
@@ -55,7 +56,7 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   const publicPages = ["/login"];
   const authRequired = !publicPages.includes(to.path);
-  const loggedInOnFrontend = localStorage.getItem("user");
+  const loggedInOnFrontend = localStorage.getItem(LOCALSTORAGE_NAME);
 
   if (authRequired) {
     APIService.isAuthorized().then(loggedInOnBackend => {

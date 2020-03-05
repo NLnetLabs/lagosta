@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import(/* webpackPreload: true */ "typeface-lato/index.css");
 import(/* webpackPreload: true */ "typeface-source-code-pro/index.css");
 import VueClipboard from "vue-clipboard2";
+import IdleVue from "idle-vue";
 
 import "prismjs";
 import "prismjs/themes/prism.css";
@@ -27,6 +28,13 @@ library.add({
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
 Vue.config.productionTip = false;
+
+const eventsHub = new Vue();
+
+Vue.use(IdleVue, {
+  eventEmitter: eventsHub,
+  idleTime: 30 * 60 * 1000 // 30 minutes idle timeout
+});
 
 new Vue({
   router,

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { authHeader } from "../auth-header";
+import { authHeader, LOCALSTORAGE_NAME } from "../auth-header";
 
 const apiClient = axios.create({
   withCredentials: true,
@@ -21,7 +21,7 @@ export default {
       .get("/api/v1/authorized")
       .then(() => {
         localStorage.setItem(
-          "user",
+          LOCALSTORAGE_NAME,
           JSON.stringify({
             authdata: window.btoa(token)
           })
@@ -29,12 +29,12 @@ export default {
         return true;
       })
       .catch(() => {
-        localStorage.removeItem("user");
+        localStorage.removeItem(LOCALSTORAGE_NAME);
         return false;
       });
   },
   logout() {
-    localStorage.removeItem("user");
+    localStorage.removeItem(LOCALSTORAGE_NAME);
     return new Promise(function(resolve) {
       resolve("Logged out.");
     });

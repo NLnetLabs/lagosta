@@ -12,7 +12,9 @@
     "dropOrClick": "Drop file here or <em>click to upload</em>",
     "started": "Krill has been running since",
     "newversion": "New version available!",
-    "supportcontracts": "Support contracts"
+    "supportcontracts": "Support contracts",
+    "warning": "Warning",
+    "idle": "You have been logged out because of inactivity."
   },
   "login": {
     "password": "Password",

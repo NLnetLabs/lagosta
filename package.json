@@ -20,6 +20,7 @@
     "express": "^4.17.1",
     "express-http-proxy": "^1.6.0",
     "http-proxy-middleware": "^0.20.0",
+    "idle-vue": "^2.0.5",
     "prismjs": "^1.19.0",
     "typeface-lato": "^0.0.54",
     "typeface-source-code-pro": "^0.0.71",
