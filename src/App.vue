@@ -97,7 +97,8 @@ export default {
       user: null,
       langs: [
         { iso: "en", label: "English" },
-        { iso: "pt", label: "Português" }
+        { iso: "es", label: "Español" },
+        { iso: "pt", label: "Português" },
       ]
     };
   },

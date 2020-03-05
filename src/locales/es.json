@@ -1,0 +1,121 @@
+{
+  "common": {
+    "readthedocs": "Leer los documentos",
+    "report": "Reportar un problema",
+    "confirm": "Confirmar",
+    "cancel": "Cancelar",
+    "ok": "OK",
+    "error": "Error",
+    "success": "ĄÉxito!",
+    "copy": "Copiar al portapapeles",
+    "download": "Descargar",
+    "dropOrClick": "Colocar el archivo aquí o hacer <em>clic para cargarlo</em>",
+    "started": "Krill está corriendo desde"
+  },
+  "login": {
+    "password": "Contraseńa",
+    "placeholder": "Su contraseńa",
+    "signin": "Iniciar sesión",
+    "required": "Ingrese su contraseńa",
+    "error": "La contrasaeńa que ingresó es incorrecta"
+  },
+  "onboarding": {
+    "welcome": "Bienvenido a Krill",
+    "welcomeHtml": "Empecemos por crear su Autoridad de Certificación (CA) RPKI. Esta se usará para configurar el RPKI Delegado con una o múltiples CA padre, generalmente su Registro Regional o Nacional de Internet.<br><br>El identificador que escoja identificará a su CA en sus interacciones con las CA padres e hijos. No se publicará en el RPKI. Escoja un identificador que ayude a los demás a reconocer a su organización. Una vez guardado, el identificador no se puede cambiar. <a href='https://rpki.readthedocs.io/en/latest/krill/manage-cas.html#adding-your-ca' target='_blank'>Más información...</a>",
+    "addCAForm": {
+      "required": "Este campo es obligatorio",
+      "format": "Este no es un nombre de CA válido",
+      "confirm": "Crear CA",
+      "confirmation": {
+        "title": "Advertencia",
+        "message": "Una vez guardado, el identificador no se puede cambiar. żDesea continuar?"
+      }
+    }
+  },
+  "cas": {
+    "loading": "Cargando Autoridades de Certificación",
+    "ca": "Autoridad de Certificación",
+    "cas": "Autoridades de Certificación",
+    "search": "Buscar CAs...",
+    "noCas": "No hay ninguna autoridad de certificación definida."
+  },
+  "caDetails": {
+    "loading": "Cargando {handle}",
+    "current": "Autoridad de Certificación actual",
+    "download": "Descargar PEM",
+    "noRoas": "No se encontró ningún ROA.",
+    "noResources": "Todavía no ha recibido ningún recurso",
+    "noChildren": "No se encontraron hijos.",
+    "addRoa": "Agregar ROA",
+    "roas": "ROAs",
+    "resources": "Recursos",
+    "parents": "Padres",
+    "repo": "Repositorio",
+    "type": "Tipo",
+    "properties": "Propiedades",
+    "property": "Propiedad",
+    "value": "Valor",
+    "kind": "Clase",
+    "resource": "Recurso",
+    "children": "Hijos",
+    "handle": "Identificador",
+    "maxLength": "Largo máx",
+    "confirmation": {
+      "title": "Advertencia",
+      "message": "Esto eliminará el ROA. żDesea continuar?",
+      "added": "ROA agregado",
+      "retired": "ROA eliminado",
+      "retiredSuccess": "El ROA se ha eliminado",
+      "addedSuccess": "El ROA se ha agregado"
+    },
+    "addROAForm": {
+      "required": "Este campo es obligatorio",
+      "asn_format": "Este no es un ASN válido",
+      "prefix_format": "Ingrese un prefijo IPv4 o IPv6 válido"
+    },
+    "onboardingWarning": "Deberá conectar su CA a un repositorio RPKI público donde pueda publicar su certificado y sus ROA. Tan pronto como se complete la configuración del padre, el software de validación comenzará a recuperar su certificado y los ROA que cree a partir de este repositorio.",
+    "initialize": "Primero inicialice el repositorio RPKI y/o el padre.",
+    "noResourcesYet": "Todavía no ha recibido ningún recurso",
+    "clickToRefresh": "Haga clic aquí para actualizar",
+    "parentsTab": {
+      "request": "Solicitud padre",
+      "response": "Respuesta padre",
+      "addParent": "Agregar otro padre",
+      "addParentSuccess": "Se agregó el padre"
+    },
+    "repoTab": {
+      "request": "Solicitud repositorio",
+      "response": "Respuesta repositorio",
+      "addRepoSuccess": "Se agregó el repositorio"
+    },
+    "copySuccess": "El XML se copió a su portapapeles"
+  },
+  "errors": {
+    "repo-not-set": "Primero debe configurar su repositorio",
+    "pub-unknown": "El publicador '{publisher}' es desconocido",
+    "pub-duplicate": "El publicador '{publisher}' ya se inicializó",
+    "pub-outside-jail": "Publicador uri '{uri}' fuera del repositorio uri '{base_uri}'",
+    "pub-uri-no-slash": "El publicador uri '{uri}' debe tener una barra diagonal al final",
+    "pub-no-embedded-repo": "No se configuró ningún repositorio integrado",
+    "ca-duplicate": "La CA '{ca}' ya se inicializó",
+    "ca-unknown": "La CA '{ca}' es desconocida",
+    "ca-repo-same": "Este repositorio ya está en uso",
+    "ca-repo-issue": "Se recibió un error del repositorio: {cause}",
+    "ca-repo-response-invalid-xml": "Se obtuvo un response xml inválido del repositorio",
+    "ca-repo-response-wrong-xml": "Se obtuvo una respuesta de padre, no de repositorio",
+    "ca-parent-duplicate": "Ya tiene un padre con el nombre '{parent}'",
+    "ca-parent-unknown": "No tiene ningún padre con el nombre '{parent}'",
+    "ca-parent-issue": "Se recibió un error del padre '{parent}': {cause}",
+    "ca-parent-response-invalid-xml": "Se obtuvo un response xml inválido del padre",
+    "ca-parent-response-wrong-xml": "Se obtuvo una respuesta del repositorio al agregar el padre",
+    "ca-child-duplicate": "Ya tiene una CA hijo con el nombre '{child}'",
+    "ca-child-unknown": "No tiene ninguna CA hijo con el nombre '{child}'",
+    "ca-child-resources-required": "Debe especificar los recursos para la CA hijo '{child}'",
+    "ca-auth-unknown": "No se puede eliminar el ROA desconocido '{prefix}-{max_length} => {asn}'",
+    "ca-auth-duplicate": "ROA duplicado '{prefix}-{max_length} => {asn}'",
+    "ca-auth-invalid-max-length": "Largo máximo inválido en ROA '{prefix}-{max_length} => {asn}'",
+    "ca-auth-not-entitled": "El prefijo '{prefix}' contenido en el ROA no está en ninguno de sus certificados actuales",
+    "ta-not-allowed": "Esta funcionalidad no es compatible con el ancla de confianza de prueba",
+    "ta-name-reserved": "Nombre reservado"
+  }
+}
