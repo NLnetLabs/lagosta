@@ -112,22 +112,40 @@
                 </el-col>
                 <el-col :span="6" :offset="2" class="hidden-xs-only">
                   <el-card class="resource-card">
-                    <el-table
-                      size="small"
-                      v-if="resourcesArray.length"
-                      :data="resourcesArray"
-                      :show-header="false"
-                      style="width: 100%"
-                    >
-                      <el-table-column
-                        prop="prop"
-                        :label="$t('caDetails.resource')"
-                      ></el-table-column>
-                      <el-table-column
-                        prop="value"
-                        :label="$t('caDetails.value')"
-                      ></el-table-column>
-                    </el-table>
+                    <div class="search-input">
+                      <el-input
+                        size="mini"
+                        prefix-icon="el-icon-search"
+                        v-model="resourcesSearch"
+                        v-if="resourcesArray.length"
+                        clearable
+                      ></el-input>
+                    </div>
+                    <div class="scrollable">
+                      <el-table
+                        size="small"
+                        v-if="filteredResourcesArray.length"
+                        :data="filteredResourcesArray"
+                        :show-header="false"
+                        style="width: 100%"
+                      >
+                        <el-table-column
+                          class-name="valign-top"
+                          prop="prop"
+                          :label="$t('caDetails.resource')"
+                          width="60"
+                        >
+                          <template slot-scope="scope">
+                            <strong>{{ filteredResourcesArray[scope.$index].prop }}</strong>
+                          </template>
+                        </el-table-column>
+                        <el-table-column prop="value" :label="$t('caDetails.value')">
+                          <template slot-scope="scope">
+                            <span v-html="filteredResourcesArray[scope.$index].value"></span>
+                          </template>
+                        </el-table-column>
+                      </el-table>
+                    </div>
 
                     <div v-if="resourcesArray.length === 0" class="empty">
                       {{ $t("caDetails.noResources") }}
@@ -136,20 +154,31 @@
                 </el-col>
                 <el-col :span="24" class="hidden-sm-and-up">
                   <el-card class="mt-3">
+                    <div class="search-input">
+                      <el-input
+                        size="mini"
+                        prefix-icon="el-icon-search"
+                        v-model="resourcesSearch"
+                        v-if="resourcesArray.length"
+                        clearable
+                      ></el-input>
+                    </div>
                     <el-table
                       size="small"
-                      v-if="resourcesArray.length"
-                      :data="resourcesArray"
+                      v-if="filteredResourcesArray.length"
+                      :data="filteredResourcesArray"
+                      :show-header="false"
                       style="width: 100%"
                     >
                       <el-table-column
                         prop="prop"
                         :label="$t('caDetails.resource')"
                       ></el-table-column>
-                      <el-table-column
-                        prop="value"
-                        :label="$t('caDetails.value')"
-                      ></el-table-column>
+                      <el-table-column prop="value" :label="$t('caDetails.value')">
+                        <template slot-scope="scope">
+                          <span v-html="filteredResourcesArray[scope.$index].value"></span>
+                        </template>
+                      </el-table-column>
                     </el-table>
 
                     <div v-if="resourcesArray.length === 0" class="empty">
@@ -538,7 +567,8 @@ export default {
           }
         ]
       },
-      fileList: []
+      fileList: [],
+      resourcesSearch: ""
     };
   },
   computed: {
@@ -583,10 +613,30 @@ export default {
         Object.keys(res).forEach(k => {
           resArray.push({
             prop: k,
-            value: res[k]
+            value: res[k].split(", ").join("<br>")
           });
         });
       }
+      return resArray;
+    },
+    filteredResourcesArray: function() {
+      let resArray = [];
+      let res = this.resourcesArray;
+      const search = this.resourcesSearch.toLowerCase();
+      res.forEach(k => {
+        if (k.value === "") {
+          k.value = "-";
+        }
+        if (k.value.toLowerCase().indexOf(search) > -1) {
+          resArray.push({
+            prop: k.prop,
+            value: k.value
+              .split("<br>")
+              .filter(x => x.toLowerCase().indexOf(search) > -1)
+              .join("<br>")
+          });
+        }
+      });
       return resArray;
     },
     childrenArray: function() {
@@ -1007,5 +1057,12 @@ ul {
 
 .resource-card {
   min-height: calc(100vh - 310px);
+  .scrollable {
+    max-height: calc(100vh - 350px);
+    overflow-y: auto;
+  }
+  .search-input {
+    margin-bottom: 10px;
+  }
 }
 </style>

@@ -239,4 +239,8 @@ a {
     color: #f85a39;
   }
 }
+
+.valign-top {
+  vertical-align: top !important;
+}
 </style>
