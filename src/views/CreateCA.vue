@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-row>
+    <el-row v-loading="loading">
       <el-col :span="8" :offset="8">
         <div class="text-center">
           <div class="welcome">
@@ -69,7 +69,6 @@ export default {
     };
   },
   created() {
-    this.loading = true;
     if (this.$route.name === "onboarding") {
       APIService.getCAs().then(response => {
         if (response.data.cas && response.data.cas.length > 0) {
@@ -119,11 +118,13 @@ export default {
               }
             )
               .then(() => {
+                this.loading = true;
                 APIService.createCA(this.addCAForm.handle)
                   .then(() => {
                     router.push("/cas/" + this.addCAForm.handle);
                   })
                   .catch(error => {
+                    this.loading = false;
                     self.parseError(error, true);
                   });
               })
