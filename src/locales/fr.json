@@ -6,13 +6,13 @@
     "cancel": "Annuler",
     "ok": "OK",
     "error": "Erreur",
-    "success": "Success!",
+    "success": "Succès!",
     "copy": "Copier dans le presse-papier",
     "download": "Télécharger",
     "dropOrClick": "Déposer le fichier ici ou <em>cliquer pour téléverser</em>",
     "started": "Krill est en cours d'exécution depuis",
     "newversion": "Nouvelle version disponible!",
-    "supportcontracts": "Support contracts",
+    "supportcontracts": "Documents contractuels",
     "warning": "Attention",
     "idle": "Vous avez été déconnecté de suite d'inactivité."
   },
@@ -33,7 +33,7 @@
       "confirm": "Créer une AC",
       "confirmation": {
         "title": "Attention",
-        "message": "Une fois défini, l'idenifiant ne pourra être changé. Continuer?"
+        "message": "Une fois défini, l'identifiant ne pourra être changé. Continuer?"
       }
     }
   },
@@ -47,7 +47,7 @@
   "caDetails": {
     "loading": "En cours de chargement {handle}",
     "current": "Autorité de Certification actuelle",
-    "download": "Télécharger le PEM",
+    "download": "Télécharger PEM",
     "noRoas": "Pas de ROAs trouvé.",
     "noResources": "Vous n'avez pas encore reçu de ressources",
     "noChildren": "Pas d'enfant trouvé.",
@@ -65,14 +65,14 @@
     "children": "Enfant",
     "handle": "Identifiant",
     "maxLength": "Longueur maximum",
-    "maxLengthTooltip": "Si longueur maximum n'est pas spécifié (-), il sera initialisé à la longueur du préfixe.",
+    "maxLengthTooltip": "Si longueur maximum n'est pas spécifiée (-), elle sera initialisée à la longueur du préfixe.",
     "confirmation": {
       "title": "Attention",
       "message": "Cette action va retirer le ROA. Continuer?",
       "added": "ROA ajouté",
       "retired": "ROA retiré",
       "retiredSuccess": "Le ROA a été retiré",
-      "addedSuccess": "The ROA a été ajouté"
+      "addedSuccess": "Le ROA a été ajouté"
     },
     "addROAForm": {
       "required": "Ce champ est requis",
@@ -84,21 +84,21 @@
     "noResourcesYet": "Vous n'avez pas encore reçu de ressources",
     "clickToRefresh": "Cliquer ici pour rafraîchir",
     "parentsTab": {
-      "request": "Child Request",
-      "response": "Réponse du parentParent Response",
+      "request": "Requête enfant",
+      "response": "Réponse du parent",
       "addParent": "Ajouter un autre parent",
       "addParentSuccess": "Parent ajouté",
       "arin": "Compatible ARIN",
-      "name": "Nom du pareent",
+      "name": "Nom du parent",
       "namerequired": "Le nom du parent est requis",
       "nameformat": "Ceci n'est pas nom de parent valide"
     },
     "repoTab": {
-      "request": "Publisher Request",
-      "response": "Repository Response",
+      "request": "Requête du Publisher",
+      "response": "Réponse du dépôt",
       "addRepoSuccess": "Dépôt ajouté"
     },
-    "copySuccess": "XML copié dans votre presse-papiers"
+    "copySuccess": "XML copié dans votre presse-papier"
   },
   "errors": {
     "repo-not-set": "Vous devez d'abord configurer un dépôt",
@@ -111,20 +111,20 @@
     "ca-unknown": "AC '{ca}' est inconnu",
     "ca-repo-same": "Ce dépôt est déjà utilisé",
     "ca-repo-issue": "Erreur reçu du dépôt: {cause}",
-    "ca-repo-response-invalid-xml": "Got invalid repository response xml",
+    "ca-repo-response-invalid-xml": "Réponse xml du dépôt invalide",
     "ca-repo-response-wrong-xml": "Réponse du parent reçu au lieu du dépôt",
     "ca-parent-duplicate": "Vous avez déjà un parent nommé '{parent}'",
     "ca-parent-unknown": "Vous n'avez pas un parent nommé '{parent}'",
     "ca-parent-issue": "Erreur reçue du parent '{parent}': {cause}",
-    "ca-parent-response-invalid-xml": "Got invalid parent response xml",
-    "ca-parent-response-wrong-xml": "Got repository response when adding parent",
-    "ca-child-duplicate": "You already have a child CA named '{child}'",
-    "ca-child-unknown": "You do not have a child CA named '{child}'",
-    "ca-child-resources-required": "You must specify resources for Child CA '{child}'",
-    "ca-roa-unknown": "Cannot remove unknown ROA '{prefix}-{max_length} => {asn}'",
-    "ca-roa-duplicate": "Duplicate ROA '{prefix}-{max_length} => {asn}'",
-    "ca-roa-invalid-max-length": "Invalid max length in ROA '{prefix}-{max_length} => {asn}'",
-    "ca-roa-not-entitled": "ROA prefix '{prefix}' is not on any of your current certificates",
+    "ca-parent-response-invalid-xml": "Réponse xml du parent invalide",
+    "ca-parent-response-wrong-xml": "Réponse du dépôt obtenue lors de l'ajout du parent",
+    "ca-child-duplicate": "Vous avez déjà une AC enfant nommée '{child}'",
+    "ca-child-unknown": "Vous n'avez pas une AC enfant nommée '{child}'",
+    "ca-child-resources-required": "Vous devez spécifier les ressources pour l'AC enfant '{child}'",
+    "ca-roa-unknown": "Ne pas retirer le ROA inconnu '{prefix}-{max_length} => {asn}'",
+    "ca-roa-duplicate": "ROA en doublon '{prefix}-{max_length} => {asn}'",
+    "ca-roa-invalid-max-length": "Longueur max invalide dans le ROA '{prefix}-{max_length} => {asn}'",
+    "ca-roa-not-entitled": "Le préfixe ROA '{prefix}' n'est dans un aucun de vos certificats actuels",
     "ta-not-allowed": "Cette fonctionalité n'est pas supportée par l'ancre de confiance de test",
     "ta-name-reserved": "Nom reservé"
   }
