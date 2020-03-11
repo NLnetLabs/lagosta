@@ -1,52 +1,52 @@
 {
   "common": {
     "readthedocs": "Read the Docs",
-    "report": "Signaler un problÃ¨me",
+    "report": "Signaler un problème",
     "confirm": "Confirmer",
     "cancel": "Annuler",
     "ok": "OK",
     "error": "Erreur",
     "success": "Success!",
     "copy": "Copier dans le presse-papier",
-    "download": "TÃ©lÃ©charger",
-    "dropOrClick": "DÃposer le fichier ici ou <em>cliquer pour tÃlÃverser</em>",
-    "started": "Krill has been running since",
-    "newversion": "New version available!",
+    "download": "Télécharger",
+    "dropOrClick": "Déposer le fichier ici ou <em>cliquer pour téléverser</em>",
+    "started": "Krill est en cours d'exécution depuis",
+    "newversion": "Nouvelle version disponible!",
     "supportcontracts": "Support contracts",
-    "warning": "Warning",
-    "idle": "You have been logged out because of inactivity."
+    "warning": "Attention",
+    "idle": "Vous avez été déconnecté de suite d'inactivité."
   },
   "login": {
-    "password": "Password",
-    "placeholder": "Your password",
-    "signin": "Sign In",
-    "required": "Please enter your password",
-    "error": "The password you specified is wrong",
-    "copied": "You should not get your passwords from <a href='https://xkcd.com/936/' target='_blank'>https://xkcd.com/936/</a>"
+    "password": "Mot de passe",
+    "placeholder": "Votre mot de passe",
+    "signin": "S'authentifier",
+    "required": "SVP entrez votre mot de passe",
+    "error": "Le mot de passe spécifié est incorrect",
+    "copied": "Vous ne devriez pas obtenir votre mot de passe depuis <a href='https://xkcd.com/936/' target='_blank'>https://xkcd.com/936/</a>"
   },
   "onboarding": {
-    "welcome": "Welcome to Krill",
+    "welcome": "Bienvenue sur Krill",
     "welcomeHtml": "Let's start by creating your RPKI Certificate Authority (CA). It will be used to configure Delegated RPKI with one or multiple parent CAs, usually your Regional or National Internet Registry.<br><br>The handle you choose will identify your CA in interactions with parent and child CAs. It will not be published in the RPKI. Please choose a handle that helps others recognise your organisation. Once set, the handle cannot be changed.",
     "addCAForm": {
-      "required": "This field is required",
-      "format": "This is not a valid CA name",
-      "confirm": "Create CA",
+      "required": "Ce champ est requis",
+      "format": "Ce n'est pas un nom d'AC valide",
+      "confirm": "Créer une AC",
       "confirmation": {
-        "title": "Warning",
-        "message": "Once set, the handle cannot be changed. Continue?"
+        "title": "Attention",
+        "message": "Une fois défini, l'idenifiant ne pourra être changé. Continuer?"
       }
     }
   },
   "cas": {
-    "loading": "Loading Certificate Authorities",
-    "ca": "Certificate Authority",
-    "cas": "Certificate Authorities",
-    "search": "Search CAs...",
-    "noCas": "There are currently no Certificate Authorities defined."
+    "loading": "Chargement en cours des Autorités de Certification",
+    "ca": "Autorité de certification",
+    "cas": "Autorités de certification",
+    "search": "Recherche d'ACs...",
+    "noCas": "Il n'y a pas d'Autorités de Certifications définies actuellement."
   },
   "caDetails": {
-    "loading": "Loading {handle}",
-    "current": "Current Certificate Authority",
+    "loading": "En cours de chargement {handle}",
+    "current": "Autorité de Certification actuelle",
     "download": "Download PEM",
     "noRoas": "No ROAs found.",
     "noResources": "You have not received any resources yet",
