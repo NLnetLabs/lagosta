@@ -4,7 +4,7 @@
       <el-col :span="10">
         <el-card class="box-card">
           <div class="text item">
-            <el-form :model="form" :rules="rules" :inline="true" ref="loginForm">
+            <el-form :model="form" :rules="rules" :inline="true" ref="loginForm" @submit.prevent.native="submitForm">
               <el-form-item :label="$t('login.password')" prop="token">
                 <el-input
                   type="password"
