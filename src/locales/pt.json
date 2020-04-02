@@ -88,7 +88,6 @@
       "response": "Resposta da CA-pai",
       "addParent": "Incluir uma nova CA-pai",
       "addParentSuccess": "CA-pai adicionada",
-      "arin": "Compatível com ARIN",
       "name": "Nome da CA-pai",
       "namerequired": "O nome da CA-pai é obrigatório",
       "nameformat": "Este não é um nome de CA-pai válido"

@@ -88,7 +88,6 @@
       "response": "Respuesta padre",
       "addParent": "Agregar otro padre",
       "addParentSuccess": "Se agregó el padre",
-      "arin": "Compatible con ARIN",
       "name": "Nombre del padre",
       "namerequired": "El nombre del padre es un dato necesario",
       "nameformat": "Este nombre de padre no es válido"

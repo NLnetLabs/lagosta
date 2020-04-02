@@ -88,7 +88,6 @@
       "response": "Parent Response",
       "addParent": "Add an additional parent",
       "addParentSuccess": "Parent added",
-      "arin": "ARIN Compatible",
       "name": "Parent Name",
       "namerequired": "The parent name is required",
       "nameformat": "This is not a valid parent name"
