@@ -58,6 +58,8 @@
     "**/**/eslint-utils": "^1.4.1",
     "**/**/serialize-javascript": "^2.1.1",
     "**/**/browserslist": "4.8.3",
-    "**/**/caniuse-lite": "1.0.30001020"
+    "**/**/caniuse-lite": "1.0.30001020",
+    "**/**/acorn": "^6.4.1",
+    "**/**/minimist": "^1.2.2"
   }
 }
