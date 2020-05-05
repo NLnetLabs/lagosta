@@ -100,8 +100,8 @@ export default {
         { iso: "en", label: "English" },
         { iso: "es", label: "Español" },
         { iso: "gr", label: "Ελληνικά" },
-        { iso: "pt", label: "Português" },
-        { iso: "fr", label: "Français" }
+        { iso: "fr", label: "Français" },
+        { iso: "pt", label: "Português" }
       ]
     };
   },
