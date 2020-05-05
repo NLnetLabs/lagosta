@@ -34,16 +34,8 @@
       <el-footer height="40px">
         <el-row>
           <el-col :span="12">
-            &copy; {{ new Date().getFullYear() }} Stichting NLnet Labs - Lagosta v{{
-              lagostaVersion
-            }}
-
-            <!-- <el-tooltip class="item" effect="dark" :content="lagostaLatestVersion" placement="top" v-if="lagostaLatestVersion !== '' && lagostaLatestVersion !== lagostaVersion">
-              <a :href="lagostaLatestVersionURL" target="_blank">({{$t("common.newversion")}})</a>
-            </el-tooltip> -->
-
-            <span v-if="krillVersion !== ''" :title="krillStarted"
-              >, Krill v{{ krillVersion }}</span
+            &copy; {{ new Date().getFullYear() }} Stichting NLnet Labs
+            <span v-if="krillVersion !== ''" :title="krillStarted"> - Krill/Lagosta v{{ krillVersion }}</span
             >
 
             <el-tooltip
@@ -88,9 +80,6 @@ import { LOCALSTORAGE_NAME } from "@/auth-header";
 export default {
   data() {
     return {
-      lagostaVersion: process.env.PACKAGE_VERSION || "0",
-      lagostaLatestVersion: "",
-      lagostaLatestVersionURL: "",
       krillVersion: "",
       krillLatestVersion: "",
       krillLatestVersionURL: "",
@@ -134,14 +123,6 @@ export default {
   },
   methods: {
     checkLatestVersions() {
-      APIService.getLatestLagostaVersion()
-        .then(success => {
-          const gh = success.data;
-          this.lagostaLatestVersion =
-            gh.tag_name.indexOf("v") === 0 ? gh.tag_name.substr(1) : gh.tag_name;
-          this.lagostaLatestVersionURL = gh.html_url;
-        })
-        .catch(() => {});
       APIService.getLatestKrillVersion()
         .then(success => {
           const gh = success.data;
