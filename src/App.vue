@@ -35,7 +35,7 @@
         <el-row>
           <el-col :span="12">
             &copy; {{ new Date().getFullYear() }} Stichting NLnet Labs
-            <span v-if="krillVersion !== ''" :title="krillStarted"> - Krill/Lagosta v{{ krillVersion }}</span
+            <span v-if="krillVersion !== ''" :title="krillStarted"> - Krill v{{ krillVersion }}</span
             >
 
             <el-tooltip
