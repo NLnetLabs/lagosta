@@ -99,6 +99,21 @@
     },
     "copySuccess": "XML copied to your clipboard"
   },
+  "announcements": {
+    "noRoasOrAnnouncements": "No ROAs or Announcements found.",
+    "search": "Search for ASN, prefix, state...",
+    "showBGPInfo": "Show BGP info",
+    "authorizes": "Authorizes {number} announcements",
+    "disallows": "Disallows {number} announcements",
+    "state": {
+      "roa_seen": "SEEN",
+      "announcement_not_found": "NOT FOUND",
+      "roa_stale": "STALE",
+      "announcement_invalid_length": "INVALID LENGTH",
+      "announcement_invalid_asn": "INVALID ASN",
+      "roa_no_announcement_info": "NO ANNOUNCEMENT INFO"
+    }
+  },
   "errors": {
     "repo-not-set": "You must configure a repository first",
     "pub-unknown": "Publisher '{publisher}' is unknown",
