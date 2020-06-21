@@ -214,15 +214,16 @@ export default {
   computed: {
     filteredAnnouncements: function() {
       const self = this;
-      const src = self.search.toLowerCase().replace(/[\W_]+/g, "");
+      const reg = /[^0-9a-z./]/gi;
+      const src = self.search.toLowerCase().replace(reg, "");
       return this.announcements.filter(function(ann) {
         let inAuth = false;
         if (ann.authorizes) {
-          inAuth = JSON.stringify(ann.authorizes).indexOf(src) > -1;
+          inAuth = JSON.stringify(ann.authorizes).replace(reg, "").indexOf(src) > -1;
         }
         let inDis = false;
         if (ann.disallows) {
-          inDis = JSON.stringify(ann.disallows).indexOf(src) > -1;
+          inDis = JSON.stringify(ann.disallows).replace(reg, "").indexOf(src) > -1;
         }
         let notFound = ann.state !== "announcement_not_found";
         if (self.showBGP) {
@@ -240,18 +241,18 @@ export default {
             self
               .$t("announcements.state")[ann.state]
               .toLowerCase()
-              .replace(/[\W_]+/g, "")
+              .replace(reg, "")
               .indexOf(src) > -1;
         } else {
           stateLabel = false;
         }
 
         return (
-          ((ann.asn + "").toLowerCase().indexOf(src) > -1 ||
-            ann.prefix.toLowerCase().indexOf(src) > -1 ||
+          ((ann.asn + "").toLowerCase().replace(reg, "").indexOf(src) > -1 ||
+            ann.prefix.toLowerCase().replace(reg, "").indexOf(src) > -1 ||
             ann.state
               .toLowerCase()
-              .replace(/[\W_]+/g, "")
+              .replace(reg, "")
               .indexOf(src) > -1 ||
             stateLabel ||
             inAuth ||
