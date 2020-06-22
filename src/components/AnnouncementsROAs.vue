@@ -69,8 +69,8 @@
                 cell-class-name="el-cell--mini"
                 style="width: 100%"
               >
-                <el-table-column prop="asn" label="ASN"></el-table-column>
-                <el-table-column prop="prefix" label="Prefix"></el-table-column>
+                <el-table-column prop="asn" :label="$t('announcements.asn')"></el-table-column>
+                <el-table-column prop="prefix" :label="$t('announcements.prefix')"></el-table-column>
                 <el-table-column width="70">
                   <template slot-scope="scope">
                     <el-button
@@ -87,13 +87,13 @@
           </el-row>
         </template>
       </el-table-column>
-      <el-table-column prop="asn" label="ASN" sortable width="200"></el-table-column>
-      <el-table-column label="Prefix" sortable>
+      <el-table-column prop="asn" :label="$t('announcements.asn')" sortable width="200"></el-table-column>
+      <el-table-column :label="$t('announcements.prefix')" sortable>
         <template slot-scope="scope">
           {{ scope.row.prefix }}{{ scope.row.max_length ? "-" + scope.row.max_length : "" }}
         </template>
       </el-table-column>
-      <el-table-column prop="state" label="State" sortable v-if="showBGP">
+      <el-table-column prop="state" :label="$t('announcements.stateLabel')" sortable v-if="showBGP">
         <template slot-scope="scope">
           <el-tag
             type="success"
@@ -214,7 +214,7 @@ export default {
   computed: {
     filteredAnnouncements: function() {
       const self = this;
-      const reg = /[^0-9a-z./]/gi;
+      const reg = /[^0-9a-z./-]/gi;
       const src = self.search.toLowerCase().replace(reg, "");
       return this.announcements.filter(function(ann) {
         let inAuth = false;
