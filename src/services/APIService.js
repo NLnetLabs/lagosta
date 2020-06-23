@@ -90,5 +90,8 @@ export default {
   },
   getLatestKrillVersion() {
     return simpleClient.get("https://api.github.com/repos/nlnetlabs/krill/releases/latest");
+  },
+  getBGPAnalysis(handle) {
+    return apiClient.get("/api/v1/cas/" + handle + "/routes/analysis/full");
   }
 };

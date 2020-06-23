@@ -100,6 +100,24 @@
     },
     "copySuccess": "XML copié dans votre presse-papier"
   },
+  "announcements": {
+    "noRoasOrAnnouncements": "Aucun ROAs ou Annonces trouvés.",
+    "search": "Rechercher un ASN, préfix, statut...",
+    "showBGPInfo": "Montrez les infos BGP",
+    "authorizes": "Autoriser {number} annonces",
+    "disallows": "Refuser {number} annonces",
+    "asn": "ASN",
+    "prefix": "Préfixe",
+    "stateLabel": "Statut",
+    "state": {
+      "roa_seen": "VU",
+      "announcement_not_found": "NON TROUVÉ",
+      "roa_stale": "OBSOLET",
+      "announcement_invalid_length": "LONGUEUR INVALIDE",
+      "announcement_invalid_asn": "ASN INVALIDE",
+      "roa_no_announcement_info": "AUCUNE INFORMATION D'ANNONCE"
+    }
+  },
   "errors": {
     "repo-not-set": "Vous devez d'abord configurer un dépôt",
     "pub-unknown": "Publisher '{publisher}' est inconnu",

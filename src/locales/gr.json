@@ -99,6 +99,24 @@
     },
     "copySuccess": "To XML αρχείο αντιγράφηκε στο πρόχειρο"
   },
+  "announcements": {
+    "noRoasOrAnnouncements": "Δεν βρέθηκαν ROA ή Ανακοινώσεις.",
+    "search": "Αναζήτηση για ASN, πρόθεμα, κατάσταση...",
+    "showBGPInfo": "Εμφάνιση BGP πληροφοριών",
+    "authorizes": "Εξουσιοδοτεί {number} ανακοινώσεις",
+    "disallows": "Απαγορεύει {number} ανακοινώσεις",
+    "asn": "ASN",
+    "prefix": "Πρόθεμα",
+    "stateLabel": "Κατάσταση",
+    "state": {
+      "roa_seen": "ΟΡΑΤΟ",
+      "announcement_not_found": "ΔΕΝ ΒΡΕΘΗΚΕ",
+      "roa_stale": "ΕΩΛΟ",
+      "announcement_invalid_length": "ΑΚΥΡΟ ΜΗΚΟΣ",
+      "announcement_invalid_asn": "ΑΚΥΡΟ ASN",
+      "roa_no_announcement_info": "ΚΑΜΜΙΑ ΠΛΗΡΟΦΟΡΙΑ ΑΝΑΚΟΙΝΩΣΗΣ"
+    }
+  },
   "errors": {
     "repo-not-set": "Πρώτα πρέπει να ρυθμιστεί ένα αποθετήριο (repository)",
     "pub-unknown": "Ο εκδότης '{publisher}' είναι άγνωστος",

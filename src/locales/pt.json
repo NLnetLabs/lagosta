@@ -99,6 +99,24 @@
     },
     "copySuccess": "XML copiado para a Área de transferência"
   },
+  "announcements": {
+    "noRoasOrAnnouncements": "ROAs ou Anúncios não encontrados.",
+    "search": "Pesquisar por ASN, prefixos, estados...",
+    "showBGPInfo": "Mostrar informações BGP",
+    "authorizes": "Autoriza {number} anúncio(s)",
+    "disallows": "Desabilita {number} anúncio(s)",
+    "asn": "ASN",
+    "prefix": "Prefixo",
+    "stateLabel": "Estado",
+    "state": {
+      "roa_seen": "VISTO",
+      "announcement_not_found": "NÃO ENCONTRADO",
+      "roa_stale": "OBSOLETO",
+      "announcement_invalid_length": "COMPRIMENTO INVÁLIDO",
+      "announcement_invalid_asn": "ASN INVÁLIDO",
+      "roa_no_announcement_info": "SEM INFORMAÇÕES DE ANÚNCIO"
+    }
+  },
   "errors": {
     "repo-not-set": "Você deve configurar um repositório primeiro",
     "pub-unknown": "Publicador '{publisher}' desconhecido",

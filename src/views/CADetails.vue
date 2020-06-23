@@ -45,54 +45,8 @@
               <h5 v-if="initializeParent || initializeRepo">{{ $t("caDetails.initialize") }}</h5>
 
               <el-row v-if="!initializeParent && !initializeRepo">
-                <el-col :xs="24" :sm="16">
-                  <i class="el-icon-loading" v-if="loadingRoas"></i>
-                  <el-table
-                    size="small"
-                    v-if="!loadingRoas && roas.length"
-                    :data="roas"
-                    style="width: 100%"
-                  >
-                    <el-table-column prop="asn" label="ASN"></el-table-column>
-                    <el-table-column prop="prefix" label="Prefix"></el-table-column>
-                    <el-table-column prop="max_length">
-                      <template slot="header">
-                        <el-tooltip
-                          effect="dark"
-                          :content="$t('caDetails.maxLengthTooltip')"
-                          placement="top"
-                        >
-                          <span>{{ $t("caDetails.maxLength") }}</span>
-                        </el-tooltip>
-                      </template>
-                      <template slot-scope="scope">
-                        {{ scope.row.max_length ? scope.row.max_length : "-" }}
-                      </template>
-                    </el-table-column>
-                    <el-table-column label width="80">
-                      <template slot-scope="scope">
-                        <el-button
-                          size="mini"
-                          icon="el-icon-delete"
-                          type="primary"
-                          round
-                          @click="deleteROA(scope.row)"
-                        ></el-button>
-                      </template>
-                    </el-table-column>
-                  </el-table>
-                  <div
-                    v-if="
-                      !loadingRoas &&
-                        roas.length === 0 &&
-                        !initializeRepo &&
-                        !initializeParent &&
-                        !emptyResources
-                    "
-                    class="empty"
-                  >
-                    {{ $t("caDetails.noRoas") }}
-                  </div>
+                <el-col :sm="24" :md="16">
+                  <announcementsROAs :handle="handle" :initializeParent="initializeParent" :initializeRepo="initializeRepo" :updated="updatedAnnouncements" @triggerAddROA="triggerAddROA($event)" @triggerError="triggerError($event)" v-if="!initializeRepo && !initializeParent && !emptyResources" />
 
                   <el-button
                     class="mt-1"
@@ -110,22 +64,13 @@
                     }}</a>
                   </div>
                 </el-col>
-                <el-col :span="6" :offset="2" class="hidden-xs-only">
+                <el-col :span="6" :offset="2" class="hidden-sm-only">
                   <el-card class="resource-card">
-                    <div class="search-input">
-                      <el-input
-                        size="mini"
-                        prefix-icon="el-icon-search"
-                        v-model="resourcesSearch"
-                        v-if="resourcesArray.length"
-                        clearable
-                      ></el-input>
-                    </div>
                     <div class="scrollable">
                       <el-table
                         size="small"
-                        v-if="filteredResourcesArray.length"
-                        :data="filteredResourcesArray"
+                        v-if="resourcesArray.length"
+                        :data="resourcesArray"
                         :show-header="false"
                         style="width: 100%"
                       >
@@ -136,12 +81,12 @@
                           width="60"
                         >
                           <template slot-scope="scope">
-                            <strong>{{ filteredResourcesArray[scope.$index].prop }}</strong>
+                            <strong>{{ resourcesArray[scope.$index].prop }}</strong>
                           </template>
                         </el-table-column>
                         <el-table-column prop="value" :label="$t('caDetails.value')">
                           <template slot-scope="scope">
-                            <span v-html="filteredResourcesArray[scope.$index].value"></span>
+                            <span v-html="resourcesArray[scope.$index].value"></span>
                           </template>
                         </el-table-column>
                       </el-table>
@@ -152,21 +97,12 @@
                     </div>
                   </el-card>
                 </el-col>
-                <el-col :span="24" class="hidden-sm-and-up">
+                <el-col :span="24" class="hidden-md-and-up">
                   <el-card class="mt-3">
-                    <div class="search-input">
-                      <el-input
-                        size="mini"
-                        prefix-icon="el-icon-search"
-                        v-model="resourcesSearch"
-                        v-if="resourcesArray.length"
-                        clearable
-                      ></el-input>
-                    </div>
                     <el-table
                       size="small"
-                      v-if="filteredResourcesArray.length"
-                      :data="filteredResourcesArray"
+                      v-if="resourcesArray.length"
+                      :data="resourcesArray"
                       :show-header="false"
                       style="width: 100%"
                     >
@@ -176,7 +112,7 @@
                       ></el-table-column>
                       <el-table-column prop="value" :label="$t('caDetails.value')">
                         <template slot-scope="scope">
-                          <span v-html="filteredResourcesArray[scope.$index].value"></span>
+                          <span v-html="resourcesArray[scope.$index].value"></span>
                         </template>
                       </el-table-column>
                     </el-table>
@@ -188,6 +124,8 @@
                 </el-col>
               </el-row>
             </el-tab-pane>
+
+
             <el-tab-pane :label="$t('caDetails.parents')" name="parents">
               <el-table
                 size="small"
@@ -459,12 +397,17 @@
 </template>
 
 <script>
+import AnnouncementsROAs from '../components/AnnouncementsROAs.vue'
+
 import "element-ui/lib/theme-chalk/display.css";
 import router from "@/router";
 import APIService from "@/services/APIService.js";
 const cidrRegex = require("cidr-regex");
 const xml2js = require("xml2js");
 export default {
+  components: {
+    'announcementsROAs': AnnouncementsROAs
+  },
   data() {
     const checkASN = (rule, value, callback) => {
       if (value === "") {
@@ -560,7 +503,8 @@ export default {
         ]
       },
       fileList: [],
-      resourcesSearch: ""
+      resourcesSearch: "",
+      updatedAnnouncements: 0,
     };
   },
   computed: {
@@ -609,26 +553,6 @@ export default {
           });
         });
       }
-      return resArray;
-    },
-    filteredResourcesArray: function() {
-      let resArray = [];
-      let res = this.resourcesArray;
-      const search = this.resourcesSearch.toLowerCase();
-      res.forEach(k => {
-        if (k.value === "") {
-          k.value = "-";
-        }
-        if (k.value.toLowerCase().indexOf(search) > -1) {
-          resArray.push({
-            prop: k.prop,
-            value: k.value
-              .split("<br>")
-              .filter(x => x.toLowerCase().indexOf(search) > -1)
-              .join("<br>")
-          });
-        }
-      });
       return resArray;
     },
     childrenArray: function() {
@@ -740,14 +664,7 @@ export default {
           });
         });
 
-      this.getROAs();
       this.loadCAs();
-    },
-    getROAs() {
-      APIService.getROAs(this.handle).then(response => {
-        this.loadingRoas = false;
-        this.roas = response.data;
-      });
     },
     getParent: function(row) {
       this.loadingParent = true;
@@ -803,11 +720,21 @@ export default {
             type: "success"
           });
           self.addROAFormVisible = false;
-          self.getROAs();
+          self.updatedAnnouncements = new Date().getTime();
+          self.$emit('refreshAnnouncements');
         })
         .catch(function(error) {
           self.parseError(error);
         });
+    },
+    triggerError: function(error) {
+      this.parseError(error);
+    },
+    triggerAddROA: function(row) {
+      this.addROAForm.asn = row.asn+"";
+      this.addROAForm.prefix = row.prefix;
+      this.updateMaxLength(row.prefix);
+      this.addROAFormVisible = true;
     },
     deleteROA: function(row) {
       const self = this;
