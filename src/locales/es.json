@@ -13,15 +13,15 @@
     "started": "Krill está corriendo desde",
     "newversion": "¡Hay una nueva versión disponible!",
     "supportcontracts": "Contratos de soporte y mantenimiento",
-    "warning": "Warning",
+    "warning": "Advertencia",
     "idle": "You have been logged out because of inactivity."
   },
   "login": {
-    "password": "Contraseńa",
-    "placeholder": "Su contraseńa",
+    "password": "Contraseña",
+    "placeholder": "Su contraseña",
     "signin": "Iniciar sesión",
-    "required": "Ingrese su contraseńa",
-    "error": "La contrasaeńa que ingresó es incorrecta",
+    "required": "Ingrese su contraseña",
+    "error": "La contraseña que ingresó es incorrecta",
     "copied": "NO deberías crear tus claves como en <a href='https://xkcd.com/936/' target='_blank'>https://xkcd.com/936/</a>"
   },
   "onboarding": {
@@ -106,7 +106,7 @@
     "authorizes": " {number} anuncios autorizados",
     "disallows": "{number}  anuncios no autorizados",
     "asn": "ASN",
-    "prefix": "Prefijo",
+    "prefix": "Bloques IPs",
     "stateLabel": "Estado",
     "state": {
       "roa_seen": "VISTO",
