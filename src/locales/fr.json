@@ -101,21 +101,21 @@
     "copySuccess": "XML copié dans votre presse-papier"
   },
   "announcements": {
-    "noRoasOrAnnouncements": "No ROAs or Announcements found.",
-    "search": "Search for ASN, prefix, state...",
-    "showBGPInfo": "Show BGP info",
-    "authorizes": "Authorizes {number} announcements",
-    "disallows": "Disallows {number} announcements",
+    "noRoasOrAnnouncements": "Aucun ROAs ou Annonces trouvés.",
+    "search": "Rechercher un ASN, préfix, statut...",
+    "showBGPInfo": "Montrez les infos BGP",
+    "authorizes": "Autoriser {number} annonces",
+    "disallows": "Refuser {number} annonces",
     "asn": "ASN",
-    "prefix": "Prefix",
-    "stateLabel": "State",
+    "prefix": "Préfixe",
+    "stateLabel": "Statut",
     "state": {
-      "roa_seen": "SEEN",
-      "announcement_not_found": "NOT FOUND",
-      "roa_stale": "STALE",
-      "announcement_invalid_length": "INVALID LENGTH POTATO",
-      "announcement_invalid_asn": "INVALID ASN",
-      "roa_no_announcement_info": "NO ANNOUNCEMENT INFO"
+      "roa_seen": "VU",
+      "announcement_not_found": "NON TROUVÉ",
+      "roa_stale": "OBSOLET",
+      "announcement_invalid_length": "LONGUEUR INVALIDE",
+      "announcement_invalid_asn": "ASN INVALIDE",
+      "roa_no_announcement_info": "AUCUNE INFORMATION D'ANNONCE"
     }
   },
   "errors": {
