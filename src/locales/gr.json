@@ -100,21 +100,21 @@
     "copySuccess": "To XML αρχείο αντιγράφηκε στο πρόχειρο"
   },
   "announcements": {
-    "noRoasOrAnnouncements": "No ROAs or Announcements found.",
-    "search": "Search for ASN, prefix, state...",
-    "showBGPInfo": "Show BGP info",
-    "authorizes": "Authorizes {number} announcements",
-    "disallows": "Disallows {number} announcements",
+    "noRoasOrAnnouncements": "Δεν βρέθηκαν ROA ή Ανακοινώσεις.",
+    "search": "Αναζήτηση για ASN, πρόθεμα, κατάσταση...",
+    "showBGPInfo": "Εμφάνιση BGP πληροφοριών",
+    "authorizes": "Εξουσιοδοτεί {number} ανακοινώσεις",
+    "disallows": "Απαγορεύει {number} ανακοινώσεις",
     "asn": "ASN",
-    "prefix": "Prefix",
-    "stateLabel": "State",
+    "prefix": "Πρόθεμα",
+    "stateLabel": "Κατάσταση",
     "state": {
-      "roa_seen": "SEEN",
-      "announcement_not_found": "NOT FOUND",
-      "roa_stale": "STALE",
-      "announcement_invalid_length": "INVALID LENGTH POTATO",
-      "announcement_invalid_asn": "INVALID ASN",
-      "roa_no_announcement_info": "NO ANNOUNCEMENT INFO"
+      "roa_seen": "ΟΡΑΤΟ",
+      "announcement_not_found": "ΔΕΝ ΒΡΕΘΗΚΕ",
+      "roa_stale": "ΕΩΛΟ",
+      "announcement_invalid_length": "ΑΚΥΡΟ ΜΗΚΟΣ",
+      "announcement_invalid_asn": "ΑΚΥΡΟ ASN",
+      "roa_no_announcement_info": "ΚΑΜΜΙΑ ΠΛΗΡΟΦΟΡΙΑ ΑΝΑΚΟΙΝΩΣΗΣ"
     }
   },
   "errors": {
