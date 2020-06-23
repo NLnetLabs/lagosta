@@ -105,6 +105,9 @@
     "showBGPInfo": "Show BGP info",
     "authorizes": "Authorizes {number} announcements",
     "disallows": "Disallows {number} announcements",
+    "asn": "ASN",
+    "prefix": "Prefix",
+    "stateLabel": "State",
     "state": {
       "roa_seen": "SEEN",
       "announcement_not_found": "NOT FOUND",

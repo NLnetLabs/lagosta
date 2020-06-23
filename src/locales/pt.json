@@ -105,6 +105,9 @@
     "showBGPInfo": "Mostrar informações BGP",
     "authorizes": "Autoriza {number} anúncio(s)",
     "disallows": "Desabilita {number} anúncio(s)",
+    "asn": "ASN",
+    "prefix": "Prefixo",
+    "stateLabel": "Estado",
     "state": {
       "roa_seen": "VISTO",
       "announcement_not_found": "NÃO ENCONTRADO",

@@ -737,7 +737,6 @@ export default {
       this.addROAFormVisible = true;
     },
     deleteROA: function(row) {
-      console.log(row);
       const self = this;
       this.$confirm(
         this.$t("caDetails.confirmation.message"),
