@@ -100,21 +100,21 @@
     "copySuccess": "El XML se copió a su portapapeles"
   },
   "announcements": {
-    "noRoasOrAnnouncements": "No ROAs or Announcements found.",
-    "search": "Search for ASN, prefix, state...",
-    "showBGPInfo": "Show BGP info",
-    "authorizes": "Authorizes {number} announcements",
-    "disallows": "Disallows {number} announcements",
+    "noRoasOrAnnouncements": "ROAs ROAs no encontrados.",
+    "search": "Busquedas por ASNs, IPs o estados...",
+    "showBGPInfo": "Mostrar información de BGP",
+    "authorizes": " {number} anuncios aurorizados",
+    "disallows": "{number}  anuncios no habilitados",
     "asn": "ASN",
     "prefix": "Prefix",
     "stateLabel": "State",
     "state": {
-      "roa_seen": "SEEN",
-      "announcement_not_found": "NOT FOUND",
-      "roa_stale": "STALE",
-      "announcement_invalid_length": "INVALID LENGTH POTATO",
-      "announcement_invalid_asn": "INVALID ASN",
-      "roa_no_announcement_info": "NO ANNOUNCEMENT INFO"
+      "roa_seen": "VISTO",
+      "announcement_not_found": "NO ENCONTRADO",
+      "roa_stale": "CADUCADO",
+      "announcement_invalid_length": "LARGO INVALIDO",
+      "announcement_invalid_asn": "ASN INVALIDO",
+      "roa_no_announcement_info": "NO HAY INFORMACIÓN DEL ANUNCIO"
     }
   },
   "errors": {
