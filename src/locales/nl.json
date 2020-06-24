@@ -104,7 +104,7 @@
     "search": "Zoek naar ASN, prefix, status...",
     "showBGPInfo": "Laat BGP info zien",
     "authorizes": "Autoriseert {number} aankondigingen",
-    "disallows": "Weigert {number} aankondigingen",
+    "disallows": "Verbiedt {number} aankondigingen",
     "asn": "ASN",
     "prefix": "Prefix",
     "stateLabel": "Status",
