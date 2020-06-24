@@ -109,9 +109,9 @@
     "prefix": "Πρόθεμα",
     "stateLabel": "Κατάσταση",
     "state": {
-      "roa_seen": "ΟΡΑΤΟ",
+      "roa_seen": "ΟΡΑΤΗ",
       "announcement_not_found": "ΔΕΝ ΒΡΕΘΗΚΕ",
-      "roa_unseen": "ΕΩΛΟ",
+      "roa_unseen": "ΑΦΑΝΗΣ",
       "announcement_invalid_length": "ΑΚΥΡΟ ΜΗΚΟΣ",
       "announcement_invalid_asn": "ΑΚΥΡΟ ASN",
       "roa_no_announcement_info": "ΚΑΜΜΙΑ ΠΛΗΡΟΦΟΡΙΑ ΑΝΑΚΟΙΝΩΣΗΣ"
