@@ -90,6 +90,7 @@ export default {
         { iso: "es", label: "Español" },
         { iso: "gr", label: "Ελληνικά" },
         { iso: "fr", label: "Français" },
+        { iso: "nl", label: "Nederlands" },
         { iso: "pt", label: "Português" }
       ]
     };
