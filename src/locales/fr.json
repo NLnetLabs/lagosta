@@ -110,9 +110,9 @@
     "prefix": "Préfixe",
     "stateLabel": "Statut",
     "state": {
-      "roa_seen": "VU",
+      "roa_seen": "TROUVÉ",
       "announcement_not_found": "NON TROUVÉ",
-      "roa_stale": "OBSOLET",
+      "roa_unseen": "INTROUVABLE",
       "announcement_invalid_length": "LONGUEUR INVALIDE",
       "announcement_invalid_asn": "ASN INVALIDE",
       "roa_no_announcement_info": "AUCUNE INFORMATION D'ANNONCE"

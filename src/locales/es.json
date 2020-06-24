@@ -111,7 +111,7 @@
     "state": {
       "roa_seen": "VISTO",
       "announcement_not_found": "NO ENCONTRADO",
-      "roa_stale": "CADUCADO",
+      "roa_unseen": "CADUCADO",
       "announcement_invalid_length": "LARGO INVÁLIDO",
       "announcement_invalid_asn": "ASN INVÁLIDO",
       "roa_no_announcement_info": "NO HAY INFORMACIÓN DEL ANUNCIO"

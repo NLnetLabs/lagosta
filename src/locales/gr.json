@@ -111,7 +111,7 @@
     "state": {
       "roa_seen": "ΟΡΑΤΟ",
       "announcement_not_found": "ΔΕΝ ΒΡΕΘΗΚΕ",
-      "roa_stale": "ΕΩΛΟ",
+      "roa_unseen": "ΕΩΛΟ",
       "announcement_invalid_length": "ΑΚΥΡΟ ΜΗΚΟΣ",
       "announcement_invalid_asn": "ΑΚΥΡΟ ASN",
       "roa_no_announcement_info": "ΚΑΜΜΙΑ ΠΛΗΡΟΦΟΡΙΑ ΑΝΑΚΟΙΝΩΣΗΣ"

@@ -111,7 +111,7 @@
     "state": {
       "roa_seen": "VISTO",
       "announcement_not_found": "NÃO ENCONTRADO",
-      "roa_stale": "OBSOLETO",
+      "roa_unseen": "OBSOLETO",
       "announcement_invalid_length": "COMPRIMENTO INVÁLIDO",
       "announcement_invalid_asn": "ASN INVÁLIDO",
       "roa_no_announcement_info": "SEM INFORMAÇÕES DE ANÚNCIO"

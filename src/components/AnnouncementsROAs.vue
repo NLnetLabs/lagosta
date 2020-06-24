@@ -128,10 +128,10 @@
           <el-tag
             type="warning"
             size="medium"
-            v-if="scope.row.state === 'roa_stale'"
+            v-if="scope.row.state === 'roa_unseen'"
             disable-transitions
             effect="plain"
-            >{{ $t("announcements.state.roa_stale") }}</el-tag
+            >{{ $t("announcements.state.roa_unseen") }}</el-tag
           >
           <el-tag
             type="danger"
@@ -270,7 +270,7 @@ export default {
   methods: {
     getRowClass: function(data) {
       if (this.showBGP && data.row.max_length) {
-        return data.row.state === "roa_stale" ? "row-stale" : "row-dark";
+        return data.row.state === "roa_unseen" ? "row_unseen" : "row-dark";
       }
       return "row-announcement";
     },
@@ -343,7 +343,7 @@ export default {
   padding: 4px 6px !important;
 }
 .el-table tr.row-dark,
-.el-table tr.row-stale {
+.el-table tr.row_unseen {
   background-color: #f5f7fa;
 }
 
@@ -360,7 +360,7 @@ export default {
 }
 
 .row-announcement,
-.row-stale {
+.row_unseen {
   .el-table__expand-column .cell,
   .el-table__expand-icon {
     display: none;
@@ -368,7 +368,7 @@ export default {
 }
 
 .row-announcement + tr,
-.row-stale + tr {
+.row_unseen + tr {
   display: none;
 }
 </style>
