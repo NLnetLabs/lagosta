@@ -1,0 +1,148 @@
+{
+  "common": {
+    "readthedocs": "Read the Docs",
+    "report": "Meld een probleem",
+    "confirm": "Bevestig",
+    "cancel": "Annuleer",
+    "ok": "OK",
+    "error": "Fout",
+    "success": "Geslaagd!",
+    "copy": "Kopiëer naar klembord",
+    "download": "Download",
+    "dropOrClick": "Sleep een bestand hierheen of <em>klik om te uploaden</em>",
+    "started": "Krill is actief sinds",
+    "newversion": "Nieuwe versie beschikbaar!",
+    "supportcontracts": "Supportcontracten",
+    "warning": "Waarschuwing",
+    "idle": "U bent uitgelogd wegens inactiviteit."
+  },
+  "login": {
+    "password": "Wachtwoord",
+    "placeholder": "Uw wachtwoord",
+    "signin": "Log In",
+    "required": "Voer alstublieft uw wachtwoord in",
+    "error": "Het wachtwoord is niet correct",
+    "copied": "Gebruik geen wachtwoorden van <a href='https://xkcd.com/936/' target='_blank'>https://xkcd.com/936/</a>"
+  },
+  "onboarding": {
+    "welcome": "Welkom bij Krill",
+    "welcomeHtml": "Laten we beginnen met aanmaken van uw RPKI Certificaatautoriteit (CA). Het zal worden gebruikt om gedelegeerde RPKI te configureren met een of meerdere bovenliggende CAs, over het algemeen uw Regionaal of Nationaal Internet Register.<br><br>De naam die u kiest identificeert uw CA tijdens interacties met bovenliggende of ondergeschikte CAs. De gekozen naam wordt niet gepubliceerd in de RPKI. Kies een naam die anderen helpen om uw organisatie te identificeren. Eenmaal ingesteld kan de naam niet worden gewijzigd.",
+    "addCAForm": {
+      "required": "Dit veld is verplicht",
+      "format": "Dit is geen geldige naam voor uw CA",
+      "confirm": "Creëer CA",
+      "confirmation": {
+        "title": "Waarschuwing",
+        "message": "De naam kan later niet worden gewijzigd. Doorgaan?"
+      }
+    }
+  },
+  "cas": {
+    "loading": "Certificaatautoriteiten worden geladen",
+    "ca": "Certificaatautoriteit",
+    "cas": "Certificaatautoriteiten",
+    "search": "Zoek naar CAs...",
+    "noCas": "Er zijn op dit moment geen certificaatautoriteiten gedefinieerd."
+  },
+  "caDetails": {
+    "loading": "{handle} wordt geladen",
+    "current": "Huidige certificaatautoriteit",
+    "download": "Download PEM",
+    "noRoas": "Geen ROAs gevonden.",
+    "noResources": "U heeft nog geen resources ontvangen",
+    "noChildren": "Geen ondergeschikte CAs gevonden.",
+    "addRoa": "Voeg ROA toe",
+    "roas": "ROAs",
+    "resources": "Resources",
+    "parents": "Bovenliggende CAs",
+    "repo": "Databank (repository)",
+    "type": "Type",
+    "properties": "Eigenschappen",
+    "property": "Eigenschap",
+    "value": "Waarde",
+    "kind": "Soort",
+    "resource": "Resource",
+    "children": "Children",
+    "handle": "Naam",
+    "maxLength": "MaxLength",
+    "maxLengthTooltip": "Als er geen maxLength is gedefinieerd (-), wordt de lengte van de prefix gebruikt.",
+    "confirmation": {
+      "title": "Waarschuwing",
+      "message": "Hiermee wordt de ROA verwijderd. Doorgaan?",
+      "added": "ROA toegevoegd",
+      "retired": "ROA verwijderd",
+      "retiredSuccess": "De ROA is verwijderd",
+      "addedSuccess": "The ROA is toegevoegd"
+    },
+    "addROAForm": {
+      "required": "Dit veld is verplicht",
+      "asn_format": "Dit is geen geldige ASN",
+      "prefix_format": "Vul alstublieft een geldige IPv4 of IPv6 prefix in"
+    },
+    "onboardingWarning": "Om uw certificaat en ROAs te publiceren moet uw CA verbonden worden met een publieke RPKI databank (repository). Zodra de configuratie met de bovenliggende CA is voltooid, zal software gebruikt door de vertrouwende partijen (RPKI validators) direct beginnen met het downloaden en verifiëren van uw certificaat en ROAs die gepubliceerd zijn in deze databank.",
+    "initialize": "Initialiseer alstublieft eerst uw RPKI databank (repository) en/of de bovenliggende CA.",
+    "noResourcesYet": "U heeft nog geen resources ontvangen",
+    "clickToRefresh": "Klik hier om te verversen",
+    "parentsTab": {
+      "request": "Child Request",
+      "response": "Parent Response",
+      "addParent": "Voeg nog een bovenliggende CA toe",
+      "addParentSuccess": "Bovenliggende CA toegevoegd",
+      "name": "Naam van de bovenliggende CA",
+      "namerequired": "Een naam voor de bovenliggende CA is verplicht",
+      "nameformat": "Dit is geen geldige naam"
+    },
+    "repoTab": {
+      "request": "Publisher Request",
+      "response": "Repository Response",
+      "addRepoSuccess": "Databank (repository) toegevoegd"
+    },
+    "copySuccess": "De XML is naar uw klembord gekopiëerd"
+  },
+  "announcements": {
+    "noRoasOrAnnouncements": "Geen ROAs of BGP-aankondigingen gevonden.",
+    "search": "Zoek naar ASN, prefix, status...",
+    "showBGPInfo": "Laat BGP info zien",
+    "authorizes": "Autoriseert {number} aankondigingen",
+    "disallows": "Weigert {number} aankondigingen",
+    "asn": "ASN",
+    "prefix": "Prefix",
+    "stateLabel": "Status",
+    "state": {
+      "roa_seen": "GEZIEN",
+      "announcement_not_found": "NIET GEVONDEN",
+      "roa_unseen": "NIET GEZIEN",
+      "announcement_invalid_length": "ONGELDIGE LENGTE",
+      "announcement_invalid_asn": "ONGELDIGE ASN",
+      "roa_no_announcement_info": "GEEN AANKONDIGINGSINFORMATIE"
+    }
+  },
+  "errors": {
+    "repo-not-set": "U dient eerst een databank (repository) te configureren",
+    "pub-unknown": "Publisher '{publisher}' is niet bekend",
+    "pub-duplicate": "Publisher '{publisher}' is al geïnitialiseerd",
+    "pub-outside-jail": "Publisher uri '{uri}' ligt buiten de repository uri '{base_uri}'",
+    "pub-uri-no-slash": "Publisher uri '{uri}' moet eindigen met een slash",
+    "pub-no-embedded-repo": "Geen geïntegreerde databank (repository) geconfigureerd",
+    "ca-duplicate": "CA '{ca}' is reeds geïnitialiseerd",
+    "ca-unknown": "CA '{ca}' is onbekend",
+    "ca-repo-same": "Deze databank (repository) is al in gebruik",
+    "ca-repo-issue": "Foutmelding ontvangen van de databank (repository): {cause}",
+    "ca-repo-response-invalid-xml": "Repository response xml is ongeldig",
+    "ca-repo-response-wrong-xml": "Parent response in plaats van repository response ontvangen",
+    "ca-parent-duplicate": "U heeft al een bovenliggende CA met de naam '{parent}'",
+    "ca-parent-unknown": "U heeft geen bovenliggende CA me de naam '{parent}'",
+    "ca-parent-issue": "Fout ontvangen van bovenliggende CA '{parent}': {cause}",
+    "ca-parent-response-invalid-xml": "Ongeldige parent response xml ontvangen",
+    "ca-parent-response-wrong-xml": "Repository response ontvangen tijdens het toevoegen van de bovenliggende CA",
+    "ca-child-duplicate": "U heeft al een ondergeschikte CA met de naam '{child}'",
+    "ca-child-unknown": "U heeft geen ondergeschikte CA met de naam '{child}'",
+    "ca-child-resources-required": "U dient resources op te geven voor ondegeschikte CA '{child}'",
+    "ca-roa-unknown": "Kan onbekende ROA '{prefix}-{max_length} => {asn}' niet verwijderen",
+    "ca-roa-duplicate": "ROA '{prefix}-{max_length} => {asn}' bestaat al",
+    "ca-roa-invalid-max-length": "Ongeldige maxLength in ROA '{prefix}-{max_length} => {asn}'",
+    "ca-roa-not-entitled": "ROA prefix '{prefix}' staat niet op een van uw huidige certificaten",
+    "ta-not-allowed": "Deze functionaliteit wordt niet ondersteund door het test-vertrouwensanker",
+    "ta-name-reserved": "Naam gereserveerd"
+  }
+}
