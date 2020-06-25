@@ -86,7 +86,7 @@
     "parentsTab": {
       "request": "Child Request",
       "response": "Parent Response",
-      "addParent": "Voeg nog een bovenliggende CA toe",
+      "addParent": "Voeg een bovenliggende CA toe",
       "addParentSuccess": "Bovenliggende CA toegevoegd",
       "name": "Naam van de bovenliggende CA",
       "namerequired": "Een naam voor de bovenliggende CA is verplicht",
@@ -102,18 +102,18 @@
   "announcements": {
     "noRoasOrAnnouncements": "Geen ROAs of BGP-aankondigingen gevonden.",
     "search": "Zoek naar ASN, prefix, status...",
-    "showBGPInfo": "Laat BGP info zien",
+    "showBGPInfo": "Toon BGP info",
     "authorizes": "Autoriseert {number} aankondigingen",
-    "disallows": "Verbiedt {number} aankondigingen",
+    "disallows": "Weigert {number} aankondigingen",
     "asn": "ASN",
     "prefix": "Prefix",
     "stateLabel": "Status",
     "state": {
-      "roa_seen": "GEZIEN",
+      "roa_seen": "ZICHTBAAR",
       "announcement_not_found": "NIET GEVONDEN",
-      "roa_unseen": "NIET GEZIEN",
+      "roa_unseen": "NIET ZICHTBAAR",
       "announcement_invalid_length": "ONGELDIGE LENGTE",
-      "announcement_invalid_asn": "ONGELDIGE ASN",
+      "announcement_invalid_asn": "ONGELDIG ASN",
       "roa_no_announcement_info": "GEEN AANKONDIGINGSINFORMATIE"
     }
   },
