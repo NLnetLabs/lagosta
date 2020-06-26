@@ -132,7 +132,7 @@
     "ca-repo-response-wrong-xml": "Got parent instead of repository response",
     "ca-parent-duplicate": "You already have a parent named '{parent}'",
     "ca-parent-unknown": "You do not have a parent named '{parent}'",
-    "ca-parent-issue": "Received error fromm parent '{parent}': {cause}",
+    "ca-parent-issue": "Received error from parent '{parent}': {cause}",
     "ca-parent-response-invalid-xml": "Got invalid parent response xml",
     "ca-parent-response-wrong-xml": "Got repository response when adding parent",
     "ca-child-duplicate": "You already have a child CA named '{child}'",
