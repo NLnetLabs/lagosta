@@ -1,0 +1,148 @@
+{
+  "common": {
+    "readthedocs": "Lesen Sie die Dokumentation",
+    "report": "Ein Problem melden",
+    "confirm": "Bestätigen",
+    "cancel": "Abbruch",
+    "ok": "OK",
+    "error": "Error",
+    "success": "Erfolgreich!",
+    "copy": "In die Zwischenablage kopieren",
+    "download": "Download",
+    "dropOrClick": "Die Datei hierhin ziehen oder zum <em>Hochladen hier klicken</em>",
+    "started": "Krill läuft seit",
+    "newversion": "Es gibt eine neue Version!",
+    "supportcontracts": "Support Verträge",
+    "warning": "Warnung",
+    "idle": "Sie wurden aufgrund von Inaktivität ausgeloggt."
+  },
+  "login": {
+    "password": "Passwort",
+    "placeholder": "Ihr Passwort",
+    "signin": "Einloggen",
+    "required": "Bitte geben Sie Ihr Passwort ein",
+    "error": "Das eingegebene Passwort ist falsch",
+    "copied": "Nutzen Sie kein Passwort von <a href='https://xkcd.com/936/' target='_blank'>https://xkcd.com/936/</a>"
+  },
+  "onboarding": {
+    "welcome": "Willkommen zu Krill",
+    "welcomeHtml": "Starten wir mit der Erstellung Ihrer RPKI Zertifizierungsstelle (CA). Diese wird zur Konfiguration einer delegierten RPKI mit einer oder mehreren Eltern-Zertifizierungsstellen benötigt. Im Normalfall ist dies Ihre Regionale oder Nationale Internet Registrierungsstelle.<br><br>Der von Ihnen gewählte Name wird zur Identifizierung Ihrer Zertifizierungsstelle gegenüber den Eltern- und Kinderzertifizierungsstellen genutzt. Der Name selber wird nicht in der RPKI veröffentlicht. Bitte wählen Sie den Namen so, dass er es anderen erlaubt Ihre Organisation zu identifizieren. Dieser Name kann nicht mehr geändert werden.",
+    "addCAForm": {
+      "required": "Dies ist ein Pflichtfeld",
+      "format": "Kein gültiger Name für eine Zertifizierungsstelle",
+      "confirm": "Zertifizierungsstelle erstellen",
+      "confirmation": {
+        "title": "Warnung",
+        "message": "Dieser Name kann nicht nachträglich geändert werden. Fortfahren?"
+      }
+    }
+  },
+  "cas": {
+    "loading": "Lade Zertifizierungsstellen",
+    "ca": "Zertifizierungsstelle",
+    "cas": "Zertifizierungsstellen",
+    "search": "Suche Zertifizierungsstellen...",
+    "noCas": "Aktuell sind keine Zertifizierungsstellen festgelegt."
+  },
+  "caDetails": {
+    "loading": "Lade {handle}",
+    "current": "Aktuelle Zertifizierungsstelle",
+    "download": "Download PEM",
+    "noRoas": "Keine ROAs gefunden.",
+    "noResources": "Sie haben noch keine Ressourcen erhalten",
+    "noChildren": "Keine Kinder gefunden.",
+    "addRoa": "ROA hinzufügen",
+    "roas": "ROAs",
+    "resources": "Ressourcen",
+    "parents": "Eltern",
+    "repo": "Repository",
+    "type": "Typ",
+    "properties": "Eigenschaften",
+    "property": "Eigenschaft",
+    "value": "Wert",
+    "kind": "Art",
+    "resource": "Ressource",
+    "children": "Kinder",
+    "handle": "Name",
+    "maxLength": "MaxLength",
+    "maxLengthTooltip": "Wenn maxLength nicht angegeben wird (-), wird die Präfixlänge genutzt.",
+    "confirmation": {
+      "title": "Warnung",
+      "message": "Diese Aktion entfernt das ROA. Fortfahren?",
+      "added": "ROA hinzugefügt",
+      "retired": "ROA entfernt",
+      "retiredSuccess": "Das ROA wurde entfernt",
+      "addedSuccess": "Das ROA wurde hinzugefügt"
+    },
+    "addROAForm": {
+      "required": "Dies ist ein Pflichtfeld",
+      "asn_format": "Dies ist kein gültiges ASN",
+      "prefix_format": "Bitte geben Sie ein gültiges IPv4 oder IPv6 Präfix ein"
+    },
+    "onboardingWarning": "Um Ihr Zertifikat und Ihre ROAs zu veröffentlichen müssen Sie Ihre Zertifizierungsstelle mit einer öffentlichen RPKI Datenbank (Repository) verbinden. Sobald die Konfiguration der Eltern-Zertifizierungsstelle abgeschlossen ist, wird die Relying Party Software mit dem Herunterladen Ihres Zertifikates sowie Ihrer ROAs, welche in dieser Datenbank veröffentlicht wurden, beginnen.",
+    "initialize": "Bitte initialisieren Sie die RPKI Datenbank (Repository) und/oder die Eltern-Zertifizierungsstelle zuerst.",
+    "noResourcesYet": "Sie haben noch keine Ressourcen erhalten",
+    "clickToRefresh": "Klicken Sie hier um neu zu laden",
+    "parentsTab": {
+      "request": "Anfrage der Kinderzertifizierungsstelle",
+      "response": "Antwort der Eltern-Zertifizierungsstelle",
+      "addParent": "Eine zusätzliche Eltern-Zertifizierungsstelle hinzufügen",
+      "addParentSuccess": "Eltern-Zertifizierungsstelle hinzugefügt",
+      "name": "Name der Eltern-Zertifizierungsstelle",
+      "namerequired": "Ein Name der Eltern-Zertifizierungsstelle ist verpflichtend",
+      "nameformat": "Dies ist kein gültiger Name"
+    },
+    "repoTab": {
+      "request": "Anfrage des Publishers",
+      "response": "Antwort der Datenbank (Repository)",
+      "addRepoSuccess": "Datenbank (Repository) hinzugefügt"
+    },
+    "copySuccess": "XML in die Zwischenablage kopiert"
+  },
+  "announcements": {
+    "noRoasOrAnnouncements": "Keine ROAs oder BGP-Ankündigung gefunden.",
+    "search": "Suche nach ASN, Präfix, Status...",
+    "showBGPInfo": "Zeige BGP Informationen",
+    "authorizes": "Autorisiert {number} BGP-Ankündigungen",
+    "disallows": "Verweigert {number} BGP-Ankündigungen",
+    "asn": "ASN",
+    "prefix": "Präfix",
+    "stateLabel": "Status",
+    "state": {
+      "roa_seen": "SICHTBAR",
+      "announcement_not_found": "NICHT GEFUNDEN",
+      "roa_unseen": "NICHT SICHTBAR",
+      "announcement_invalid_length": "UNGÜLTIGE LÄNGE",
+      "announcement_invalid_asn": "UNGÜLTIGES ASN",
+      "roa_no_announcement_info": "KEINE BGP-ANKÜNDIGUNG INFORMATION"
+    }
+  },
+  "errors": {
+    "repo-not-set": "Sie müssen erst eine Datenbank (Repository) konfigurieren",
+    "pub-unknown": "Publisher '{publisher}' unbekannt",
+    "pub-duplicate": "Publisher '{publisher}' wurde bereits initialisiert",
+    "pub-outside-jail": "Publisher uri '{uri}' außerhalb der Datenbank (Repository) uri '{base_uri}'",
+    "pub-uri-no-slash": "Publisher uri '{uri}' muss mit einen Slash enden",
+    "pub-no-embedded-repo": "Keine integrierte Datenbank (Repository) konfiguriert",
+    "ca-duplicate": "Die Zertifizierungsstelle '{ca}' wurde bereits initialisiert",
+    "ca-unknown": "Die Zertifizierungsstelle '{ca}' ist unbekannt",
+    "ca-repo-same": "Diese Datenbank (Repository) ist bereits in Benutzung",
+    "ca-repo-issue": "Die Datenbank (Repository) hat folgenden Error zurückgeliefert: {cause}",
+    "ca-repo-response-invalid-xml": "Datenbank (Repository) Antwort ist ungültig",
+    "ca-repo-response-wrong-xml": "Antwort der Eltern-Zertifizierungsstelle anstatt der Datenbank (Repository) erhalten",
+    "ca-parent-duplicate": "Es existiert bereits eine Eltern-Zertifizierungsstelle mit dem Namen '{parent}'",
+    "ca-parent-unknown": "Es existiert keine Eltern-Zertifizierungsstelle mit dem Namen '{parent}'",
+    "ca-parent-issue": "Error von Eltern-Zertifizierungsstelle empfangen '{parent}': {cause}",
+    "ca-parent-response-invalid-xml": "Ungültige Eltern-Zertifizierungsstelle xml empfangen",
+    "ca-parent-response-wrong-xml": "Datenbank (Repository) Antwort während des Hinzufügens der Eltern-Zertifizierungsstelle erhalten",
+    "ca-child-duplicate": "Es existiert bereits eine Kinder-Zertifizierungsstelle mit dem Namen '{child}'",
+    "ca-child-unknown": "Es existiert keine Kinder-Zertifizierungsstelle mit dem Namen '{child}'",
+    "ca-child-resources-required": "Sie müssen Ressourcen für die Kinder-Zertifizierungsstelle angeben '{child}'",
+    "ca-roa-unknown": "Unbekanntes ROA kann nicht entfernt werden '{prefix}-{max_length} => {asn}'",
+    "ca-roa-duplicate": "ROA existiert bereits '{prefix}-{max_length} => {asn}'",
+    "ca-roa-invalid-max-length": "Ungültige maxLength in ROA '{prefix}-{max_length} => {asn}'",
+    "ca-roa-not-entitled": "Das ROA Präfix '{prefix}' ist in keinem Ihrer aktuellen Zertifikate zu finden",
+    "ta-not-allowed": "Diese Funktionalität wird vom Test Vertrauensanker nicht unterstützt",
+    "ta-name-reserved": "Name reserviert"
+  }
+}
