@@ -14,7 +14,8 @@
     "newversion": "Nouvelle version disponible!",
     "supportcontracts": "Contrats de support et de maintenance",
     "warning": "Attention",
-    "idle": "Vous avez été déconnecté de suite d'inactivité."
+    "idle": "Vous avez été déconnecté de suite d'inactivité.",
+    "nodata": "No data"
   },
   "login": {
     "password": "Mot de passe",

@@ -14,7 +14,8 @@
     "newversion": "Nova versão disponível!",
     "supportcontracts": "Contratos de Suporte",
     "warning": "Aviso",
-    "idle": "Sua sessão expirou por inatividade."
+    "idle": "Sua sessão expirou por inatividade.",
+    "nodata": "No data"
   },
   "login": {
     "password": "Senha",

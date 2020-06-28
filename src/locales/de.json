@@ -14,7 +14,8 @@
     "newversion": "Es gibt eine neue Version!",
     "supportcontracts": "Support Verträge",
     "warning": "Warnung",
-    "idle": "Sie wurden aufgrund von Inaktivität ausgeloggt."
+    "idle": "Sie wurden aufgrund von Inaktivität ausgeloggt.",
+    "nodata": "No data"
   },
   "login": {
     "password": "Passwort",

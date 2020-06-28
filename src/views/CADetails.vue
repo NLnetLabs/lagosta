@@ -363,10 +363,10 @@
       @close="resetForm('addROAForm')"
     >
       <el-form :model="addROAForm" :rules="addROAFormRules" ref="addROAForm">
-        <el-form-item label="ASN" prop="asn">
+        <el-form-item :label="$t('announcements.asn')" prop="asn">
           <el-input v-model="addROAForm.asn" autocomplete="off" @change="removeAS()"></el-input>
         </el-form-item>
-        <el-form-item label="Prefix" placeholder="ie. 10.1.0.0/22" prop="prefix">
+        <el-form-item :label="$t('announcements.prefix')" placeholder="ie. 10.1.0.0/22" prop="prefix">
           <el-input
             v-model="addROAForm.prefix"
             autocomplete="off"

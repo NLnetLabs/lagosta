@@ -35,6 +35,7 @@
       :default-sort="{ prop: 'asn', order: 'ascending' }"
       style="width: 100%"
       :row-class-name="getRowClass"
+      :empty-text="$t('common.nodata')"
       default-expand-all
     >
       <el-table-column type="expand" :class-name="!showBGP ? 'expandable' : ''">
@@ -49,9 +50,9 @@
                   }"
                 ></span>
               </h4>
-              <el-table size="small" :data="scope.row.authorizes" style="width: 100%;margin-bottom:2rem">
-                <el-table-column prop="asn" label="ASN"></el-table-column>
-                <el-table-column prop="prefix" label="Prefix"></el-table-column>
+              <el-table size="small" :data="scope.row.authorizes" style="width: 100%;margin-bottom:2rem" :empty-text="$t('common.nodata')">
+                <el-table-column prop="asn" :label="$t('announcements.asn')"></el-table-column>
+                <el-table-column prop="prefix" :label="$t('announcements.prefix')"></el-table-column>
               </el-table>
             </el-col>
             <el-col :xs="24" :sm="12">
@@ -68,6 +69,7 @@
                 :data="scope.row.disallows"
                 cell-class-name="el-cell--mini"
                 style="width: 100%"
+                :empty-text="$t('common.nodata')"
               >
                 <el-table-column prop="asn" :label="$t('announcements.asn')"></el-table-column>
                 <el-table-column prop="prefix" :label="$t('announcements.prefix')"></el-table-column>

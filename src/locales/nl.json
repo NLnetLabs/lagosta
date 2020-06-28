@@ -14,7 +14,8 @@
     "newversion": "Nieuwe versie beschikbaar!",
     "supportcontracts": "Supportcontracten",
     "warning": "Waarschuwing",
-    "idle": "U bent uitgelogd wegens inactiviteit."
+    "idle": "U bent uitgelogd wegens inactiviteit.",
+    "nodata": "No data"
   },
   "login": {
     "password": "Wachtwoord",

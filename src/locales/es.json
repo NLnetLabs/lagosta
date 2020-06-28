@@ -14,7 +14,8 @@
     "newversion": "¡Hay una nueva versión disponible!",
     "supportcontracts": "Contratos de soporte y mantenimiento",
     "warning": "Advertencia",
-    "idle": "You have been logged out because of inactivity."
+    "idle": "You have been logged out because of inactivity.",
+    "nodata": "No data"
   },
   "login": {
     "password": "Contraseña",
