@@ -21,6 +21,7 @@
     "express-http-proxy": "^1.6.0",
     "http-proxy-middleware": "^0.20.0",
     "idle-vue": "^2.0.5",
+    "ip6addr": "^0.2.3",
     "prismjs": "^1.19.0",
     "typeface-lato": "^0.0.54",
     "typeface-source-code-pro": "^0.0.71",
@@ -62,6 +63,6 @@
     "**/**/acorn": "^6.4.1",
     "**/**/minimist": "^1.2.2",
     "**/**/kind-of": "^6.0.3",
-    "**/**/websocket-extensions" : "0.1.4"
+    "**/**/websocket-extensions": "0.1.4"
   }
 }

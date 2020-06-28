@@ -88,7 +88,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="asn" :label="$t('announcements.asn')" sortable width="200"></el-table-column>
-      <el-table-column :label="$t('announcements.prefix')" sortable>
+      <el-table-column :label="$t('announcements.prefix')" sortable :sort-method="sortPrefix">
         <template slot-scope="scope">
           {{ scope.row.prefix }}{{ scope.row.max_length ? "-" + scope.row.max_length : "" }}
         </template>
@@ -191,6 +191,7 @@
 
 <script>
 import APIService from "@/services/APIService.js";
+import ip6addr from "ip6addr";
 const LOCALSTORAGE_BGP = "lagosta_showbgp";
 export default {
   props: ["handle", "initializeParent", "initializeRepo", "updated"],
@@ -214,7 +215,7 @@ export default {
   computed: {
     filteredAnnouncements: function() {
       const self = this;
-      const reg = /[^0-9a-z./-]/gi;
+      const reg = /[^0-9a-zΆ-ωΑ-ώ./-]/gi;
       const src = self.search.toLowerCase().replace(reg, "");
       return this.announcements.filter(function(ann) {
         let inAuth = false;
@@ -268,6 +269,9 @@ export default {
     this.loadAnnouncements();
   },
   methods: {
+    sortPrefix: function(a, b) {
+      return ip6addr.compareCIDR(a.prefix.split('-')[0], b.prefix.split('-')[0]);
+    },
     getRowClass: function(data) {
       if (this.showBGP && data.row.max_length) {
         return data.row.state === "roa_unseen" ? "row_unseen" : "row-dark";
