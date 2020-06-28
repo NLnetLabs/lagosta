@@ -86,6 +86,7 @@ export default {
       krillStarted: "",
       user: null,
       langs: [
+        { iso: "de", label: "Deutsch" },
         { iso: "en", label: "English" },
         { iso: "es", label: "Español" },
         { iso: "gr", label: "Ελληνικά" },
