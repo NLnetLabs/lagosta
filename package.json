@@ -6,7 +6,6 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "test:e2e": "vue-cli-service test:e2e",
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
@@ -22,6 +21,7 @@
     "http-proxy-middleware": "^0.20.0",
     "idle-vue": "^2.0.5",
     "ip6addr": "^0.2.3",
+    "moment": "^2.27.0",
     "prismjs": "^1.21.0",
     "typeface-lato": "^0.0.54",
     "typeface-source-code-pro": "^0.0.71",
@@ -36,7 +36,6 @@
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.8.0",
-    "@vue/cli-plugin-e2e-cypress": "^3.8.0",
     "@vue/cli-plugin-eslint": "^3.8.0",
     "@vue/cli-plugin-unit-mocha": "^3.8.0",
     "@vue/cli-service": "^3.8.0",
