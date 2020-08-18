@@ -17,6 +17,43 @@
     "idle": "You have been logged out because of inactivity.",
     "nodata": "No data"
   },
+  "testbed": {
+    "welcome": "Welcome to the Krill Testbed",
+    "welcomeHtml": "If configuring Relying Party software such as Routinator you will need to download the testbed TAL.",
+    "tallink": "Click here to download the testbed TAL",
+    "addChildForm": {
+      "confirm": "Register child CA",
+      "format": "This is not a valid child request XML",
+      "required": "Please enter the child request XML",
+      "confirmation": {
+        "title": "Warning",
+        "message": "Are you sure you want to register this child with the testbed?"
+      }
+    },
+    "removeChildForm": {
+      "confirm": "Remove child CA",
+      "confirmation": {
+        "title": "Warning",
+        "message": "Are you sure you want to unregister this child with the testbed?"
+      }
+    },
+    "addPublisherForm": {
+      "confirm": "Register publisher",
+      "format": "This is not a valid publisher request XML",
+      "required": "Please enter the publisher request XML",
+      "confirmation": {
+        "title": "Warning",
+        "message": "Are you sure you want to register this publisher with the testbed?"
+      }
+    },
+    "removePublisherForm": {
+      "confirm": "Remove publisher",
+      "confirmation": {
+        "title": "Warning",
+        "message": "Are you sure you want to unregister this publisher with the testbed?"
+      }
+    }
+  },
   "login": {
     "password": "Password",
     "placeholder": "Your password",

@@ -93,5 +93,44 @@ export default {
   },
   getBGPAnalysis(handle) {
     return apiClient.get("/api/v1/cas/" + handle + "/routes/analysis/full");
+  },
+  unauthenticatedAddChild(parent, child, asn_res, ipv4_res, ipv6_res, id_cert) {
+    return simpleClient.post("/api/v1/cas/" + parent + "/children", {
+      handle: child,
+      resources: {
+        asn: (typeof asn_res !== 'undefined' ? asn_res : ""),
+        v4: (typeof ipv4_res !== 'undefined' ? ipv4_res : ""),
+        v6: (typeof ipv6_res !== 'undefined' ? ipv6_res : "")
+      },
+      auth: {
+        rfc8183: {
+          tag: null,
+          child_handle: child,
+          id_cert: id_cert
+        }
+      }
+    });
+  },
+  unauthenticatedGetParentResponseXML(parent, child) {
+    return apiClient.get("/api/v1/cas/" + parent + "/children/" + child + "/parent_response.xml");
+  },
+  unauthenticatedRemoveChild(parent, child) {
+    return simpleClient.delete("/api/v1/cas/" + parent + "/children/" + child);
+  },
+  unauthenticatedAddPublisher(publisher_handle, publisher_request_xml) {
+    return simpleClient.post("/api/v1/publishers", {
+      tag: null,
+      publisher_handle: publisher_handle,
+      id_cert: publisher_request_xml
+    });
+  },
+  unauthenticatedGetRepositoryResponseXML(publisher) {
+    return apiClient.get("/api/v1/publishers/" + publisher + "/response.xml");
+  },
+  unauthenticatedRemovePublisher(publisher) {
+    return simpleClient.delete("/api/v1/publishers/" + publisher);
+  },
+  getConfig() {
+    return simpleClient.get("/config");
   }
 };
