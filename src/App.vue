@@ -4,7 +4,7 @@
       <el-header>
         <el-row>
           <el-col :span="4">
-            <router-link :to="{ name: 'home' }">
+            <router-link :to="{ name: get_tl_link_target() }">
               <div class="logo">
                 <img src="@/assets/images/krill_logo_white.svg" />
               </div>
@@ -124,6 +124,10 @@ export default {
     this.checkLatestVersions();
   },
   methods: {
+    get_tl_link_target() {
+      // stay in the testbed UI, don't navigate outside of it
+      return (this.$route.name === "testbed" ? "testbed" : "home");
+    },
     checkLatestVersions() {
       APIService.getLatestKrillVersion()
         .then(success => {
