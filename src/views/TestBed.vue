@@ -156,7 +156,6 @@
 </template>
 
 <script>
-import router from "@/router";
 import APIService from "@/services/APIService.js";
 const xml2js = require("xml2js");
 export default {
@@ -257,13 +256,17 @@ export default {
       enterPressed: false
     };
   },
-  created() {
-    if (this.$route.name === "testbed") {
+  beforeRouteEnter(to, from, next) {
+    // don't show the testbed UI if the testbed feature is disabled
+    if (to.name == "testbed") {
       APIService.getConfig().then(response => {
         if (!response.data.testbed_enabled) {
-          router.push("/");
+          next({ name: 'home' });
+        } else {
+          next();
         }
-      });
+      })
+      .catch(() => next({ name: 'home' }));
     }
   },
   methods: {
