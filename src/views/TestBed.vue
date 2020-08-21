@@ -198,20 +198,20 @@ export default {
         const self = this;
         xml2js.parseString(value, function(err, json) {
           if (err) {
-            callback(new Error(self.$t('errors.invalid-xml', { err: err }), true));
+            callback(new Error(self.$t('testbed.errors.invalid-xml', { err: err }), true));
           } else {
             if (typeof json.child_request === 'undefined') {
-              callback(new Error(self.$t('errors.missing-xml-el', { el: '<child_request>' } )));
+              callback(new Error(self.$t('testbed.errors.missing-xml-el', { el: '<child_request>' } )));
             } else if (!json.child_request) {
-              callback(new Error(self.$t('errors.empty-xml-el', { el: '<child_request>' } )));
+              callback(new Error(self.$t('testbed.errors.empty-xml-el', { el: '<child_request>' } )));
             } else if (typeof json.child_request.$ === 'undefined' || typeof json.child_request.$.child_handle === 'undefined') {
-              callback(new Error(self.$t('errors.missing-xml-attr', { attr: 'child_handle', el: '<child_request>' } )));
+              callback(new Error(self.$t('testbed.errors.missing-xml-attr', { attr: 'child_handle', el: '<child_request>' } )));
             } else if (json.child_request.$.child_handle.length == 0) {
-              callback(new Error(self.$t('errors.empty-xml-attr', { attr: 'child_handle', el: '<child_request>' } )));
+              callback(new Error(self.$t('testbed.errors.empty-xml-attr', { attr: 'child_handle', el: '<child_request>' } )));
             } else if (typeof json.child_request.child_bpki_ta === 'undefined') {
-              callback(new Error(self.$t('errors.missing-xml-child-el', { el: '<child_bpki_ta>', parent: '<child_request>' } )));
+              callback(new Error(self.$t('testbed.errors.missing-xml-child-el', { el: '<child_bpki_ta>', parent: '<child_request>' } )));
             } else if (json.child_request.child_bpki_ta[0].length == 0) {
-              callback(new Error(self.$t('errors.empty-xml-el', { el: '<child_bpki_ta>' } )));
+              callback(new Error(self.$t('testbed.errors.empty-xml-el', { el: '<child_bpki_ta>' } )));
             } else {
               callback();
             }
@@ -226,20 +226,20 @@ export default {
         const self = this;
         xml2js.parseString(value, function(err, json) {
           if (err) {
-            callback(new Error(self.$t('errors.invalid-xml', { err: err } ), true));
+            callback(new Error(self.$t('testbed.errors.invalid-xml', { err: err } ), true));
           } else {
             if (typeof json.publisher_request === 'undefined') {
-              callback(new Error(self.$t('errors.missing-xml-el', { el: '<publisher_request>' } )));
+              callback(new Error(self.$t('testbed.errors.missing-xml-el', { el: '<publisher_request>' } )));
             } else if (!json.publisher_request) {
-              callback(new Error(self.$t('errors.empty-xml-el', { el: '<publisher_request>' } )));
+              callback(new Error(self.$t('testbed.errors.empty-xml-el', { el: '<publisher_request>' } )));
             } else if (typeof json.publisher_request.$ === 'undefined' || typeof json.publisher_request.$.publisher_handle === 'undefined') {
-              callback(new Error(self.$t('errors.missing-xml-attr', { attr: 'publisher_handle', el: '<publisher_request>' } )));
+              callback(new Error(self.$t('testbed.errors.missing-xml-attr', { attr: 'publisher_handle', el: '<publisher_request>' } )));
             } else if (json.publisher_request.$.publisher_handle.length == 0) {
-              callback(new Error(self.$t('errors.empty-xml-attr', { attr: 'publisher_handle', el: '<publisher_request>' } )));
+              callback(new Error(self.$t('testbed.errors.empty-xml-attr', { attr: 'publisher_handle', el: '<publisher_request>' } )));
             } else if (typeof json.publisher_request.publisher_bpki_ta === 'undefined') {
-              callback(new Error(self.$t('errors.missing-xml-child-el', { el: '<publisher_bpki_ta>', parent: '<publisher_request>' } )));
+              callback(new Error(self.$t('testbed.errors.missing-xml-child-el', { el: '<publisher_bpki_ta>', parent: '<publisher_request>' } )));
             } else if (json.publisher_request.publisher_bpki_ta[0].length == 0) {
-              callback(new Error(self.$t('errors.empty-xml-el', { el: '<publisher_bpki_ta>' } )));
+              callback(new Error(self.$t('testbed.errors.empty-xml-el', { el: '<publisher_bpki_ta>' } )));
             } else {
               callback();
             }
@@ -284,13 +284,13 @@ export default {
         child_handle: [
           {
             required: true,
-            message: this.$t('errors.child-handle-required')
+            message: this.$t('testbed.errors.child-handle-required')
           }
         ],
         publisher_handle: [
           {
             required: true,
-            message: this.$t('errors.publisher-handle-required')
+            message: this.$t('testbed.errors.publisher-handle-required')
           }
         ]
       },
@@ -315,9 +315,9 @@ export default {
       let e = error;
       if (error.data) {
         e = error.data.label
-          ? this.$t("errors." + error.data.label, error.data.args)
-          : this.$t("errors." + error.data.code);
-        if (e === "errors." + (error.data.label ? error.data.label : error.data.code)) {
+          ? this.$t("testbed.errors." + error.data.label, error.data.args)
+          : this.$t("testbed.errors." + error.data.code);
+        if (e === "testbed.errors." + (error.data.label ? error.data.label : error.data.code)) {
           e = error.data.msg;
         }
       }
@@ -380,7 +380,7 @@ export default {
                   })
                   .catch(function(err) {
                     self.loading = false;
-                    self.parseError(self.$t('errors.invalid-xml', { err: err } ), true);
+                    self.parseError(self.$t('testbed.errors.invalid-xml', { err: err } ), true);
                   });
               })
               .catch(() => {
@@ -475,7 +475,7 @@ export default {
                   })
                   .catch(function(err) {
                     self.loading = false;
-                    self.parseError(self.$t('errors.invalid-xml', { err: err } ), true);
+                    self.parseError(self.$t('testbed.errors.invalid-xml', { err: err } ), true);
                   });
               })
               .catch(() => {
