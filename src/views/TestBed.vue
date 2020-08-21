@@ -7,17 +7,21 @@
             <img src="@/assets/images/welcome.svg" />
           </div>
 
-          <h3>{{ $t("testbed.welcome") }}</h3>
+          <h1>{{ $t("testbed.welcome") }}</h1>
         </div>
 
-        <h4>TAL</h4>
-        <p v-html="$t('testbed.welcomeHtml')"></p>
+        <h4>{{ $t('testbed.disclaimer.heading')}}</h4>
+        <p v-html="$t('testbed.disclaimer.body')"></p>
+
+        <h4>{{ $t('testbed.rpconfighelp.heading') }}</h4>
+        <p v-html="$t('testbed.rpconfighelp.body')"></p>
 
         <a href="/ta/ta.tal" target="_blank">{{
-          $t("testbed.tallink")
+          $t("testbed.rpconfighelp.tallink")
         }}</a>
 
-        <h4>{{ $t('testbed.regunreg') }}</h4>
+        <h4>{{ $t('testbed.regunreg.heading') }}</h4>
+        <p v-html="$t('testbed.regunreg.body')"></p>
 
         <el-alert type="error" v-if="error" :closable="true" show-icon title="Error" style="margin-bottom: 10px;">{{ error }}</el-alert>
 

@@ -147,10 +147,20 @@
     "ta-name-reserved": "Name reserved"
   },
   "testbed": {
-    "welcome": "Welcome to the Krill Testbed",
-    "welcomeHtml": "If configuring Relying Party software such as Routinator you will need to download the testbed TAL.",
-    "regunreg": "Register/Unregister",
-    "tallink": "Click here to download the testbed TAL",
+    "welcome": "Welcome to this RPKI testbed",
+    "disclaimer": {
+      "heading": "Disclaimer",
+      "body": "<p>This testbed is open to all for <b>testing purposes</b> only. It offers a <b><u>test</u> RPKI hierarchy</b> rooted at this testbed and is completely separate to and independent of the real global RPKI hierarchy.</p><p>No guarantees are given concerning the availability of this service. Any relationships established between your RPKI CA(s) and/or Publisher9s) and the testbed may disappear at any time.</p><p>Anyone can manage the relationships irrespective of their actual resource ownership rights in the real global RPKI hierarchy, and anyone can revoke existing relationships in the <b>test RPKI hierarchy</b>, even yours!</p><p>Please <a href='https://github.com/NLnetLabs/krill/issues/new'>report</a> any issues with this testbed. For more information about RPKI and how the hierarchy works see the <a href='https://rpki.readthedocs.io/'>RPKI documentation at Read the Docs</a>.</p>"
+    },
+    "rpconfighelp": {
+      "heading": "Configuring Relying Party Software",
+      "body": "<p>As this test RPKI hierarchy is distinct from the real global RPKI hierarchy your Relying Party software will not be aware of it. To direct Relying Party software to query this test RPKI hierarchy you must supply it with the Trust Anchor Locator (TAL) of this testbed.</p><p>Use the link below to download the testbed TAL file and follow the instructions for your Relying Party software to configure it to use the downloaded TAL file.</p>",
+      "tallink": "Click here to download the testbed TAL"
+    },
+    "regunreg": {
+      "heading": "Register/Unregister",
+      "body": "<p>Use the Register CA form below to register your RPKI Certificate Authority as a child of the testbed thereby granting you the right to issue Route Origin Authorisations (ROAs) for the resources that you claim.</p><p>Additionally, if you do not wish to host your own Rsync and RRDP repositories you may use the Register Publisher form below to grant your publisher the right to publish ROAs in the testbed hosted repositories.</p><p>Use the Unregister forms to cancel previously established relationships (<b><i>even those of other testbed users</i></b>!)."
+    },
     "rfcdoclink": "Click to view the RFC-8183 documentation for this XML",
     "childhandle": "Child Handle",
     "publisherhandle": "Publisher Handle",
