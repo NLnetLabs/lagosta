@@ -16,7 +16,7 @@
         <h4>{{ $t('testbed.rpconfighelp.heading') }}</h4>
         <p v-html="$t('testbed.rpconfighelp.body')"></p>
 
-        <a href="/ta/ta.tal" target="_blank">{{
+        <a href="/testbed.tal" target="_blank">{{
           $t("testbed.rpconfighelp.tallink")
         }}</a>
 
