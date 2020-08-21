@@ -35,6 +35,20 @@
               </el-form-item>
               <el-row type="flex" class="modal-footer" justify="end">
                 <el-form-item>
+                  <el-button
+                    type="primary"
+                    :title="$t('common.copy')"
+                    @click="$emit('copy-xml', addChildRespForm.parentRespXML)"
+                  >
+                    <font-awesome-icon icon="clipboard" />
+                  </el-button>
+                  <el-button
+                    type="primary"
+                    :title="$t('common.download')"
+                    @click="$emit('download-xml', addChildRespForm.parentRespXML, 'parent_response')"
+                  >
+                    <font-awesome-icon icon="download" />
+                  </el-button>
                    <el-button @click="resetAddChildForm()">Register another CA</el-button>
                 </el-form-item>
               </el-row>
@@ -111,6 +125,20 @@
               </el-form-item>
               <el-row type="flex" class="modal-footer" justify="end">
                 <el-form-item>
+                  <el-button
+                    type="primary"
+                    :title="$t('common.copy')"
+                    @click="$emit('copy-xml', addPublisherRespForm.repoRespXML)"
+                  >
+                    <font-awesome-icon icon="clipboard" />
+                  </el-button>
+                  <el-button
+                    type="primary"
+                    :title="$t('common.download')"
+                    @click="$emit('download-xml', addPublisherRespForm.repoRespXML, 'repository_response')"
+                  >
+                    <font-awesome-icon icon="download" />
+                  </el-button>
                    <el-button @click="resetAddPublisherForm()">Register another Publisher</el-button>
                 </el-form-item>
               </el-row>

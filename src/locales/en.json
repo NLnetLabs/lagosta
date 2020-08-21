@@ -15,7 +15,8 @@
     "supportcontracts": "Support contracts",
     "warning": "Warning",
     "idle": "You have been logged out because of inactivity.",
-    "nodata": "No data"
+    "nodata": "No data",
+    "copySuccess": "XML copied to your clipboard"
   },
   "testbed": {
     "welcome": "Welcome to the Krill Testbed",
@@ -134,8 +135,7 @@
       "request": "Publisher Request",
       "response": "Repository Response",
       "addRepoSuccess": "Repository added"
-    },
-    "copySuccess": "XML copied to your clipboard"
+    }
   },
   "announcements": {
     "noRoasOrAnnouncements": "No ROAs or Announcements found.",

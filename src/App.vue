@@ -28,7 +28,7 @@
       </el-header>
 
       <el-main>
-        <router-view v-on:authEvent="loadUser" />
+        <router-view v-on:authEvent="loadUser" v-on:copy-xml="copyXML" v-on:download-xml="downloadXML" />
       </el-main>
 
       <el-footer height="40px">
@@ -124,6 +124,24 @@ export default {
     this.checkLatestVersions();
   },
   methods: {
+    copyXML(text) {
+      const self = this;
+      this.$copyXML(text).then(function() {
+        self.$notify({
+          title: self.$t("common.success"),
+          message: self.$t("common.copySuccess"),
+          type: "success"
+        });
+      });
+    },
+    downloadXML(text, filename) {
+      const url = window.URL.createObjectURL(new Blob([text]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", filename);
+      document.body.appendChild(link);
+      link.click();
+    },
     get_tl_link_target() {
       // stay in the testbed UI, don't navigate outside of it
       return (this.$route.name === "testbed" ? "testbed" : "home");

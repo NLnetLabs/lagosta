@@ -15,7 +15,8 @@
     "supportcontracts": "Contratos de Suporte",
     "warning": "Aviso",
     "idle": "Sua sessão expirou por inatividade.",
-    "nodata": "No data"
+    "nodata": "No data",
+    "copySuccess": "XML copiado para a Área de transferência"
   },
   "login": {
     "password": "Senha",
@@ -97,8 +98,7 @@
       "request": "Requisição do Publicador",
       "response": "Resposta do Repositório",
       "addRepoSuccess": "Repositório adicionado"
-    },
-    "copySuccess": "XML copiado para a Área de transferência"
+    }
   },
   "announcements": {
     "noRoasOrAnnouncements": "ROAs ou Anúncios não encontrados.",

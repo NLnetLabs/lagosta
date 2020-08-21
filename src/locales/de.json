@@ -15,7 +15,8 @@
     "supportcontracts": "Support Verträge",
     "warning": "Warnung",
     "idle": "Sie wurden aufgrund von Inaktivität ausgeloggt.",
-    "nodata": "Keine Daten"
+    "nodata": "Keine Daten",
+    "copySuccess": "XML in die Zwischenablage kopiert"
   },
   "login": {
     "password": "Passwort",
@@ -97,8 +98,7 @@
       "request": "Anfrage des Publishers",
       "response": "Antwort der Datenbank (Repository)",
       "addRepoSuccess": "Datenbank (Repository) hinzugefügt"
-    },
-    "copySuccess": "XML in die Zwischenablage kopiert"
+    }
   },
   "announcements": {
     "noRoasOrAnnouncements": "Keine ROAs oder BGP-Ankündigung gefunden.",

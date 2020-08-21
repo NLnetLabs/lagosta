@@ -15,7 +15,8 @@
     "supportcontracts": "Contratos de soporte y mantenimiento",
     "warning": "Advertencia",
     "idle": "You have been logged out because of inactivity.",
-    "nodata": "No data"
+    "nodata": "No data",
+    "copySuccess": "El XML se copió a su portapapeles"
   },
   "login": {
     "password": "Contraseña",
@@ -97,8 +98,7 @@
       "request": "Solicitud repositorio",
       "response": "Respuesta repositorio",
       "addRepoSuccess": "Se agregó el repositorio"
-    },
-    "copySuccess": "El XML se copió a su portapapeles"
+    }
   },
   "announcements": {
     "noRoasOrAnnouncements": "ROAs no encontrados.",
