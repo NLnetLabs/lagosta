@@ -17,15 +17,15 @@
           $t("testbed.tallink")
         }}</a>
 
-        <h4>Register/Unregister</h4>
+        <h4>{{ $t('testbed.regunreg') }}</h4>
 
         <el-alert type="error" v-if="error" :closable="true" show-icon title="Error" style="margin-bottom: 10px;">{{ error }}</el-alert>
 
         <el-tabs type="border-card">
-          <el-tab-pane label="Register CA">
+          <el-tab-pane :label="$t('testbed.addChild.heading')">
             <el-form :model="addChildRespForm" :rules="rules" ref="addChildRespForm" v-show="addChildRespForm.parentRespXML != ''">
-              <el-form-item label="Testbed response XML" prop="parentRespXML">
-                <el-link href="https://tools.ietf.org/html/rfc8183#section-5.2.2" target="_blank" icon="el-icon-info">Click to view the RFC-8183 documentation for this XML</el-link>
+              <el-form-item label="$t('testbed.responseXML')" prop="parentRespXML">
+                <el-link href="https://tools.ietf.org/html/rfc8183#section-5.2.2" target="_blank" icon="el-icon-info">{{ $t('testbed.rfcdoclink') }}</el-link>
                 <prism-editor
                   v-model="addChildRespForm.parentRespXML"
                   language="xml"
@@ -49,73 +49,73 @@
                   >
                     <font-awesome-icon icon="download" />
                   </el-button>
-                   <el-button @click="resetAddChildForm()">Register another CA</el-button>
+                   <el-button @click="resetAddChildForm()">{{ $t('testbed.addChild.registeranother') }}</el-button>
                 </el-form-item>
               </el-row>
             </el-form>
             <el-form :model="addChildForm" :rules="rules" ref="addChildForm"  v-show="addChildRespForm.parentRespXML == ''">
-              <el-form-item label="Child Request XML" prop="childReqXML">
-                <el-link href="https://tools.ietf.org/html/rfc8183#section-5.2.1" target="_blank" icon="el-icon-info">Click to view the RFC-8183 documentation for this XML</el-link>
+              <el-form-item :label="$t('testbed.addChild.requestXML.label')" prop="childReqXML">
+                <el-link href="https://tools.ietf.org/html/rfc8183#section-5.2.1" target="_blank" icon="el-icon-info">{{ $t('testbed.rfcdoclink') }}</el-link>
                 <prism-editor
                   v-model="addChildForm.childReqXML"
                   language="xml"
                   style="height:180px"
                 ></prism-editor>
               </el-form-item>
-              <el-form-item label="ASN Resources" prop="asn_res">
+              <el-form-item :label="$t('testbed.addChild.asnresources.label')" prop="asn_res">
                 <el-input
                   ref="asn_res"
-                  placeholder="The AS resources: e.g. AS1, AS3-4"
+                  :placeholder="$t('testbed.addChild.asnresources.placeholder')"
                   v-model="addChildForm.asn_res"
                 ></el-input>
               </el-form-item>
-              <el-form-item label="IPv4 Resources" prop="ipv4_res">
+              <el-form-item :label="$t('testbed.addChild.ipv4resources.label')" prop="ipv4_res">
                 <el-input
                   ref="ipv4_res"
-                  placeholder="The IPv4 resources: e.g. 192.168.0.0/16"
+                  :placeholder="$t('testbed.addChild.ipv4resources.placeholder')"
                   v-model="addChildForm.ipv4_res"
                 ></el-input>
               </el-form-item>
-              <el-form-item label="IPv6 Resources" prop="ipv6_res">
+              <el-form-item :label="$t('testbed.addChild.ipv6resources.label')" prop="ipv6_res">
                 <el-input
                   ref="ipv6_res"
-                  placeholder="The IPv6 resources: e.g. 2001:db8::/32"
+                  :placeholder="$t('testbed.addChild.ipv6resources.placeholder')"
                   v-model="addChildForm.ipv6_res"
                 ></el-input>
               </el-form-item>
               <el-row type="flex" class="modal-footer" justify="end">
                 <el-form-item>
                   <el-button type="primary" @click="submitAddChildForm()">{{
-                    $t("testbed.addChildForm.confirm")
+                    $t("testbed.addChild.confirm")
                   }}</el-button>
                 </el-form-item>
               </el-row>
             </el-form>
           </el-tab-pane>
 
-          <el-tab-pane label="Unregister CA">
+          <el-tab-pane :label="$t('testbed.removeChild.heading')">
             <el-form :model="removeChildForm" :rules="rules" ref="removeChildForm">
-              <el-form-item label="Child Handle" prop="child_handle">
+              <el-form-item :label="$t('testbed.childhandle')" prop="child_handle">
                 <el-input
                   ref="child_handle"
-                  placeholder="Enter the CA name to remove"
+                  :placeholder="$t('testbed.removeChild.placeholder')"
                   v-model="removeChildForm.child_handle"
                 ></el-input>
               </el-form-item>
               <el-row type="flex" class="modal-footer" justify="end">
                 <el-form-item>
                   <el-button type="primary" @click="submitRemoveChildForm()">{{
-                    $t("testbed.removeChildForm.confirm")
+                    $t("testbed.removeChild.confirm")
                   }}</el-button>
                 </el-form-item>
               </el-row>
             </el-form>
           </el-tab-pane>
 
-          <el-tab-pane label="Register Publisher">
+          <el-tab-pane :label="$t('testbed.addPublisher.heading')">
             <el-form :model="addPublisherRespForm" :rules="rules" ref="addPublisherRespForm" v-show="addPublisherRespForm.repoRespXML != ''">
-              <el-form-item label="Testbed response XML" prop="repoRespXML">
-                <el-link href="https://tools.ietf.org/html/rfc8183#section-5.2.4" target="_blank" icon="el-icon-info">Click to view the RFC-8183 documentation for this XML</el-link>
+              <el-form-item :label="$t('testbed.responseXML')" prop="repoRespXML">
+                <el-link href="https://tools.ietf.org/html/rfc8183#section-5.2.4" target="_blank" icon="el-icon-info">{{ $t('testbed.rfcdoclink') }}</el-link>
                 <prism-editor
                   v-model="addPublisherRespForm.repoRespXML"
                   language="xml"
@@ -139,16 +139,15 @@
                   >
                     <font-awesome-icon icon="download" />
                   </el-button>
-                   <el-button @click="resetAddPublisherForm()">Register another Publisher</el-button>
+                   <el-button @click="resetAddPublisherForm()">{{ $t('testbed.addPublisher.registeranother') }}</el-button>
                 </el-form-item>
               </el-row>
             </el-form>
             <el-form :model="addPublisherForm" :rules="rules" ref="addPublisherForm" v-show="addPublisherRespForm.repoRespXML == ''">
-              <el-form-item label="Publisher Request XML" prop="pubReqXML">
-                <el-link href="https://tools.ietf.org/html/rfc8183#section-5.2.3" target="_blank" icon="el-icon-info">Click to view the RFC-8183 documentation for this XML</el-link>
+              <el-form-item :label="$t('testbed.addPublisher.requestXML.label')" prop="pubReqXML">
+                <el-link href="https://tools.ietf.org/html/rfc8183#section-5.2.3" target="_blank" icon="el-icon-info">{{ $t('testbed.rfcdoclink') }}</el-link>
                 <prism-editor
                   v-model="addPublisherForm.pubReqXML"
-                  placeholder="<publisher_request ..."
                   language="xml"
                   style="height:180px"
                 ></prism-editor>
@@ -156,26 +155,26 @@
               <el-row type="flex" class="modal-footer" justify="end">
                 <el-form-item>
                   <el-button type="primary" @click="submitAddPublisherForm()">{{
-                    $t("testbed.addPublisherForm.confirm")
+                    $t("testbed.addPublisher.confirm")
                   }}</el-button>
                 </el-form-item>
               </el-row>
             </el-form>
           </el-tab-pane>
 
-          <el-tab-pane label="Unregister Publisher">
+          <el-tab-pane :label="$t('testbed.removePublisher.heading')">
             <el-form :model="removePublisherForm" :rules="rules" ref="removePublisherForm">
-              <el-form-item label="Publisher Handle" prop="publisher_handle">
+              <el-form-item :label="$t('testbed.publisherhandle')" prop="publisher_handle">
                 <el-input
                   ref="publisher_handle"
-                  placeholder="Enter the Publisher name to remove"
+                  :placeholder="$t('testbed.removePublisher.placeholder')"
                   v-model="removePublisherForm.publisher_handle"
                 ></el-input>
               </el-form-item>
               <el-row type="flex" class="modal-footer" justify="end">
                 <el-form-item>
                   <el-button type="primary" @click="submitRemovePublisherForm()">{{
-                    $t("testbed.removePublisherForm.confirm")
+                    $t("testbed.removePublisher.confirm")
                   }}</el-button>
                 </el-form-item>
               </el-row>
@@ -194,20 +193,25 @@ export default {
   data() {
     const checkReqXML = (rule, value, callback) => {
       if (!value || value.trim() === "") {
-        callback(new Error(this.$t("testbed.addChildForm.required")));
+        callback(new Error(this.$t("testbed.addChild.required")));
       } else {
+        const self = this;
         xml2js.parseString(value, function(err, json) {
           if (err) {
-            callback(new Error("Invalid RFC 8183 XML: " + err, true));
+            callback(new Error(self.$t('errors.invalid-xml', { err: err }), true));
           } else {
-            if (!json.child_request) {
-              callback(new Error("Invalid RFC 8183 XML: Missing <child_request> element"));
-            } else if (!json.child_request.$.child_handle) {
-              callback(new Error("Invalid RFC 8183 XML: Missing child_handle attribute on <child_request> element"));
-            } else if (!json.child_request.child_bpki_ta) {
-              callback(new Error("Invalid RFC 8183 XML: Missing child_bpki_ta child element of the <child_request> element"));
-            } else if (json.child_request.child_bpki_ta.length == 0) {
-              callback(new Error("Invalid RFC 8183 XML: Missing child_bpki_ta child array element of the <child_request> element"));
+            if (typeof json.child_request === 'undefined') {
+              callback(new Error(self.$t('errors.missing-xml-el', { el: '<child_request>' } )));
+            } else if (!json.child_request) {
+              callback(new Error(self.$t('errors.empty-xml-el', { el: '<child_request>' } )));
+            } else if (typeof json.child_request.$ === 'undefined' || typeof json.child_request.$.child_handle === 'undefined') {
+              callback(new Error(self.$t('errors.missing-xml-attr', { attr: 'child_handle', el: '<child_request>' } )));
+            } else if (json.child_request.$.child_handle.length == 0) {
+              callback(new Error(self.$t('errors.empty-xml-attr', { attr: 'child_handle', el: '<child_request>' } )));
+            } else if (typeof json.child_request.child_bpki_ta === 'undefined') {
+              callback(new Error(self.$t('errors.missing-xml-child-el', { el: '<child_bpki_ta>', parent: '<child_request>' } )));
+            } else if (json.child_request.child_bpki_ta[0].length == 0) {
+              callback(new Error(self.$t('errors.empty-xml-el', { el: '<child_bpki_ta>' } )));
             } else {
               callback();
             }
@@ -217,20 +221,25 @@ export default {
     };
     const checkPubXML = (rule, value, callback) => {
       if (!value || value.trim() === "") {
-        callback(new Error(this.$t("testbed.addPublisherForm.required")));
+        callback(new Error(this.$t("testbed.addPublisher.required")));
       } else {
+        const self = this;
         xml2js.parseString(value, function(err, json) {
           if (err) {
-            callback(new Error("Invalid RFC 8183 XML: " + err, true));
+            callback(new Error(self.$t('errors.invalid-xml', { err: err } ), true));
           } else {
-            if (!json.publisher_request) {
-              callback(new Error("Invalid RFC 8183 XML: Missing <publisher_request> element"));
-            } else if (!json.publisher_request.$.publisher_handle) {
-              callback(new Error("Invalid RFC 8183 XML: Missing child_handle attribute on <publisher_request> element"));
-            } else if (!json.publisher_request.publisher_bpki_ta) {
-              callback(new Error("Invalid RFC 8183 XML: Missing publisher_bpki_ta child element of the <publisher_request> element"));
-            } else if (json.publisher_request.publisher_bpki_ta.length == 0) {
-              callback(new Error("Invalid RFC 8183 XML: Missing publisher_bpki_ta child array element of the <publisher_request> element"));
+            if (typeof json.publisher_request === 'undefined') {
+              callback(new Error(self.$t('errors.missing-xml-el', { el: '<publisher_request>' } )));
+            } else if (!json.publisher_request) {
+              callback(new Error(self.$t('errors.empty-xml-el', { el: '<publisher_request>' } )));
+            } else if (typeof json.publisher_request.$ === 'undefined' || typeof json.publisher_request.$.publisher_handle === 'undefined') {
+              callback(new Error(self.$t('errors.missing-xml-attr', { attr: 'publisher_handle', el: '<publisher_request>' } )));
+            } else if (json.publisher_request.$.publisher_handle.length == 0) {
+              callback(new Error(self.$t('errors.empty-xml-attr', { attr: 'publisher_handle', el: '<publisher_request>' } )));
+            } else if (typeof json.publisher_request.publisher_bpki_ta === 'undefined') {
+              callback(new Error(self.$t('errors.missing-xml-child-el', { el: '<publisher_bpki_ta>', parent: '<publisher_request>' } )));
+            } else if (json.publisher_request.publisher_bpki_ta[0].length == 0) {
+              callback(new Error(self.$t('errors.empty-xml-el', { el: '<publisher_bpki_ta>' } )));
             } else {
               callback();
             }
@@ -242,7 +251,7 @@ export default {
       loading: false,
       error: "",
       addChildForm: {
-        childReqXML: "Paste your <child_request/> XML here",
+        childReqXML: this.$t('testbed.addChild.requestXML.placeholder'),
       },
       addChildRespForm: {
         parentRespXML: ""
@@ -251,7 +260,7 @@ export default {
         child_handle: ""
       },
       addPublisherForm: {
-        pubReqXML: "Paste your <publisher_request/> XML here",
+        pubReqXML: this.$t('testbed.addPublisher.requestXML.placeholder'),
       },
       addPublisherRespForm: {
         repoRespXML: ""
@@ -275,13 +284,13 @@ export default {
         child_handle: [
           {
             required: true,
-            message: "Child Handle is required"
+            message: this.$t('errors.child-handle-required')
           }
         ],
         publisher_handle: [
           {
             required: true,
-            message: "Publisher Handle is required"
+            message: this.$t('errors.publisher-handle-required')
           }
         ]
       },
@@ -332,8 +341,8 @@ export default {
         this.$refs["addChildForm"].validate(valid => {
           if (valid) {
             this.$confirm(
-              this.$t("testbed.addChildForm.confirmation.message"),
-              this.$t("testbed.addChildForm.confirmation.title"),
+              this.$t("testbed.addChild.confirmation.message"),
+              this.$t("testbed.addChild.confirmation.title"),
               {
                 confirmButtonText: this.$t("common.ok"),
                 cancelButtonText: this.$t("common.cancel")
@@ -357,7 +366,7 @@ export default {
                             self.loading = false;
                             self.parseError("", false);
                             self.addChildRespForm.parentRespXML = response.data;
-                            self.$message("Child CA '" + child_handle + "' has been added to the testbed.");
+                            self.$message(this.$t({ path: 'testbed.addChild.success', args: { child_handle: child_handle } }));
                           })
                           .catch(error => {
                             self.loading = false;
@@ -371,7 +380,7 @@ export default {
                   })
                   .catch(function(err) {
                     self.loading = false;
-                    self.parseError("XML parsing error: " + err, true);
+                    self.parseError(self.$t('errors.invalid-xml', { err: err } ), true);
                   });
               })
               .catch(() => {
@@ -390,8 +399,8 @@ export default {
         this.$refs["removeChildForm"].validate(valid => {
           if (valid) {
             this.$confirm(
-              this.$t("testbed.removeChildForm.confirmation.message"),
-              this.$t("testbed.removeChildForm.confirmation.title"),
+              this.$t("testbed.removeChild.confirmation.message"),
+              this.$t("testbed.removeChild.confirmation.title"),
               {
                 confirmButtonText: this.$t("common.ok"),
                 cancelButtonText: this.$t("common.cancel")
@@ -405,7 +414,7 @@ export default {
                       self.loading = false;
                       self.parseError("", false);
                       self.$refs.removeChildForm.resetFields();
-                      self.$message("Child CA '" + child_handle + "' has been removed from the testbed.");
+                      self.$message(this.$t({ path: 'testbed.removeChild.success', args: { child_handle: child_handle } }));
                   })
                   .catch(error => {
                     self.loading = false;
@@ -432,8 +441,8 @@ export default {
         this.$refs["addPublisherForm"].validate(valid => {
           if (valid) {
             this.$confirm(
-              this.$t("testbed.addPublisherForm.confirmation.message"),
-              this.$t("testbed.addPublisherForm.confirmation.title"),
+              this.$t("testbed.addPublisher.confirmation.message"),
+              this.$t("testbed.addPublisher.confirmation.title"),
               {
                 confirmButtonText: this.$t("common.ok"),
                 cancelButtonText: this.$t("common.cancel")
@@ -452,7 +461,7 @@ export default {
                             self.loading = false;
                             self.parseError("", false);
                             self.addPublisherRespForm.repoRespXML = response.data;
-                            self.$message("Publisher '" + publisher_handle + "' has been added to the testbed.");
+                            self.$message(this.$t({ path: 'testbed.addPublisher.success', args: { publisher_handle: publisher_handle } }));
                           })
                           .catch(error => {
                             self.loading = false;
@@ -466,7 +475,7 @@ export default {
                   })
                   .catch(function(err) {
                     self.loading = false;
-                    self.parseError("XML parsing error: " + err, true);
+                    self.parseError(self.$t('errors.invalid-xml', { err: err } ), true);
                   });
               })
               .catch(() => {
@@ -485,8 +494,8 @@ export default {
         this.$refs["removePublisherForm"].validate(valid => {
           if (valid) {
             this.$confirm(
-              this.$t("testbed.removePublisherForm.confirmation.message"),
-              this.$t("testbed.removePublisherForm.confirmation.title"),
+              this.$t("testbed.removePublisher.confirmation.message"),
+              this.$t("testbed.removePublisher.confirmation.title"),
               {
                 confirmButtonText: this.$t("common.ok"),
                 cancelButtonText: this.$t("common.cancel")
@@ -500,7 +509,7 @@ export default {
                       self.loading = false;
                       self.parseError("", false);
                       self.$refs.removePublisherForm.resetFields();
-                      self.$message("Publisher '" + publisher_handle + "' has been removed from the testbed.");
+                      self.$message(this.$t({ path: 'testbed.removePublisher.success', args: { publisher_handle: publisher_handle } }));
                   })
                   .catch(error => {
                     self.loading = false;
