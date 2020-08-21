@@ -124,9 +124,9 @@ export default {
     this.checkLatestVersions();
   },
   methods: {
-    copyXML(text) {
+    copyXML(xml) {
       const self = this;
-      this.$copyXML(text).then(function() {
+      this.$copyText(xml).then(function() {
         self.$notify({
           title: self.$t("common.success"),
           message: self.$t("common.copySuccess"),
@@ -134,11 +134,11 @@ export default {
         });
       });
     },
-    downloadXML(text, filename) {
-      const url = window.URL.createObjectURL(new Blob([text]));
+    downloadXML(xml, filename) {
+      const url = window.URL.createObjectURL(new Blob([xml]));
       const link = document.createElement("a");
       link.href = url;
-      link.setAttribute("download", filename);
+      link.setAttribute("download", filename) + '.xml';
       document.body.appendChild(link);
       link.click();
     },
