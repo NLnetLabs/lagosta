@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div style="margin-left: 20%; margin-right: 20%;">
     <el-row v-loading="loading">
-      <el-col :span="8" :offset="8">
+      <el-col>
         <div class="text-center">
           <div class="welcome">
             <img src="@/assets/images/welcome.svg" />
@@ -30,6 +30,7 @@
                   v-model="addChildRespForm.parentRespXML"
                   language="xml"
                   v-bind:readonly=true
+                  style="height:180px"
                 ></prism-editor>
               </el-form-item>
               <el-row type="flex" class="modal-footer" justify="end">
@@ -44,6 +45,7 @@
                 <prism-editor
                   v-model="addChildForm.childReqXML"
                   language="xml"
+                  style="height:180px"
                 ></prism-editor>
               </el-form-item>
               <el-form-item label="ASN Resources" prop="asn_res">
@@ -104,6 +106,7 @@
                   v-model="addPublisherRespForm.repoRespXML"
                   language="xml"
                   v-bind:readonly=true
+                  style="height:180px"
                 ></prism-editor>
               </el-form-item>
               <el-row type="flex" class="modal-footer" justify="end">
@@ -119,6 +122,7 @@
                   v-model="addPublisherForm.pubReqXML"
                   placeholder="<publisher_request ..."
                   language="xml"
+                  style="height:180px"
                 ></prism-editor>
               </el-form-item>
               <el-row type="flex" class="modal-footer" justify="end">
