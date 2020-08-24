@@ -304,14 +304,9 @@ export default {
   beforeRouteEnter(to, from, next) {
     // don't show the testbed UI if the testbed feature is disabled
     if (to.name == "testbed") {
-      APIService.getConfig().then(response => {
-        if (!response.data.testbed_enabled) {
-          next({ name: 'home' });
-        } else {
-          next();
-        }
-      })
-      .catch(() => next({ name: 'home' }));
+      APIService.testbedEnabled()
+        .then(() => next())
+        .catch(() => next({ name: 'home' }));
     }
   },
   methods: {
@@ -358,14 +353,14 @@ export default {
                   .then(function(result) {
                     let id_cert = result.child_request.child_bpki_ta[0];
                     let child_handle = result.child_request.$.child_handle;
-                    APIService.unauthenticatedAddChild(
+                    APIService.testbedAddChild(
                       "testbed",
                       child_handle,
                       self.addChildForm.asn_res,
                       self.addChildForm.ipv4_res,
                       self.addChildForm.ipv6_res, id_cert)
                       .then(() => {
-                        APIService.unauthenticatedGetParentResponseXML("testbed", child_handle)
+                        APIService.testbedGetParentResponseXML("testbed", child_handle)
                           .then(response => {
                             self.loading = false;
                             self.parseError("", false);
@@ -413,7 +408,7 @@ export default {
               .then(() => {
                 self.loading = true;
                 let child_handle = self.removeChildForm.child_handle;
-                APIService.unauthenticatedRemoveChild("testbed", child_handle)
+                APIService.testbedRemoveChild("testbed", child_handle)
                   .then(() => {
                       self.loading = false;
                       self.parseError("", false);
@@ -458,9 +453,9 @@ export default {
                   .then(function(result) {
                     let id_cert = result.publisher_request.publisher_bpki_ta[0];
                     let publisher_handle = result.publisher_request.$.publisher_handle;
-                    APIService.unauthenticatedAddPublisher(publisher_handle, id_cert)
+                    APIService.testbedAddPublisher(publisher_handle, id_cert)
                       .then(() => {
-                        APIService.unauthenticatedGetRepositoryResponseXML(publisher_handle)
+                        APIService.testbedGetRepositoryResponseXML(publisher_handle)
                           .then(response => {
                             self.loading = false;
                             self.parseError("", false);
@@ -508,7 +503,7 @@ export default {
               .then(() => {
                 self.loading = true;
                 let publisher_handle = self.removePublisherForm.publisher_handle;
-                APIService.unauthenticatedRemovePublisher(publisher_handle)
+                APIService.testbedRemovePublisher(publisher_handle)
                   .then(() => {
                       self.loading = false;
                       self.parseError("", false);

@@ -94,8 +94,8 @@ export default {
   getBGPAnalysis(handle) {
     return apiClient.get("/api/v1/cas/" + handle + "/routes/analysis/full");
   },
-  unauthenticatedAddChild(parent, child, asn_res, ipv4_res, ipv6_res, id_cert) {
-    return simpleClient.post("/api/v1/cas/" + parent + "/children", {
+  testbedAddChild(parent, child, asn_res, ipv4_res, ipv6_res, id_cert) {
+    return simpleClient.post("/testbed/children", {
       handle: child,
       resources: {
         asn: (typeof asn_res !== 'undefined' ? asn_res : ""),
@@ -111,26 +111,26 @@ export default {
       }
     });
   },
-  unauthenticatedGetParentResponseXML(parent, child) {
-    return apiClient.get("/api/v1/cas/" + parent + "/children/" + child + "/parent_response.xml");
+  testbedGetParentResponseXML(parent, child) {
+    return apiClient.get("/testbed/children/" + child + "/parent_response.xml");
   },
-  unauthenticatedRemoveChild(parent, child) {
-    return simpleClient.delete("/api/v1/cas/" + parent + "/children/" + child);
+  testbedRemoveChild(parent, child) {
+    return simpleClient.delete("/testbed/children/" + child);
   },
-  unauthenticatedAddPublisher(publisher_handle, publisher_request_xml) {
-    return simpleClient.post("/api/v1/publishers", {
+  testbedAddPublisher(publisher_handle, publisher_request_xml) {
+    return simpleClient.post("/testbed/publishers", {
       tag: null,
       publisher_handle: publisher_handle,
       id_cert: publisher_request_xml
     });
   },
-  unauthenticatedGetRepositoryResponseXML(publisher) {
-    return apiClient.get("/api/v1/publishers/" + publisher + "/response.xml");
+  testbedGetRepositoryResponseXML(publisher) {
+    return apiClient.get("/testbed/publishers/" + publisher + "/response.xml");
   },
-  unauthenticatedRemovePublisher(publisher) {
-    return simpleClient.delete("/api/v1/publishers/" + publisher);
+  testbedRemovePublisher(publisher) {
+    return simpleClient.delete("/testbed/publishers/" + publisher);
   },
-  getConfig() {
-    return simpleClient.get("/config");
+  testbedEnabled() {
+    return simpleClient.get("/testbed/enabled");
   }
 };
