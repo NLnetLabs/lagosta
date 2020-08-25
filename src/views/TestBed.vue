@@ -354,13 +354,12 @@ export default {
                     let id_cert = result.child_request.child_bpki_ta[0];
                     let child_handle = result.child_request.$.child_handle;
                     APIService.testbedAddChild(
-                      "testbed",
                       child_handle,
                       self.addChildForm.asn_res,
                       self.addChildForm.ipv4_res,
                       self.addChildForm.ipv6_res, id_cert)
                       .then(() => {
-                        APIService.testbedGetParentResponseXML("testbed", child_handle)
+                        APIService.testbedGetParentResponseXML(child_handle)
                           .then(response => {
                             self.loading = false;
                             self.parseError("", false);
@@ -408,7 +407,7 @@ export default {
               .then(() => {
                 self.loading = true;
                 let child_handle = self.removeChildForm.child_handle;
-                APIService.testbedRemoveChild("testbed", child_handle)
+                APIService.testbedRemoveChild(child_handle)
                   .then(() => {
                       self.loading = false;
                       self.parseError("", false);

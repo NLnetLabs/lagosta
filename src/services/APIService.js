@@ -94,7 +94,7 @@ export default {
   getBGPAnalysis(handle) {
     return apiClient.get("/api/v1/cas/" + handle + "/routes/analysis/full");
   },
-  testbedAddChild(parent, child, asn_res, ipv4_res, ipv6_res, id_cert) {
+  testbedAddChild(child, asn_res, ipv4_res, ipv6_res, id_cert) {
     return simpleClient.post("/testbed/children", {
       handle: child,
       resources: {
@@ -111,10 +111,10 @@ export default {
       }
     });
   },
-  testbedGetParentResponseXML(parent, child) {
-    return apiClient.get("/testbed/children/" + child + "/parent_response.xml");
+  testbedGetParentResponseXML(child) {
+    return simpleClient.get("/testbed/children/" + child + "/parent_response.xml");
   },
-  testbedRemoveChild(parent, child) {
+  testbedRemoveChild(child) {
     return simpleClient.delete("/testbed/children/" + child);
   },
   testbedAddPublisher(publisher_handle, publisher_request_xml) {
@@ -125,7 +125,7 @@ export default {
     });
   },
   testbedGetRepositoryResponseXML(publisher) {
-    return apiClient.get("/testbed/publishers/" + publisher + "/response.xml");
+    return simpleClient.get("/testbed/publishers/" + publisher + "/response.xml");
   },
   testbedRemovePublisher(publisher) {
     return simpleClient.delete("/testbed/publishers/" + publisher);
