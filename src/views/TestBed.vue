@@ -28,7 +28,7 @@
         <el-tabs type="border-card">
           <el-tab-pane :label="$t('testbed.addChild.heading')">
             <el-form :model="addChildRespForm" :rules="rules" ref="addChildRespForm" v-show="addChildRespForm.parentRespXML != ''">
-              <el-form-item label="$t('testbed.responseXML')" prop="parentRespXML">
+              <el-form-item :label="$t('testbed.responseXML')" prop="parentRespXML">
                 <el-link href="https://tools.ietf.org/html/rfc8183#section-5.2.2" target="_blank" icon="el-icon-info">{{ $t('testbed.rfcdoclink') }}</el-link>
                 <prism-editor
                   v-model="addChildRespForm.parentRespXML"
