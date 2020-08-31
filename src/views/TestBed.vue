@@ -14,11 +14,7 @@
         <p v-html="$t('testbed.disclaimer.body')"></p>
 
         <h4>{{ $t('testbed.rpconfighelp.heading') }}</h4>
-        <p v-html="$t('testbed.rpconfighelp.body')"></p>
-
-        <a href="/testbed.tal" target="_blank">{{
-          $t("testbed.rpconfighelp.tallink")
-        }}</a>
+        <p v-html="$t('testbed.rpconfighelp.body', { tallink: '/testbed.tal' })"></p>
 
         <h4>{{ $t('testbed.regunreg.heading') }}</h4>
         <p v-html="$t('testbed.regunreg.body')"></p>
