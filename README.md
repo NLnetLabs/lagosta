@@ -1,4 +1,5 @@
 [![GitHub Actions Build Status](https://github.com/NLnetLabs/lagosta/workflows/Build/badge.svg)](https://github.com/NLnetLabs/lagosta/actions?query=workflow%3ABuild)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FNLnetLabs%2Flagosta.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FNLnetLabs%2Flagosta?ref=badge_shield)
 
 # Lagosta
 
@@ -49,3 +50,6 @@ and then run
 ```
 node server.js
 ```
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FNLnetLabs%2Flagosta.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FNLnetLabs%2Flagosta?ref=badge_large)
