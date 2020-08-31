@@ -364,7 +364,10 @@ export default {
                             self.loading = false;
                             self.parseError("", false);
                             self.addChildRespForm.parentRespXML = response.data;
-                            self.$message(self.$t({ path: 'testbed.addChild.success', args: { child_handle: child_handle } }));
+                            self.$message({
+                              message: self.$t('testbed.addChild.success', { child_handle: child_handle }),
+                              type: 'success'
+                            });
                           })
                           .catch(error => {
                             self.loading = false;
@@ -412,7 +415,10 @@ export default {
                       self.loading = false;
                       self.parseError("", false);
                       self.$refs.removeChildForm.resetFields();
-                      self.$message(self.$t({ path: 'testbed.removeChild.success', args: { child_handle: child_handle } }));
+                      self.$message({
+                        message: self.$t('testbed.removeChild.success', { child_handle: child_handle }),
+                        type: 'success'
+                      });
                   })
                   .catch(error => {
                     self.loading = false;
@@ -459,7 +465,10 @@ export default {
                             self.loading = false;
                             self.parseError("", false);
                             self.addPublisherRespForm.repoRespXML = response.data;
-                            self.$message(self.$t({ path: 'testbed.addPublisher.success', args: { publisher_handle: publisher_handle } }));
+                            self.$message({
+                              message: self.$t('testbed.addPublisher.success', { publisher_handle: publisher_handle }),
+                              type: 'success'
+                            });
                           })
                           .catch(error => {
                             self.loading = false;
@@ -507,7 +516,10 @@ export default {
                       self.loading = false;
                       self.parseError("", false);
                       self.$refs.removePublisherForm.resetFields();
-                      self.$message(self.$t({ path: 'testbed.removePublisher.success', args: { publisher_handle: publisher_handle } }));
+                      self.$message({
+                        message: self.$t('testbed.removePublisher.success', { publisher_handle: publisher_handle }),
+                        type: 'success'
+                      });
                   })
                   .catch(error => {
                     self.loading = false;
