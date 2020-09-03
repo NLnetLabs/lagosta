@@ -190,6 +190,9 @@
                 </el-table-column>
                 <el-table-column prop="kind" :label="$t('caDetails.kind')"></el-table-column>
               </el-table>
+
+              <json-viewer :value="parents" :expand-depth="5"></json-viewer>
+
               <el-button
                 class="mt-1"
                 size="mini"
@@ -197,6 +200,15 @@
                 v-if="!initializeParent && !initializeRepo && !showAddParent"
                 @click="addAdditionalParent()"
                 >{{ $t("caDetails.parentsTab.addParent") }}</el-button
+              >
+
+              <el-button
+                class="mt-1"
+                type="text"
+                size="mini"
+                v-if="!initializeParent && !initializeRepo"
+                @click="syncParents"
+                >{{ $t("caDetails.syncParents") }}</el-button
               >
 
               <el-form
@@ -374,6 +386,12 @@
                   </template>
                 </el-table-column>
               </el-table>
+
+              <json-viewer :value="repoStatus" :expand-depth="5"></json-viewer>
+
+              <el-button class="mt-1" type="text" size="mini" @click="syncRepo">{{
+                $t("caDetails.syncRepo")
+              }}</el-button>
             </el-tab-pane>
           </el-tabs>
         </div>
@@ -811,7 +829,9 @@ export default {
       resourcesSearch: "",
       updatedAnnouncements: 0,
       bgpShown: false,
-      analysisDetailsVisible: false
+      analysisDetailsVisible: false,
+      parents: {},
+      repoStatus: {}
     };
   },
   computed: {
@@ -980,6 +1000,26 @@ export default {
         this.suggestions = r.data;
       });
     },
+    getParents() {
+      APIService.getParents(this.handle).then(response => {
+        this.parents = response.data;
+      });
+    },
+    syncParents() {
+      APIService.syncParents().then(() => {
+        this.getParents();
+      });
+    },
+    getRepoStatus() {
+      APIService.getRepoStatus(this.handle).then(response => {
+        this.repoStatus = response.data;
+      });
+    },
+    syncRepo() {
+      APIService.syncRepo().then(() => {
+        this.getRepoStatus();
+      });
+    },
     parseError(error, notify) {
       let e = error;
       if (error.data) {
@@ -1027,6 +1067,8 @@ export default {
             APIService.getChildRequestXML(this.handle).then(response => {
               this.initializeParentForm.xml = response.data;
             });
+          } else {
+            this.getParents();
           }
         })
         .catch(error => {
@@ -1036,6 +1078,7 @@ export default {
         });
       APIService.getRepo(this.handle)
         .then(response => {
+          this.getRepoStatus();
           this.loadingRepo = false;
           if (this.initializeParent) {
             this.activeTab = "parents";
