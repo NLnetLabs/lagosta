@@ -115,7 +115,8 @@
       "roa_unseen": "NIET ZICHTBAAR",
       "announcement_invalid_length": "ONGELDIGE LENGTE",
       "announcement_invalid_asn": "ONGELDIG ASN",
-      "roa_no_announcement_info": "GEEN AANKONDIGINGSINFORMATIE"
+      "roa_no_announcement_info": "GEEN AANKONDIGINGSINFORMATIE",
+      "roa_too_permissive": "TOO PERMISSIVE"
     }
   },
   "errors": {

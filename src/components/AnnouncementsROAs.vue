@@ -128,6 +128,14 @@
             >{{ $t("announcements.state.roa_seen") }}</el-tag
           >
           <el-tag
+            type="warning"
+            size="medium"
+            v-if="scope.row.state === 'roa_too_permissive'"
+            disable-transitions
+            effect="plain"
+            >{{ $t("announcements.state.roa_too_permissive") }}</el-tag
+          >
+          <el-tag
             type="success"
             size="mini"
             v-if="scope.row.authorizes && scope.row.authorizes.length"
@@ -250,6 +258,7 @@ export default {
   watch: {
     showBGP: function(val) {
       localStorage.setItem(LOCALSTORAGE_BGP, val ? "show" : "hide");
+      this.$emit("triggerShowBGP", val);
       this.currentPage = 1;
       this.preFilterAnnouncements();
     },
@@ -264,6 +273,7 @@ export default {
   created() {
     this.loadingAnnouncements = true;
     this.loadAnnouncements();
+    this.$emit("triggerShowBGP", this.showBGP);
   },
   methods: {
     debounce: function(func, wait = 100) {

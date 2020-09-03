@@ -54,19 +54,21 @@ export default {
   getParentContact(handle, parent) {
     return apiClient.get("/api/v1/cas/" + handle + "/parents/" + parent);
   },
-  updateROAs(handle, delta) {
-    return apiClient.post("/api/v1/cas/" + handle + "/routes", delta).catch(error => {
-      if (error.response && error.response.data) {
-        return Promise.reject({
-          data: error.response.data
-        });
-      }
-      return Promise.reject({
-        data: {
-          code: -1
+  updateROAs(handle, delta, dryRun) {
+    return apiClient
+      .post("/api/v1/cas/" + handle + "/routes" + (dryRun ? "/try" : ""), delta)
+      .catch(error => {
+        if (error.response && error.response.data) {
+          return Promise.reject({
+            data: error.response.data
+          });
         }
+        return Promise.reject({
+          data: {
+            code: -1
+          }
+        });
       });
-    });
   },
   createCA(handle) {
     return apiClient.post("/api/v1/cas", {
@@ -132,5 +134,8 @@ export default {
   },
   testbedEnabled() {
     return simpleClient.get("/testbed/enabled");
+  },
+  getROAsSuggestions(handle) {
+    return apiClient.get("/api/v1/cas/" + handle + "/routes/analysis/suggest");
   }
 };
