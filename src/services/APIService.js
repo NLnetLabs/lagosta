@@ -51,6 +51,12 @@ export default {
   getRepo(handle) {
     return apiClient.get("/api/v1/cas/" + handle + "/repo");
   },
+  getRepoStatus(handle) {
+    return apiClient.get("/api/v1/cas/" + handle + "/repo/status");
+  },
+  getParents(handle) {
+    return apiClient.get("/api/v1/cas/" + handle + "/parents");
+  },
   getParentContact(handle, parent) {
     return apiClient.get("/api/v1/cas/" + handle + "/parents/" + parent);
   },
@@ -137,5 +143,11 @@ export default {
   },
   getROAsSuggestions(handle) {
     return apiClient.get("/api/v1/cas/" + handle + "/routes/analysis/suggest");
+  },
+  syncParents() {
+    return apiClient.post("/api/v1/bulk/cas/sync/parent");
+  },
+  syncRepo() {
+    return apiClient.post("/api/v1/bulk/cas/sync/repo");
   }
 };

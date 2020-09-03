@@ -16,11 +16,8 @@
     "warning": "Warning",
     "idle": "You have been logged out because of inactivity.",
     "nodata": "No data",
-<<<<<<< HEAD
-    "copySuccess": "XML copied to your clipboard"
-=======
+    "copySuccess": "XML copied to your clipboard",
     "edit": "Edit"
->>>>>>> First pass at Suggestions
   },
   "login": {
     "password": "Password",
@@ -102,10 +99,7 @@
       "request": "Publisher Request",
       "response": "Repository Response",
       "addRepoSuccess": "Repository added"
-<<<<<<< HEAD
-=======
     },
-    "copySuccess": "XML copied to your clipboard",
     "analyseThis": "Analyse my ROAs",
     "analysis": "ROA Analysis",
     "suggestions": {
@@ -127,8 +121,9 @@
         "too_permissive": "Too permissive",
         "new": "New"
       }
->>>>>>> First pass at Suggestions
-    }
+    },
+    "syncParents": "Refresh Parents",
+    "syncRepo": "Refresh Repo"
   },
   "announcements": {
     "noRoasOrAnnouncements": "No ROAs or Announcements found.",
