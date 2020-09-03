@@ -46,16 +46,41 @@
 
               <el-row v-if="!initializeParent && !initializeRepo">
                 <el-col :sm="24" :md="16">
-                  <announcementsROAs :handle="handle" :initializeParent="initializeParent" :initializeRepo="initializeRepo" :updated="updatedAnnouncements" @triggerAddROA="triggerAddROA($event)" @triggerError="triggerError($event)" v-if="!initializeRepo && !initializeParent && !emptyResources" />
+                  <announcementsROAs
+                    :handle="handle"
+                    :initializeParent="initializeParent"
+                    :initializeRepo="initializeRepo"
+                    :updated="updatedAnnouncements"
+                    @triggerAddROA="triggerAddROA($event)"
+                    @triggerError="triggerError($event)"
+                    @triggerShowBGP="triggerShowBGP($event)"
+                    v-if="!initializeRepo && !initializeParent && !emptyResources"
+                  />
 
-                  <el-button
-                    class="mt-1"
-                    size="mini"
-                    type="primary"
-                    v-if="!initializeParent && !initializeRepo && !emptyResources"
-                    @click="addROAFormVisible = true"
-                    >{{ $t("caDetails.addRoa") }}</el-button
-                  >
+                  <el-row>
+                    <el-col :span="12">
+                      <el-button
+                        class="mt-1"
+                        size="mini"
+                        type="primary"
+                        v-if="!initializeParent && !initializeRepo && !emptyResources"
+                        @click="
+                          resetForm('addROAForm');
+                          addROAFormVisible = true;
+                        "
+                        >{{ $t("caDetails.addRoa") }}</el-button
+                      >
+                    </el-col>
+                    <el-col :span="12" style="text-align:right">
+                      <el-button
+                        class="mt-1"
+                        type="text"
+                        v-if="!initializeParent && !initializeRepo && !emptyResources && bgpShown"
+                        @click="analysisDetailsVisible = true"
+                        >{{ $t("caDetails.analyseThis") }}</el-button
+                      >
+                    </el-col>
+                  </el-row>
 
                   <div v-if="!initializeParent && !initializeRepo && emptyResources" class="empty">
                     {{ $t("caDetails.noResourcesYet") }}
@@ -124,7 +149,6 @@
                 </el-col>
               </el-row>
             </el-tab-pane>
-
 
             <el-tab-pane :label="$t('caDetails.parents')" name="parents">
               <el-table
@@ -360,13 +384,17 @@
       :title="$t('caDetails.addRoa')"
       :visible.sync="addROAFormVisible"
       :close-on-click-modal="false"
-      @close="resetForm('addROAForm')"
+      @close="addROAFormVisible = false"
     >
       <el-form :model="addROAForm" :rules="addROAFormRules" ref="addROAForm">
         <el-form-item :label="$t('announcements.asn')" prop="asn">
           <el-input v-model="addROAForm.asn" autocomplete="off" @change="removeAS()"></el-input>
         </el-form-item>
-        <el-form-item :label="$t('announcements.prefix')" placeholder="ie. 10.1.0.0/22" prop="prefix">
+        <el-form-item
+          :label="$t('announcements.prefix')"
+          placeholder="ie. 10.1.0.0/22"
+          prop="prefix"
+        >
           <el-input
             v-model="addROAForm.prefix"
             autocomplete="off"
@@ -386,18 +414,279 @@
         <el-row type="flex" class="modal-footer" justify="end">
           <el-form-item>
             <el-button @click="resetForm('addROAForm')">{{ $t("common.cancel") }}</el-button>
-            <el-button type="primary" @click="submitForm('addROAForm')">{{
-              $t("common.confirm")
-            }}</el-button>
+            <el-button
+              type="primary"
+              @click="submitForm('addROAForm')"
+              :disabled="submittingROAForm"
+              >{{ $t("common.confirm") }}</el-button
+            >
           </el-form-item>
         </el-row>
       </el-form>
+    </el-dialog>
+
+    <el-dialog
+      :visible.sync="addROASuggestionsVisible"
+      custom-class="suggestion-dialog"
+      :close-on-click-modal="false"
+      @close="addROASuggestionsVisible = false"
+      width="80%"
+    >
+      <div slot="title" class="el-dialog__title">
+        {{ $t("caDetails.suggestions.adding") }} {{ $t("announcements.asn") }}:
+        <strong>{{ addROAForm.asn }}</strong
+        >, {{ $t("announcements.prefix") }}: <strong>{{ addROAForm.prefix }}</strong
+        >, {{ $t("caDetails.maxLength") }}: <strong>{{ addROAForm.maxLength }}</strong> -
+        <el-button
+          type="text"
+          @click="
+            addROASuggestionsVisible = false;
+            addROAFormVisible = true;
+          "
+          >{{ $t("common.edit") }}</el-button
+        >
+      </div>
+      <el-row>
+        <el-col :xs="24" :sm="11">
+          <h3 class="suggestion-title suggestion-title-nopadding">
+            {{ $t("caDetails.suggestions.willResult") }}
+          </h3>
+          <simpleROAsTable :announcements="effects"></simpleROAsTable>
+        </el-col>
+        <el-col :xs="24" :sm="12">
+          <h3 class="suggestion-title">
+            {{ $t("caDetails.suggestions.yourChoice") }}
+          </h3>
+          <el-table
+            size="small"
+            v-if="deltaMine && deltaMine.length"
+            :data="deltaMine"
+            :default-sort="{ prop: 'asn', order: 'ascending' }"
+            style="width: 100%; border: 2px solid #EBEEF5; margin-left: 1rem; padding-left: 1rem"
+            max-height="560"
+            :empty-text="$t('common.nodata')"
+            @selection-change="handleMineSelectionChange"
+          >
+            <el-table-column type="selection" width="55"> </el-table-column>
+            <el-table-column label="" width="50">
+              <template slot-scope="scope">
+                <el-tooltip
+                  class="item"
+                  effect="dark"
+                  :content="
+                    $t('caDetails.suggestions.willAdd', {
+                      reason: $t('caDetails.suggestions.reasons.' + scope.row.reason)
+                    })
+                  "
+                  placement="right"
+                >
+                  <el-tag
+                    type="success"
+                    size="mini"
+                    v-if="scope.row.action === 'add'"
+                    disable-transitions
+                    ><i class="el-icon-check"></i
+                  ></el-tag>
+                </el-tooltip>
+                <el-tooltip
+                  class="item"
+                  effect="dark"
+                  :content="
+                    $t('caDetails.suggestions.willRemove', {
+                      reason: $t('caDetails.suggestions.reasons.' + scope.row.reason)
+                    })
+                  "
+                  placement="right"
+                >
+                  <el-tag
+                    type="danger"
+                    size="mini"
+                    v-if="scope.row.action === 'remove'"
+                    disable-transitions
+                    ><i class="el-icon-delete"></i
+                  ></el-tag>
+                </el-tooltip>
+              </template>
+            </el-table-column>
+            <el-table-column
+              prop="asn"
+              :label="$t('announcements.asn')"
+              sortable
+              width="200"
+            ></el-table-column>
+
+            <el-table-column :label="$t('announcements.prefix')" sortable>
+              <template slot-scope="scope">
+                {{ scope.row.prefix }}{{ scope.row.max_length ? "-" + scope.row.max_length : "" }}
+              </template>
+            </el-table-column>
+          </el-table>
+
+          <h3 class="suggestion-title">
+            {{ $t("caDetails.suggestions.ourSuggestion") }}
+            <el-tooltip
+              class="item"
+              effect="dark"
+              :content="$t('caDetails.suggestions.ourSuggestionHelp')"
+              placement="right"
+            >
+              <sup>?</sup>
+            </el-tooltip>
+          </h3>
+          <el-table
+            size="small"
+            v-if="deltaSuggestions && deltaSuggestions.length"
+            :data="deltaSuggestions"
+            :default-sort="{ prop: 'asn', order: 'ascending' }"
+            style="width: 100%; border: 2px solid #EBEEF5; margin-left: 1rem; padding-left: 1rem"
+            max-height="560"
+            :empty-text="$t('common.nodata')"
+            @selection-change="handleSuggestionSelectionChange"
+          >
+            <el-table-column type="selection" width="55"> </el-table-column>
+            <el-table-column label="" width="50">
+              <template slot-scope="scope">
+                <el-tooltip
+                  class="item"
+                  effect="dark"
+                  :content="
+                    $t('caDetails.suggestions.willAdd', {
+                      reason: $t('caDetails.suggestions.reasons.' + scope.row.reason)
+                    })
+                  "
+                  placement="right"
+                >
+                  <el-tag
+                    type="success"
+                    size="mini"
+                    v-if="scope.row.action === 'add'"
+                    disable-transitions
+                    ><i class="el-icon-check"></i
+                  ></el-tag>
+                </el-tooltip>
+                <el-tooltip
+                  class="item"
+                  effect="dark"
+                  :content="
+                    $t('caDetails.suggestions.willRemove', {
+                      reason: $t('caDetails.suggestions.reasons.' + scope.row.reason)
+                    })
+                  "
+                  placement="right"
+                >
+                  <el-tag
+                    type="danger"
+                    size="mini"
+                    v-if="scope.row.action === 'remove'"
+                    disable-transitions
+                    ><i class="el-icon-delete"></i
+                  ></el-tag>
+                </el-tooltip>
+              </template>
+            </el-table-column>
+            <el-table-column
+              prop="asn"
+              :label="$t('announcements.asn')"
+              sortable
+              width="200"
+            ></el-table-column>
+
+            <el-table-column :label="$t('announcements.prefix')" sortable>
+              <template slot-scope="scope">
+                {{ scope.row.prefix }}{{ scope.row.max_length ? "-" + scope.row.max_length : "" }}
+              </template>
+            </el-table-column>
+          </el-table>
+        </el-col>
+      </el-row>
+
+      <span slot="footer" class="dialog-footer">
+        <el-button
+          type="text"
+          @click="
+            resetForm('addROAForm');
+            addROASuggestionsVisible = false;
+          "
+          >{{ $t("common.cancel") }}</el-button
+        >
+        <el-button
+          type="primary"
+          @click="addSuggestedROA"
+          :disabled="
+            submittingSuggestionForm ||
+              (deltaCart.added.length === 0 && deltaCart.removed.length === 0)
+          "
+          >{{ $t("common.confirm") }}</el-button
+        >
+      </span>
+    </el-dialog>
+
+    <el-dialog
+      :visible.sync="analysisDetailsVisible"
+      custom-class="suggestion-dialog"
+      :title="$t('caDetails.analysis')"
+      :close-on-click-modal="false"
+      @close="analysisDetailsVisible = false"
+      @open="getROAsSuggestions"
+      width="50%"
+    >
+      <el-row>
+        <el-col :xs="24">
+          <el-table
+            size="small"
+            v-if="deltaSuggestions && deltaSuggestions.length"
+            :data="deltaSuggestions"
+            :default-sort="{ prop: 'asn', order: 'ascending' }"
+            max-height="560"
+            :empty-text="$t('common.nodata')"
+          >
+            <el-table-column label="" width="100">
+              <template slot-scope="scope">
+                <el-tag
+                  type="success"
+                  size="mini"
+                  v-if="scope.row.action === 'add'"
+                  disable-transitions
+                  >{{ $t("caDetails.suggestions.addThis") }}</el-tag
+                >
+
+                <el-tag
+                  type="danger"
+                  size="mini"
+                  v-if="scope.row.action === 'remove'"
+                  disable-transitions
+                  >{{ $t("caDetails.suggestions.removeThis") }}</el-tag
+                >
+              </template>
+            </el-table-column>
+            <el-table-column
+              prop="asn"
+              :label="$t('announcements.asn')"
+              sortable
+              width="200"
+            ></el-table-column>
+
+            <el-table-column :label="$t('announcements.prefix')" sortable>
+              <template slot-scope="scope">
+                {{ scope.row.prefix }}{{ scope.row.max_length ? "-" + scope.row.max_length : "" }}
+              </template>
+            </el-table-column>
+          </el-table>
+        </el-col>
+      </el-row>
+
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="analysisDetailsVisible = false">{{
+          $t("common.ok")
+        }}</el-button>
+      </span>
     </el-dialog>
   </div>
 </template>
 
 <script>
-import AnnouncementsROAs from '../components/AnnouncementsROAs.vue'
+import AnnouncementsROAs from "../components/AnnouncementsROAs.vue";
+import SimpleROAsTable from "../components/SimpleROAsTable.vue";
 
 import "element-ui/lib/theme-chalk/display.css";
 import router from "@/router";
@@ -406,7 +695,8 @@ const cidrRegex = require("cidr-regex");
 const xml2js = require("xml2js");
 export default {
   components: {
-    'announcementsROAs': AnnouncementsROAs
+    announcementsROAs: AnnouncementsROAs,
+    simpleROAsTable: SimpleROAsTable
   },
   data() {
     const checkASN = (rule, value, callback) => {
@@ -461,6 +751,19 @@ export default {
       parentDetails: [],
       error: "",
       addROAFormVisible: false,
+      addROASuggestionsVisible: false,
+      effects: [],
+      suggestions: [],
+      deltaMine: [],
+      deltaMineCart: {
+        added: [],
+        removed: []
+      },
+      deltaSuggestions: [],
+      deltaSuggestionsCart: {
+        added: [],
+        removed: []
+      },
       addROAForm: {
         asn: "",
         prefix: "",
@@ -481,6 +784,8 @@ export default {
           }
         ]
       },
+      submittingROAForm: false,
+      submittingSuggestionForm: false,
       initializeRepo: false,
       initializeRepoForm: {
         xml: "",
@@ -505,6 +810,8 @@ export default {
       fileList: [],
       resourcesSearch: "",
       updatedAnnouncements: 0,
+      bgpShown: false,
+      analysisDetailsVisible: false
     };
   },
   computed: {
@@ -572,6 +879,12 @@ export default {
         }
       });
       return empty;
+    },
+    deltaCart: function() {
+      return {
+        added: this.deltaMineCart.added.concat(this.deltaSuggestionsCart.added),
+        removed: this.deltaMineCart.removed.concat(this.deltaSuggestionsCart.removed)
+      };
     }
   },
   watch: {
@@ -582,6 +895,62 @@ export default {
           self.initializeParentForm.name = result.parent_response.$.parent_handle;
         }
       });
+    },
+    suggestions(suggestions) {
+      let delta = [];
+
+      let addToDelta = function(category, isAdd) {
+        if (suggestions[category]) {
+          suggestions[category].forEach(s => {
+            if (category === "too_permissive") {
+              delta.push({
+                action: "remove",
+                reason: category,
+                asn: s.current.asn,
+                prefix: s.current.prefix,
+                max_length: s.current.max_length
+              });
+              s.new.forEach(n => {
+                delta.push({
+                  action: "add",
+                  reason: category,
+                  asn: n.asn,
+                  prefix: n.prefix,
+                  max_length: n.prefix ? n.prefix.split("/")[1] * 1 : ""
+                });
+              });
+            } else {
+              delta.push({
+                action: isAdd ? "add" : "remove",
+                reason: category,
+                asn: s.asn,
+                prefix: s.prefix,
+                max_length: s.prefix ? s.prefix.split("/")[1] * 1 : ""
+              });
+            }
+          });
+        }
+      };
+
+      addToDelta("not_found", true);
+      addToDelta("invalid_asn", true);
+      addToDelta("invalid_length", true);
+
+      addToDelta("stale", false);
+      addToDelta("as0_redundant", false);
+      addToDelta("too_permissive", false);
+
+      this.deltaSuggestions = delta;
+
+      this.deltaMine = [
+        {
+          action: "add",
+          reason: "new",
+          asn: this.addROAForm.asn,
+          prefix: this.addROAForm.prefix,
+          max_length: this.addROAForm.maxLength * 1
+        }
+      ];
     }
   },
   created() {
@@ -594,6 +963,23 @@ export default {
     next();
   },
   methods: {
+    handleMineSelectionChange(val) {
+      this.deltaMineCart = {
+        added: val.filter(row => row.action === "add"),
+        removed: val.filter(row => row.action === "remove")
+      };
+    },
+    handleSuggestionSelectionChange(val) {
+      this.deltaSuggestionsCart = {
+        added: val.filter(row => row.action === "add"),
+        removed: val.filter(row => row.action === "remove")
+      };
+    },
+    getROAsSuggestions() {
+      APIService.getROAsSuggestions(this.handle).then(r => {
+        this.suggestions = r.data;
+      });
+    },
     parseError(error, notify) {
       let e = error;
       if (error.data) {
@@ -701,29 +1087,61 @@ export default {
     switchCA: function() {
       router.push("/cas/" + this.handle);
     },
-    addROA: function() {
+    addSuggestedROA: function() {
       const self = this;
-      APIService.updateROAs(this.handle, {
-        added: [
-          {
-            asn: parseInt(this.addROAForm.asn),
-            prefix: this.addROAForm.prefix,
-            max_length: parseInt(this.addROAForm.maxLength) || 0
-          }
-        ],
-        removed: []
-      })
+      self.submittingSuggestionForm = true;
+
+      APIService.updateROAs(this.handle, this.deltaCart)
         .then(() => {
+          self.addROASuggestionsVisible = false;
           self.$notify({
             title: this.$t("caDetails.confirmation.added"),
             message: this.$t("caDetails.confirmation.addedSuccess"),
             type: "success"
           });
-          self.addROAFormVisible = false;
           self.updatedAnnouncements = new Date().getTime();
-          self.$emit('refreshAnnouncements');
+          self.$emit("refreshAnnouncements");
         })
         .catch(function(error) {
+          self.submittingSuggestionForm = false;
+          self.parseError(error);
+        });
+    },
+    addROA: function() {
+      const self = this;
+      APIService.updateROAs(
+        this.handle,
+        {
+          added: [
+            {
+              asn: parseInt(this.addROAForm.asn),
+              prefix: this.addROAForm.prefix,
+              max_length: parseInt(this.addROAForm.maxLength) || 0
+            }
+          ],
+          removed: []
+        },
+        this.bgpShown
+      )
+        .then(r => {
+          self.submittingROAForm = false;
+          self.addROAFormVisible = false;
+          if (r.data) {
+            self.addROASuggestionsVisible = true;
+            self.effects = r.data.effect.sort((a, b) => (a.state > b.state ? 1 : -1));
+            self.suggestions = r.data.suggestion;
+          } else {
+            self.$notify({
+              title: this.$t("caDetails.confirmation.added"),
+              message: this.$t("caDetails.confirmation.addedSuccess"),
+              type: "success"
+            });
+            self.updatedAnnouncements = new Date().getTime();
+            self.$emit("refreshAnnouncements");
+          }
+        })
+        .catch(function(error) {
+          self.submittingROAForm = false;
           self.parseError(error);
         });
     },
@@ -731,10 +1149,13 @@ export default {
       this.parseError(error);
     },
     triggerAddROA: function(row) {
-      this.addROAForm.asn = row.asn+"";
+      this.addROAForm.asn = row.asn + "";
       this.addROAForm.prefix = row.prefix;
       this.updateMaxLength(row.prefix);
       this.addROAFormVisible = true;
+    },
+    triggerShowBGP: function(val) {
+      this.bgpShown = val;
     },
     deleteROA: function(row) {
       const self = this;
@@ -747,10 +1168,14 @@ export default {
         }
       )
         .then(() => {
-          APIService.updateROAs(this.handle, {
-            added: [],
-            removed: [row]
-          })
+          APIService.updateROAs(
+            this.handle,
+            {
+              added: [],
+              removed: [row]
+            },
+            self.bgpShown
+          )
             .then(() => {
               self.$notify({
                 title: this.$t("caDetails.confirmation.retired"),
@@ -774,6 +1199,7 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
+          this.submittingROAForm = true;
           this.addROA();
         } else {
           return false;
@@ -783,7 +1209,9 @@ export default {
     resetForm(formName) {
       this.error = "";
       this.addROAFormVisible = false;
-      this.$refs[formName].resetFields();
+      if (this.$refs[formName]) {
+        this.$refs[formName].resetFields();
+      }
     },
     updateMaxLength(value) {
       if (value.indexOf("/") > -1) {
@@ -864,6 +1292,15 @@ h3 {
   font-weight: 300;
   margin: 0;
   padding-top: 0.3rem;
+  &.suggestion-title {
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    margin-top: 1rem;
+    font-weight: 500;
+  }
+  &.suggestion-title-nopadding {
+    margin-left: 0;
+  }
 }
 
 .box-card {
@@ -939,6 +1376,15 @@ ul {
   }
   .search-input {
     margin-bottom: 10px;
+  }
+}
+</style>
+
+<style lang="scss">
+.suggestion-dialog {
+  .el-dialog__body {
+    padding-top: 0;
+    padding-bottom: 0;
   }
 }
 </style>

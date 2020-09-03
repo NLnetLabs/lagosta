@@ -16,7 +16,11 @@
     "warning": "Warning",
     "idle": "You have been logged out because of inactivity.",
     "nodata": "No data",
+<<<<<<< HEAD
     "copySuccess": "XML copied to your clipboard"
+=======
+    "edit": "Edit"
+>>>>>>> First pass at Suggestions
   },
   "login": {
     "password": "Password",
@@ -98,6 +102,32 @@
       "request": "Publisher Request",
       "response": "Repository Response",
       "addRepoSuccess": "Repository added"
+<<<<<<< HEAD
+=======
+    },
+    "copySuccess": "XML copied to your clipboard",
+    "analyseThis": "Analyse my ROAs",
+    "analysis": "ROA Analysis",
+    "suggestions": {
+      "adding": "Adding",
+      "willResult": "Will result in",
+      "yourChoice": "Your choice",
+      "ourSuggestion": "Our Suggestion",
+      "ourSuggestionHelp": "Help text here",
+      "addThis": "Add this",
+      "removeThis": "Remove this",
+      "willAdd": "Will add this ROA ({reason})",
+      "willRemove": "Will remove this ROA ({reason})",
+      "reasons": {
+        "not_found": "Not found",
+        "invalid_asn": "Invalid ASN",
+        "invalid_length": "Invalid length",
+        "stale": "Stale",
+        "as0_redundant": "AS0 redundant",
+        "too_permissive": "Too permissive",
+        "new": "New"
+      }
+>>>>>>> First pass at Suggestions
     }
   },
   "announcements": {
@@ -115,7 +145,8 @@
       "roa_unseen": "UNSEEN",
       "announcement_invalid_length": "INVALID LENGTH",
       "announcement_invalid_asn": "INVALID ASN",
-      "roa_no_announcement_info": "NO ANNOUNCEMENT INFO"
+      "roa_no_announcement_info": "NO ANNOUNCEMENT INFO",
+      "roa_too_permissive": "TOO PERMISSIVE"
     }
   },
   "errors": {
