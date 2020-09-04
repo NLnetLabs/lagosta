@@ -4,7 +4,7 @@
       <el-header>
         <el-row>
           <el-col :span="4">
-            <router-link :to="{ name: get_tl_link_target() }">
+            <router-link :to="{ name: getTlLinkTarget() }">
               <div class="logo">
                 <img src="@/assets/images/krill_logo_white.svg" />
               </div>
@@ -28,7 +28,7 @@
       </el-header>
 
       <el-main>
-        <router-view v-on:authEvent="loadUser" v-on:copy-xml="copyXML" v-on:download-xml="downloadXML" />
+        <router-view v-on:auth-event="loadUser" v-on:copy-xml="copyXML" v-on:download-xml="downloadXML" />
       </el-main>
 
       <el-footer height="40px">
@@ -142,7 +142,7 @@ export default {
       document.body.appendChild(link);
       link.click();
     },
-    get_tl_link_target() {
+    getTlLinkTarget() {
       // stay in the testbed UI, don't navigate outside of it
       return (this.$route.name === "testbed" ? "testbed" : "home");
     },

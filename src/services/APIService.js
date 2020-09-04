@@ -98,9 +98,9 @@ export default {
     return simpleClient.post("/testbed/children", {
       handle: child,
       resources: {
-        asn: (typeof asn_res !== 'undefined' ? asn_res : ""),
-        v4: (typeof ipv4_res !== 'undefined' ? ipv4_res : ""),
-        v6: (typeof ipv6_res !== 'undefined' ? ipv6_res : "")
+        asn: typeof asn_res !== "undefined" ? asn_res : "",
+        v4: typeof ipv4_res !== "undefined" ? ipv4_res : "",
+        v6: typeof ipv6_res !== "undefined" ? ipv6_res : ""
       },
       auth: {
         rfc8183: {
