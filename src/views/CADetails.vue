@@ -51,9 +51,9 @@
                     :initializeParent="initializeParent"
                     :initializeRepo="initializeRepo"
                     :updated="updatedAnnouncements"
-                    @triggerAddROA="triggerAddROA($event)"
-                    @triggerError="triggerError($event)"
-                    @triggerShowBGP="triggerShowBGP($event)"
+                    @trigger-add-ROA="triggerAddROA($event)"
+                    @trigger-error="triggerError($event)"
+                    @trigger-show-BGP="triggerShowBGP($event)"
                     v-if="!initializeRepo && !initializeParent && !emptyResources"
                   />
 
@@ -1095,7 +1095,7 @@ export default {
 
       this.loadCAs();
     },
-    getParent: function(row) {
+    getParent(row) {
       this.loadingParent = true;
       this.parentDetails = [];
       APIService.getParentContact(this.handle, row.handle).then(response => {
@@ -1118,19 +1118,19 @@ export default {
         }
       });
     },
-    loadCAs: function() {
+    loadCAs() {
       APIService.getCAs().then(response => {
         this.loadingCAs = false;
         this.CAs = response.data.cas;
       });
     },
-    loadCA: function(row) {
+    loadCA(row) {
       router.push("/cas/" + row.handle);
     },
-    switchCA: function() {
+    switchCA() {
       router.push("/cas/" + this.handle);
     },
-    addSuggestedROA: function() {
+    addSuggestedROA() {
       const self = this;
       self.submittingSuggestionForm = true;
 
@@ -1143,14 +1143,13 @@ export default {
             type: "success"
           });
           self.updatedAnnouncements = new Date().getTime();
-          self.$emit("refreshAnnouncements");
         })
         .catch(function(error) {
           self.submittingSuggestionForm = false;
           self.parseError(error);
         });
     },
-    addROA: function() {
+    addROA() {
       const self = this;
       APIService.updateROAs(
         this.handle,
@@ -1180,7 +1179,6 @@ export default {
               type: "success"
             });
             self.updatedAnnouncements = new Date().getTime();
-            self.$emit("refreshAnnouncements");
           }
         })
         .catch(function(error) {
@@ -1188,51 +1186,17 @@ export default {
           self.parseError(error);
         });
     },
-    triggerError: function(error) {
+    triggerError(error) {
       this.parseError(error);
     },
-    triggerAddROA: function(row) {
+    triggerAddROA(row) {
       this.addROAForm.asn = row.asn + "";
       this.addROAForm.prefix = row.prefix;
       this.updateMaxLength(row.prefix);
       this.addROAFormVisible = true;
     },
-    triggerShowBGP: function(val) {
+    triggerShowBGP(val) {
       this.bgpShown = val;
-    },
-    deleteROA: function(row) {
-      const self = this;
-      this.$confirm(
-        this.$t("caDetails.confirmation.message"),
-        this.$t("caDetails.confirmation.title"),
-        {
-          confirmButtonText: this.$t("common.ok"),
-          cancelButtonText: this.$t("common.cancel")
-        }
-      )
-        .then(() => {
-          APIService.updateROAs(
-            this.handle,
-            {
-              added: [],
-              removed: [row]
-            },
-            self.bgpShown
-          )
-            .then(() => {
-              self.$notify({
-                title: this.$t("caDetails.confirmation.retired"),
-                message: this.$t("caDetails.confirmation.retiredSuccess"),
-                type: "success"
-              });
-              self.getROAs();
-              self.resetForm("addROAForm");
-            })
-            .catch(error => {
-              self.parseError(error);
-            });
-        })
-        .catch(() => {});
     },
     removeAS() {
       if (this.addROAForm.asn.toLowerCase().indexOf("as") === 0) {
