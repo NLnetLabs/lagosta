@@ -98,7 +98,31 @@
       "request": "Αίτημα Εκδότη",
       "response": "Απάντηση Αποθετηρίου (Repository)",
       "addRepoSuccess": "Το Αποθετήριο (Repository) προστέθηκε"
-    }
+    },
+    "analyseThis": "Analyse my ROAs",
+    "analysis": "ROA Analysis",
+    "suggestions": {
+      "adding": "Adding",
+      "willResult": "Will result in",
+      "yourChoice": "Your choice",
+      "ourSuggestion": "Our Suggestion",
+      "ourSuggestionHelp": "Help text here",
+      "addThis": "Add this",
+      "removeThis": "Remove this",
+      "willAdd": "Will add this ROA ({reason})",
+      "willRemove": "Will remove this ROA ({reason})",
+      "reasons": {
+        "not_found": "Not found",
+        "invalid_asn": "Invalid ASN",
+        "invalid_length": "Invalid length",
+        "stale": "Stale",
+        "as0_redundant": "AS0 redundant",
+        "too_permissive": "Too permissive",
+        "new": "New"
+      }
+    },
+    "syncParents": "Refresh Parents",
+    "syncRepo": "Refresh Repo"
   },
   "announcements": {
     "noRoasOrAnnouncements": "Δεν βρέθηκαν ROA ή Ανακοινώσεις.",
