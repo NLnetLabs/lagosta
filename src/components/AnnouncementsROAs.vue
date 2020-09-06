@@ -256,16 +256,16 @@ export default {
     };
   },
   watch: {
-    showBGP: function(val) {
+    showBGP(val) {
       localStorage.setItem(LOCALSTORAGE_BGP, val ? "show" : "hide");
-      this.$emit("triggerShowBGP", val);
+      this.$emit("trigger-show-BGP", val);
       this.currentPage = 1;
       this.preFilterAnnouncements();
     },
-    updated: function() {
+    updated() {
       this.loadAnnouncements();
     },
-    search: function() {
+    search() {
       this.currentPage = 1;
       this.debounce(this.preFilterAnnouncements, 500);
     }
@@ -273,20 +273,20 @@ export default {
   created() {
     this.loadingAnnouncements = true;
     this.loadAnnouncements();
-    this.$emit("triggerShowBGP", this.showBGP);
+    this.$emit("trigger-show-BGP", this.showBGP);
   },
   methods: {
-    debounce: function(func, wait = 100) {
+    debounce(func, wait = 100) {
       clearTimeout(this.debounceTimeout);
       this.debounceTimeout = setTimeout(() => {
         func.apply(this);
       }, wait);
     },
-    preFilterAnnouncements: function() {
+    preFilterAnnouncements() {
       this.loadingTable = true;
       this.debounce(this.filterAnnouncements, 200);
     },
-    filterAnnouncements: function() {
+    filterAnnouncements() {
       const self = this;
       const reg = /[^0-9a-zΆ-ωΑ-ώ./-]/gi;
       const src = self.search.toLowerCase().replace(reg, "");
@@ -353,16 +353,16 @@ export default {
       );
       this.loadingTable = false;
     },
-    sortPrefix: function(a, b) {
+    sortPrefix(a, b) {
       return ip6addr.compareCIDR(a.prefix.split("-")[0], b.prefix.split("-")[0]);
     },
-    getRowClass: function(data) {
+    getRowClass(data) {
       if (this.showBGP && data.row.max_length) {
         return data.row.state === "roa_unseen" ? "row_unseen" : "row-dark";
       }
       return "row-announcement";
     },
-    loadAnnouncements: function() {
+    loadAnnouncements() {
       APIService.getBGPAnalysis(this.handle).then(r => {
         const filtered = r.data.filter(
           ann =>
@@ -376,10 +376,10 @@ export default {
         this.loadingAnnouncements = false;
       });
     },
-    triggerAddROA: function(row) {
-      this.$emit("triggerAddROA", row);
+    triggerAddROA(row) {
+      this.$emit("trigger-add-ROA", row);
     },
-    deleteROA: function(row) {
+    deleteROA(row) {
       const self = this;
       this.$confirm(
         this.$t("caDetails.confirmation.message"),
@@ -390,10 +390,14 @@ export default {
         }
       )
         .then(() => {
-          APIService.updateROAs(this.handle, {
-            added: [],
-            removed: [row]
-          })
+          APIService.updateROAs(
+            this.handle,
+            {
+              added: [],
+              removed: [row]
+            },
+            this.showBGP
+          )
             .then(() => {
               self.$notify({
                 title: this.$t("caDetails.confirmation.retired"),
@@ -403,7 +407,7 @@ export default {
               self.loadAnnouncements();
             })
             .catch(error => {
-              self.$emit("triggerError", error);
+              self.$emit("trigger-error", error);
             });
         })
         .catch(() => {});

@@ -56,7 +56,7 @@ export default {
     };
   },
   computed: {
-    filteredCAs: function() {
+    filteredCAs() {
       let src = this.search;
       return this.CAs.filter(function(ca) {
         return ca.handle.toLowerCase().indexOf(src) > -1;
@@ -68,13 +68,13 @@ export default {
     this.loadCAs();
   },
   methods: {
-    loadCAs: function() {
+    loadCAs() {
       APIService.getCAs().then(response => {
         this.loading = false;
         this.CAs = response.data.cas;
       });
     },
-    loadCA: function(row) {
+    loadCA(row) {
       router.push("/cas/" + row.handle);
     }
   }
