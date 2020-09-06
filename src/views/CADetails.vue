@@ -193,14 +193,14 @@
                     <el-button
                       type="primary"
                       :title="$t('common.copy')"
-                      @click="copyXML(initializeParentForm.xml)"
+                      @click="$emit('copy-xml', initializeParentForm.xml)"
                     >
                       <font-awesome-icon icon="clipboard" />
                     </el-button>
                     <el-button
                       type="primary"
                       :title="$t('common.download')"
-                      @click="downloadXML(initializeParentForm.xml, 'child_request')"
+                      @click="$emit('download-xml', initializeParentForm.xml, 'child_request')"
                     >
                       <font-awesome-icon icon="download" />
                     </el-button>
@@ -283,14 +283,14 @@
                     <el-button
                       type="primary"
                       :title="$t('common.copy')"
-                      @click="copyXML(initializeRepoForm.xml)"
+                      @click="$emit('copy-xml', initializeRepoForm.xml)"
                     >
                       <font-awesome-icon icon="clipboard" />
                     </el-button>
                     <el-button
                       type="primary"
                       :title="$t('common.download')"
-                      @click="downloadXML(initializeRepoForm.xml, 'publisher_request')"
+                      @click="$emit('download-xml', initializeRepoForm.xml, 'publisher_request')"
                     >
                       <font-awesome-icon icon="download" />
                     </el-button>
@@ -789,24 +789,6 @@ export default {
       if (value.indexOf("/") > -1) {
         this.addROAForm.maxLength = value.split("/")[1];
       }
-    },
-    copyXML(xml) {
-      const self = this;
-      this.$copyText(xml).then(function() {
-        self.$notify({
-          title: self.$t("common.success"),
-          message: self.$t("caDetails.copySuccess"),
-          type: "success"
-        });
-      });
-    },
-    downloadXML(xml, filename) {
-      const url = window.URL.createObjectURL(new Blob([xml]));
-      const link = document.createElement("a");
-      link.href = url;
-      link.setAttribute("download", filename + ".xml");
-      document.body.appendChild(link);
-      link.click();
     },
     beforeUpload(file, what) {
       const self = this;

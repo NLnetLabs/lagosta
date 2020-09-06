@@ -15,7 +15,8 @@
     "supportcontracts": "Contrats de support et de maintenance",
     "warning": "Attention",
     "idle": "Vous avez été déconnecté de suite d'inactivité.",
-    "nodata": "No data"
+    "nodata": "No data",
+    "copySuccess": "XML copié dans votre presse-papier"
   },
   "login": {
     "password": "Mot de passe",
@@ -98,8 +99,7 @@
       "request": "Requête du Publisher",
       "response": "Réponse du dépôt",
       "addRepoSuccess": "Dépôt ajouté"
-    },
-    "copySuccess": "XML copié dans votre presse-papier"
+    }
   },
   "announcements": {
     "noRoasOrAnnouncements": "Aucun ROAs ou Annonces trouvés.",

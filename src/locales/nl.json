@@ -15,7 +15,8 @@
     "supportcontracts": "Supportcontracten",
     "warning": "Waarschuwing",
     "idle": "U bent uitgelogd wegens inactiviteit.",
-    "nodata": "Geen data"
+    "nodata": "Geen data",
+    "copySuccess": "De XML is naar uw klembord gekopiëerd"
   },
   "login": {
     "password": "Wachtwoord",
@@ -97,8 +98,7 @@
       "request": "Publisher Request",
       "response": "Repository Response",
       "addRepoSuccess": "Databank (repository) toegevoegd"
-    },
-    "copySuccess": "De XML is naar uw klembord gekopiëerd"
+    }
   },
   "announcements": {
     "noRoasOrAnnouncements": "Geen ROAs of BGP-aankondigingen gevonden.",

@@ -92,7 +92,7 @@ export default {
       this.loading = true;
       APIService.login(this.form.token).then(success => {
         if (success) {
-          this.$emit("authEvent");
+          this.$emit("auth-event");
           router.push(this.returnUrl);
         } else {
           self.error = this.$t("login.error");

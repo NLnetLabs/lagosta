@@ -4,7 +4,7 @@
       <el-header>
         <el-row>
           <el-col :span="4">
-            <router-link :to="{ name: 'home' }">
+            <router-link :to="{ name: getTlLinkTarget() }">
               <div class="logo">
                 <img src="@/assets/images/krill_logo_white.svg" />
               </div>
@@ -28,7 +28,7 @@
       </el-header>
 
       <el-main>
-        <router-view v-on:authEvent="loadUser" />
+        <router-view v-on:auth-event="loadUser" v-on:copy-xml="copyXML" v-on:download-xml="downloadXML" />
       </el-main>
 
       <el-footer height="40px">
@@ -124,6 +124,28 @@ export default {
     this.checkLatestVersions();
   },
   methods: {
+    copyXML(xml) {
+      const self = this;
+      this.$copyText(xml).then(function() {
+        self.$notify({
+          title: self.$t("common.success"),
+          message: self.$t("common.copySuccess"),
+          type: "success"
+        });
+      });
+    },
+    downloadXML(xml, filename) {
+      const url = window.URL.createObjectURL(new Blob([xml]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", filename) + '.xml';
+      document.body.appendChild(link);
+      link.click();
+    },
+    getTlLinkTarget() {
+      // stay in the testbed UI, don't navigate outside of it
+      return (this.$route.name === "testbed" ? "testbed" : "home");
+    },
     checkLatestVersions() {
       APIService.getLatestKrillVersion()
         .then(success => {
