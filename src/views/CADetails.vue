@@ -54,6 +54,7 @@
                     @trigger-add-ROA="triggerAddROA($event)"
                     @trigger-error="triggerError($event)"
                     @trigger-show-BGP="triggerShowBGP($event)"
+                    @trigger-suggestions="triggerSuggestions($event)"
                     v-if="!initializeRepo && !initializeParent && !emptyResources"
                   />
 
@@ -451,6 +452,7 @@
       width="80%"
     >
       <div slot="title" class="el-dialog__title">
+        <span v-if="!removeROASuggestions">
         {{ $t("caDetails.suggestions.adding") }} {{ $t("announcements.asn") }}:
         <strong>{{ addROAForm.asn }}</strong
         >, {{ $t("announcements.prefix") }}: <strong>{{ addROAForm.prefix }}</strong
@@ -463,6 +465,11 @@
           "
           >{{ $t("common.edit") }}</el-button
         >
+        </span>
+        <span v-if="removeROASuggestions">
+          {{ $t("caDetails.suggestions.removing") }}
+        </span>
+        
       </div>
       <el-row>
         <el-col :xs="24" :sm="11">
@@ -551,6 +558,7 @@
               <sup>?</sup>
             </el-tooltip>
           </h3>
+          <h4 v-if="!deltaSuggestions || deltaSuggestions.length === 0">{{ $t("caDetails.suggestions.keep") }}</h4>
           <el-table
             size="small"
             v-if="deltaSuggestions && deltaSuggestions.length"
@@ -631,7 +639,7 @@
           type="primary"
           @click="addSuggestedROA"
           :disabled="
-            submittingSuggestionForm ||
+            
               (deltaCart.added.length === 0 && deltaCart.removed.length === 0)
           "
           >{{ $t("common.confirm") }}</el-button
@@ -657,24 +665,47 @@
             :default-sort="{ prop: 'asn', order: 'ascending' }"
             max-height="560"
             :empty-text="$t('common.nodata')"
+            @selection-change="handleSuggestionSelectionChange"
           >
-            <el-table-column label="" width="100">
+            <el-table-column type="selection" width="55"> </el-table-column>
+            <el-table-column label="" width="50">
               <template slot-scope="scope">
-                <el-tag
-                  type="success"
-                  size="mini"
-                  v-if="scope.row.action === 'add'"
-                  disable-transitions
-                  >{{ $t("caDetails.suggestions.addThis") }}</el-tag
+                <el-tooltip
+                  class="item"
+                  effect="dark"
+                  :content="
+                    $t('caDetails.suggestions.willAdd', {
+                      reason: $t('caDetails.suggestions.reasons.' + scope.row.reason)
+                    })
+                  "
+                  placement="right"
                 >
-
-                <el-tag
-                  type="danger"
-                  size="mini"
-                  v-if="scope.row.action === 'remove'"
-                  disable-transitions
-                  >{{ $t("caDetails.suggestions.removeThis") }}</el-tag
+                  <el-tag
+                    type="success"
+                    size="mini"
+                    v-if="scope.row.action === 'add'"
+                    disable-transitions
+                    ><i class="el-icon-check"></i
+                  ></el-tag>
+                </el-tooltip>
+                <el-tooltip
+                  class="item"
+                  effect="dark"
+                  :content="
+                    $t('caDetails.suggestions.willRemove', {
+                      reason: $t('caDetails.suggestions.reasons.' + scope.row.reason)
+                    })
+                  "
+                  placement="right"
                 >
+                  <el-tag
+                    type="danger"
+                    size="mini"
+                    v-if="scope.row.action === 'remove'"
+                    disable-transitions
+                    ><i class="el-icon-delete"></i
+                  ></el-tag>
+                </el-tooltip>
               </template>
             </el-table-column>
             <el-table-column
@@ -694,9 +725,19 @@
       </el-row>
 
       <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="analysisDetailsVisible = false">{{
-          $t("common.ok")
-        }}</el-button>
+        <el-button
+          type="text"
+          @click="analysisDetailsVisible = false"
+          >{{ $t("common.cancel") }}</el-button
+        >
+        <el-button
+          type="primary"
+          @click="addSuggestedROA"
+          :disabled="
+            (deltaCart.added.length === 0 && deltaCart.removed.length === 0)
+          "
+          >{{ $t("common.confirm") }}</el-button
+        >
       </span>
     </el-dialog>
   </div>
@@ -770,6 +811,7 @@ export default {
       error: "",
       addROAFormVisible: false,
       addROASuggestionsVisible: false,
+      removeROASuggestions: false,
       effects: [],
       suggestions: [],
       deltaMine: [],
@@ -961,16 +1003,17 @@ export default {
       addToDelta("too_permissive", false);
 
       this.deltaSuggestions = delta;
-
-      this.deltaMine = [
-        {
-          action: "add",
-          reason: "new",
-          asn: this.addROAForm.asn,
-          prefix: this.addROAForm.prefix,
-          max_length: this.addROAForm.maxLength * 1
-        }
-      ];
+      if (!this.removeROASuggestions){
+        this.deltaMine = [
+          {
+            action: "add",
+            reason: "new",
+            asn: this.addROAForm.asn*1,
+            prefix: this.addROAForm.prefix,
+            max_length: this.addROAForm.maxLength * 1
+          }
+        ];
+      }
     }
   },
   created() {
@@ -996,6 +1039,7 @@ export default {
       };
     },
     getROAsSuggestions() {
+      this.suggestions = [];
       APIService.getROAsSuggestions(this.handle).then(r => {
         this.suggestions = r.data;
       });
@@ -1137,6 +1181,7 @@ export default {
       APIService.updateROAs(this.handle, this.deltaCart)
         .then(() => {
           self.addROASuggestionsVisible = false;
+          self.analysisDetailsVisible = false;
           self.$notify({
             title: this.$t("caDetails.confirmation.added"),
             message: this.$t("caDetails.confirmation.addedSuccess"),
@@ -1151,6 +1196,7 @@ export default {
     },
     addROA() {
       const self = this;
+      this.removeROASuggestions = false;
       APIService.updateROAs(
         this.handle,
         {
@@ -1197,6 +1243,21 @@ export default {
     },
     triggerShowBGP(val) {
       this.bgpShown = val;
+    },
+    triggerSuggestions(event) {
+      this.removeROASuggestions = true;
+      this.addROASuggestionsVisible = true;
+      this.effects = event.data.effect.sort((a, b) => (a.state > b.state ? 1 : -1));
+      this.suggestions = event.data.suggestion;
+      this.deltaMine = [
+        {
+          action: "remove",
+          reason: "new",
+          asn: event.remove.asn*1,
+          prefix: event.remove.prefix,
+          max_length: event.remove.maxLength * 1
+        }
+      ];
     },
     removeAS() {
       if (this.addROAForm.asn.toLowerCase().indexOf("as") === 0) {
@@ -1308,6 +1369,11 @@ h3 {
   &.suggestion-title-nopadding {
     margin-left: 0;
   }
+}
+
+h4 {
+  font-weight: 300;
+  margin-left: 1rem;
 }
 
 .box-card {
