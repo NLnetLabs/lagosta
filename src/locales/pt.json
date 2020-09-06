@@ -103,6 +103,8 @@
     "analysis": "ROA Analysis",
     "suggestions": {
       "adding": "Adding",
+      "removing": "Removing ROA",
+      "keep": "Keep everything as is.",
       "willResult": "Will result in",
       "yourChoice": "Your choice",
       "ourSuggestion": "Our Suggestion",

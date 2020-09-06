@@ -110,7 +110,7 @@
 
 <script>
 export default {
-  props: ["announcements", "orderby"],
+  props: ["announcements"],
   data() {
     return {
       filteredAnnouncements: [],

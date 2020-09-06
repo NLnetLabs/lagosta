@@ -319,7 +319,8 @@ export default {
         if (self.$t("announcements.state")[ann.state]) {
           stateLabel =
             self
-              .$t("announcements.state")[ann.state].toLowerCase()
+              .$t("announcements.state")[ann.state]
+              .toLowerCase()
               .replace(reg, "")
               .indexOf(src) > -1;
         } else {
@@ -398,13 +399,17 @@ export default {
             },
             this.showBGP
           )
-            .then(() => {
-              self.$notify({
-                title: this.$t("caDetails.confirmation.retired"),
-                message: this.$t("caDetails.confirmation.retiredSuccess"),
-                type: "success"
-              });
-              self.loadAnnouncements();
+            .then(r => {
+              if (r.data) {
+                self.$emit("trigger-suggestions", {remove: row, data: r.data});
+              } else {
+                self.$notify({
+                  title: this.$t("caDetails.confirmation.retired"),
+                  message: this.$t("caDetails.confirmation.retiredSuccess"),
+                  type: "success"
+                });
+                self.loadAnnouncements();
+              }
             })
             .catch(error => {
               self.$emit("trigger-error", error);
