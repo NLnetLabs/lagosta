@@ -125,7 +125,13 @@
       }
     },
     "syncParents": "Refresh Parents",
-    "syncRepo": "Refresh Repo"
+    "syncRepo": "Refresh Repo",
+    "lastExchange": "Last Exchange",
+    "nextExchange": "Next Exchange Before",
+    "allResources": "All Resources",
+    "entitlements": "Entitlements",
+    "parentCertificate": "Parent Certificate",
+    "published": "Published"
   },
   "announcements": {
     "noRoasOrAnnouncements": "No ROAs or Announcements found.",

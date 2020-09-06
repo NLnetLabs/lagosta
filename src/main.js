@@ -18,10 +18,6 @@ import "vue-prism-editor/dist/VuePrismEditor.css"; // import the styles
 
 Vue.component("prism-editor", VuePrismEditor);
 
-import JsonViewer from "vue-json-viewer";
-
-Vue.use(JsonViewer);
-
 Vue.use(VueClipboard);
 
 library.add({
