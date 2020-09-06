@@ -158,6 +158,111 @@
                 :data="ca.parents"
                 style="width: 100%"
               >
+                <el-table-column type="expand">
+                  <template slot-scope="props">
+                    <div v-if="parents && parents[props.row.handle]">
+                      <p>
+                        {{ $t("caDetails.lastExchange") }}:
+                        {{ getDate(parents[props.row.handle].last_exchange.timestamp) }}:
+                        {{ parents[props.row.handle].last_exchange.result }} -
+                        <a :href="parents[props.row.handle].last_exchange.uri" target="_blank">{{
+                          parents[props.row.handle].last_exchange.uri
+                        }}</a>
+                      </p>
+                      <p>
+                        {{ $t("caDetails.nextExchange") }}:
+                        {{ getDate(parents[props.row.handle].next_exchange_before) }}
+                      </p>
+                      <p>
+                        <el-row>
+                          <el-col :span="2">{{ $t("caDetails.allResources") }}:: </el-col>
+                          <el-col :span="22">
+                            ASN: {{ parents[props.row.handle].all_resources.asn }}<br />
+                            IPv4: {{ parents[props.row.handle].all_resources.v4 }}<br />
+                            IPv6: {{ parents[props.row.handle].all_resources.v6 }}<br />
+                          </el-col>
+                        </el-row>
+                      </p>
+                      <p>
+                        <el-row>
+                          <el-col :span="2">{{ $t("caDetails.entitlements") }}: </el-col>
+                          <el-col :span="22">
+                            <div
+                              :key="ent"
+                              v-for="ent in Object.keys(parents[props.row.handle].entitlements)"
+                            >
+                              <div>
+                                {{ $t("caDetails.parentCertificate") }}:
+                                <a
+                                  :href="
+                                    parents[props.row.handle].entitlements[ent].parent_cert.uri
+                                  "
+                                  target="_blank"
+                                  >{{
+                                    parents[props.row.handle].entitlements[ent].parent_cert.uri
+                                      .split("/")
+                                      .pop()
+                                  }}</a
+                                >
+                                <el-button
+                                  type="text"
+                                  size="mini"
+                                  class="mini-download"
+                                  :title="$t('common.download')"
+                                  @click="
+                                    $emit(
+                                      'download-file',
+                                      parents[props.row.handle].entitlements[ent].parent_cert
+                                        .cert_pem,
+                                      parents[props.row.handle].entitlements[ent].parent_cert.uri
+                                        .split('/')
+                                        .pop()
+                                    )
+                                  "
+                                >
+                                  <font-awesome-icon icon="download" />
+                                </el-button>
+                              </div>
+
+                              <p
+                                :key="rec.uri"
+                                v-for="rec in parents[props.row.handle].entitlements[ent].received"
+                              >
+                                <el-row>
+                                  <el-col :span="12"
+                                    ><a :href="rec.uri" target="_blank">{{
+                                      rec.uri.split("/").pop()
+                                    }}</a>
+                                    <el-button
+                                      type="text"
+                                      size="mini"
+                                      class="mini-download"
+                                      :title="$t('common.download')"
+                                      @click="
+                                        $emit(
+                                          'download-file',
+                                          rec.cert_pem,
+                                          rec.uri.split('/').pop()
+                                        )
+                                      "
+                                    >
+                                      <font-awesome-icon icon="download" />
+                                    </el-button>
+                                  </el-col>
+                                  <el-col :span="12">
+                                    ASN: {{ rec.resources.asn }}<br />
+                                    IPv4: {{ rec.resources.v4 }}<br />
+                                    IPv6: {{ rec.resources.v6 }}<br />
+                                  </el-col>
+                                </el-row>
+                              </p>
+                            </div>
+                          </el-col>
+                        </el-row>
+                      </p>
+                    </div>
+                  </template>
+                </el-table-column>
                 <el-table-column prop="handle" label="Handle">
                   <template slot-scope="scope">
                     <el-popover
@@ -191,8 +296,6 @@
                 </el-table-column>
                 <el-table-column prop="kind" :label="$t('caDetails.kind')"></el-table-column>
               </el-table>
-
-              <json-viewer :value="parents" :expand-depth="5"></json-viewer>
 
               <el-button
                 class="mt-1"
@@ -237,7 +340,7 @@
                     <el-button
                       type="primary"
                       :title="$t('common.download')"
-                      @click="$emit('download-xml', initializeParentForm.xml, 'child_request')"
+                      @click="$emit('download-file', initializeParentForm.xml, 'child_request.xml')"
                     >
                       <font-awesome-icon icon="download" />
                     </el-button>
@@ -327,7 +430,9 @@
                     <el-button
                       type="primary"
                       :title="$t('common.download')"
-                      @click="$emit('download-xml', initializeRepoForm.xml, 'publisher_request')"
+                      @click="
+                        $emit('download-file', initializeRepoForm.xml, 'publisher_request.xml')
+                      "
                     >
                       <font-awesome-icon icon="download" />
                     </el-button>
@@ -375,6 +480,55 @@
                 :data="properties"
                 style="width: 100%"
               >
+                <el-table-column type="expand">
+                  <template>
+                    <div v-if="repoStatus">
+                      <p>
+                        {{ $t("caDetails.lastExchange") }}:
+                        {{ getDate(repoStatus.last_exchange.timestamp) }}:
+                        {{ repoStatus.last_exchange.result }} -
+                        <a :href="repoStatus.last_exchange.uri" target="_blank">{{
+                          repoStatus.last_exchange.uri
+                        }}</a>
+                      </p>
+                      <p>
+                        {{ $t("caDetails.nextExchange") }}:
+                        {{ getDate(repoStatus.next_exchange_before) }}
+                      </p>
+                      <p>
+                        <el-row>
+                          <el-col :span="2">{{ $t("caDetails.published") }}:</el-col>
+                          <el-col :span="22">
+                            <p :key="pub.uri" v-for="pub in repoStatus.published">
+                              <el-row>
+                                <el-col :span="12"
+                                  ><a :href="pub.uri" target="_blank">{{
+                                    pub.uri.split("/").pop()
+                                  }}</a>
+                                  <el-button
+                                    type="text"
+                                    size="mini"
+                                    class="mini-download"
+                                    :title="$t('common.download')"
+                                    @click="
+                                      $emit(
+                                        'download-file',
+                                        pub.base64,
+                                        pub.uri.split('/').pop() + '.base64'
+                                      )
+                                    "
+                                  >
+                                    <font-awesome-icon icon="download" />
+                                  </el-button>
+                                </el-col>
+                              </el-row>
+                            </p>
+                          </el-col>
+                        </el-row>
+                      </p>
+                    </div>
+                  </template>
+                </el-table-column>
                 <el-table-column prop="type" :label="$t('caDetails.type')"></el-table-column>
                 <el-table-column prop="props" :label="$t('caDetails.properties')">
                   <template slot-scope="scope">
@@ -387,8 +541,6 @@
                   </template>
                 </el-table-column>
               </el-table>
-
-              <json-viewer :value="repoStatus" :expand-depth="5"></json-viewer>
 
               <el-button class="mt-1" type="text" size="mini" @click="syncRepo">{{
                 $t("caDetails.syncRepo")
@@ -453,23 +605,22 @@
     >
       <div slot="title" class="el-dialog__title">
         <span v-if="!removeROASuggestions">
-        {{ $t("caDetails.suggestions.adding") }} {{ $t("announcements.asn") }}:
-        <strong>{{ addROAForm.asn }}</strong
-        >, {{ $t("announcements.prefix") }}: <strong>{{ addROAForm.prefix }}</strong
-        >, {{ $t("caDetails.maxLength") }}: <strong>{{ addROAForm.maxLength }}</strong> -
-        <el-button
-          type="text"
-          @click="
-            addROASuggestionsVisible = false;
-            addROAFormVisible = true;
-          "
-          >{{ $t("common.edit") }}</el-button
-        >
+          {{ $t("caDetails.suggestions.adding") }} {{ $t("announcements.asn") }}:
+          <strong>{{ addROAForm.asn }}</strong
+          >, {{ $t("announcements.prefix") }}: <strong>{{ addROAForm.prefix }}</strong
+          >, {{ $t("caDetails.maxLength") }}: <strong>{{ addROAForm.maxLength }}</strong> -
+          <el-button
+            type="text"
+            @click="
+              addROASuggestionsVisible = false;
+              addROAFormVisible = true;
+            "
+            >{{ $t("common.edit") }}</el-button
+          >
         </span>
         <span v-if="removeROASuggestions">
           {{ $t("caDetails.suggestions.removing") }}
         </span>
-        
       </div>
       <el-row>
         <el-col :xs="24" :sm="11">
@@ -558,7 +709,9 @@
               <sup>?</sup>
             </el-tooltip>
           </h3>
-          <h4 v-if="!deltaSuggestions || deltaSuggestions.length === 0">{{ $t("caDetails.suggestions.keep") }}</h4>
+          <h4 v-if="!deltaSuggestions || deltaSuggestions.length === 0">
+            {{ $t("caDetails.suggestions.keep") }}
+          </h4>
           <el-table
             size="small"
             v-if="deltaSuggestions && deltaSuggestions.length"
@@ -638,10 +791,7 @@
         <el-button
           type="primary"
           @click="addSuggestedROA"
-          :disabled="
-            
-              (deltaCart.added.length === 0 && deltaCart.removed.length === 0)
-          "
+          :disabled="deltaCart.added.length === 0 && deltaCart.removed.length === 0"
           >{{ $t("common.confirm") }}</el-button
         >
       </span>
@@ -725,17 +875,13 @@
       </el-row>
 
       <span slot="footer" class="dialog-footer">
-        <el-button
-          type="text"
-          @click="analysisDetailsVisible = false"
-          >{{ $t("common.cancel") }}</el-button
-        >
+        <el-button type="text" @click="analysisDetailsVisible = false">{{
+          $t("common.cancel")
+        }}</el-button>
         <el-button
           type="primary"
           @click="addSuggestedROA"
-          :disabled="
-            (deltaCart.added.length === 0 && deltaCart.removed.length === 0)
-          "
+          :disabled="deltaCart.added.length === 0 && deltaCart.removed.length === 0"
           >{{ $t("common.confirm") }}</el-button
         >
       </span>
@@ -752,6 +898,8 @@ import router from "@/router";
 import APIService from "@/services/APIService.js";
 const cidrRegex = require("cidr-regex");
 const xml2js = require("xml2js");
+import * as moment from "moment";
+
 export default {
   components: {
     announcementsROAs: AnnouncementsROAs,
@@ -1003,12 +1151,12 @@ export default {
       addToDelta("too_permissive", false);
 
       this.deltaSuggestions = delta;
-      if (!this.removeROASuggestions){
+      if (!this.removeROASuggestions) {
         this.deltaMine = [
           {
             action: "add",
             reason: "new",
-            asn: this.addROAForm.asn*1,
+            asn: this.addROAForm.asn * 1,
             prefix: this.addROAForm.prefix,
             max_length: this.addROAForm.maxLength * 1
           }
@@ -1017,6 +1165,7 @@ export default {
     }
   },
   created() {
+    moment.locale(this.$i18n.locale);
     this.getContent();
   },
   beforeRouteUpdate(to, from, next) {
@@ -1026,6 +1175,9 @@ export default {
     next();
   },
   methods: {
+    getDate(timestamp) {
+      return moment(timestamp * 1000).format("MMMM Do YYYY, h:mm:ss a");
+    },
     handleMineSelectionChange(val) {
       this.deltaMineCart = {
         added: val.filter(row => row.action === "add"),
@@ -1253,7 +1405,7 @@ export default {
         {
           action: "remove",
           reason: "new",
-          asn: event.remove.asn*1,
+          asn: event.remove.asn * 1,
           prefix: event.remove.prefix,
           max_length: event.remove.maxLength * 1
         }
@@ -1450,6 +1602,12 @@ ul {
   .search-input {
     margin-bottom: 10px;
   }
+}
+
+.mini-download {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  padding-left: 10px;
 }
 </style>
 

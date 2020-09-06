@@ -28,7 +28,7 @@
       </el-header>
 
       <el-main>
-        <router-view v-on:auth-event="loadUser" v-on:copy-xml="copyXML" v-on:download-xml="downloadXML" />
+        <router-view v-on:auth-event="loadUser" v-on:copy-xml="copyXML" v-on:download-file="downloadFile" />
       </el-main>
 
       <el-footer height="40px">
@@ -134,11 +134,11 @@ export default {
         });
       });
     },
-    downloadXML(xml, filename) {
-      const url = window.URL.createObjectURL(new Blob([xml]));
+    downloadFile(content, filename) {
+      const url = window.URL.createObjectURL(new Blob([content]));
       const link = document.createElement("a");
       link.href = url;
-      link.setAttribute("download", filename) + '.xml';
+      link.setAttribute("download", filename);
       document.body.appendChild(link);
       link.click();
     },

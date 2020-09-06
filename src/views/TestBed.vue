@@ -45,7 +45,7 @@
                   <el-button
                     type="primary"
                     :title="$t('common.download')"
-                    @click="$emit('download-xml', addChildRespForm.parentRespXML, 'parent_response')"
+                    @click="$emit('download-file', addChildRespForm.parentRespXML, 'parent_response.xml')"
                   >
                     <font-awesome-icon icon="download" />
                   </el-button>
@@ -135,7 +135,7 @@
                   <el-button
                     type="primary"
                     :title="$t('common.download')"
-                    @click="$emit('download-xml', addPublisherRespForm.repoRespXML, 'repository_response')"
+                    @click="$emit('download-file', addPublisherRespForm.repoRespXML, 'repository_response.xml')"
                   >
                     <font-awesome-icon icon="download" />
                   </el-button>
