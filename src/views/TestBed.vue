@@ -349,31 +349,45 @@ export default {
                   .then(function(result) {
                     let id_cert = result.child_request.child_bpki_ta[0];
                     let child_handle = result.child_request.$.child_handle;
-                    APIService.testbedAddChild(
+                    function doAddChild(child_handle, asn_res, ipv4_res, ipv6_res, id_cert) {
+                      APIService.testbedAddChild(child_handle, asn_res, ipv4_res, ipv6_res, id_cert)
+                        .then(() => {
+                          APIService.testbedGetParentResponseXML(child_handle)
+                            .then(response => {
+                              self.loading = false;
+                              self.parseError("", false);
+                              self.addChildRespForm.parentRespXML = response.data;
+                              self.$message({
+                                message: self.$t('testbed.addChild.success', { child_handle: child_handle }),
+                                type: 'success'
+                              });
+                            })
+                            .catch(error => {
+                              self.loading = false;
+                              self.parseError(error.response, true);
+                            });
+                        })
+                        .catch(error => {
+                          // if 400 ca-child-duplicate retry with random
+                          // ca name appendage
+                          if (error.response.data !== undefined &&
+                              error.response.data.label !== undefined &&
+                              error.response.data.label === 'ca-child-duplicate') {
+                            let new_child_handle = child_handle + String(new Date().getTime());
+                            console.log('CA name ' + child_handle + ' is taken, retrying with name ' + new_child_handle);
+                            doAddChild(new_child_handle, asn_res, ipv4_res, ipv6_res,id_cert);
+                          } else {
+                            self.loading = false;
+                            self.parseError(error.response, true);
+                          }
+                        });
+                    }
+                    doAddChild(
                       child_handle,
                       self.addChildForm.asn_res,
                       self.addChildForm.ipv4_res,
-                      self.addChildForm.ipv6_res, id_cert)
-                      .then(() => {
-                        APIService.testbedGetParentResponseXML(child_handle)
-                          .then(response => {
-                            self.loading = false;
-                            self.parseError("", false);
-                            self.addChildRespForm.parentRespXML = response.data;
-                            self.$message({
-                              message: self.$t('testbed.addChild.success', { child_handle: child_handle }),
-                              type: 'success'
-                            });
-                          })
-                          .catch(error => {
-                            self.loading = false;
-                            self.parseError(error.response, true);
-                          });
-                      })
-                      .catch(error => {
-                        self.loading = false;
-                        self.parseError(error.response, true);
-                      });
+                      self.addChildForm.ipv6_res,
+                      id_cert);
                   })
                   .catch(function(err) {
                     self.loading = false;
@@ -454,27 +468,40 @@ export default {
                   .then(function(result) {
                     let id_cert = result.publisher_request.publisher_bpki_ta[0];
                     let publisher_handle = result.publisher_request.$.publisher_handle;
-                    APIService.testbedAddPublisher(publisher_handle, id_cert)
-                      .then(() => {
-                        APIService.testbedGetRepositoryResponseXML(publisher_handle)
-                          .then(response => {
-                            self.loading = false;
-                            self.parseError("", false);
-                            self.addPublisherRespForm.repoRespXML = response.data;
-                            self.$message({
-                              message: self.$t('testbed.addPublisher.success', { publisher_handle: publisher_handle }),
-                              type: 'success'
+                    function doAddPublisher(publisher_handle, id_cert) {
+                      APIService.testbedAddPublisher(publisher_handle, id_cert)
+                        .then(() => {
+                          APIService.testbedGetRepositoryResponseXML(publisher_handle)
+                            .then(response => {
+                              self.loading = false;
+                              self.parseError("", false);
+                              self.addPublisherRespForm.repoRespXML = response.data;
+                              self.$message({
+                                message: self.$t('testbed.addPublisher.success', { publisher_handle: publisher_handle }),
+                                type: 'success'
+                              });
+                            })
+                            .catch(error => {
+                              self.loading = false;
+                              self.parseError(error.response, true);
                             });
-                          })
-                          .catch(error => {
+                        })
+                        .catch(error => {
+                          // if 400 pub-duplicate retry with random
+                          // publisher name appendage
+                          if (error.response.data !== undefined &&
+                              error.response.data.label !== undefined &&
+                              error.response.data.label === 'pub-duplicate') {
+                            let new_publisher_handle = publisher_handle + String(new Date().getTime());
+                            console.log('Publisher name ' + publisher_handle + ' is taken, retrying with name ' + new_publisher_handle);
+                            doAddPublisher(new_publisher_handle, id_cert);
+                          } else {
                             self.loading = false;
                             self.parseError(error.response, true);
-                          });
-                      })
-                      .catch(error => {
-                        self.loading = false;
-                        self.parseError(error.response, true);
-                      });
+                          }
+                        });
+                    }
+                    doAddPublisher(publisher_handle, id_cert);
                   })
                   .catch(function(err) {
                     self.loading = false;
