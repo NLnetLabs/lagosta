@@ -60,9 +60,9 @@ export default {
   getParentContact(handle, parent) {
     return apiClient.get("/api/v1/cas/" + handle + "/parents/" + parent);
   },
-  updateROAs(handle, delta, dryRun) {
+  updateROAs(handle, delta, trial) {
     return apiClient
-      .post("/api/v1/cas/" + handle + "/routes" + (dryRun ? "/try" : ""), delta)
+      .post("/api/v1/cas/" + handle + "/routes" + (trial ? "/try" : ""), delta)
       .catch(error => {
         if (error.response && error.response.data) {
           return Promise.reject({
@@ -75,6 +75,9 @@ export default {
           }
         });
       });
+  },
+  updateROAsDryRun(handle, delta) {
+    return apiClient.post("/api/v1/cas/" + handle + "/routes/analysis/dryrun", delta);
   },
   createCA(handle) {
     return apiClient.post("/api/v1/cas", {

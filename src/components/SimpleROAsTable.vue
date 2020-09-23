@@ -1,10 +1,9 @@
 <template>
   <div class="simple-roas-table">
-
     <el-table
       ref="roaTable"
       size="small"
-      v-if="announcements.length"
+      v-if="announcements"
       :data="filteredAnnouncements"
       style="width: 100%"
       :empty-text="$t('common.nodata')"
@@ -110,7 +109,7 @@
 
 <script>
 export default {
-  props: ["announcements"],
+  props: ["announcements", "updated"],
   data() {
     return {
       filteredAnnouncements: [],
@@ -122,6 +121,9 @@ export default {
     };
   },
   watch: {
+    updated() {
+      this.preFilterAnnouncements();
+    }
   },
   created() {
     this.preFilterAnnouncements();

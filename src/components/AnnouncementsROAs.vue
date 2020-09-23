@@ -136,6 +136,14 @@
             >{{ $t("announcements.state.roa_too_permissive") }}</el-tag
           >
           <el-tag
+            type="warning"
+            size="medium"
+            v-if="scope.row.state === 'roa_as0'"
+            disable-transitions
+            effect="plain"
+            >AS0</el-tag
+          >
+          <el-tag
             type="success"
             size="mini"
             v-if="scope.row.authorizes && scope.row.authorizes.length"
@@ -359,6 +367,9 @@ export default {
     },
     getRowClass(data) {
       if (this.showBGP && data.row.max_length) {
+        if (data.row.state === "roa_as0" && !data.row.authorizes && !data.row.disallows) {
+          return "row-as0";
+        }
         return data.row.state === "roa_unseen" ? "row_unseen" : "row-dark";
       }
       return "row-announcement";
@@ -459,7 +470,8 @@ export default {
 }
 
 .row-announcement,
-.row_unseen {
+.row_unseen,
+.row-as0 {
   .el-table__expand-column .cell,
   .el-table__expand-icon {
     display: none;
@@ -467,9 +479,11 @@ export default {
 }
 
 .row-announcement + tr,
-.row_unseen + tr {
+.row_unseen + tr,
+.row-as0 + tr {
   display: none;
 }
+
 
 .el-pagination {
   margin-top: 1rem;

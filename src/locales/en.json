@@ -178,7 +178,8 @@
     "ca-roa-invalid-max-length": "Invalid max length in ROA '{prefix}-{max_length} => {asn}'",
     "ca-roa-not-entitled": "ROA prefix '{prefix}' is not on any of your current certificates",
     "ta-not-allowed": "This functionality is not supported by the test Trust Anchor",
-    "ta-name-reserved": "Name reserved"
+    "ta-name-reserved": "Name reserved",
+    "ca-roa-delta-error": "Delta rejected, see included json"
   },
   "testbed": {
     "welcome": "Welcome to this RPKI testbed",
