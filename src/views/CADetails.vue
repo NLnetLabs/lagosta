@@ -483,7 +483,7 @@
                 <el-table-column type="expand">
                   <template>
                     <div v-if="repoStatus">
-                      <p>
+                      <p v-if="repoStatus.last_exchange">
                         {{ $t("caDetails.lastExchange") }}:
                         {{ getDate(repoStatus.last_exchange.timestamp) }}:
                         {{ repoStatus.last_exchange.result }} -
@@ -554,8 +554,9 @@
     <el-dialog
       :title="$t('caDetails.addRoa')"
       :visible.sync="addROAFormVisible"
+      custom-class="add-roa-dialog"
       :close-on-click-modal="false"
-      @close="addROAFormVisible = false"
+      @close="error = '';addROAFormVisible = false"
     >
       <el-form :model="addROAForm" :rules="addROAFormRules" ref="addROAForm">
         <el-form-item :label="$t('announcements.asn')" prop="asn">
@@ -577,11 +578,13 @@
             v-model="addROAForm.maxLength"
             autocomplete="off"
             type="number"
+            :readonly="addROAForm.asn === '0'"
             min="4"
             max="64"
           ></el-input>
         </el-form-item>
         <el-alert type="error" v-if="error" :closable="false" class="mb-1">{{ error }}</el-alert>
+        <pre v-if="error && deltaError" class="pre-error">{{ JSON.stringify(deltaError, null, 2) }}</pre>
         <el-row type="flex" class="modal-footer" justify="end">
           <el-form-item>
             <el-button @click="resetForm('addROAForm')">{{ $t("common.cancel") }}</el-button>
@@ -601,6 +604,7 @@
       custom-class="suggestion-dialog"
       :close-on-click-modal="false"
       @close="addROASuggestionsVisible = false"
+      @opened="$refs.deltaMineTable.toggleRowSelection(deltaMine[0])"
       width="80%"
     >
       <div slot="title" class="el-dialog__title">
@@ -623,22 +627,17 @@
         </span>
       </div>
       <el-row>
-        <el-col :xs="24" :sm="11">
-          <h3 class="suggestion-title suggestion-title-nopadding">
-            {{ $t("caDetails.suggestions.willResult") }}
-          </h3>
-          <simpleROAsTable :announcements="effects"></simpleROAsTable>
-        </el-col>
         <el-col :xs="24" :sm="12">
           <h3 class="suggestion-title">
             {{ $t("caDetails.suggestions.yourChoice") }}
           </h3>
           <el-table
             size="small"
+            ref="deltaMineTable"
             v-if="deltaMine && deltaMine.length"
             :data="deltaMine"
             :default-sort="{ prop: 'asn', order: 'ascending' }"
-            style="width: 100%; border: 2px solid #EBEEF5; margin-left: 1rem; padding-left: 1rem"
+            style="width: 100%; border: 2px solid #EBEEF5;"
             max-height="560"
             :empty-text="$t('common.nodata')"
             @selection-change="handleMineSelectionChange"
@@ -717,7 +716,7 @@
             v-if="deltaSuggestions && deltaSuggestions.length"
             :data="deltaSuggestions"
             :default-sort="{ prop: 'asn', order: 'ascending' }"
-            style="width: 100%; border: 2px solid #EBEEF5; margin-left: 1rem; padding-left: 1rem"
+            style="width: 100%; border: 2px solid #EBEEF5;"
             max-height="560"
             :empty-text="$t('common.nodata')"
             @selection-change="handleSuggestionSelectionChange"
@@ -776,6 +775,12 @@
               </template>
             </el-table-column>
           </el-table>
+        </el-col>
+        <el-col :xs="24" :sm="11" :offset="1">
+          <h3 class="suggestion-title suggestion-title-nopadding">
+            {{ $t("caDetails.suggestions.willResult") }}
+          </h3>
+          <simpleROAsTable :announcements="effects" :updated="updatedAnnouncements"></simpleROAsTable>
         </el-col>
       </el-row>
 
@@ -957,6 +962,7 @@ export default {
       repo: {},
       parentDetails: [],
       error: "",
+      deltaError: null,
       addROAFormVisible: false,
       addROASuggestionsVisible: false,
       removeROASuggestions: false,
@@ -1178,17 +1184,25 @@ export default {
     getDate(timestamp) {
       return moment(timestamp * 1000).format("MMMM Do YYYY, h:mm:ss a");
     },
+    previewUpdates() {
+      APIService.updateROAsDryRun(this.handle, this.deltaCart).then(r => {
+        this.effects = r.data.sort((a, b) => (a.state > b.state ? 1 : -1));
+        this.updatedAnnouncements = new Date().getTime();
+      });
+    },
     handleMineSelectionChange(val) {
       this.deltaMineCart = {
         added: val.filter(row => row.action === "add"),
         removed: val.filter(row => row.action === "remove")
       };
+      this.previewUpdates();
     },
     handleSuggestionSelectionChange(val) {
       this.deltaSuggestionsCart = {
         added: val.filter(row => row.action === "add"),
         removed: val.filter(row => row.action === "remove")
       };
+      this.previewUpdates();
     },
     getROAsSuggestions() {
       this.suggestions = [];
@@ -1224,6 +1238,12 @@ export default {
           : this.$t("errors." + error.data.code);
         if (e === "errors." + (error.data.label ? error.data.label : error.data.code)) {
           e = error.data.msg;
+        }
+        if (error.data.delta_error) {
+          this.deltaError = error.data.delta_error;
+        }
+        else {
+          this.deltaError = null;
         }
       }
 
@@ -1414,6 +1434,9 @@ export default {
     removeAS() {
       if (this.addROAForm.asn.toLowerCase().indexOf("as") === 0) {
         this.addROAForm.asn = this.addROAForm.asn.substr(2);
+      }
+      if (this.addROAForm.asn === '0') {
+        this.updateMaxLength(this.addROAForm.prefix);
       }
     },
     submitForm(formName) {
@@ -1617,5 +1640,25 @@ ul {
     padding-top: 0;
     padding-bottom: 0;
   }
+}
+.add-roa-dialog {
+  input:read-only {
+    background-color: #f0f0f0;
+  }
+  .modal-footer {
+    .el-form-item {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.pre-error {
+  font-size: 0.7rem;
+  background-color: #fef0f0;
+  padding: 8px 24px;
+  color: #F56C6C;
+  max-height: 4rem;
+  margin-top: -1rem;
+  overflow: auto;
 }
 </style>
