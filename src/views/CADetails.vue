@@ -157,25 +157,31 @@
                 v-if="ca.parents.length && !showAddParent"
                 :data="ca.parents"
                 style="width: 100%"
+                default-expand-all
+                row-class-name="row-dark"
+                :show-header="false"
               >
                 <el-table-column type="expand">
                   <template slot-scope="props">
                     <div v-if="parents && parents[props.row.handle]">
                       <p>
-                        {{ $t("caDetails.lastExchange") }}:
-                        {{ getDate(parents[props.row.handle].last_exchange.timestamp) }}:
-                        {{ parents[props.row.handle].last_exchange.result }} -
-                        <a :href="parents[props.row.handle].last_exchange.uri" target="_blank">{{
-                          parents[props.row.handle].last_exchange.uri
-                        }}</a>
+                        <strong>{{ $t("caDetails.lastExchange") }}</strong>&nbsp;
+                        {{ getDate(parents[props.row.handle].last_exchange.timestamp) }}
+                        <span v-if="parents[props.row.handle].last_exchange.result === 'Success'"><i class="el-icon-success" style="color: #67C23A"></i></span>
+                        <span v-if="parents[props.row.handle].last_exchange.result !== 'Success'"><i class="el-icon-error" style="color: #F56C6C"></i>
+                          {{ parents[props.row.handle].last_exchange.result }}
+                          <strong>URI</strong> {{
+                            parents[props.row.handle].last_exchange.uri
+                          }}
+                        </span>
                       </p>
                       <p>
-                        {{ $t("caDetails.nextExchange") }}:
+                        <strong>{{ $t("caDetails.nextExchange") }}</strong>&nbsp;
                         {{ getDate(parents[props.row.handle].next_exchange_before) }}
                       </p>
                       <p>
                         <el-row>
-                          <el-col :span="2">{{ $t("caDetails.allResources") }}:: </el-col>
+                          <el-col :span="2"><strong>{{ $t("caDetails.allResources") }}</strong></el-col>
                           <el-col :span="22">
                             ASN: {{ parents[props.row.handle].all_resources.asn }}<br />
                             IPv4: {{ parents[props.row.handle].all_resources.v4 }}<br />
@@ -183,15 +189,18 @@
                           </el-col>
                         </el-row>
                       </p>
-                      <p>
+                      <p v-if="!showEntitlements">
+                        <a href="javascript: void(0)" @click="showEntitlements=true">{{ $t("caDetails.showEntitlements") }}</a>
+                      </p>
+                      <p v-if="showEntitlements">
                         <el-row>
-                          <el-col :span="2">{{ $t("caDetails.entitlements") }}: </el-col>
+                          <el-col :span="2"><strong>{{ $t("caDetails.entitlements") }}</strong></el-col>
                           <el-col :span="22">
                             <div
                               :key="ent"
                               v-for="ent in Object.keys(parents[props.row.handle].entitlements)"
                             >
-                              <div>
+                              <!-- <div>
                                 {{ $t("caDetails.parentCertificate") }}:
                                 <a
                                   :href="
@@ -222,27 +231,38 @@
                                 >
                                   <font-awesome-icon icon="download" />
                                 </el-button>
-                              </div>
+                              </div> -->
 
                               <p
                                 :key="rec.uri"
                                 v-for="rec in parents[props.row.handle].entitlements[ent].received"
+                                style="margin-top: 0"
                               >
                                 <el-row>
                                   <el-col :span="12"
-                                    ><a :href="rec.uri" target="_blank">{{
+                                    >{{
                                       rec.uri.split("/").pop()
-                                    }}</a>
+                                    }}
                                     <el-button
                                       type="text"
                                       size="mini"
                                       class="mini-download"
+                                      :title="$t('common.copy')"
+                                      @click="$copyText(rec.uri)"
+                                    >
+                                      <font-awesome-icon icon="clipboard" />
+                                    </el-button>
+                                    <el-button
+                                      type="text"
+                                      size="mini"
+                                      class="mini-download"
+                                      style="padding-left: 0"
                                       :title="$t('common.download')"
                                       @click="
                                         $emit(
                                           'download-file',
                                           rec.cert_pem,
-                                          rec.uri.split('/').pop()
+                                          rec.uri.split('/').pop() + '.pem'
                                         )
                                       "
                                     >
@@ -265,36 +285,11 @@
                 </el-table-column>
                 <el-table-column prop="handle" label="Handle">
                   <template slot-scope="scope">
-                    <el-popover
-                      v-if="ca.parents[scope.$index].kind === 'rfc6492'"
-                      placement="right"
-                      width="400"
-                      trigger="click"
-                    >
-                      <i class="el-icon-loading" v-if="loadingParent"></i>
-                      <el-table :data="parentDetails">
-                        <el-table-column
-                          property="prop"
-                          :label="$t('caDetails.property')"
-                        ></el-table-column>
-                        <el-table-column
-                          property="value"
-                          :label="$t('caDetails.value')"
-                        ></el-table-column>
-                      </el-table>
-                      <el-button
-                        type="text"
-                        slot="reference"
-                        @click="getParent(ca.parents[scope.$index])"
-                        >{{ ca.parents[scope.$index].handle }}</el-button
-                      >
-                    </el-popover>
-                    <span v-if="ca.parents[scope.$index].kind !== 'rfc6492'">{{
+                    <strong>{{
                       ca.parents[scope.$index].handle
-                    }}</span>
+                    }}</strong>
                   </template>
                 </el-table-column>
-                <el-table-column prop="kind" :label="$t('caDetails.kind')"></el-table-column>
               </el-table>
 
               <el-button
@@ -310,7 +305,7 @@
                 class="mt-1"
                 type="text"
                 size="mini"
-                v-if="!initializeParent && !initializeRepo"
+                v-if="!initializeParent && !initializeRepo && !showAddParent"
                 @click="syncParents"
                 >{{ $t("caDetails.syncParents") }}</el-button
               >
@@ -479,42 +474,58 @@
                 v-if="properties.length"
                 :data="properties"
                 style="width: 100%"
+                default-expand-all
+                row-class-name="row-dark"
+                :show-header="false"
               >
                 <el-table-column type="expand">
                   <template>
                     <div v-if="repoStatus">
                       <p v-if="repoStatus.last_exchange">
-                        {{ $t("caDetails.lastExchange") }}:
-                        {{ getDate(repoStatus.last_exchange.timestamp) }}:
-                        {{ repoStatus.last_exchange.result }} -
-                        <a :href="repoStatus.last_exchange.uri" target="_blank">{{
-                          repoStatus.last_exchange.uri
-                        }}</a>
+                        <strong>{{ $t("caDetails.lastExchange") }}</strong>&nbsp;
+                        {{ getDate(repoStatus.last_exchange.timestamp) }}
+                        <span v-if="repoStatus.last_exchange.result === 'Success'"><i class="el-icon-success" style="color: #67C23A"></i></span>
+                        <span v-if="repoStatus.last_exchange.result !== 'Success'"><i class="el-icon-error" style="color: #F56C6C"></i>
+                          {{ repoStatus.last_exchange.result }}
+                          <strong>URI</strong> {{
+                            repoStatus.last_exchange.uri
+                          }}
+                        </span>
                       </p>
                       <p>
-                        {{ $t("caDetails.nextExchange") }}:
+                        <strong>{{ $t("caDetails.nextExchange") }}</strong>&nbsp;
                         {{ getDate(repoStatus.next_exchange_before) }}
                       </p>
                       <p>
                         <el-row>
-                          <el-col :span="2">{{ $t("caDetails.published") }}:</el-col>
+                          <el-col :span="2"><strong>{{ $t("caDetails.published") }}</strong></el-col>
                           <el-col :span="22">
-                            <p :key="pub.uri" v-for="pub in repoStatus.published">
+                            <p :key="pub.uri" v-for="pub in repoStatus.published" style="margin-top: 0">
                               <el-row>
                                 <el-col :span="12"
-                                  ><a :href="pub.uri" target="_blank">{{
+                                  >{{
                                     pub.uri.split("/").pop()
-                                  }}</a>
+                                  }}
                                   <el-button
                                     type="text"
                                     size="mini"
                                     class="mini-download"
+                                    :title="$t('common.copy')"
+                                    @click="$copyText(pub.uri)"
+                                  >
+                                    <font-awesome-icon icon="clipboard" />
+                                  </el-button>
+                                  <el-button
+                                    type="text"
+                                    size="mini"
+                                    class="mini-download"
+                                    style="padding-left: 0"
                                     :title="$t('common.download')"
                                     @click="
                                       $emit(
                                         'download-file',
-                                        pub.base64,
-                                        pub.uri.split('/').pop() + '.base64'
+                                        convertB64(pub.base64),
+                                        pub.uri.split('/').pop()
                                       )
                                     "
                                   >
@@ -529,15 +540,9 @@
                     </div>
                   </template>
                 </el-table-column>
-                <el-table-column prop="type" :label="$t('caDetails.type')"></el-table-column>
-                <el-table-column prop="props" :label="$t('caDetails.properties')">
-                  <template slot-scope="scope">
-                    <ul>
-                      <li :key="prop.prop" v-for="prop in properties[scope.$index].props">
-                        {{ prop.prop }}:
-                        <a :href="prop.value" target="_blank">{{ prop.value }}</a>
-                      </li>
-                    </ul>
+                <el-table-column prop="type" :label="$t('caDetails.type')">
+                  <template>
+                    {{ $t("caDetails.repo") }}
                   </template>
                 </el-table-column>
               </el-table>
@@ -1027,12 +1032,13 @@ export default {
       bgpShown: false,
       analysisDetailsVisible: false,
       parents: {},
-      repoStatus: {}
+      repoStatus: {},
+      showEntitlements: false
     };
   },
   computed: {
     properties: function() {
-      if (this.repo) {
+      if (this.repo && this.repoStatus) {
         if (this.repo.embedded) {
           return [
             {
@@ -1183,6 +1189,9 @@ export default {
   methods: {
     getDate(timestamp) {
       return moment(timestamp * 1000).format("MMMM Do YYYY, h:mm:ss a");
+    },
+    convertB64(b64) {
+      return atob(b64);
     },
     previewUpdates() {
       APIService.updateROAsDryRun(this.handle, this.deltaCart).then(r => {
@@ -1660,5 +1669,9 @@ ul {
   max-height: 4rem;
   margin-top: -1rem;
   overflow: auto;
+}
+
+.el-table tr.row-dark {
+  background-color: #f5f7fa;
 }
 </style>

@@ -125,11 +125,12 @@
       }
     },
     "syncParents": "Refresh Parents",
-    "syncRepo": "Refresh Repo",
+    "syncRepo": "Refresh Repository",
     "lastExchange": "Last Exchange",
     "nextExchange": "Next Exchange Before",
     "allResources": "All Resources",
     "entitlements": "Entitlements",
+    "showEntitlements": "Show Detailed Entitlements",
     "parentCertificate": "Parent Certificate",
     "published": "Published"
   },
