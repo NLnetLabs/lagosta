@@ -64,6 +64,9 @@
     "**/**/kind-of": "^6.0.3",
     "**/**/websocket-extensions": "0.1.4",
     "**/**/elliptic": "^6.5.3",
-    "**/**/dot-prop": "^5.1.1"
+    "**/**/dot-prop": "^5.1.1",
+    "**/**/node-forge": "^0.10.0",
+    "**/**/yargs-parser": "^13.1.2",
+    "**/**/http-proxy": "^1.18.1"
   }
 }
