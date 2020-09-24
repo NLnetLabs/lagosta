@@ -66,7 +66,7 @@
                         type="primary"
                         v-if="!initializeParent && !initializeRepo && !emptyResources"
                         @click="
-                          resetForm('addROAForm');
+                          resetAddRoaForm();
                           addROAFormVisible = true;
                         "
                         >{{ $t("caDetails.addRoa") }}</el-button
@@ -165,23 +165,28 @@
                   <template slot-scope="props">
                     <div v-if="parents && parents[props.row.handle]">
                       <p>
-                        <strong>{{ $t("caDetails.lastExchange") }}</strong>&nbsp;
+                        <strong>{{ $t("caDetails.lastExchange") }}</strong
+                        >&nbsp;
                         {{ getDate(parents[props.row.handle].last_exchange.timestamp) }}
-                        <span v-if="parents[props.row.handle].last_exchange.result === 'Success'"><i class="el-icon-success" style="color: #67C23A"></i></span>
-                        <span v-if="parents[props.row.handle].last_exchange.result !== 'Success'"><i class="el-icon-error" style="color: #F56C6C"></i>
+                        <span v-if="parents[props.row.handle].last_exchange.result === 'Success'"
+                          ><i class="el-icon-success" style="color: #67C23A"></i
+                        ></span>
+                        <span v-if="parents[props.row.handle].last_exchange.result !== 'Success'"
+                          ><i class="el-icon-error" style="color: #F56C6C"></i>
                           {{ parents[props.row.handle].last_exchange.result }}
-                          <strong>URI</strong> {{
-                            parents[props.row.handle].last_exchange.uri
-                          }}
+                          <strong>URI</strong> {{ parents[props.row.handle].last_exchange.uri }}
                         </span>
                       </p>
                       <p>
-                        <strong>{{ $t("caDetails.nextExchange") }}</strong>&nbsp;
+                        <strong>{{ $t("caDetails.nextExchange") }}</strong
+                        >&nbsp;
                         {{ getDate(parents[props.row.handle].next_exchange_before) }}
                       </p>
                       <p>
                         <el-row>
-                          <el-col :span="2"><strong>{{ $t("caDetails.allResources") }}</strong></el-col>
+                          <el-col :span="2"
+                            ><strong>{{ $t("caDetails.allResources") }}</strong></el-col
+                          >
                           <el-col :span="22">
                             ASN: {{ parents[props.row.handle].all_resources.asn }}<br />
                             IPv4: {{ parents[props.row.handle].all_resources.v4 }}<br />
@@ -190,11 +195,15 @@
                         </el-row>
                       </p>
                       <p v-if="!showEntitlements">
-                        <a href="javascript: void(0)" @click="showEntitlements=true">{{ $t("caDetails.showEntitlements") }}</a>
+                        <a href="javascript: void(0)" @click="showEntitlements = true">{{
+                          $t("caDetails.showEntitlements")
+                        }}</a>
                       </p>
                       <p v-if="showEntitlements">
                         <el-row>
-                          <el-col :span="2"><strong>{{ $t("caDetails.entitlements") }}</strong></el-col>
+                          <el-col :span="2"
+                            ><strong>{{ $t("caDetails.entitlements") }}</strong></el-col
+                          >
                           <el-col :span="22">
                             <div
                               :key="ent"
@@ -240,9 +249,7 @@
                               >
                                 <el-row>
                                   <el-col :span="12"
-                                    >{{
-                                      rec.uri.split("/").pop()
-                                    }}
+                                    >{{ rec.uri.split("/").pop() }}
                                     <el-button
                                       type="text"
                                       size="mini"
@@ -285,9 +292,7 @@
                 </el-table-column>
                 <el-table-column prop="handle" label="Handle">
                   <template slot-scope="scope">
-                    <strong>{{
-                      ca.parents[scope.$index].handle
-                    }}</strong>
+                    <strong>{{ ca.parents[scope.$index].handle }}</strong>
                   </template>
                 </el-table-column>
               </el-table>
@@ -482,30 +487,37 @@
                   <template>
                     <div v-if="repoStatus">
                       <p v-if="repoStatus.last_exchange">
-                        <strong>{{ $t("caDetails.lastExchange") }}</strong>&nbsp;
+                        <strong>{{ $t("caDetails.lastExchange") }}</strong
+                        >&nbsp;
                         {{ getDate(repoStatus.last_exchange.timestamp) }}
-                        <span v-if="repoStatus.last_exchange.result === 'Success'"><i class="el-icon-success" style="color: #67C23A"></i></span>
-                        <span v-if="repoStatus.last_exchange.result !== 'Success'"><i class="el-icon-error" style="color: #F56C6C"></i>
+                        <span v-if="repoStatus.last_exchange.result === 'Success'"
+                          ><i class="el-icon-success" style="color: #67C23A"></i
+                        ></span>
+                        <span v-if="repoStatus.last_exchange.result !== 'Success'"
+                          ><i class="el-icon-error" style="color: #F56C6C"></i>
                           {{ repoStatus.last_exchange.result }}
-                          <strong>URI</strong> {{
-                            repoStatus.last_exchange.uri
-                          }}
+                          <strong>URI</strong> {{ repoStatus.last_exchange.uri }}
                         </span>
                       </p>
                       <p>
-                        <strong>{{ $t("caDetails.nextExchange") }}</strong>&nbsp;
+                        <strong>{{ $t("caDetails.nextExchange") }}</strong
+                        >&nbsp;
                         {{ getDate(repoStatus.next_exchange_before) }}
                       </p>
                       <p>
                         <el-row>
-                          <el-col :span="2"><strong>{{ $t("caDetails.published") }}</strong></el-col>
+                          <el-col :span="2"
+                            ><strong>{{ $t("caDetails.published") }}</strong></el-col
+                          >
                           <el-col :span="22">
-                            <p :key="pub.uri" v-for="pub in repoStatus.published" style="margin-top: 0">
+                            <p
+                              :key="pub.uri"
+                              v-for="pub in repoStatus.published"
+                              style="margin-top: 0"
+                            >
                               <el-row>
                                 <el-col :span="12"
-                                  >{{
-                                    pub.uri.split("/").pop()
-                                  }}
+                                  >{{ pub.uri.split("/").pop() }}
                                   <el-button
                                     type="text"
                                     size="mini"
@@ -561,7 +573,10 @@
       :visible.sync="addROAFormVisible"
       custom-class="add-roa-dialog"
       :close-on-click-modal="false"
-      @close="error = '';addROAFormVisible = false"
+      @close="
+        error = '';
+        addROAFormVisible = false;
+      "
     >
       <el-form :model="addROAForm" :rules="addROAFormRules" ref="addROAForm">
         <el-form-item :label="$t('announcements.asn')" prop="asn">
@@ -589,10 +604,10 @@
           ></el-input>
         </el-form-item>
         <el-alert type="error" v-if="error" :closable="false" class="mb-1">{{ error }}</el-alert>
-        <pre v-if="error && deltaError" class="pre-error">{{ JSON.stringify(deltaError, null, 2) }}</pre>
+        <jsonErrorVisualizer :json="deltaError" v-if="error && deltaError" ></jsonErrorVisualizer>
         <el-row type="flex" class="modal-footer" justify="end">
           <el-form-item>
-            <el-button @click="resetForm('addROAForm')">{{ $t("common.cancel") }}</el-button>
+            <el-button @click="resetAddRoaForm()">{{ $t("common.cancel") }}</el-button>
             <el-button
               type="primary"
               @click="submitForm('addROAForm')"
@@ -718,6 +733,7 @@
           </h4>
           <el-table
             size="small"
+            ref="deltaSuggestionsTable"
             v-if="deltaSuggestions && deltaSuggestions.length"
             :data="deltaSuggestions"
             :default-sort="{ prop: 'asn', order: 'ascending' }"
@@ -785,17 +801,17 @@
           <h3 class="suggestion-title suggestion-title-nopadding">
             {{ $t("caDetails.suggestions.willResult") }}
           </h3>
-          <simpleROAsTable :announcements="effects" :updated="updatedAnnouncements"></simpleROAsTable>
+          <simpleROAsTable
+            :announcements="effects"
+            :updated="updatedPreview"
+          ></simpleROAsTable>
         </el-col>
       </el-row>
 
       <span slot="footer" class="dialog-footer">
         <el-button
           type="text"
-          @click="
-            resetForm('addROAForm');
-            addROASuggestionsVisible = false;
-          "
+          @click="resetAddRoaForm();addROASuggestionsVisible = false;"
           >{{ $t("common.cancel") }}</el-button
         >
         <el-button
@@ -902,6 +918,7 @@
 <script>
 import AnnouncementsROAs from "../components/AnnouncementsROAs.vue";
 import SimpleROAsTable from "../components/SimpleROAsTable.vue";
+import JSONErrorVisualizer from "../components/JSONErrorVisualizer.vue";
 
 import "element-ui/lib/theme-chalk/display.css";
 import router from "@/router";
@@ -913,14 +930,15 @@ import * as moment from "moment";
 export default {
   components: {
     announcementsROAs: AnnouncementsROAs,
-    simpleROAsTable: SimpleROAsTable
+    simpleROAsTable: SimpleROAsTable,
+    jsonErrorVisualizer: JSONErrorVisualizer
   },
   data() {
     const checkASN = (rule, value, callback) => {
       if (value === "") {
         callback(new Error(this.$t("caDetails.addROAForm.required")));
       } else {
-        if (value.toLowerCase().indexOf("as") === 0) {
+        if (value && value.toLowerCase().indexOf("as") === 0) {
           value = value.substr(2) * 1;
         }
         if (value >= 0 && value <= 4294967295) {
@@ -934,7 +952,7 @@ export default {
       if (value === "") {
         callback(new Error(this.$t("caDetails.addROAForm.required")));
       } else {
-        if (cidrRegex({ exact: true }).test(value)) {
+        if (!value || cidrRegex({ exact: true }).test(value)) {
           callback();
         } else {
           callback(new Error(this.$t("caDetails.addROAForm.prefix_format")));
@@ -1029,11 +1047,13 @@ export default {
       fileList: [],
       resourcesSearch: "",
       updatedAnnouncements: 0,
+      updatedPreview: 0,
       bgpShown: false,
       analysisDetailsVisible: false,
       parents: {},
       repoStatus: {},
-      showEntitlements: false
+      showEntitlements: false,
+      lastModifiedTable: null
     };
   },
   computed: {
@@ -1188,7 +1208,7 @@ export default {
   },
   methods: {
     getDate(timestamp) {
-      return moment(timestamp * 1000).format("MMMM Do YYYY, h:mm:ss a");
+      return moment(timestamp * 1000).format("MMMM Do YYYY, HH:mm:ss");
     },
     convertB64(b64) {
       return atob(b64);
@@ -1196,22 +1216,36 @@ export default {
     previewUpdates() {
       APIService.updateROAsDryRun(this.handle, this.deltaCart).then(r => {
         this.effects = r.data.sort((a, b) => (a.state > b.state ? 1 : -1));
-        this.updatedAnnouncements = new Date().getTime();
+        this.updatedPreview = new Date().getTime();
       });
     },
     handleMineSelectionChange(val) {
+      const self = this;
       this.deltaMineCart = {
         added: val.filter(row => row.action === "add"),
         removed: val.filter(row => row.action === "remove")
       };
-      this.previewUpdates();
+      if (this.lastModifiedTable !== "mine") {
+        this.$refs.deltaSuggestionsTable.clearSelection();
+      }
+      window.setTimeout(function() {
+        self.previewUpdates();
+      }, 1000);
+      this.lastModifiedTable = "mine";
     },
     handleSuggestionSelectionChange(val) {
+      const self = this;
       this.deltaSuggestionsCart = {
         added: val.filter(row => row.action === "add"),
         removed: val.filter(row => row.action === "remove")
       };
-      this.previewUpdates();
+      if (this.lastModifiedTable !== "suggestions") {
+        this.$refs.deltaMineTable.clearSelection();
+      }
+      window.setTimeout(function() {
+        self.previewUpdates();
+      }, 1000);
+      this.lastModifiedTable = "suggestions";
     },
     getROAsSuggestions() {
       this.suggestions = [];
@@ -1250,8 +1284,7 @@ export default {
         }
         if (error.data.delta_error) {
           this.deltaError = error.data.delta_error;
-        }
-        else {
+        } else {
           this.deltaError = null;
         }
       }
@@ -1444,7 +1477,7 @@ export default {
       if (this.addROAForm.asn.toLowerCase().indexOf("as") === 0) {
         this.addROAForm.asn = this.addROAForm.asn.substr(2);
       }
-      if (this.addROAForm.asn === '0') {
+      if (this.addROAForm.asn === "0") {
         this.updateMaxLength(this.addROAForm.prefix);
       }
     },
@@ -1458,15 +1491,16 @@ export default {
         }
       });
     },
-    resetForm(formName) {
+    resetAddRoaForm() {
       this.error = "";
       this.addROAFormVisible = false;
-      if (this.$refs[formName]) {
-        this.$refs[formName].resetFields();
-      }
+      this.submittingROAForm = false;
+      this.$set(this.addROAForm, "asn", null)
+      this.$set(this.addROAForm, "prefix", null)
+      this.$set(this.addROAForm, "maxLength", "")
     },
     updateMaxLength(value) {
-      if (value.indexOf("/") > -1) {
+      if (value && value.indexOf("/") > -1) {
         this.addROAForm.maxLength = value.split("/")[1];
       }
     },
@@ -1659,16 +1693,6 @@ ul {
       margin-bottom: 0;
     }
   }
-}
-
-.pre-error {
-  font-size: 0.7rem;
-  background-color: #fef0f0;
-  padding: 8px 24px;
-  color: #F56C6C;
-  max-height: 4rem;
-  margin-top: -1rem;
-  overflow: auto;
 }
 
 .el-table tr.row-dark {

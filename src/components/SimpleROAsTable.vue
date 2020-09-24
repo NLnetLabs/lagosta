@@ -8,11 +8,7 @@
       style="width: 100%"
       :empty-text="$t('common.nodata')"
     >
-      <el-table-column
-        prop="asn"
-        :label="$t('announcements.asn')"
-        width="110"
-      ></el-table-column>
+      <el-table-column prop="asn" :label="$t('announcements.asn')" width="110"></el-table-column>
       <el-table-column :label="$t('announcements.prefix')">
         <template slot-scope="scope">
           {{ scope.row.prefix }}{{ scope.row.max_length ? "-" + scope.row.max_length : "" }}
@@ -140,9 +136,7 @@ export default {
     },
     filterAnnouncements: function() {
       let filtered = this.announcements.filter(function(ann) {
-        return (
-          ann.state !== 'announcement_valid'
-        );
+        return ann.state !== "announcement_valid";
       });
       this.totalRecords = filtered.length;
       this.filteredAnnouncements = filtered.slice(
@@ -150,7 +144,7 @@ export default {
         Math.min(this.announcements.length, this.currentPage * this.pageSize)
       );
       this.loadingTable = false;
-    },
+    }
   }
 };
 </script>
@@ -163,10 +157,9 @@ export default {
 
 <style lang="scss">
 .simple-roas-table {
-
-.el-pagination {
-  margin-top: 1rem;
-  text-align: left;
-}
+  .el-pagination {
+    margin-top: 1rem;
+    text-align: left;
+  }
 }
 </style>

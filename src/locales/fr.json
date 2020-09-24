@@ -153,6 +153,16 @@
       "roa_too_permissive": "TOO PERMISSIVE"
     }
   },
+  "deltaErrors": {
+    "duplicates": "Duplicates",
+    "covered": "Covered",
+    "notheld": "Notheld",
+    "unknowns": "Unknowns",
+    "invalid_length": "Invalid Length",
+    "covering": "Covering",
+    "as0_exists": "AS0 Exists",
+    "as0_overlaps": "AS0 Overlaps"
+  },
   "errors": {
     "repo-not-set": "Vous devez d'abord configurer un dépôt",
     "pub-unknown": "Publisher '{publisher}' est inconnu",
