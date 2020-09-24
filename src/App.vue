@@ -166,7 +166,7 @@ export default {
           this.krillStarted =
             this.$t("common.started") +
             " " +
-            moment(stats.data.started * 1000).format("MMMM Do YYYY, h:mm:ss a");
+            moment(stats.data.started * 1000).format("MMMM Do YYYY, HH:mm:ss");
         }
       });
     },
