@@ -327,8 +327,8 @@ export default {
       }
     },
     resetAddChildForm() {
-      this.$refs.addChildForm.resetFields();
-      this.$refs.addChildRespForm.resetFields();
+      this.$refs["addChildForm"].resetFields();
+      this.$refs["addChildRespForm"].resetFields();
     },
     submitAddChildForm(fromKeyboard = false) {
       const self = this;
@@ -432,8 +432,8 @@ export default {
       self.enterPressed = fromKeyboard;
     },
     resetAddPublisherForm() {
-      this.$refs.addPublisherForm.resetFields();
-      this.$refs.addPublisherRespForm.resetFields();
+      this.$refs["addPublisherForm"].resetFields();
+      this.$refs["addPublisherRespForm"].resetFields();
     },
     submitAddPublisherForm(fromKeyboard = false) {
       const self = this;

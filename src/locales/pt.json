@@ -102,6 +102,8 @@
     "analyseThis": "Analyse my ROAs",
     "analysis": "ROA Analysis",
     "suggestions": {
+      "following": "We suggest the following changes to your ROAs",
+      "nochanges": "We suggest no changes at this time",
       "adding": "Adding",
       "removing": "Removing ROA",
       "keep": "Keep everything as is.",
@@ -149,7 +151,15 @@
       "announcement_invalid_length": "COMPRIMENTO INVÁLIDO",
       "announcement_invalid_asn": "ASN INVÁLIDO",
       "roa_no_announcement_info": "SEM INFORMAÇÕES DE ANÚNCIO",
-      "roa_too_permissive": "TOO PERMISSIVE"
+      "roa_too_permissive": "TOO PERMISSIVE",
+      "as0": "AS0",
+      "roa_seen_help": "This ROA matches announcements seen in BGP",
+      "announcement_not_found_help": "This announcement is not covered by any of your ROAs",
+      "roa_unseen_help": "We do not see any BGP announcements matching this ROA",
+      "announcement_invalid_length_help": "This announcement is not allowed because it is more specific than the prefix and max length you authorized for this ASN",
+      "announcement_invalid_asn_help": "This announcement is not allowed because you only authorized the prefix from another ASN",
+      "roa_too_permissive_help": "This ROA matches announcements in BGP, but also allows unseen announcements",
+      "as0_help": "This ROA serves to disallow all announcements for a prefix"
     }
   },
   "deltaErrors": {

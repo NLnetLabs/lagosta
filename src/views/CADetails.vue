@@ -834,6 +834,12 @@
     >
       <el-row>
         <el-col :xs="24">
+          <h3 v-if="deltaSuggestions && deltaSuggestions.length" class="suggestion-title suggestion-title-nopadding suggestion-title-light">
+            {{ $t("caDetails.suggestions.following") }}
+          </h3>
+          <h3 v-if="deltaSuggestions && deltaSuggestions.length === 0" class="suggestion-title suggestion-title-nopadding suggestion-title-light">
+            {{ $t("caDetails.suggestions.nochanges") }}
+          </h3>
           <el-table
             size="small"
             v-if="deltaSuggestions && deltaSuggestions.length"
@@ -901,14 +907,21 @@
       </el-row>
 
       <span slot="footer" class="dialog-footer">
-        <el-button type="text" @click="analysisDetailsVisible = false">{{
+        <el-button type="text" @click="analysisDetailsVisible = false" v-if="deltaSuggestions && deltaSuggestions.length">{{
           $t("common.cancel")
         }}</el-button>
         <el-button
           type="primary"
+          v-if="deltaSuggestions && deltaSuggestions.length"
           @click="addSuggestedROA"
           :disabled="deltaCart.added.length === 0 && deltaCart.removed.length === 0"
           >{{ $t("common.confirm") }}</el-button
+        >
+        <el-button
+          type="primary"
+          v-if="deltaSuggestions && deltaSuggestions.length === 0"
+          @click="analysisDetailsVisible = false"
+          >{{ $t("common.ok") }}</el-button
         >
       </span>
     </el-dialog>
@@ -1225,8 +1238,8 @@ export default {
         added: val.filter(row => row.action === "add"),
         removed: val.filter(row => row.action === "remove")
       };
-      if (this.lastModifiedTable !== "mine") {
-        this.$refs.deltaSuggestionsTable.clearSelection();
+      if (this.lastModifiedTable !== "mine" && this.$refs["deltaSuggestionsTable"]) {
+        this.$refs["deltaSuggestionsTable"].clearSelection();
       }
       window.setTimeout(function() {
         self.previewUpdates();
@@ -1239,8 +1252,8 @@ export default {
         added: val.filter(row => row.action === "add"),
         removed: val.filter(row => row.action === "remove")
       };
-      if (this.lastModifiedTable !== "suggestions") {
-        this.$refs.deltaMineTable.clearSelection();
+      if (this.lastModifiedTable !== "suggestions" && this.$refs["deltaMineTable"]) {
+        this.$refs["deltaMineTable"].clearSelection();
       }
       window.setTimeout(function() {
         self.previewUpdates();
@@ -1586,6 +1599,9 @@ h3 {
   }
   &.suggestion-title-nopadding {
     margin-left: 0;
+  }
+  &.suggestion-title-light {
+    font-weight: 300;
   }
 }
 
