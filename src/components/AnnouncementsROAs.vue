@@ -119,84 +119,7 @@
       </el-table-column>
       <el-table-column prop="state" :label="$t('announcements.stateLabel')" sortable v-if="showBGP">
         <template slot-scope="scope">
-          <el-tag
-            type="success"
-            size="medium"
-            v-if="scope.row.state === 'roa_seen'"
-            disable-transitions
-            effect="plain"
-            >{{ $t("announcements.state.roa_seen") }}</el-tag
-          >
-          <el-tag
-            type="warning"
-            size="medium"
-            v-if="scope.row.state === 'roa_too_permissive'"
-            disable-transitions
-            effect="plain"
-            >{{ $t("announcements.state.roa_too_permissive") }}</el-tag
-          >
-          <el-tag
-            type="warning"
-            size="medium"
-            v-if="scope.row.state === 'roa_as0'"
-            disable-transitions
-            effect="plain"
-            >AS0</el-tag
-          >
-          <el-tag
-            type="success"
-            size="mini"
-            v-if="scope.row.authorizes && scope.row.authorizes.length"
-            disable-transitions
-            >{{ scope.row.authorizes.length }}</el-tag
-          >
-          <el-tag
-            type="warning"
-            size="mini"
-            v-if="scope.row.disallows && scope.row.disallows.length"
-            disable-transitions
-            >{{ scope.row.disallows.length }}</el-tag
-          >
-          <el-tag
-            type="info"
-            size="medium"
-            v-if="scope.row.state === 'announcement_not_found'"
-            disable-transitions
-            effect="plain"
-            >{{ $t("announcements.state.announcement_not_found") }}</el-tag
-          >
-          <el-tag
-            type="warning"
-            size="medium"
-            v-if="scope.row.state === 'roa_unseen'"
-            disable-transitions
-            effect="plain"
-            >{{ $t("announcements.state.roa_unseen") }}</el-tag
-          >
-          <el-tag
-            type="danger"
-            size="medium"
-            v-if="scope.row.state === 'announcement_invalid_length'"
-            disable-transitions
-            effect="plain"
-            >{{ $t("announcements.state.announcement_invalid_length") }}</el-tag
-          >
-          <el-tag
-            type="danger"
-            size="medium"
-            v-if="scope.row.state === 'announcement_invalid_asn'"
-            disable-transitions
-            effect="plain"
-            >{{ $t("announcements.state.announcement_invalid_asn") }}</el-tag
-          >
-          <el-tag
-            type="danger"
-            size="medium"
-            v-if="scope.row.state === 'roa_no_announcement_info'"
-            disable-transitions
-            effect="plain"
-            >{{ $t("announcements.state.roa_no_announcement_info") }}</el-tag
-          >
+          <stateVisualizer :scope="scope"></stateVisualizer>
         </template>
       </el-table-column>
       <el-table-column prop="state" width="130" align="right">
@@ -245,8 +168,12 @@
 import APIService from "@/services/APIService.js";
 import ip6addr from "ip6addr";
 const LOCALSTORAGE_BGP = "lagosta_showbgp";
+import StateVisualizer from "./StateVisualizer.vue";
 
 export default {
+  components: {
+    stateVisualizer: StateVisualizer,
+  },
   props: ["handle", "initializeParent", "initializeRepo", "updated"],
   data() {
     return {
