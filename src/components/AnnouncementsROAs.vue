@@ -164,10 +164,10 @@
       v-if="!loadingAnnouncements && !loadingTable"
       background
       :current-page.sync="currentPage"
+      :page-sizes="[10, 25, 100, 500]"
       :page-size="pageSize"
-      :hide-on-single-page="true"
       @current-change="preFilterAnnouncements"
-      layout="prev, pager, next"
+      layout="sizes, prev, pager, next"
       :total="totalRecords"
     >
     </el-pagination>
