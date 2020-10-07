@@ -1401,6 +1401,16 @@ export default {
     switchCA() {
       router.push("/cas/" + this.handle);
     },
+    resetDeltaCarts() {
+      this.deltaMineCart = {
+        added: [],
+        removed: []
+      };
+      this.deltaSuggestionsCart = {
+        added: [],
+        removed: []
+      };
+    },
     addSuggestedROA() {
       const self = this;
       self.submittingSuggestionForm = true;
@@ -1442,6 +1452,7 @@ export default {
           self.submittingROAForm = false;
           self.addROAFormVisible = false;
           if (r.data) {
+            self.resetDeltaCarts();
             self.addROASuggestionsVisible = true;
             self.effects = r.data.effect.sort((a, b) => (a.state > b.state ? 1 : -1));
             self.suggestions = r.data.suggestion;
@@ -1473,6 +1484,7 @@ export default {
     },
     triggerSuggestions(event) {
       this.removeROASuggestions = true;
+      this.resetDeltaCarts();
       this.addROASuggestionsVisible = true;
       this.effects = event.data.effect.sort((a, b) => (a.state > b.state ? 1 : -1));
       this.suggestions = event.data.suggestion;
