@@ -71,7 +71,7 @@
     "maxLengthTooltip": "If max length is not specified (-), it defaults to the prefix length.",
     "confirmation": {
       "title": "Warning",
-      "message": "This will remove the ROA. Continue?",
+      "message": "This will remove the ROA '{prefix}-{max_length} => {asn}'. Continue?",
       "added": "ROA added",
       "retired": "ROA removed",
       "retiredSuccess": "The ROA has been removed",

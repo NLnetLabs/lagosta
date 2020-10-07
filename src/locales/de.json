@@ -70,7 +70,7 @@
     "maxLengthTooltip": "Wenn maxLength nicht angegeben wird (-), wird die Präfixlänge genutzt.",
     "confirmation": {
       "title": "Warnung",
-      "message": "Diese Aktion entfernt das ROA. Fortfahren?",
+      "message": "Diese Aktion entfernt das ROA '{prefix}-{max_length} => {asn}'. Fortfahren?",
       "added": "ROA hinzugefügt",
       "retired": "ROA entfernt",
       "retiredSuccess": "Das ROA wurde entfernt",

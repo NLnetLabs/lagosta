@@ -70,7 +70,7 @@
     "maxLengthTooltip": "Se o comprimento máximo não está especificado, o comprimento do prefixo será utilizado",
     "confirmation": {
       "title": "Aviso",
-      "message": "Esta operação irá remover a ROA. Continuar?",
+      "message": "Esta operação irá remover a ROA '{prefix}-{max_length} => {asn}'. Continuar?",
       "added": "ROA adicionada",
       "retired": "ROA removida",
       "retiredSuccess": "A ROA foi removida",
