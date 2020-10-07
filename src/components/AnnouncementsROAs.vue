@@ -22,6 +22,16 @@
       </el-col>
       <el-col :xs="24" :sm="16">
         <div class="show-bgp">
+          <download-csv
+            class="download-csv"
+            :fields="['asn', 'prefix', 'max_length', showBGP ? 'state' : null]"
+            :data="filteredAnnouncements"
+            :name="handle + '.csv'"
+          >
+            <el-button class="mt-1" type="text">
+              <font-awesome-icon icon="file-csv" /> {{ $t("announcements.download") }}
+            </el-button>
+          </download-csv>
           <el-switch v-model="showBGP" :active-text="$t('announcements.showBGPInfo')"> </el-switch>
         </div>
       </el-col>
@@ -172,7 +182,7 @@ import StateVisualizer from "./StateVisualizer.vue";
 
 export default {
   components: {
-    stateVisualizer: StateVisualizer,
+    stateVisualizer: StateVisualizer
   },
   props: ["handle", "initializeParent", "initializeRepo", "updated"],
   data() {
@@ -254,8 +264,7 @@ export default {
         if (self.$t("announcements.state")[ann.state]) {
           stateLabel =
             self
-              .$t("announcements.state")[ann.state]
-              .toLowerCase()
+              .$t("announcements.state")[ann.state].toLowerCase()
               .replace(reg, "")
               .indexOf(src) > -1;
         } else {
@@ -339,7 +348,7 @@ export default {
           )
             .then(r => {
               if (r.data) {
-                self.$emit("trigger-suggestions", {remove: row, data: r.data});
+                self.$emit("trigger-suggestions", { remove: row, data: r.data });
               } else {
                 self.$notify({
                   title: this.$t("caDetails.confirmation.retired"),
@@ -411,9 +420,13 @@ export default {
   display: none;
 }
 
-
 .el-pagination {
   margin-top: 1rem;
   text-align: right;
+}
+
+.download-csv {
+  display: inline;
+  margin-right: 1rem;
 }
 </style>

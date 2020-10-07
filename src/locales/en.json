@@ -161,7 +161,8 @@
       "announcement_invalid_asn_help": "This announcement is not allowed because you only authorized the prefix from another ASN",
       "roa_too_permissive_help": "This ROA matches announcements in BGP, but also allows unseen announcements",
       "as0_help": "This ROA serves to disallow all announcements for a prefix"
-    }
+    },
+    "download": "Download CSV"
   },
   "deltaErrors": {
     "duplicates": "Duplicates",
