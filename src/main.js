@@ -4,7 +4,7 @@ import router from "./router";
 import "./plugins/element.js";
 import i18n from "./i18n";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faSignOutAlt, faDownload, faClipboard } from "@fortawesome/free-solid-svg-icons";
+import { faSignOutAlt, faDownload, faClipboard, faFileCsv, faDiagnoses } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import(/* webpackPreload: true */ "typeface-lato/index.css");
 import(/* webpackPreload: true */ "typeface-source-code-pro/index.css");
@@ -15,15 +15,20 @@ import "prismjs";
 import "prismjs/themes/prism.css";
 import VuePrismEditor from "vue-prism-editor";
 import "vue-prism-editor/dist/VuePrismEditor.css"; // import the styles
+import JsonCSV from "vue-json-csv";
 
 Vue.component("prism-editor", VuePrismEditor);
 
 Vue.use(VueClipboard);
 
+Vue.component("download-csv", JsonCSV);
+
 library.add({
   faSignOutAlt,
   faDownload,
-  faClipboard
+  faClipboard,
+  faFileCsv,
+  faDiagnoses
 });
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
