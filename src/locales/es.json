@@ -70,7 +70,7 @@
     "maxLengthTooltip": "Si el largo máximo no es especificado (-), se toma por defecto el largo del prefijo.",
     "confirmation": {
       "title": "Advertencia",
-      "message": "Esto eliminará el ROA. żDesea continuar?",
+      "message": "Esto eliminará el ROA '{prefix}-{max_length} => {asn}'. żDesea continuar?",
       "added": "ROA agregado",
       "retired": "ROA eliminado",
       "retiredSuccess": "El ROA se ha eliminado",

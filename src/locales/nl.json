@@ -70,7 +70,7 @@
     "maxLengthTooltip": "Als er geen maxLength is gedefinieerd (-), wordt de lengte van de prefix gebruikt.",
     "confirmation": {
       "title": "Waarschuwing",
-      "message": "Hiermee wordt de ROA verwijderd. Doorgaan?",
+      "message": "Hiermee wordt de ROA '{prefix}-{max_length} => {asn}' verwijderd. Doorgaan?",
       "added": "ROA toegevoegd",
       "retired": "ROA verwijderd",
       "retiredSuccess": "De ROA is verwijderd",

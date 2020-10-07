@@ -321,7 +321,7 @@ export default {
     deleteROA(row) {
       const self = this;
       this.$confirm(
-        this.$t("caDetails.confirmation.message"),
+        this.$t("caDetails.confirmation.message", row),
         this.$t("caDetails.confirmation.title"),
         {
           confirmButtonText: this.$t("common.ok"),
