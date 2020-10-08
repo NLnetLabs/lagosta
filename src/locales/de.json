@@ -187,6 +187,7 @@
     "ca-repo-response-invalid-xml": "Datenbank (Repository) Antwort ist ungültig",
     "ca-repo-response-wrong-xml": "Antwort der Eltern-Zertifizierungsstelle anstatt der Datenbank (Repository) erhalten",
     "ca-parent-duplicate": "Es existiert bereits eine Eltern-Zertifizierungsstelle mit dem Namen '{parent}'",
+    "ca-parent-xml-duplicate": "This response is already used by a parent named '{parent}'",
     "ca-parent-unknown": "Es existiert keine Eltern-Zertifizierungsstelle mit dem Namen '{parent}'",
     "ca-parent-issue": "Error von Eltern-Zertifizierungsstelle empfangen '{parent}': {cause}",
     "ca-parent-response-invalid-xml": "Ungültige Eltern-Zertifizierungsstelle xml empfangen",

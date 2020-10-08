@@ -187,6 +187,7 @@
     "ca-repo-response-invalid-xml": "Άκυρη απάντηση XML από το αποθετήριο (repository)",
     "ca-repo-response-wrong-xml": "Λήφθηκε απάντηση CA-γονέα αντί για απάντηση αποθετηρίου (repository)",
     "ca-parent-duplicate": "Έχετε ήδη έναν CA-γονέα με το όνομα '{parent}'",
+    "ca-parent-xml-duplicate": "This response is already used by a parent named '{parent}'",
     "ca-parent-unknown": "Δεν έχετε CA-γονέα με το όνομα '{parent}'",
     "ca-parent-issue": "Μήνυμα σφάλματος από CA-γονέα '{parent}': {cause}",
     "ca-parent-response-invalid-xml": "Άκυρη απάντηση XML από CA-γονέα",

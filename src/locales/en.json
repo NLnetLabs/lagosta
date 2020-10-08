@@ -188,6 +188,7 @@
     "ca-repo-response-invalid-xml": "Got invalid repository response xml",
     "ca-repo-response-wrong-xml": "Got parent instead of repository response",
     "ca-parent-duplicate": "You already have a parent named '{parent}'",
+    "ca-parent-xml-duplicate": "This response is already used by a parent named '{parent}'",
     "ca-parent-unknown": "You do not have a parent named '{parent}'",
     "ca-parent-issue": "Received error from parent '{parent}': {cause}",
     "ca-parent-response-invalid-xml": "Got invalid parent response xml",
