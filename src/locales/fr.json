@@ -188,6 +188,7 @@
     "ca-repo-response-invalid-xml": "Réponse xml du dépôt invalide",
     "ca-repo-response-wrong-xml": "Réponse du parent reçue au lieu du dépôt",
     "ca-parent-duplicate": "Vous avez déjà un parent nommé '{parent}'",
+    "ca-parent-xml-duplicate": "This response is already used by a parent named '{parent}'",
     "ca-parent-unknown": "Vous n'avez pas un parent nommé '{parent}'",
     "ca-parent-issue": "Erreur reçue du parent '{parent}': {cause}",
     "ca-parent-response-invalid-xml": "Réponse xml du parent invalide",
