@@ -88,13 +88,35 @@ export default {
     return apiClient.get("/api/v1/cas/" + handle + "/child_request.xml");
   },
   addParentResponse(handle, xml, name) {
-    return apiClient.post("/api/v1/cas/" + handle + "/parents-xml/" + name, xml);
+    return apiClient.post("/api/v1/cas/" + handle + "/parents-xml/" + name, xml).catch(error => {
+      if (error.response && error.response.data) {
+        return Promise.reject({
+          data: error.response.data
+        });
+      }
+      return Promise.reject({
+        data: {
+          code: -1
+        }
+      });
+    });
   },
   getRepoRequestXML(handle) {
     return apiClient.get("/api/v1/cas/" + handle + "/repo/request.xml");
   },
   addRepoResponse(handle, xml) {
-    return apiClient.post("/api/v1/cas/" + handle + "/repo", xml);
+    return apiClient.post("/api/v1/cas/" + handle + "/repo", xml).catch(error => {
+      if (error.response && error.response.data) {
+        return Promise.reject({
+          data: error.response.data
+        });
+      }
+      return Promise.reject({
+        data: {
+          code: -1
+        }
+      });
+    });
   },
   getKrillStats() {
     return apiClient.get("/stats/info");
