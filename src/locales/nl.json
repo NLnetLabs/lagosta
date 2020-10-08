@@ -164,14 +164,14 @@
     "download": "Download CSV"
   },
   "deltaErrors": {
-    "duplicates": "Duplicates",
-    "covered": "Covered",
-    "notheld": "Notheld",
-    "unknowns": "Unknowns",
-    "invalid_length": "Invalid Length",
-    "covering": "Covering",
-    "as0_exists": "AS0 Exists",
-    "as0_overlaps": "AS0 Overlaps"
+    "duplicates": "ROA bestaat reeds",
+    "covered": "Overlappende ROA bestaat",
+    "notheld": "Niet uw prefix",
+    "unknowns": "ROA bestaat niet",
+    "invalid_length": "Invalide Lengte",
+    "covering": "Overlapt bestaande ROA",
+    "as0_exists": "Overlappende AS0 ROA bestaat",
+    "as0_overlaps": "Overlapt bestaande ROA"
   },
   "errors": {
     "repo-not-set": "U dient eerst een databank (repository) te configureren",
@@ -200,7 +200,7 @@
     "ca-roa-not-entitled": "ROA prefix '{prefix}' staat niet op een van uw huidige certificaten",
     "ta-not-allowed": "Deze functionaliteit wordt niet ondersteund door het test-vertrouwensanker",
     "ta-name-reserved": "Naam gereserveerd",
-    "ca-roa-delta-error": "Delta rejected, see included json"
+    "ca-roa-delta-error": "ROA geweigerd om de volgende reden(en):"
   },
   "testbed": {
     "welcome": "Welcome to this RPKI testbed",
