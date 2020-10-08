@@ -201,7 +201,7 @@
     "ca-roa-not-entitled": "ROA prefix '{prefix}' is not on any of your current certificates",
     "ta-not-allowed": "This functionality is not supported by the test Trust Anchor",
     "ta-name-reserved": "Name reserved",
-    "ca-roa-delta-error": "Delta rejected, see included json"
+    "ca-roa-delta-error": "ROA rejected because of the following issue(s)"
   },
   "testbed": {
     "welcome": "Welcome to this RPKI testbed",

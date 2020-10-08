@@ -200,7 +200,7 @@
     "ca-roa-not-entitled": "Το πρόθεμα ROA '{prefix}' δεν είναι σε κανένα από τα τρέχοντα πιστοποιητικά σας",
     "ta-not-allowed": "Αυτή η λειτουργικότητα δεν υποστηρίζεται από τη δοκιμαστική Άγκυρα Εμπιστοσύνης (Trust Anchor)",
     "ta-name-reserved": "Κατοχυρωμένο όνομα",
-    "ca-roa-delta-error": "Delta rejected, see included json"
+    "ca-roa-delta-error": "ROA rejected because of the following issue(s)"
   },
   "testbed": {
     "welcome": "Welcome to this RPKI testbed",
