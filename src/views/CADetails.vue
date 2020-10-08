@@ -78,7 +78,7 @@
                         type="text"
                         v-if="!initializeParent && !initializeRepo && !emptyResources && bgpShown"
                         @click="analysisDetailsVisible = true"
-                        ><font-awesome-icon icon="diagnoses" /> {{ $t("caDetails.analyseThis") }}</el-button
+                        >{{ $t("caDetails.analyseThis") }}</el-button
                       >
                     </el-col>
                   </el-row>
