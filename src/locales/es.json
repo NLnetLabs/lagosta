@@ -200,7 +200,7 @@
     "ca-roa-not-entitled": "El prefijo '{prefix}' contenido en el ROA no está en ninguno de sus certificados actuales",
     "ta-not-allowed": "Esta funcionalidad no es compatible con el ancla de confianza de prueba",
     "ta-name-reserved": "Nombre reservado",
-    "ca-roa-delta-error": "Delta rejected, see included json"
+    "ca-roa-delta-error": "ROA rejected because of the following issue(s)"
   },
   "testbed": {
     "welcome": "Welcome to this RPKI testbed",

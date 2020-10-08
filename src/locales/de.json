@@ -200,7 +200,7 @@
     "ca-roa-not-entitled": "Das ROA Präfix '{prefix}' ist in keinem Ihrer aktuellen Zertifikate zu finden",
     "ta-not-allowed": "Diese Funktionalität wird vom Test Vertrauensanker nicht unterstützt",
     "ta-name-reserved": "Name reserviert",
-    "ca-roa-delta-error": "Delta rejected, see included json"
+    "ca-roa-delta-error": "ROA rejected because of the following issue(s)"
   },
   "testbed": {
     "welcome": "Welcome to this RPKI testbed",
