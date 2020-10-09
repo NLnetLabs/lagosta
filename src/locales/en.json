@@ -212,7 +212,7 @@
     },
     "rpconfighelp": {
       "heading": "Testbed TAL",
-      "body": "To fetch the data published by this testbed, please download this <a href='{tallink}'>Trust Anchor Locator</a> (TAL) and configure it in your Relying Party Software."
+      "body": "To fetch the data published by this testbed, please download this <a href='{tallink}'>Trust Anchor Locator</a> (TAL) and configure it in your Relying Party Software. Note that you should NEVER use this TAL in a production environment. This is provided for testing only."
     },
     "regunreg": {
       "heading": "Register/Unregister",
