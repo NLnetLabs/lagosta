@@ -374,7 +374,6 @@ export default {
                               error.response.data.label !== undefined &&
                               error.response.data.label === 'ca-child-duplicate') {
                             let new_child_handle = child_handle + String(new Date().getTime());
-                            console.log('CA name ' + child_handle + ' is taken, retrying with name ' + new_child_handle);
                             doAddChild(new_child_handle, asn_res, ipv4_res, ipv6_res,id_cert);
                           } else {
                             self.loading = false;
@@ -493,7 +492,6 @@ export default {
                               error.response.data.label !== undefined &&
                               error.response.data.label === 'pub-duplicate') {
                             let new_publisher_handle = publisher_handle + String(new Date().getTime());
-                            console.log('Publisher name ' + publisher_handle + ' is taken, retrying with name ' + new_publisher_handle);
                             doAddPublisher(new_publisher_handle, id_cert);
                           } else {
                             self.loading = false;
