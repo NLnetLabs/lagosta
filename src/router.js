@@ -6,6 +6,7 @@ import CAs from "./views/CAs.vue";
 import CADetails from "./views/CADetails.vue";
 import Interstitial from "./views/Interstitial.vue";
 import CreateCA from "./views/CreateCA.vue";
+import TestBed from "./views/TestBed.vue";
 import PageNotFound from "./views/404.vue";
 import APIService from "./services/APIService.js";
 import { LOCALSTORAGE_NAME } from "./auth-header";
@@ -28,6 +29,11 @@ const router = new Router({
       path: "/onboarding",
       name: "onboarding",
       component: CreateCA
+    },
+    {
+      path: "/testbed",
+      name: "testbed",
+      component: TestBed
     },
     {
       path: "/createca",
@@ -54,7 +60,7 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  const publicPages = ["/login"];
+  const publicPages = ["/login", "/testbed"];
   const authRequired = !publicPages.includes(to.path);
   const loggedInOnFrontend = localStorage.getItem(LOCALSTORAGE_NAME);
 

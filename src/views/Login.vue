@@ -4,7 +4,7 @@
       <el-col :span="10">
         <el-card class="box-card">
           <div class="text item">
-            <el-form :model="form" :rules="rules" :inline="true" ref="loginForm">
+            <el-form :model="form" :rules="rules" :inline="true" ref="loginForm" @submit.prevent.native="submitForm">
               <el-form-item :label="$t('login.password')" prop="token">
                 <el-input
                   type="password"
@@ -92,7 +92,7 @@ export default {
       this.loading = true;
       APIService.login(this.form.token).then(success => {
         if (success) {
-          this.$emit("authEvent");
+          this.$emit("auth-event");
           router.push(this.returnUrl);
         } else {
           self.error = this.$t("login.error");

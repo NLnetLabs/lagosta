@@ -20,7 +20,7 @@ export default {
     this.loadCAs();
   },
   methods: {
-    loadCAs: function() {
+    loadCAs() {
       APIService.getCAs().then(response => {
         this.loading = false;
         if (response.data.cas && response.data.cas.length > 0) {
