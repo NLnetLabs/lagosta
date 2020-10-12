@@ -111,7 +111,7 @@
       "willResult": "Will result in",
       "yourChoice": "Your choice",
       "ourSuggestion": "Our Suggestion",
-      "ourSuggestionHelp": "Help text here",
+      "ourSuggestionHelp": "Our suggestion is based RIPE RIS Routing information, please verify!",
       "addThis": "Add this",
       "removeThis": "Remove this",
       "willAdd": "Will add this ROA ({reason})",
