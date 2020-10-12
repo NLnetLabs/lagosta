@@ -157,9 +157,9 @@
       "announcement_not_found_help": "Diese BGP Ankündigung wird von keinem Ihrer ROAs geschützt",
       "roa_unseen_help": "Wir sehen keine BGP Ankündigungen welche mit dem ROA übereinstimmen",
       "announcement_invalid_length_help": "Diese BGP Ankündigung ist nicht erlaubt, da es spezifischer ist als das Präfix und die MaxLength welche Sie für dieses ASN autorisiert haben",
-      "announcement_invalid_asn_help": "Diese BGP Ankündigung ist nicht erlaubt, da Sie nur das Präfix für ein anderes ASN autorisirt haben",
+      "announcement_invalid_asn_help": "Diese BGP Ankündigung ist nicht erlaubt, da Sie nur das Präfix für ein anderes ASN autorisiert haben",
       "roa_too_permissive_help": "Dieses ROA stimmt mit BGP Ankündigungen überein, erlaubt darüber hinaus aber auch noch weitere BGP Ankündigungen",
-      "as0_help": "Dieses ROA dient dafür alle BGP Ankündigungen für dieses Präfix zu verbieten"
+      "as0_help": "Dieses ROA dient dazu alle BGP Ankündigungen für dieses Präfix zu verbieten"
     },
     "download": "CSV herunterladen"
   },
@@ -170,7 +170,7 @@
     "unknowns": "ROA existiert nicht",
     "invalid_length": "Ungültige Länge",
     "covering": "Überlappt mit bestehendem ROA",
-    "as0_exists": "Überlappendes S0 ROA besteht bereits",
+    "as0_exists": "Überlappendes AS0 ROA besteht bereits",
     "as0_overlaps": "Überlappt bestehendes ROA"
   },
   "errors": {
@@ -211,11 +211,11 @@
     },
     "rpconfighelp": {
       "heading": "Testumgebungs TAL",
-      "body": "Um die Daten für diese Testumgebung zu laden, bitte starten Sie den Download von diesem <a href='{tallink}'>Trust Anchor Locator</a> (TAL) und konfigurieren Sie diesen in Ihrer Relying Party Software. Bitte beachten Sie, dass Sie diesen TAL NIEMALS in einer Produktivumgebung einsetzen sollten. Er wird ausschließlich zu Testzwecken zur Verfügung gestellt."
+      "body": "Um die Daten für diese Testumgebung zu laden, starten Sie bitte den Download von diesem <a href='{tallink}'>Trust Anchor Locator</a> (TAL) und konfigurieren Sie diesen in Ihrer Relying Party Software. Bitte beachten Sie, dass Sie diesen TAL NIEMALS in einer Produktivumgebung einsetzen sollten. Er wird ausschließlich zu Testzwecken zur Verfügung gestellt."
     },
     "regunreg": {
       "heading": "(De-)Registrieren",
-      "body": "<p>Nutzen Sie das Formular um Ihre RPKI Zertifizierungsstelle als Kind der Testumgebung zu registrieren. Danach können Sie Route Origin Authorisations (ROAs) für Ihre Ressourcen erstellen.</p><p>Falls Sie nicht Ihre eigenen Rsync und RRDP Datenbanken bereitstellen wollen, können Sie das Publisher Registrierungsformular nutzen um Ihre ROAs in der Datenbank der Testumgebung zu veröffentlichen. Nutzen Sie das Deregistrierungsformular um bestehende Beziehungen aufzulösen (sogar die von anderen Nutzen der Testumgebung!).</p>"
+      "body": "<p>Nutzen Sie das Formular um Ihre RPKI Zertifizierungsstelle als Kind der Testumgebung zu registrieren. Danach können Sie Route Origin Authorisations (ROAs) für Ihre Ressourcen erstellen.</p><p>Falls Sie nicht Ihre eigenen Rsync und RRDP Datenbanken bereitstellen wollen, können Sie das Publisher Registrierungsformular nutzen um Ihre ROAs in der Datenbank der Testumgebung zu veröffentlichen. Nutzen Sie das Deregistrierungsformular um bestehende Beziehungen aufzulösen (sogar die von anderen Nutzern der Testumgebung!).</p>"
     },
     "rfcdoclink": "Klicken Sie hier um die RFC-8183 Dokumentation für dieses XML zu sehen",
     "childhandle": "Kind Handle",
@@ -251,7 +251,7 @@
     },
     "removeChild": {
       "heading": "Zertifizierungsstelle entfernen",
-      "placeholder": "Geben Sie den Namen der Zertifizierungsstelle eine welche entfernt werden soll",
+      "placeholder": "Geben Sie den Namen der Zertifizierungsstelle ein welche entfernt werden soll",
       "confirm": "Kinder-Zertifizierungsstelle entfernen",
       "confirmation": {
         "title": "Warnung",
@@ -265,7 +265,7 @@
         "label": "Publisher Anfrage XML",
         "placeholder": "Fügen Sie Ihr <publisher_request/> XML hier ein"
       },
-      "confirm": "Publisher registieren",
+      "confirm": "Publisher registrieren",
       "format": "Dies ist keine valide Publisher XML Anfrage",
       "required": "Fügen Sie eine Publisher XML Anfrage hinzu",
       "confirmation": {
@@ -277,7 +277,7 @@
     },
     "removePublisher": {
       "heading": "Publisher entfernen",
-      "placeholder": "Geben Sie den Namen des Publishers eine welcher entfernt werden soll",
+      "placeholder": "Geben Sie den Namen des Publishers ein welcher entfernt werden soll",
       "confirm": "Publisher entfernen",
       "confirmation": {
         "title": "Warnung",
