@@ -16,7 +16,8 @@
     "warning": "Aviso",
     "idle": "Sua sessão expirou por inatividade.",
     "nodata": "No data",
-    "copySuccess": "XML copiado para a Área de transferência"
+    "copySuccess": "XML copiado para a Área de transferência",
+    "edit": "Edit"
   },
   "login": {
     "password": "Senha",

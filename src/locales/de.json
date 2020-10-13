@@ -16,7 +16,8 @@
     "warning": "Warnung",
     "idle": "Sie wurden aufgrund von Inaktivität ausgeloggt.",
     "nodata": "Keine Daten",
-    "copySuccess": "XML in die Zwischenablage kopiert"
+    "copySuccess": "XML in die Zwischenablage kopiert",
+    "edit": "Edit"
   },
   "login": {
     "password": "Passwort",
