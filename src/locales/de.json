@@ -286,7 +286,7 @@
       "success": "Publisher '{publisher_handle}' wurde aus der Testumgebung entfernt."
     },
     "errors": {
-      "invalid-xml": "Ungüliges XML: {err}",
+      "invalid-xml": "Ungültiges XML: {err}",
       "missing-xml-el": "Fehlendes Element {el}",
       "missing-xml-child-el": "Fehlendes Kind-Element {el} vom Element {parent}",
       "missing-xml-attr": "Fehlendes Attribut {attr} vom Element {el}",
