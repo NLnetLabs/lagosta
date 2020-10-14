@@ -16,7 +16,8 @@
     "warning": "Προειδοποίηση",
     "idle": "Έχετε αποσυνδεθεί λόγω αδράνειας.",
     "nodata": "No data",
-    "copySuccess": "To XML αρχείο αντιγράφηκε στο πρόχειρο"
+    "copySuccess": "To XML αρχείο αντιγράφηκε στο πρόχειρο",
+    "edit": "Edit"
   },
   "login": {
     "password": "Κωδικός",
