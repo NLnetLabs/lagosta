@@ -140,7 +140,7 @@
   "announcements": {
     "noRoasOrAnnouncements": "Aucun ROAs ou Annonces trouvés.",
     "search": "Rechercher un ASN, préfix, statut...",
-    "showBGPInfo": "Montrez les infos BGP",
+    "showBGPInfo": "Montrer les infos BGP",
     "authorizes": "Autoriser {number} annonces",
     "disallows": "Refuser {number} annonces",
     "asn": "ASN",
@@ -153,27 +153,27 @@
       "announcement_invalid_length": "LONGUEUR INVALIDE",
       "announcement_invalid_asn": "ASN INVALIDE",
       "roa_no_announcement_info": "AUCUNE INFORMATION D'ANNONCE",
-      "roa_too_permissive": "TOO PERMISSIVE",
+      "roa_too_permissive": "TROP PERMISSIF",
       "as0": "AS0",
-      "roa_seen_help": "This ROA matches announcements seen in BGP",
-      "announcement_not_found_help": "This announcement is not covered by any of your ROAs",
-      "roa_unseen_help": "We do not see any BGP announcements matching this ROA",
-      "announcement_invalid_length_help": "This announcement is not allowed because it is more specific than the prefix and max length you authorized for this ASN",
-      "announcement_invalid_asn_help": "This announcement is not allowed because you only authorized the prefix from another ASN",
-      "roa_too_permissive_help": "This ROA matches announcements in BGP, but also allows unseen announcements",
-      "as0_help": "This ROA serves to disallow all announcements for a prefix"
+      "roa_seen_help": "Ce ROA correspond aux annonces vues dans BGP",
+      "announcement_not_found_help": "Cette announce n'est couverte par aucun de vos ROAs",
+      "roa_unseen_help": "Nous ne voyons aucune annonces BGP qui correspondent à ce ROA",
+      "announcement_invalid_length_help": "Cette annonce n'est pas permise parce qu'elle est plus spécifique que le préfixe et la longueur maximum autorisées pour cet ASN",
+      "announcement_invalid_asn_help": "Cette annonce n'est pas permise parce que vous autorisez seulement le préfixe depuis un autre ASN",
+      "roa_too_permissive_help": "Ce ROA correspond aux annonces en BGP, mais aussi à des annonces introuvables",
+      "as0_help": "Ce ROA sert à refuser toutes les annonces pour un préfixe"
     },
-    "download": "Download CSV"
+    "download": "Télécharger le fichier au format CSV"
   },
   "deltaErrors": {
-    "duplicates": "Duplicates",
-    "covered": "Covered",
-    "notheld": "Notheld",
-    "unknowns": "Unknowns",
-    "invalid_length": "Invalid Length",
-    "covering": "Covering",
-    "as0_exists": "AS0 Exists",
-    "as0_overlaps": "AS0 Overlaps"
+    "duplicates": "Doublons",
+    "covered": "Couvert",
+    "notheld": "Pas Considéré",
+    "unknowns": "Inconnus",
+    "invalid_length": "Longueur Invalide",
+    "covering": "En cours de couverture",
+    "as0_exists": "AS0 Existe",
+    "as0_overlaps": "AS0 Empiète"
   },
   "errors": {
     "repo-not-set": "Vous devez d'abord configurer un dépôt",
