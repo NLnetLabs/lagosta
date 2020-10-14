@@ -258,7 +258,7 @@
         "title": "Warning",
         "message": "Are you sure you want to unregister this child with the testbed?"
       },
-      "success": "Child CA '{child_handle}' has been addremoved from to the testbed."
+      "success": "Child CA '{child_handle}' has been removed from to the testbed."
     },
     "addPublisher": {
       "heading": "Register Publisher",
