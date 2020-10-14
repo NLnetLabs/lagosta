@@ -16,7 +16,8 @@
     "warning": "Advertencia",
     "idle": "You have been logged out because of inactivity.",
     "nodata": "No data",
-    "copySuccess": "El XML se copió a su portapapeles"
+    "copySuccess": "El XML se copió a su portapapeles",
+    "edit": "Edit"
   },
   "login": {
     "password": "Contraseña",
