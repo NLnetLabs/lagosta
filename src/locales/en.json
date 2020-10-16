@@ -111,7 +111,7 @@
       "willResult": "Will result in",
       "yourChoice": "Your choice",
       "ourSuggestion": "Our Suggestion",
-      "ourSuggestionHelp": "Our suggestion is based RIPE RIS Routing information, please verify!",
+      "ourSuggestionHelp": "Our suggestion is based on RIPE RIS Routing information, please verify!",
       "addThis": "Add this",
       "removeThis": "Remove this",
       "willAdd": "Will add this ROA ({reason})",
@@ -258,7 +258,7 @@
         "title": "Warning",
         "message": "Are you sure you want to unregister this child with the testbed?"
       },
-      "success": "Child CA '{child_handle}' has been addremoved from to the testbed."
+      "success": "Child CA '{child_handle}' has been removed from to the testbed."
     },
     "addPublisher": {
       "heading": "Register Publisher",
