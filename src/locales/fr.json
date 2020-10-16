@@ -16,7 +16,8 @@
     "warning": "Attention",
     "idle": "Vous avez été déconnecté de suite d'inactivité.",
     "nodata": "No data",
-    "copySuccess": "XML copié dans votre presse-papier"
+    "copySuccess": "XML copié dans votre presse-papier",
+    "edit": "Edit"
   },
   "login": {
     "password": "Mot de passe",
