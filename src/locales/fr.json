@@ -33,7 +33,7 @@
     "addCAForm": {
       "required": "Ce champ est requis",
       "format": "Ce n'est pas un nom d'AC valide",
-      "confirm": "Créer une AC",
+      "confirm": "Créez une AC",
       "confirmation": {
         "title": "Attention",
         "message": "Une fois défini, l'identifiant ne pourra être changé. Continuer?"
@@ -71,7 +71,7 @@
     "maxLengthTooltip": "Si la longueur maximum n'est pas spécifiée (-), elle sera initialisée à la longueur du préfixe.",
     "confirmation": {
       "title": "Attention",
-      "message": "Cette action va enlever le ROA '{prefix}-{max_length} => {asn}'. Continuer?",
+      "message": "Cette action va enlever le ROA '{prefix}-{max_length} => {asn}'. Continuez?",
       "added": "ROA ajouté",
       "retired": "ROA enlevé",
       "retiredSuccess": "Le ROA a été enlevé",
@@ -80,10 +80,10 @@
     "addROAForm": {
       "required": "Ce champ est requis",
       "asn_format": "Ceci n'est pas un ASN valide",
-      "prefix_format": "S'il vous plaît entrer un préfixe IPv4 ou IPv6 valide"
+      "prefix_format": "SVP entrez un préfixe IPv4 ou IPv6 valide"
     },
-    "onboardingWarning": "Vous aurez besoin de connecter votre AC à un dépôt RPKI publique où vous pourrez publier votre certificat et vos ROAs. Dès que la configuration côté parent est complète, le 'relying party' (logiciel validateur) commencera immédiatement à récupérer votre certificat et les ROAs que vous avez créés depuis ce dépôt.",
-    "initialize": "S'il vous plaît, initialiser le dépôt RPKI et/ou le parent en premier lieu.",
+    "onboardingWarning": "Veuillez connecter votre AC à un dépôt RPKI publique pour publier votre certificat et vos ROAs. Dès que la configuration côté parent est complète, le 'relying party' (logiciel validateur) commencera immédiatement à récupérer votre certificat et les ROAs que vous avez créés depuis ce dépôt.",
+    "initialize": "SVP initialisez le dépôt RPKI et/ou le parent en premier lieu.",
     "noResourcesYet": "Vous n'avez pas encore reçu de ressources",
     "clickToRefresh": "Cliquer ici pour rafraîchir",
     "parentsTab": {
@@ -94,52 +94,52 @@
       "arin": "Compatible ARIN",
       "name": "Nom du parent",
       "namerequired": "Le nom du parent est requis",
-      "nameformat": "Ceci n'est pas nom de parent valide"
+      "nameformat": "Nom de parent invalide"
     },
     "repoTab": {
       "request": "Requête du Publisher",
       "response": "Réponse du dépôt",
       "addRepoSuccess": "Dépôt ajouté"
     },
-    "analyseThis": "Analyse my ROAs",
-    "analysis": "ROA Analysis",
+    "analyseThis": "Analyser mes ROAs",
+    "analysis": "Analyse des ROA",
     "suggestions": {
-      "following": "We suggest the following changes to your ROAs",
-      "nochanges": "We suggest no changes at this time",
-      "adding": "Adding",
-      "removing": "Removing ROA",
-      "keep": "Keep everything as is.",
-      "willResult": "Will result in",
-      "yourChoice": "Your choice",
-      "ourSuggestion": "Our Suggestion",
-      "ourSuggestionHelp": "Our suggestion is based RIPE RIS Routing information, please verify!",
-      "addThis": "Add this",
-      "removeThis": "Remove this",
-      "willAdd": "Will add this ROA ({reason})",
-      "willRemove": "Will remove this ROA ({reason})",
+      "following": "Nous suggérons les changements suivant pour vos ROAs",
+      "nochanges": "Nous ne suggérons aucun changement pour le moment",
+      "adding": "En cours d'ajout",
+      "removing": "Retirer le ROA",
+      "keep": "Aucun changement",
+      "willResult": "Résultera en",
+      "yourChoice": "Votre choix",
+      "ourSuggestion": "Notre Suggestion",
+      "ourSuggestionHelp": "Notre suggestion est basée sur les informations de routage de RIPE RIS, veuillez svp vérifier !!",
+      "addThis": "Ajouter ceci",
+      "removeThis": "Retirer ceci",
+      "willAdd": "Ajoutera ce ROA ({reason})",
+      "willRemove": "Retirera ce ROA ({reason})",
       "reasons": {
-        "not_found": "Not found",
-        "invalid_asn": "Invalid ASN",
-        "invalid_length": "Invalid length",
-        "stale": "Stale",
-        "as0_redundant": "AS0 redundant",
-        "too_permissive": "Too permissive",
-        "new": "New"
+        "not_found": "Pas trouvé",
+        "invalid_asn": "ASN invalide",
+        "invalid_length": "longueur invalide",
+        "stale": "Obsolète",
+        "as0_redundant": "AS0 redondant",
+        "too_permissive": "Trop permissif",
+        "new": "Nouveau"
       }
     },
-    "syncParents": "Refresh Parents",
-    "syncRepo": "Refresh Repository",
-    "lastExchange": "Last Exchange",
-    "nextExchange": "Next Exchange Before",
-    "allResources": "All Resources",
-    "entitlements": "Entitlements",
-    "showEntitlements": "Show Detailed Entitlements",
-    "parentCertificate": "Parent Certificate",
-    "published": "Published"
+    "syncParents": "Rafraîchir les Parents",
+    "syncRepo": "Rafraîchir le Dépôt",
+    "lastExchange": "Dernier Échange",
+    "nextExchange": "Dernier Échange Avant",
+    "allResources": "Toutes les Ressources",
+    "entitlements": "Ressources Dues",
+    "showEntitlements": "Montrer les Ressources Dues en détail",
+    "parentCertificate": "Certificat Parent",
+    "published": "Publié"
   },
   "announcements": {
     "noRoasOrAnnouncements": "Aucun ROAs ou Annonces trouvés.",
-    "search": "Rechercher un ASN, préfix, statut...",
+    "search": "Rechercher un ASN, préfixe, statut...",
     "showBGPInfo": "Montrez les infos BGP",
     "authorizes": "Autoriser {number} annonces",
     "disallows": "Refuser {number} annonces",
@@ -153,27 +153,27 @@
       "announcement_invalid_length": "LONGUEUR INVALIDE",
       "announcement_invalid_asn": "ASN INVALIDE",
       "roa_no_announcement_info": "AUCUNE INFORMATION D'ANNONCE",
-      "roa_too_permissive": "TOO PERMISSIVE",
+      "roa_too_permissive": "TROP PERMISSIF",
       "as0": "AS0",
-      "roa_seen_help": "This ROA matches announcements seen in BGP",
-      "announcement_not_found_help": "This announcement is not covered by any of your ROAs",
-      "roa_unseen_help": "We do not see any BGP announcements matching this ROA",
-      "announcement_invalid_length_help": "This announcement is not allowed because it is more specific than the prefix and max length you authorized for this ASN",
-      "announcement_invalid_asn_help": "This announcement is not allowed because you only authorized the prefix from another ASN",
-      "roa_too_permissive_help": "This ROA matches announcements in BGP, but also allows unseen announcements",
-      "as0_help": "This ROA serves to disallow all announcements for a prefix"
+      "roa_seen_help": "Ce ROA correspond aux annonces vues dans BGP",
+      "announcement_not_found_help": "Cette announce n'est couverte par aucun de vos ROAs",
+      "roa_unseen_help": "Aucune annonce BGP correspondant à ce ROA trouvée",
+      "announcement_invalid_length_help": "Cette annonce n'est pas permise parce qu'elle est plus spécifique que la longueur du préfixe et la taille maximum autorisées pour cet ASN",
+      "announcement_invalid_asn_help": "Cette annonce n'est pas permise parce que vous autorisez seulement le préfixe depuis un autre ASN",
+      "roa_too_permissive_help": "Ce ROA correspond aux annonces en BGP, mais aussi à des annonces introuvables",
+      "as0_help": "Ce ROA sert à invalider toutes les annonces pour un préfixe"
     },
-    "download": "Download CSV"
+    "download": "Télécharger le fichier au format CSV"
   },
   "deltaErrors": {
-    "duplicates": "Duplicates",
-    "covered": "Covered",
-    "notheld": "Notheld",
-    "unknowns": "Unknowns",
-    "invalid_length": "Invalid Length",
-    "covering": "Covering",
-    "as0_exists": "AS0 Exists",
-    "as0_overlaps": "AS0 Overlaps"
+    "duplicates": "Doublons",
+    "covered": "Couvert",
+    "notheld": "Pas Considéré",
+    "unknowns": "Inconnus",
+    "invalid_length": "Longueur Invalide",
+    "covering": "Recouvrant",
+    "as0_exists": "AS0 Existe",
+    "as0_overlaps": "Chevauchement du AS0"
   },
   "errors": {
     "repo-not-set": "Vous devez d'abord configurer un dépôt",
@@ -189,7 +189,7 @@
     "ca-repo-response-invalid-xml": "Réponse xml du dépôt invalide",
     "ca-repo-response-wrong-xml": "Réponse du parent reçue au lieu du dépôt",
     "ca-parent-duplicate": "Vous avez déjà un parent nommé '{parent}'",
-    "ca-parent-xml-duplicate": "This response is already used by a parent named '{parent}'",
+    "ca-parent-xml-duplicate": "Cette réponse est déjà utilisée par le parent '{parent}'",
     "ca-parent-unknown": "Vous n'avez pas un parent nommé '{parent}'",
     "ca-parent-issue": "Erreur reçue du parent '{parent}': {cause}",
     "ca-parent-response-invalid-xml": "Réponse xml du parent invalide",
@@ -203,99 +203,99 @@
     "ca-roa-not-entitled": "Le préfixe du ROA '{prefix}' ne figure dans aucun de vos certificats actuels",
     "ta-not-allowed": "Cette fonctionnalité n'est pas supportée par l'ancre de confiance de test",
     "ta-name-reserved": "Nom reservé",
-    "ca-roa-delta-error": "ROA rejected because of the following issue(s)"
+    "ca-roa-delta-error": "ROA rejeté pour la/les raison(s) suivante(s)"
   },
   "testbed": {
-    "welcome": "Welcome to this RPKI testbed",
+    "welcome": "Bienvenue sur ce banc d'essai pour RPKI",
     "disclaimer": {
-      "heading": "Disclaimer",
-      "body": "This testbed offers a completely independent RPKI hierarchy, which can be used for evaluation purposes. It allows you to register any resources for your Child CA. No guarantees are given concerning the availability of this service. If you find any issues, <a href='https://github.com/NLnetLabs/krill/issues/new'>please let us know</a>."
+      "heading": "Avertissement",
+      "body": "Ce banc d'essai offre une hiérarchie complètement différente pour RPKI; il peut être utilisé pour des besoins d'évaluation. Il vous permet d'inscrire n'importe quelles ressources pour votre AC enfant. Aucune garantie n'est donnée concernant la disponibilité de ce service. Si vous décelez un problème, <a href='https://github.com/NLnetLabs/krill/issues/new'>merci de nous le faire savoir</a>."
     },
     "rpconfighelp": {
-      "heading": "Testbed TAL",
-      "body": "To fetch the data published by this testbed, please download this <a href='{tallink}'>Trust Anchor Locator</a> (TAL) and configure it in your Relying Party Software. Note that you should NEVER use this TAL in a production environment. This is provided for testing only."
+      "heading": "Banc d'essai TAL",
+      "body": "Pour récupérer les données publiées par ce banc d'essai, veuillez svp télécharger ce <a href='{tallink}'>Trust Anchor Locator</a> (TAL) et le configurer dans votre logiciel validateur, le Relying Pary. Noter que vous ne devriez JAMAIS utiliser ce TAL dans un environnement de production. Il est mis à disposition uniquement pour des tests."
     },
     "regunreg": {
-      "heading": "Register/Unregister",
-      "body": "<p>Use the form to register your RPKI Certificate Authority as a child of the testbed so you can create Route Origin Authorisations (ROAs) for the resources that you claim.</p><p>If you do not wish to host your own Rsync and RRDP repositories you can use the Register Publisher form to configure publishing your ROAs in the respository hosted by the testbed. Use the Unregister forms to cancel previously established relationships (even those of other testbed users!).</p>"
+      "heading": "Inscrire/Désinscrire",
+      "body": "<p>Utiliser le formulaire pour inscrire votre autorité de certification RPKI comme un enfant de ce banc d'essai ainsi vous pourrez créer les 'Route Origin Authorisations' (ROAs) pour les resources que vous revendiquez.</p><p>Si vous ne voulez pas héberger vos propres  dépôts Rsync et RRDP vous pouvez utiliser le formulaire du Register Publisher  pour configurer la publication de vos ROAs dans le dépôt hébergé par le banc d'essai. Utilisez les formulaires 'Se désinscrire' pour annuler les relations précédemment établies (même celles des autres utilisateurs du banc d'essai!).</p>"
     },
-    "rfcdoclink": "Click to view the RFC-8183 documentation for this XML",
-    "childhandle": "Child Handle",
-    "publisherhandle": "Publisher Handle",
-    "responseXML": "Testbed response XML",
+    "rfcdoclink": "Cliquer pour voir la documentation de ce XML dans le RFC-8183",
+    "childhandle": "Identifiant enfant",
+    "publisherhandle": "Identifiant Publisher",
+    "responseXML": "réponse banc d'essai au format XML",
     "addChild": {
-      "heading": "Register CA",
+      "heading": "Inscrire l'AC",
       "requestXML": {
-        "label": "Child Request XML",
-        "placeholder": "Paste your <child_request/> XML here"
+        "label": "Requête XML enfant",
+        "placeholder": "Coller votre <child_request/> XML ici"
       },
       "asnresources": {
-        "label": "ASN Resources",
-        "placeholder": "The AS resources: e.g. AS1, AS3-4"
+        "label": "Ressources ASN",
+        "placeholder": "Les ressources AS: e.g. AS1, AS3-4"
       },
       "ipv4resources": {
-        "label": "IPv4 Resources",
-        "placeholder": "The IPv4 resources: e.g. 192.168.0.0/16"
+        "label": "Ressources IPv4",
+        "placeholder": "Les ressources IPv4: e.g. 192.168.0.0/16"
       },
       "ipv6resources": {
-        "label": "IPv6 Resources",
-        "placeholder": "The IPv6 resources: e.g. 2001:db8::/32"
+        "label": "Ressources IPv6",
+        "placeholder": "Les ressources IPv6: e.g. 2001:db8::/32"
       },
-      "confirm": "Register child CA",
-      "format": "This is not a valid child request XML",
-      "required": "Please provide the child request XML",
+      "confirm": "Inscrire l'AC enfant",
+      "format": "Ce n'est pas une requête enfant XML valide",
+      "required": "Veuillez svp fournir la requête XML enfant",
       "confirmation": {
-        "title": "Warning",
-        "message": "Are you sure you want to register this child with the testbed?"
+        "title": "Attention",
+        "message": "Êtes-vous sûr de vouloir inscrire cet enfant dans le banc d'essai ?"
       },
-      "success": "Child CA '{child_handle}' has been added to the testbed.",
-      "registeranother": "Register another CA"
+      "success": "L'AC enfant '{child_handle}' a été ajoutée au banc d'essai.",
+      "registeranother": "Inscrire une autre AC"
     },
     "removeChild": {
-      "heading": "Unregister CA",
-      "placeholder": "Enter the CA name to remove",
-      "confirm": "Remove child CA",
+      "heading": "Désinscrire l'AC",
+      "placeholder": "Entrer le nom de l'AC à retirer",
+      "confirm": "Retirer l'AC enfant",
       "confirmation": {
-        "title": "Warning",
-        "message": "Are you sure you want to unregister this child with the testbed?"
+        "title": "Attention",
+        "message": "Êtes-vous sûr de vouloir désinscrire cet enfant du banc d'essai ?"
       },
-      "success": "Child CA '{child_handle}' has been addremoved from to the testbed."
+      "success": "L'AC enfant '{child_handle}' a été retirée du banc d'essai."
     },
     "addPublisher": {
-      "heading": "Register Publisher",
+      "heading": "Inscrire le Publisher",
       "requestXML": {
-        "label": "Publisher Request XML",
-        "placeholder": "Paste your <publisher_request/> XML here"
+        "label": "Requête XML de type Publisher",
+        "placeholder": "Coller votre  <publisher_request/> XML ici"
       },
-      "confirm": "Register publisher",
-      "format": "This is not a valid publisher request XML",
-      "required": "Please provide the publisher request XML",
+      "confirm": "Inscrire le Publisher",
+      "format": "Ceci n'est pas une requête XML de type Publisher valide",
+      "required": "Veuillez svp fournir la requête XML de type Publisher",
       "confirmation": {
-        "title": "Warning",
-        "message": "Are you sure you want to register this publisher with the testbed?"
+        "title": "Attention",
+        "message": "Êtes-vous sûr de vouloir inscrire ce Publisher avec le banc d'essai?"
       },
-      "success": "Publisher '{publisher_handle}' has been added to the testbed.",
-      "registeranother": "Register another Publisher"
+      "success": "Le Publisher '{publisher_handle}' a été ajouté au banc d'essai.",
+      "registeranother": "Inscrire un autre Publisher"
     },
     "removePublisher": {
-      "heading": "Unregister Publisher",
-      "placeholder": "Enter the Publisher name to remove",
-      "confirm": "Remove publisher",
+      "heading": "Désinscrire le Publisher",
+      "placeholder": "Entrer le nom du Publisher à retirer",
+      "confirm": "Retirer le publisher",
       "confirmation": {
-        "title": "Warning",
-        "message": "Are you sure you want to unregister this publisher with the testbed?"
+        "title": "Attention",
+        "message": "Etes-vous sûr de vouloir désinscrire ce Publisher avec le banc d'essai ?"
       },
-      "success": "Publisher '{publisher_handle}' has been removed from the testbed."
+      "success": "Le Publisher '{publisher_handle}' a été retiré du banc d'essai."
     },
     "errors": {
-      "invalid-xml": "Invalid XML: {err}",
-      "missing-xml-el": "Missing element {el}",
-      "missing-xml-child-el": "Missing child element {el} of element {parent}",
-      "missing-xml-attr": "Missing attribute {attr} on element {el}",
-      "empty-xml-el": "Element {el} cannot be empty",
-      "empty-xml-attr": "Attribute {attr} on element {el} cannot be empty",
-      "child-handle-required": "Child Handle is required",
-      "publisher-handle-required": "Publisher Handle is required"
+      "invalid-xml": "XML invalide: {err}",
+      "missing-xml-el": "Element manquant {el}",
+      "missing-xml-child-el": "Elément enfant  {el} de l'élément {parent} manquant",
+      "missing-xml-attr": "Attribut {attr} sur l'élement {el} manquant",
+      "empty-xml-el": "Elément {el} ne peut pas être vide",
+      "empty-xml-attr": "Attribut {attr} de l'élément {el} ne peut pas être vide",
+      "child-handle-required": "L'identifiant Enfant est requis",
+      "publisher-handle-required": "L'identifiant Publisher est requis"
     }
   }
 }
