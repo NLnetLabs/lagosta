@@ -33,7 +33,7 @@
     "addCAForm": {
       "required": "Ce champ est requis",
       "format": "Ce n'est pas un nom d'AC valide",
-      "confirm": "Créer une AC",
+      "confirm": "Créez une AC",
       "confirmation": {
         "title": "Attention",
         "message": "Une fois défini, l'identifiant ne pourra être changé. Continuer?"
@@ -71,7 +71,7 @@
     "maxLengthTooltip": "Si la longueur maximum n'est pas spécifiée (-), elle sera initialisée à la longueur du préfixe.",
     "confirmation": {
       "title": "Attention",
-      "message": "Cette action va enlever le ROA '{prefix}-{max_length} => {asn}'. Continuer?",
+      "message": "Cette action va enlever le ROA '{prefix}-{max_length} => {asn}'. Continuez?",
       "added": "ROA ajouté",
       "retired": "ROA enlevé",
       "retiredSuccess": "Le ROA a été enlevé",
@@ -80,10 +80,10 @@
     "addROAForm": {
       "required": "Ce champ est requis",
       "asn_format": "Ceci n'est pas un ASN valide",
-      "prefix_format": "S'il vous plaît entrer un préfixe IPv4 ou IPv6 valide"
+      "prefix_format": "SVP entrez un préfixe IPv4 ou IPv6 valide"
     },
-    "onboardingWarning": "Vous aurez besoin de connecter votre AC à un dépôt RPKI publique où vous pourrez publier votre certificat et vos ROAs. Dès que la configuration côté parent est complète, le 'relying party' (logiciel validateur) commencera immédiatement à récupérer votre certificat et les ROAs que vous avez créés depuis ce dépôt.",
-    "initialize": "S'il vous plaît, initialiser le dépôt RPKI et/ou le parent en premier lieu.",
+    "onboardingWarning": "Veuillez connecter votre AC à un dépôt RPKI publique pour publier votre certificat et vos ROAs. Dès que la configuration côté parent est complète, le 'relying party' (logiciel validateur) commencera immédiatement à récupérer votre certificat et les ROAs que vous avez créés depuis ce dépôt.",
+    "initialize": "SVP initialisez le dépôt RPKI et/ou le parent en premier lieu.",
     "noResourcesYet": "Vous n'avez pas encore reçu de ressources",
     "clickToRefresh": "Cliquer ici pour rafraîchir",
     "parentsTab": {
@@ -94,7 +94,7 @@
       "arin": "Compatible ARIN",
       "name": "Nom du parent",
       "namerequired": "Le nom du parent est requis",
-      "nameformat": "Ceci n'est pas nom de parent valide"
+      "nameformat": "Nom de parent invalide"
     },
     "repoTab": {
       "request": "Requête du Publisher",
@@ -105,14 +105,14 @@
     "analysis": "Analyse des ROA",
     "suggestions": {
       "following": "Nous suggérons les changements suivant pour vos ROAs",
-      "nochanges": "Nous ne suggérons pas de changements pour le moment",
+      "nochanges": "Nous ne suggérons aucun changement pour le moment",
       "adding": "En cours d'ajout",
       "removing": "Retirer le ROA",
-      "keep": "Conserver le tout tel quel.",
+      "keep": "Aucun changement",
       "willResult": "Résultera en",
       "yourChoice": "Votre choix",
       "ourSuggestion": "Notre Suggestion",
-      "ourSuggestionHelp": "Notre suggestion est basée sur les informations de routage du RIPE RIS, veuillez svp vérifier !!",
+      "ourSuggestionHelp": "Notre suggestion est basée sur les informations de routage de RIPE RIS, veuillez svp vérifier !!",
       "addThis": "Ajouter ceci",
       "removeThis": "Retirer ceci",
       "willAdd": "Ajoutera ce ROA ({reason})",
@@ -121,7 +121,7 @@
         "not_found": "Pas trouvé",
         "invalid_asn": "ASN invalide",
         "invalid_length": "longueur invalide",
-        "stale": "Dépassé",
+        "stale": "Obsolète",
         "as0_redundant": "AS0 redondant",
         "too_permissive": "Trop permissif",
         "new": "Nouveau"
@@ -129,18 +129,18 @@
     },
     "syncParents": "Rafraîchir les Parents",
     "syncRepo": "Rafraîchir le Dépôt",
-    "lastExchange": "Dernier Echange",
-    "nextExchange": "Dernier Echange Avant",
+    "lastExchange": "Dernier Échange",
+    "nextExchange": "Dernier Échange Avant",
     "allResources": "Toutes les Ressources",
-    "entitlements": "Transmission de Droits",
-    "showEntitlements": "Montrer les Transmissions de Droits détaillées",
+    "entitlements": "Ressources Dues",
+    "showEntitlements": "Montrer les Ressources Dues en détail",
     "parentCertificate": "Certificat Parent",
     "published": "Publié"
   },
   "announcements": {
     "noRoasOrAnnouncements": "Aucun ROAs ou Annonces trouvés.",
-    "search": "Rechercher un ASN, préfix, statut...",
-    "showBGPInfo": "Montrer les infos BGP",
+    "search": "Rechercher un ASN, préfixe, statut...",
+    "showBGPInfo": "Montrez les infos BGP",
     "authorizes": "Autoriser {number} annonces",
     "disallows": "Refuser {number} annonces",
     "asn": "ASN",
@@ -157,11 +157,11 @@
       "as0": "AS0",
       "roa_seen_help": "Ce ROA correspond aux annonces vues dans BGP",
       "announcement_not_found_help": "Cette announce n'est couverte par aucun de vos ROAs",
-      "roa_unseen_help": "Nous ne voyons aucune annonces BGP qui correspondent à ce ROA",
-      "announcement_invalid_length_help": "Cette annonce n'est pas permise parce qu'elle est plus spécifique que le préfixe et la longueur maximum autorisées pour cet ASN",
+      "roa_unseen_help": "Aucune annonce BGP correspondant à ce ROA trouvée",
+      "announcement_invalid_length_help": "Cette annonce n'est pas permise parce qu'elle est plus spécifique que la longueur du préfixe et la taille maximum autorisées pour cet ASN",
       "announcement_invalid_asn_help": "Cette annonce n'est pas permise parce que vous autorisez seulement le préfixe depuis un autre ASN",
       "roa_too_permissive_help": "Ce ROA correspond aux annonces en BGP, mais aussi à des annonces introuvables",
-      "as0_help": "Ce ROA sert à refuser toutes les annonces pour un préfixe"
+      "as0_help": "Ce ROA sert à invalider toutes les annonces pour un préfixe"
     },
     "download": "Télécharger le fichier au format CSV"
   },
@@ -171,9 +171,9 @@
     "notheld": "Pas Considéré",
     "unknowns": "Inconnus",
     "invalid_length": "Longueur Invalide",
-    "covering": "En cours de couverture",
+    "covering": "Recouvrant",
     "as0_exists": "AS0 Existe",
-    "as0_overlaps": "AS0 Empiète"
+    "as0_overlaps": "Chevauchement du AS0"
   },
   "errors": {
     "repo-not-set": "Vous devez d'abord configurer un dépôt",
@@ -189,7 +189,7 @@
     "ca-repo-response-invalid-xml": "Réponse xml du dépôt invalide",
     "ca-repo-response-wrong-xml": "Réponse du parent reçue au lieu du dépôt",
     "ca-parent-duplicate": "Vous avez déjà un parent nommé '{parent}'",
-    "ca-parent-xml-duplicate": "This response is already used by a parent named '{parent}'",
+    "ca-parent-xml-duplicate": "Cette réponse est déjà utilisée par le parent '{parent}'",
     "ca-parent-unknown": "Vous n'avez pas un parent nommé '{parent}'",
     "ca-parent-issue": "Erreur reçue du parent '{parent}': {cause}",
     "ca-parent-response-invalid-xml": "Réponse xml du parent invalide",
@@ -203,7 +203,7 @@
     "ca-roa-not-entitled": "Le préfixe du ROA '{prefix}' ne figure dans aucun de vos certificats actuels",
     "ta-not-allowed": "Cette fonctionnalité n'est pas supportée par l'ancre de confiance de test",
     "ta-name-reserved": "Nom reservé",
-    "ca-roa-delta-error": "ROA rejected because of the following issue(s)"
+    "ca-roa-delta-error": "ROA rejeté pour la/les raison(s) suivante(s)"
   },
   "testbed": {
     "welcome": "Bienvenue sur ce banc d'essai pour RPKI",
@@ -217,9 +217,9 @@
     },
     "regunreg": {
       "heading": "Inscrire/Désinscrire",
-      "body": "<p>Utilisez le formulaire pour inscrire votre autorité de certification RPKI comme un enfant de ce banc d'essai ainsi vous pourrez créer les 'Route Origin Authorisations' (ROAs) pour les resources que vous revendiquez.</p><p>Si vous ne voulez pas héberger vos propres  dépôts Rsync et RRDP vous pouvez utiliser le formulaire du Register Publisher  pour configurer la publication de vos ROAs dans le dépôt hébergé par le banc d'essai. Utilisez les formulaires 'Se désinscrire' pour annuler les relations précédemment établies (même celles des autres utilisateurs du banc d'essai!).</p>"
+      "body": "<p>Utiliser le formulaire pour inscrire votre autorité de certification RPKI comme un enfant de ce banc d'essai ainsi vous pourrez créer les 'Route Origin Authorisations' (ROAs) pour les resources que vous revendiquez.</p><p>Si vous ne voulez pas héberger vos propres  dépôts Rsync et RRDP vous pouvez utiliser le formulaire du Register Publisher  pour configurer la publication de vos ROAs dans le dépôt hébergé par le banc d'essai. Utilisez les formulaires 'Se désinscrire' pour annuler les relations précédemment établies (même celles des autres utilisateurs du banc d'essai!).</p>"
     },
-    "rfcdoclink": "Cliquez pour voir la documentation de ce XML dans le RFC-8183",
+    "rfcdoclink": "Cliquer pour voir la documentation de ce XML dans le RFC-8183",
     "childhandle": "Identifiant enfant",
     "publisherhandle": "Identifiant Publisher",
     "responseXML": "réponse banc d'essai au format XML",
@@ -246,7 +246,7 @@
       "required": "Veuillez svp fournir la requête XML enfant",
       "confirmation": {
         "title": "Attention",
-        "message": "Etes-vous sur de vouloir inscire cet enfant dans le banc d'essai ?"
+        "message": "Êtes-vous sûr de vouloir inscrire cet enfant dans le banc d'essai ?"
       },
       "success": "L'AC enfant '{child_handle}' a été ajoutée au banc d'essai.",
       "registeranother": "Inscrire une autre AC"
@@ -257,7 +257,7 @@
       "confirm": "Retirer l'AC enfant",
       "confirmation": {
         "title": "Attention",
-        "message": "Etes-vous sûr de vouloir désinscrire cet enfant du banc d'essai ?"
+        "message": "Êtes-vous sûr de vouloir désinscrire cet enfant du banc d'essai ?"
       },
       "success": "L'AC enfant '{child_handle}' a été retirée du banc d'essai."
     },
@@ -272,7 +272,7 @@
       "required": "Veuillez svp fournir la requête XML de type Publisher",
       "confirmation": {
         "title": "Attention",
-        "message": "Etes-vous sûr de vouloir inscrire ce Publisher avec le banc d'essai?"
+        "message": "Êtes-vous sûr de vouloir inscrire ce Publisher avec le banc d'essai?"
       },
       "success": "Le Publisher '{publisher_handle}' a été ajouté au banc d'essai.",
       "registeranother": "Inscrire un autre Publisher"
