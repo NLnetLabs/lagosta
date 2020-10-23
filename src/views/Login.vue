@@ -83,23 +83,15 @@ export default {
   },
   created() {
     this.returnUrl = this.$route.query.returnUrl || "/";
+    if (this.$route.query.id && this.$route.query.token) {
+      APIService.recordLogin(
+        window.atob(this.$route.query.id),
+        this.$route.query.token
+      );
+      this.postLogin(true);
+    }
   },
   methods: {
-    login() {
-      this.submitted = true;
-
-      const self = this;
-      this.loading = true;
-      APIService.login(this.form.token).then(success => {
-        if (success) {
-          this.$emit("auth-event");
-          router.push(this.returnUrl);
-        } else {
-          self.error = this.$t("login.error");
-          self.loading = false;
-        }
-      });
-    },
     submitForm() {
       this.$refs["loginForm"].validate(valid => {
         if (valid) {
@@ -108,6 +100,24 @@ export default {
           return false;
         }
       });
+    },
+    login() {
+      this.submitted = true;
+
+      const self = this;
+      this.loading = true;
+      APIService.login(this.form.token).then(success => {
+        this.postLogin(success)
+      });
+    },
+    postLogin(success) {
+      if (success) {
+        this.$emit("auth-event");
+        router.push(this.returnUrl);
+      } else {
+        self.error = this.$t("login.error");
+        self.loading = false;
+      }
     }
   }
 };

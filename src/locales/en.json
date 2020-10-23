@@ -17,7 +17,8 @@
     "idle": "You have been logged out because of inactivity.",
     "nodata": "No data",
     "copySuccess": "XML copied to your clipboard",
-    "edit": "Edit"
+    "edit": "Edit",
+    "welcome": "Logged in as: "
   },
   "login": {
     "password": "Password",

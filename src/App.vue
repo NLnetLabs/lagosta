@@ -10,7 +10,7 @@
               </div>
             </router-link>
           </el-col>
-          <el-col :span="14">&nbsp;</el-col>
+          <el-col :span="14"><span v-if="user">{{ $t("common.welcome") }} {{ this.user.id }}</span><span v-else>&nbsp;</span></el-col>
           <el-col :span="6">
             <div class="toolbar">
               <el-select v-model="$i18n.locale" placeholder="Language" size="small">
@@ -174,9 +174,16 @@ export default {
       this.user = JSON.parse(localStorage.getItem(LOCALSTORAGE_NAME));
     },
     logout() {
-      return APIService.logout().then(() => {
+      return APIService.logout().then(response => {
+        var logout_url = response.data;
         this.user = null;
-        router.push("/login");
+        // send the user to the right location to complete the logout process,
+        // e.g. at a 3rd party login provider
+        if (logout_url.indexOf('http') === 0) {
+          window.location.href = logout_url
+        } else {
+          router.push(logout_url);
+        }
       });
     }
   }

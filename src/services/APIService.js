@@ -6,7 +6,35 @@ const apiClient = axios.create({
   headers: authHeader()
 });
 
+apiClient.interceptors.response.use(function (response) {
+  // Any status code that lie within the range of 2xx cause this function to trigger
+  // Do something with response data
+  if (response.headers["authorization"] !== undefined) {
+    apiClient.defaults.headers["Authorization"] = response.headers["authorization"];
+  }
+  return response;
+}, function (error) {
+  // Any status codes that falls outside the range of 2xx cause this function to trigger
+  // Do something with response error
+  console.log("testing: rejection handler invoked: " + error);
+  throw new Error('Oh no!');
+});
+
 const simpleClient = axios.create();
+
+function handleError(error) {
+  console.log("testing: handling error: " + error);
+  if (error.response && error.response.data) {
+    return Promise.reject({
+      data: error.response.data
+    });
+  }
+  return Promise.reject({
+    data: {
+      code: -1
+    }
+  });
+}
 
 export default {
   isAuthorized() {
@@ -16,16 +44,14 @@ export default {
       .catch(() => false);
   },
   login(token) {
+    // Change this to use one mechanism for logins: form POST
+    // No password stored at the client, no different login flows,
+    // return a signed timestamped JWT in all cases, etc.
     apiClient.defaults.headers["Authorization"] = "Bearer " + token;
     return apiClient
-      .get("/api/v1/authorized")
-      .then(() => {
-        localStorage.setItem(
-          LOCALSTORAGE_NAME,
-          JSON.stringify({
-            authdata: window.btoa(token)
-          })
-        );
+      .post("/auth/login")
+      .then(response => {
+        recordLogin(response.data, token);
         return true;
       })
       .catch(() => {
@@ -33,14 +59,24 @@ export default {
         return false;
       });
   },
+  recordLogin(id, token) {
+    apiClient.defaults.headers["Authorization"] = "Bearer " + token;
+    localStorage.setItem(
+      LOCALSTORAGE_NAME,
+      JSON.stringify({
+        authdata: token,
+        id: id
+      })
+    );
+  },
   logout() {
     localStorage.removeItem(LOCALSTORAGE_NAME);
-    return new Promise(function(resolve) {
-      resolve("Logged out.");
-    });
+    // returns the URL to which the user should be sent to complete the logout
+    // process, e.g. when using a 3rd party login provider.
+    return simpleClient.post("/auth/logout");
   },
   getCAs() {
-    return apiClient.get("/api/v1/cas");
+    return apiClient.get("/api/v1/cas").catch(handleError);
   },
   getCA(handle) {
     return apiClient.get("/api/v1/cas/" + handle);
@@ -63,18 +99,7 @@ export default {
   updateROAs(handle, delta, trial) {
     return apiClient
       .post("/api/v1/cas/" + handle + "/routes" + (trial ? "/try" : ""), delta)
-      .catch(error => {
-        if (error.response && error.response.data) {
-          return Promise.reject({
-            data: error.response.data
-          });
-        }
-        return Promise.reject({
-          data: {
-            code: -1
-          }
-        });
-      });
+      .catch(handleError);
   },
   updateROAsDryRun(handle, delta) {
     return apiClient.post("/api/v1/cas/" + handle + "/routes/analysis/dryrun", delta);
@@ -174,5 +199,8 @@ export default {
   },
   syncRepo() {
     return apiClient.post("/api/v1/bulk/cas/sync/repo");
+  },
+  getLoginURL() {
+    return simpleClient.get("/auth/login");
   }
 };

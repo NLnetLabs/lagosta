@@ -17,6 +17,8 @@ import VuePrismEditor from "vue-prism-editor";
 import "vue-prism-editor/dist/VuePrismEditor.css"; // import the styles
 import JsonCSV from "vue-json-csv";
 
+Vue.config.devtools = true;
+
 Vue.component("prism-editor", VuePrismEditor);
 
 Vue.use(VueClipboard);
