@@ -51,8 +51,15 @@ export default {
     return apiClient
       .post("/auth/login")
       .then(response => {
-        recordLogin(response.data, token);
-        return true;
+        apiClient.defaults.headers["Authorization"] = "Bearer " + token;
+        localStorage.setItem(
+          LOCALSTORAGE_NAME,
+          JSON.stringify({
+            authdata: token,
+            id: response.data
+          })
+        );
+            return true;
       })
       .catch(() => {
         localStorage.removeItem(LOCALSTORAGE_NAME);
