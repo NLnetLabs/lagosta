@@ -43,23 +43,28 @@ export default {
       .then(() => true)
       .catch(() => false);
   },
-  login(token) {
-    // Change this to use one mechanism for logins: form POST
-    // No password stored at the client, no different login flows,
-    // return a signed timestamped JWT in all cases, etc.
+  login(token, id = undefined) {
     apiClient.defaults.headers["Authorization"] = "Bearer " + token;
+
+    // Handle id/password login mode where we have to submit an id and password,
+    // not just a token as when in master token mode.
+    let queryParams = "";
+    if (id !== undefined) {
+      queryParams = "?id=" + id;
+    }
+
     return apiClient
-      .post("/auth/login")
+      .post("/auth/login" + queryParams)
       .then(response => {
-        apiClient.defaults.headers["Authorization"] = "Bearer " + token;
+        apiClient.defaults.headers["Authorization"] = "Bearer " + response.data.token;
         localStorage.setItem(
           LOCALSTORAGE_NAME,
           JSON.stringify({
-            authdata: token,
-            id: response.data
+            id: window.atob(response.data.id),
+            authdata: response.data.token,
           })
         );
-            return true;
+        return true;
       })
       .catch(() => {
         localStorage.removeItem(LOCALSTORAGE_NAME);

@@ -25,8 +25,11 @@
     "placeholder": "Your password",
     "signin": "Sign In",
     "required": "Please enter your password",
-    "error": "The password you specified is wrong",
-    "copied": "You should not get your passwords from <a href='https://xkcd.com/936/' target='_blank'>https://xkcd.com/936/</a>"
+    "error": "The credentials you specified are wrong",
+    "copied": "You should not get your passwords from <a href='https://xkcd.com/936/' target='_blank'>https://xkcd.com/936/</a>",
+    "id": "Username",
+    "idPlaceholder": "Your username",
+    "idRequired": "Please enter your username"
   },
   "onboarding": {
     "welcome": "Welcome to Krill",
