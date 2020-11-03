@@ -16,14 +16,12 @@ apiClient.interceptors.response.use(function (response) {
 }, function (error) {
   // Any status codes that falls outside the range of 2xx cause this function to trigger
   // Do something with response error
-  console.log("testing: rejection handler invoked: " + error);
   throw new Error('Oh no!');
 });
 
 const simpleClient = axios.create();
 
 function handleError(error) {
-  console.log("testing: handling error: " + error);
   if (error.response && error.response.data) {
     return Promise.reject({
       data: error.response.data
