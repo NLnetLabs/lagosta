@@ -153,14 +153,16 @@
       "announcement_invalid_asn": "ASN INVÁLIDO",
       "roa_no_announcement_info": "SEM INFORMAÇÕES DE ANÚNCIO",
       "roa_too_permissive": "MUITO PERMISSIVO",
-      "as0": "AS0",
+      "roa_as0": "AS0",
+      "roa_as0_redundant": "REDUNDANT",
       "roa_seen_help": "Esta ROA corresponde a anúncios vistos no BGP",
       "announcement_not_found_help": "Este anúncio não está coberto por nenhuma de suas ROAs",
       "roa_unseen_help": "Não vemos nenhum anúncio BGP que corresponda a esta ROA",
       "announcement_invalid_length_help": "Este anúncio não é permitido porque é mais específico do que o prefixo e comprimento máximo autorizado para este ASN",
       "announcement_invalid_asn_help": "Este anúncio não é permitido porque você somente autorizou o prefixo a partir de outro ASN",
       "roa_too_permissive_help": "Esta ROA corresponde a anúncios visto no BGP, mas também permite anúncios não vistos",
-      "as0_help": "Esta ROA serve para não permitir qualquer anúncio por um prefixo"
+      "roa_as0_help": "Esta ROA serve para não permitir qualquer anúncio por um prefixo",
+      "roa_as0_redundant_help": "This AS0 ROA is redundant because there are other ROAs covering its prefix"
     },
     "download": "Download CSV"
   },

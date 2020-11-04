@@ -153,14 +153,16 @@
       "announcement_invalid_asn": "ΑΚΥΡΟ ASN",
       "roa_no_announcement_info": "ΚΑΜΜΙΑ ΠΛΗΡΟΦΟΡΙΑ ΑΝΑΚΟΙΝΩΣΗΣ",
       "roa_too_permissive": "ΠΟΛΥ ΕΠΙΤΡΕΠΤΙΚΗ",
-      "as0": "AS0",
+      "roa_as0": "AS0",
+      "roa_as0_redundant": "REDUNDANT",
       "roa_seen_help": "Υπάρχουν ταιριαστές ανακοινώσεις στο BGP για αυτό το ROA",
       "announcement_not_found_help": "Αυτή η ανακοίνωση δεν καλύπτεται από κανένα ROA σας",
       "roa_unseen_help": "Δεν βλέπουμε καμμία BGP ανακοίνωση που να ταιριάζει με αυτό το ROA",
       "announcement_invalid_length_help": "Αυτή η ανακοίνωση δεν είναι επιτρεπτή καθώς είναι πιο συγκεκριμένη από το πρόθεμα και το μέγιστο μήκος που έχετε εξουσιοδοτήσει για αυτό το ASN",
       "announcement_invalid_asn_help": "Αυτή η ανακοίνωση δεν είναι επιτρεπτή καθώς έχετε εξουσιοδοτήσει το πρόθεμα μόνο από άλλο ASN",
       "roa_too_permissive_help": "Αυτό το ROA ταιριάζει με ανακοινώσιες στο BGP, αλλά επίσης επιτρέπει αφανείς ανακοινώσεις",
-      "as0_help": "Αυτό το ROA χρησιμεύει για να αποτρέπει όλες τις ανακοινώσεις για ένα πρόθεμα"
+      "roa_as0_help": "Αυτό το ROA χρησιμεύει για να αποτρέπει όλες τις ανακοινώσεις για ένα πρόθεμα",
+      "roa_as0_redundant_help": "This AS0 ROA is redundant because there are other ROAs covering its prefix"
     },
     "download": "Λήψη CSV"
   },

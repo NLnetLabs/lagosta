@@ -153,14 +153,16 @@
       "announcement_invalid_asn": "UNGÜLTIGES ASN",
       "roa_no_announcement_info": "KEINE BGP-ANKÜNDIGUNG INFORMATION",
       "roa_too_permissive": "NICHT RESTRIKTIV GENUG",
-      "as0": "AS0",
+      "roa_as0": "AS0",
+      "roa_as0_redundant": "REDUNDANT",
       "roa_seen_help": "Dieses ROA stimmt mit BGP Ankündigungen überein",
       "announcement_not_found_help": "Diese BGP Ankündigung wird von keinem Ihrer ROAs geschützt",
       "roa_unseen_help": "Wir sehen keine BGP Ankündigungen welche mit dem ROA übereinstimmen",
       "announcement_invalid_length_help": "Diese BGP Ankündigung ist nicht erlaubt, da es spezifischer ist als das Präfix und die MaxLength welche Sie für dieses ASN autorisiert haben",
       "announcement_invalid_asn_help": "Diese BGP Ankündigung ist nicht erlaubt, da Sie nur das Präfix für ein anderes ASN autorisiert haben",
       "roa_too_permissive_help": "Dieses ROA stimmt mit BGP Ankündigungen überein, erlaubt darüber hinaus aber auch noch weitere BGP Ankündigungen",
-      "as0_help": "Dieses ROA dient dazu alle BGP Ankündigungen für dieses Präfix zu verbieten"
+      "roa_as0_help": "Dieses ROA dient dazu alle BGP Ankündigungen für dieses Präfix zu verbieten",
+      "roa_as0_redundant_help": "This AS0 ROA is redundant because there are other ROAs covering its prefix"
     },
     "download": "CSV herunterladen"
   },
