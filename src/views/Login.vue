@@ -2,7 +2,7 @@
   <div class="login">
     <el-row type="flex" class="row-index" justify="center">
       <el-col :span="10">
-        <el-card class="box-card">
+        <el-card class="box-card" v-if="withLogin">
           <div class="text item">
             <el-form :model="form" :rules="rules" :inline="inline" ref="loginForm" @submit.prevent.native="submitForm">
               <el-form-item v-if="withId" :label="$t('login.id')" prop="id">
@@ -40,7 +40,13 @@
     </el-row>
     <el-row type="flex" class="row-index alert-row" justify="center">
       <el-col :span="10">
-        <el-alert type="error" v-if="error" :closable="false">{{ error }}</el-alert>
+        <el-alert type="error" v-if="error" :closable="false">{{ error }}
+          <div style="margin-top:10px;" v-if="retryUrl">
+            <i18n v-if="retryUrl" path="login.retry">
+              <router-link :to="retryUrl">{{ $t('login.here') }}</router-link>
+            </i18n>
+          </div>
+        </el-alert>
       </el-col>
     </el-row>
     <div class="route-left">
@@ -65,6 +71,8 @@ export default {
         token: ""
       },
       withId: false,
+      withLogin: true,
+      retryUrl: undefined,
       submitted: false,
       loading: false,
       returnUrl: "",
@@ -99,10 +107,16 @@ export default {
   created() {
     this.returnUrl = this.$route.query.returnUrl || "/";
 
-// Handle OpenID Connect post login redirect with the id of the now logged
+    // Handle OpenID Connect post login redirect with the id of the now logged
     // in user and the token that should be used to authenticat and authorize
     // subsequent API calls.
-    if (this.$route.query.id && this.$route.query.token) {
+    if (this.$route.query.error) {
+      this.postLogin(false, this.$route.query.error);
+      // Hide the usual login form
+      this.withLogin = false;
+      // Show a retry link in the error message
+      this.retryUrl = this.returnUrl;
+    } else if (this.$route.query.id && this.$route.query.token) {
       APIService.recordLogin(
         window.atob(this.$route.query.id),
         this.$route.query.token
@@ -169,12 +183,16 @@ export default {
         });
       }
     },
-    postLogin(success) {
+    postLogin(success, error = undefined) {
       if (success) {
         this.$emit("auth-event");
         router.push(this.returnUrl);
       } else {
-        this.error = this.$t("login.error");
+        if (error === undefined) {
+          this.error = this.$t("login.error");
+        } else {
+          this.error = this.$t("errors." + error);
+        }
         this.loading = false;
       }
     }
