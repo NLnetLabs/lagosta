@@ -1168,7 +1168,7 @@ export default {
               s.new.forEach(n => {
                 delta.push({
                   action: "add",
-                  reason: category,
+                  reason: "specific",
                   asn: n.asn,
                   prefix: n.prefix,
                   max_length: n.prefix ? n.prefix.split("/")[1] * 1 : ""
@@ -1193,6 +1193,7 @@ export default {
 
       addToDelta("stale", false);
       addToDelta("as0_redundant", false);
+      addToDelta("redundant", false);
       addToDelta("too_permissive", false);
 
       this.deltaSuggestions = delta;

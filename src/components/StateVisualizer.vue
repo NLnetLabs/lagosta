@@ -28,13 +28,22 @@
       >{{ $t("announcements.state.roa_as0") }}</el-tag
     >
     <el-tag
-        type="warning"
-        size="medium"
-        v-if="scope.row.state === 'roa_as0_redundant'"
-        disable-transitions
-        effect="plain"
-        :title="$t('announcements.state.roa_as0_redundant_help')"
-    >{{ $t("announcements.state.roa_as0_redundant") }}</el-tag
+      type="warning"
+      size="medium"
+      v-if="scope.row.state === 'roa_as0_redundant'"
+      disable-transitions
+      effect="plain"
+      :title="$t('announcements.state.roa_as0_redundant_help')"
+      >{{ $t("announcements.state.roa_as0_redundant") }}</el-tag
+    >
+    <el-tag
+      type="warning"
+      size="medium"
+      v-if="scope.row.state === 'roa_redundant'"
+      disable-transitions
+      effect="plain"
+      :title="$t('announcements.state.roa_redundant_help')"
+      >{{ $t("announcements.state.roa_redundant") }}</el-tag
     >
     <el-tag
       type="success"

@@ -123,7 +123,9 @@
         "invalid_length": "longueur invalide",
         "stale": "Obsolète",
         "as0_redundant": "AS0 redondant",
+        "redundant": "Redondant",
         "too_permissive": "Trop permissif",
+        "specific": "Allow specific announcement in a ROA which may be too permissive",
         "new": "Nouveau"
       }
     },
@@ -154,6 +156,7 @@
       "announcement_invalid_asn": "ASN INVALIDE",
       "roa_no_announcement_info": "AUCUNE INFORMATION D'ANNONCE",
       "roa_too_permissive": "TROP PERMISSIF",
+      "roa_redundant": "REDUNDANT",
       "roa_as0": "AS0",
       "roa_as0_redundant": "REDUNDANT",
       "roa_seen_help": "Ce ROA correspond aux annonces vues dans BGP",
@@ -162,8 +165,9 @@
       "announcement_invalid_length_help": "Cette annonce n'est pas permise parce qu'elle est plus spécifique que la longueur du préfixe et la taille maximum autorisées pour cet ASN",
       "announcement_invalid_asn_help": "Cette annonce n'est pas permise parce que vous autorisez seulement le préfixe depuis un autre ASN",
       "roa_too_permissive_help": "Ce ROA correspond aux annonces en BGP, mais aussi à des annonces introuvables",
+      "roa_redundant_help": "This ROA is redundant because there are one or more other ROAs covering its prefix, length and ASN",
       "roa_as0_help": "Ce ROA sert à invalider toutes les annonces pour un préfixe",
-      "roa_as0_redundant_help": "This AS0 ROA is redundant because there are other ROAs covering its prefix"
+      "roa_as0_redundant_help": "This AS0 ROA is redundant because there are one or more other ROAs covering its prefix"
     },
     "download": "Télécharger le fichier au format CSV"
   },

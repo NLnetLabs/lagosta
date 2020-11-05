@@ -122,7 +122,9 @@
         "invalid_length": "Άκυρο μήκος",
         "stale": "'Εωλο",
         "as0_redundant": "Περιττό με AS0",
+        "redundant": "Redundant ROA",
         "too_permissive": "Πολύ επιτρεπτικό",
+        "specific": "Allow specific announcement in a ROA which may be too permissive",
         "new": "Νέο"
       }
     },
@@ -153,6 +155,7 @@
       "announcement_invalid_asn": "ΑΚΥΡΟ ASN",
       "roa_no_announcement_info": "ΚΑΜΜΙΑ ΠΛΗΡΟΦΟΡΙΑ ΑΝΑΚΟΙΝΩΣΗΣ",
       "roa_too_permissive": "ΠΟΛΥ ΕΠΙΤΡΕΠΤΙΚΗ",
+      "roa_redundant": "REDUNDANT",
       "roa_as0": "AS0",
       "roa_as0_redundant": "REDUNDANT",
       "roa_seen_help": "Υπάρχουν ταιριαστές ανακοινώσεις στο BGP για αυτό το ROA",
@@ -161,8 +164,9 @@
       "announcement_invalid_length_help": "Αυτή η ανακοίνωση δεν είναι επιτρεπτή καθώς είναι πιο συγκεκριμένη από το πρόθεμα και το μέγιστο μήκος που έχετε εξουσιοδοτήσει για αυτό το ASN",
       "announcement_invalid_asn_help": "Αυτή η ανακοίνωση δεν είναι επιτρεπτή καθώς έχετε εξουσιοδοτήσει το πρόθεμα μόνο από άλλο ASN",
       "roa_too_permissive_help": "Αυτό το ROA ταιριάζει με ανακοινώσιες στο BGP, αλλά επίσης επιτρέπει αφανείς ανακοινώσεις",
+      "roa_redundant_help": "This ROA is redundant because there are one or more other ROAs covering its prefix, length and ASN",
       "roa_as0_help": "Αυτό το ROA χρησιμεύει για να αποτρέπει όλες τις ανακοινώσεις για ένα πρόθεμα",
-      "roa_as0_redundant_help": "This AS0 ROA is redundant because there are other ROAs covering its prefix"
+      "roa_as0_redundant_help": "This AS0 ROA is redundant because there are one or more other ROAs covering its prefix"
     },
     "download": "Λήψη CSV"
   },
