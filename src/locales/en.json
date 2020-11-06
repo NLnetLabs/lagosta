@@ -29,7 +29,9 @@
     "copied": "You should not get your passwords from <a href='https://xkcd.com/936/' target='_blank'>https://xkcd.com/936/</a>",
     "id": "Username",
     "idPlaceholder": "Your username",
-    "idRequired": "Please enter your username"
+    "idRequired": "Please enter your username",
+    "retry": "Click {0} to return to the login page.",
+    "here": "here"
   },
   "onboarding": {
     "welcome": "Welcome to Krill",
@@ -206,7 +208,8 @@
     "ca-roa-not-entitled": "ROA prefix '{prefix}' is not on any of your current certificates",
     "ta-not-allowed": "This functionality is not supported by the test Trust Anchor",
     "ta-name-reserved": "Name reserved",
-    "ca-roa-delta-error": "ROA rejected because of the following issue(s)"
+    "ca-roa-delta-error": "ROA rejected because of the following issue(s)",
+    "api-invalid-role": "Your user has not been granted the right to use Krill. Please contact your administrator."
   },
   "testbed": {
     "welcome": "Welcome to this RPKI testbed",
