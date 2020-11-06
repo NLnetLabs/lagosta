@@ -21,6 +21,15 @@
     <el-tag
       type="warning"
       size="medium"
+      v-if="scope.row.state === 'roa_disallowing'"
+      disable-transitions
+      effect="plain"
+      :title="$t('announcements.state.roa_disallowing_help')"
+      >{{ $t("announcements.state.roa_disallowing") }}</el-tag
+    >
+    <el-tag
+      type="warning"
+      size="medium"
       v-if="scope.row.state === 'roa_as0'"
       disable-transitions
       effect="plain"

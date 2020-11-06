@@ -1195,6 +1195,7 @@ export default {
       addToDelta("as0_redundant", false);
       addToDelta("redundant", false);
       addToDelta("too_permissive", false);
+      addToDelta("disallowing", false);
 
       this.deltaSuggestions = delta;
       if (!this.removeROASuggestions) {
