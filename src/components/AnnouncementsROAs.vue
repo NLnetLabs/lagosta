@@ -161,7 +161,7 @@
     </el-table>
 
     <el-pagination
-      v-if="!loadingAnnouncements && !loadingTable"
+      v-if="!loadingAnnouncements && !loadingTable && announcements.length > 0 && filteredAnnouncements.length > 0"
       background
       :current-page.sync="currentPage"
       :page-sizes="[10, 25, 100, 500]"
