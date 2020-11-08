@@ -48,7 +48,6 @@
       style="width: 100%"
       :row-class-name="getRowClass"
       :empty-text="$t('common.nodata')"
-      default-expand-all
     >
       <el-table-column type="expand" :class-name="!showBGP ? 'expandable' : ''">
         <template slot-scope="scope">
@@ -306,7 +305,10 @@ export default {
         if (data.row.state === "roa_as0" && !data.row.authorizes && !data.row.disallows) {
           return "row-as0";
         }
-        return data.row.state === "roa_unseen" ? "row_unseen" : "row-dark";
+        if (data.row.state === "roa_no_announcement_info") {
+          return "row-no-announcement";
+        }
+        return data.row.state === "roa_unseen" ? "row-unseen" : "row-dark";
       }
       return "row-announcement";
     },
@@ -389,7 +391,7 @@ export default {
   padding: 4px 6px !important;
 }
 .el-table tr.row-dark,
-.el-table tr.row_unseen {
+.el-table tr.row-unseen {
   background-color: #f5f7fa;
 }
 
@@ -406,7 +408,8 @@ export default {
 }
 
 .row-announcement,
-.row_unseen,
+.row-unseen,
+.row-no-announcement,
 .row-as0 {
   .el-table__expand-column .cell,
   .el-table__expand-icon {
@@ -415,7 +418,7 @@ export default {
 }
 
 .row-announcement + tr,
-.row_unseen + tr,
+.row-unseen + tr,
 .row-as0 + tr {
   display: none;
 }
