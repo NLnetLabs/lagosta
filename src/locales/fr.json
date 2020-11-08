@@ -105,6 +105,7 @@
     "analysis": "Analyse des ROA",
     "suggestions": {
       "following": "Nous suggérons les changements suivant pour vos ROAs",
+      "makesure": "Please make sure you verify these suggestions yourself, you can read <a href='https://rpki.readthedocs.io/en/latest/krill/manage-roas.html' target='_blank'>here</a> how we came to these suggestions",
       "nochanges": "Nous ne suggérons aucun changement pour le moment",
       "adding": "En cours d'ajout",
       "removing": "Retirer le ROA",

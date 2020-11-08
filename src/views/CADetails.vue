@@ -835,7 +835,8 @@
       <el-row>
         <el-col :xs="24">
           <h3 v-if="deltaSuggestions && deltaSuggestions.length" class="suggestion-title suggestion-title-nopadding suggestion-title-light">
-            {{ $t("caDetails.suggestions.following") }}
+            {{ $t("caDetails.suggestions.following") }}.<br>
+            <span v-html="$t('caDetails.suggestions.makesure')">.</span>
           </h3>
           <h3 v-if="deltaSuggestions && deltaSuggestions.length === 0" class="suggestion-title suggestion-title-nopadding suggestion-title-light">
             {{ $t("caDetails.suggestions.nochanges") }}
@@ -849,57 +850,50 @@
             :empty-text="$t('common.nodata')"
             @selection-change="handleSuggestionSelectionChange"
           >
-            <el-table-column type="selection" width="55"> </el-table-column>
-            <el-table-column label="" width="50">
+            <el-table-column type="selection" width="45"> </el-table-column>
+            <el-table-column label="" width="45">
               <template slot-scope="scope">
-                <el-tooltip
-                  class="item"
-                  effect="dark"
-                  :content="
+                <el-tag
+                  type="success"
+                  size="mini"
+                  :title="
                     $t('caDetails.suggestions.willAdd', {
                       reason: $t('caDetails.suggestions.reasons.' + scope.row.reason)
                     })
                   "
-                  placement="right"
-                >
-                  <el-tag
-                    type="success"
-                    size="mini"
-                    v-if="scope.row.action === 'add'"
-                    disable-transitions
-                    ><i class="el-icon-check"></i
-                  ></el-tag>
-                </el-tooltip>
-                <el-tooltip
-                  class="item"
-                  effect="dark"
-                  :content="
+                  v-if="scope.row.action === 'add'"
+                  disable-transitions
+                  ><i class="el-icon-check"></i
+                ></el-tag>
+                <el-tag
+                  type="danger"
+                  size="mini"
+                  :title="
                     $t('caDetails.suggestions.willRemove', {
                       reason: $t('caDetails.suggestions.reasons.' + scope.row.reason)
                     })
                   "
-                  placement="right"
-                >
-                  <el-tag
-                    type="danger"
-                    size="mini"
-                    v-if="scope.row.action === 'remove'"
-                    disable-transitions
-                    ><i class="el-icon-delete"></i
-                  ></el-tag>
-                </el-tooltip>
+                  v-if="scope.row.action === 'remove'"
+                  disable-transitions
+                  ><i class="el-icon-delete"></i
+                ></el-tag>
               </template>
             </el-table-column>
             <el-table-column
               prop="asn"
               :label="$t('announcements.asn')"
               sortable
-              width="200"
+              width="100"
             ></el-table-column>
 
-            <el-table-column :label="$t('announcements.prefix')" sortable>
+            <el-table-column :label="$t('announcements.prefix')" sortable width="200">
               <template slot-scope="scope">
                 {{ scope.row.prefix }}{{ scope.row.max_length ? "-" + scope.row.max_length : "" }}
+              </template>
+            </el-table-column>
+            <el-table-column label="">
+              <template slot-scope="scope">
+                <div class="suggestion-reason">{{ $t('caDetails.suggestions.reasons.' + scope.row.reason) }}</div>
               </template>
             </el-table-column>
           </el-table>
@@ -1610,6 +1604,7 @@ h3 {
     margin-left: 1rem;
     margin-top: 1rem;
     font-weight: 500;
+    line-height: 1.5rem;
   }
   &.suggestion-title-nopadding {
     margin-left: 0;
@@ -1727,5 +1722,11 @@ ul {
 
 .el-table tr.row-dark {
   background-color: #f5f7fa;
+}
+
+.suggestion-reason {
+  font-style: italic;
+  color: #999;
+  word-break: normal;
 }
 </style>
