@@ -44,10 +44,11 @@
       size="small"
       v-if="!loadingAnnouncements && !loadingTable && announcements.length"
       :data="filteredAnnouncements"
-      :default-sort="{ prop: 'asn', order: 'ascending' }"
+      :default-sort="currentSort"
       style="width: 100%"
       :row-class-name="getRowClass"
       :empty-text="$t('common.nodata')"
+      @sort-change="sortChange"
     >
       <el-table-column type="expand" :class-name="!showBGP ? 'expandable' : ''">
         <template slot-scope="scope">
@@ -121,7 +122,7 @@
         sortable
         width="200"
       ></el-table-column>
-      <el-table-column :label="$t('announcements.prefix')" sortable :sort-method="sortPrefix">
+      <el-table-column :label="$t('announcements.prefix')" sortable>
         <template slot-scope="scope">
           {{ scope.row.prefix }}{{ scope.row.max_length ? "-" + scope.row.max_length : "" }}
         </template>
@@ -160,11 +161,16 @@
     </el-table>
 
     <el-pagination
-      v-if="!loadingAnnouncements && !loadingTable && announcements.length > 0 && filteredAnnouncements.length > 0"
+      v-if="
+        !loadingAnnouncements &&
+          !loadingTable &&
+          announcements.length > 0 &&
+          filteredAnnouncements.length > 0
+      "
       background
       :current-page.sync="currentPage"
       :page-sizes="[10, 25, 100, 500]"
-      :page-size="pageSize"
+      :page-size.sync="pageSize"
       @current-change="preFilterAnnouncements"
       layout="sizes, prev, pager, next"
       :total="totalRecords"
@@ -196,7 +202,8 @@ export default {
       currentPage: 1,
       pageSize: 25,
       totalRecords: 0,
-      debounceTimeout: -1
+      debounceTimeout: -1,
+      currentSort: { order: "ascending", prop: "asn" }
     };
   },
   watch: {
@@ -212,6 +219,9 @@ export default {
     search() {
       this.currentPage = 1;
       this.debounce(this.preFilterAnnouncements, 500);
+    },
+    pageSize() {
+      this.preFilterAnnouncements();
     }
   },
   created() {
@@ -234,6 +244,23 @@ export default {
       const self = this;
       const reg = /[^0-9a-zΆ-ωΑ-ώ./-]/gi;
       const src = self.search.toLowerCase().replace(reg, "");
+      this.announcements = this.announcements.sort((a, b) => {
+        switch (this.currentSort.prop) {
+          case "prefix":
+            return (
+              ip6addr.compareCIDR(a.prefix.split("-")[0], b.prefix.split("-")[0]) *
+              (this.currentSort.order === "ascending" ? 1 : -1)
+            );
+          default:
+            if (a[this.currentSort.prop] < b[this.currentSort.prop]) {
+              return this.currentSort.order === "ascending" ? -1 : 1;
+            }
+            if (a[this.currentSort.prop] > b[this.currentSort.prop]) {
+              return this.currentSort.order === "ascending" ? 1 : -1;
+            }
+            return 0;
+        }
+      });
       let filtered = this.announcements.filter(function(ann) {
         let inAuth = false;
         if (ann.authorizes) {
@@ -297,8 +324,9 @@ export default {
       );
       this.loadingTable = false;
     },
-    sortPrefix(a, b) {
-      return ip6addr.compareCIDR(a.prefix.split("-")[0], b.prefix.split("-")[0]);
+    sortChange(sort) {
+      this.currentSort = sort;
+      this.filterAnnouncements();
     },
     getRowClass(data) {
       if (this.showBGP && data.row.max_length) {
