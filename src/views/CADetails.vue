@@ -835,8 +835,7 @@
       <el-row>
         <el-col :xs="24">
           <h3 v-if="deltaSuggestions && deltaSuggestions.length" class="suggestion-title suggestion-title-nopadding suggestion-title-light">
-            {{ $t("caDetails.suggestions.following") }}.<br>
-            <span v-html="$t('caDetails.suggestions.makesure')">.</span>
+            <span v-html="$t('caDetails.suggestions.following')">.</span>
           </h3>
           <h3 v-if="deltaSuggestions && deltaSuggestions.length === 0" class="suggestion-title suggestion-title-nopadding suggestion-title-light">
             {{ $t("caDetails.suggestions.nochanges") }}
