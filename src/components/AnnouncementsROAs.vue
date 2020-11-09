@@ -445,12 +445,6 @@ export default {
   }
 }
 
-.row-announcement + tr,
-.row-unseen + tr,
-.row-as0 + tr {
-  display: none;
-}
-
 .el-pagination {
   margin-top: 1rem;
   text-align: right;
