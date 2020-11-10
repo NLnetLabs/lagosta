@@ -103,7 +103,7 @@
     "analyseThis": "Analiseer mijn ROAs",
     "analysis": "ROA Analyse",
     "suggestions": {
-      "following": "We suggereren de volgende wijzigingen in uw ROAs",
+      "following": "Controleer a.u.b. de volgende voorgestelde wijzigingen in uw ROAs. <a href='https://rpki.readthedocs.io/en/latest/krill/manage-roas.html' target='_blank'>Lees meer..</a>",
       "nochanges": "We suggereren op dit moment niets te wijzigen",
       "adding": "Toe te voegen",
       "removing": "Te verwijderen",
