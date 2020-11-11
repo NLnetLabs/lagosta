@@ -103,7 +103,7 @@
     "analyseThis": "Meine ROAs analysieren",
     "analysis": "ROA Analyse",
     "suggestions": {
-      "following": "Please verify the following suggested changes to your ROAs. <a href='https://rpki.readthedocs.io/en/latest/krill/manage-roas.html' target='_blank'>Read more..</a>",
+      "following": "Bitte überprüfen Sie die folgenden vorgeschlagenen Änderungen an Ihren ROAs. <a href='https://rpki.readthedocs.io/en/latest/krill/manage-roas.html' target='_blank'>Weitere Informationen...</a>",
       "nochanges": "Keine Änderungsvorschläge im Moment",
       "adding": "Hinzufügen",
       "removing": "Entfernen des ROA",
@@ -121,11 +121,11 @@
         "invalid_asn": "Ungültiges ASN",
         "invalid_length": "Ungültige Länge",
         "stale": "Nicht sichtbar",
-        "disallowing": "ROA disallows announcements, but authorizes nothing. Use AS0 instead?",
-        "as0_redundant": "Redundant ROA",
-        "redundant": "Redundant ROA",
+        "disallowing": "ROA führt zu ungültigen Ankündigungen. Die Nutzung eines AS0 ROA wird stattdessen empfohlen.",
+        "as0_redundant": "Redundantes ROA",
+        "redundant": "Redundantes ROA",
         "too_permissive": "Nicht restriktiv genug",
-        "specific": "Allow specific announcement in a ROA which may be too permissive",
+        "specific": "Spezifische Ankündigungen im ROA erlauben welches nicht restriktiv genug wäre",
         "new": "Neu"
       }
     },
@@ -156,8 +156,8 @@
       "announcement_invalid_asn": "UNGÜLTIGES ASN",
       "roa_no_announcement_info": "KEINE BGP-ANKÜNDIGUNG INFORMATION",
       "roa_too_permissive": "NICHT RESTRIKTIV GENUG",
-      "roa_disallowing": "DISALLOWING",
-      "roa_disallowing_help": "This ROA disallows announcements only. If this is intentional you may want to use an AS0 ROA instead.",
+      "roa_disallowing": "Verursacht ungültige Ankündigungen",
+      "roa_disallowing_help": "Dieses ROA führt ausschließlich zu ungültigen Ankündigungen. Falls dies beabsichtigt ist, wird die Nutzung eines AS0 ROAs empfohlen.",
       "roa_redundant": "REDUNDANT",
       "roa_as0": "AS0",
       "roa_as0_redundant": "REDUNDANT",
@@ -167,9 +167,9 @@
       "announcement_invalid_length_help": "Diese BGP Ankündigung ist nicht erlaubt, da es spezifischer ist als das Präfix und die MaxLength welche Sie für dieses ASN autorisiert haben",
       "announcement_invalid_asn_help": "Diese BGP Ankündigung ist nicht erlaubt, da Sie nur das Präfix für ein anderes ASN autorisiert haben",
       "roa_too_permissive_help": "Dieses ROA stimmt mit BGP Ankündigungen überein, erlaubt darüber hinaus aber auch noch weitere BGP Ankündigungen",
-      "roa_redundant_help": "This ROA is redundant because there are one or more other ROAs covering its prefix, length and ASN",
+      "roa_redundant_help": "Dieses ROA ist redundant da ein oder mehrere andere ROAs das Präfix, die Länge und das ASN bereits einschließen",
       "roa_as0_help": "Dieses ROA dient dazu alle BGP Ankündigungen für dieses Präfix zu verbieten",
-      "roa_as0_redundant_help": "This AS0 ROA is redundant because there are one or more other ROAs covering its prefix"
+      "roa_as0_redundant_help": "Dieses AS0 ROA ist redundant da ein oder mehrere andere ROAs das Präfix bereits einschließen"
     },
     "download": "CSV herunterladen"
   },
