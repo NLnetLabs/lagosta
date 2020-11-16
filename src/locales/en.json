@@ -218,7 +218,8 @@
     "ta-not-allowed": "This functionality is not supported by the test Trust Anchor",
     "ta-name-reserved": "Name reserved",
     "ca-roa-delta-error": "ROA rejected because of the following issue(s)",
-    "api-invalid-role": "Your user has not been granted the right to use Krill. Please contact your administrator."
+    "api-invalid-role": "Your user has not been granted the right to use Krill. Please contact your administrator.",
+    "api-insufficient-rights": "Your user does not have sufficient rights to perform this action. Please contact your administrator."
   },
   "testbed": {
     "welcome": "Welcome to this RPKI testbed",
