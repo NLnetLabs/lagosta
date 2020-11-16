@@ -85,7 +85,7 @@
 
                   <div v-if="!initializeParent && !initializeRepo && emptyResources" class="empty">
                     {{ $t("caDetails.noResourcesYet") }}
-                    <a href="javascript: void(0)" @click="getContent()">{{
+                    <a href="javascript: void(0)" @click="getContent()" id="no_resources_click_to_refresh">{{
                       $t("caDetails.clickToRefresh")
                     }}</a>
                   </div>
@@ -580,7 +580,12 @@
     >
       <el-form :model="addROAForm" :rules="addROAFormRules" ref="addROAForm">
         <el-form-item :label="$t('announcements.asn')" prop="asn">
-          <el-input v-model="addROAForm.asn" autocomplete="off" @change="removeAS()"></el-input>
+          <el-input
+            v-model="addROAForm.asn"
+            autocomplete="off"
+            @change="removeAS()"
+            id="add_roa_asn"
+          ></el-input>
         </el-form-item>
         <el-form-item
           :label="$t('announcements.prefix')"
@@ -591,6 +596,7 @@
             v-model="addROAForm.prefix"
             autocomplete="off"
             @input="updateMaxLength($event)"
+            id="add_roa_prefix"
           ></el-input>
         </el-form-item>
         <el-form-item :label="$t('caDetails.maxLength')" placeholder="ie. 24" prop="maxLength">
@@ -601,6 +607,7 @@
             :readonly="addROAForm.asn === '0'"
             min="4"
             max="64"
+            id="add_roa_maxlength"
           ></el-input>
         </el-form-item>
         <el-alert type="error" v-if="error" :closable="false" class="mb-1">{{ error }}</el-alert>

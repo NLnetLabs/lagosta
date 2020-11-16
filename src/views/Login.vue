@@ -11,6 +11,7 @@
                   :placeholder="$t('login.idPlaceholder')"
                   v-model="form.id"
                   clearable
+                  id="login_id"
                 ></el-input>
                 <div class="el-form-item__error" slot="error" slot-scope="scope">
                   <span v-html="scope.error"></span>
@@ -23,6 +24,7 @@
                   v-model="form.token"
                   clearable
                   @keyup.enter.native="submitForm"
+                  id="login_password"
                 ></el-input>
                 <div class="el-form-item__error" slot="error" slot-scope="scope">
                   <span v-html="scope.error"></span>
