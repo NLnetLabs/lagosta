@@ -103,7 +103,7 @@
     "analyseThis": "Ανέλυσε τα ROA",
     "analysis": "Ανάλυση ROA",
     "suggestions": {
-      "following": "Προτείνουμε τις ακόλουθες αλλαγές στα ROA",
+      "following": "Please verify the following suggested changes to your ROAs. <a href='https://rpki.readthedocs.io/en/latest/krill/manage-roas.html' target='_blank'>Read more..</a>",
       "nochanges": "Δεν προτείνουμε αλλαγές αυτή τη στιγμή",
       "adding": "Προσθήκη",
       "removing": "Αφαίρεση ROA",
@@ -121,8 +121,11 @@
         "invalid_asn": "Άκυρο ASN",
         "invalid_length": "Άκυρο μήκος",
         "stale": "'Εωλο",
+        "disallowing": "ROA disallows announcements, but authorizes nothing. Use AS0 instead?",
         "as0_redundant": "Περιττό με AS0",
+        "redundant": "Redundant ROA",
         "too_permissive": "Πολύ επιτρεπτικό",
+        "specific": "Allow specific announcement in a ROA which may be too permissive",
         "new": "Νέο"
       }
     },
@@ -153,14 +156,20 @@
       "announcement_invalid_asn": "ΑΚΥΡΟ ASN",
       "roa_no_announcement_info": "ΚΑΜΜΙΑ ΠΛΗΡΟΦΟΡΙΑ ΑΝΑΚΟΙΝΩΣΗΣ",
       "roa_too_permissive": "ΠΟΛΥ ΕΠΙΤΡΕΠΤΙΚΗ",
-      "as0": "AS0",
+      "roa_disallowing": "DISALLOWING",
+      "roa_disallowing_help": "This ROA disallows announcements only. If this is intentional you may want to use an AS0 ROA instead.",
+      "roa_redundant": "REDUNDANT",
+      "roa_as0": "AS0",
+      "roa_as0_redundant": "REDUNDANT",
       "roa_seen_help": "Υπάρχουν ταιριαστές ανακοινώσεις στο BGP για αυτό το ROA",
       "announcement_not_found_help": "Αυτή η ανακοίνωση δεν καλύπτεται από κανένα ROA σας",
       "roa_unseen_help": "Δεν βλέπουμε καμμία BGP ανακοίνωση που να ταιριάζει με αυτό το ROA",
       "announcement_invalid_length_help": "Αυτή η ανακοίνωση δεν είναι επιτρεπτή καθώς είναι πιο συγκεκριμένη από το πρόθεμα και το μέγιστο μήκος που έχετε εξουσιοδοτήσει για αυτό το ASN",
       "announcement_invalid_asn_help": "Αυτή η ανακοίνωση δεν είναι επιτρεπτή καθώς έχετε εξουσιοδοτήσει το πρόθεμα μόνο από άλλο ASN",
       "roa_too_permissive_help": "Αυτό το ROA ταιριάζει με ανακοινώσιες στο BGP, αλλά επίσης επιτρέπει αφανείς ανακοινώσεις",
-      "as0_help": "Αυτό το ROA χρησιμεύει για να αποτρέπει όλες τις ανακοινώσεις για ένα πρόθεμα"
+      "roa_redundant_help": "This ROA is redundant because there are one or more other ROAs covering its prefix, length and ASN",
+      "roa_as0_help": "Αυτό το ROA χρησιμεύει για να αποτρέπει όλες τις ανακοινώσεις για ένα πρόθεμα",
+      "roa_as0_redundant_help": "This AS0 ROA is redundant because there are one or more other ROAs covering its prefix"
     },
     "download": "Λήψη CSV"
   },

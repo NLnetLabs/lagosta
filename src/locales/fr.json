@@ -104,7 +104,7 @@
     "analyseThis": "Analyser mes ROAs",
     "analysis": "Analyse des ROA",
     "suggestions": {
-      "following": "Nous suggérons les changements suivant pour vos ROAs",
+      "following": "Please verify the following suggested changes to your ROAs. <a href='https://rpki.readthedocs.io/en/latest/krill/manage-roas.html' target='_blank'>Read more..</a>",
       "nochanges": "Nous ne suggérons aucun changement pour le moment",
       "adding": "En cours d'ajout",
       "removing": "Retirer le ROA",
@@ -122,8 +122,11 @@
         "invalid_asn": "ASN invalide",
         "invalid_length": "longueur invalide",
         "stale": "Obsolète",
+        "disallowing": "ROA disallows announcements, but authorizes nothing. Use AS0 instead?",
         "as0_redundant": "AS0 redondant",
+        "redundant": "Redondant",
         "too_permissive": "Trop permissif",
+        "specific": "Allow specific announcement in a ROA which may be too permissive",
         "new": "Nouveau"
       }
     },
@@ -154,14 +157,20 @@
       "announcement_invalid_asn": "ASN INVALIDE",
       "roa_no_announcement_info": "AUCUNE INFORMATION D'ANNONCE",
       "roa_too_permissive": "TROP PERMISSIF",
-      "as0": "AS0",
+      "roa_disallowing": "DISALLOWING",
+      "roa_disallowing_help": "This ROA disallows announcements only. If this is intentional you may want to use an AS0 ROA instead.",
+      "roa_redundant": "REDUNDANT",
+      "roa_as0": "AS0",
+      "roa_as0_redundant": "REDUNDANT",
       "roa_seen_help": "Ce ROA correspond aux annonces vues dans BGP",
       "announcement_not_found_help": "Cette announce n'est couverte par aucun de vos ROAs",
       "roa_unseen_help": "Aucune annonce BGP correspondant à ce ROA trouvée",
       "announcement_invalid_length_help": "Cette annonce n'est pas permise parce qu'elle est plus spécifique que la longueur du préfixe et la taille maximum autorisées pour cet ASN",
       "announcement_invalid_asn_help": "Cette annonce n'est pas permise parce que vous autorisez seulement le préfixe depuis un autre ASN",
       "roa_too_permissive_help": "Ce ROA correspond aux annonces en BGP, mais aussi à des annonces introuvables",
-      "as0_help": "Ce ROA sert à invalider toutes les annonces pour un préfixe"
+      "roa_redundant_help": "This ROA is redundant because there are one or more other ROAs covering its prefix, length and ASN",
+      "roa_as0_help": "Ce ROA sert à invalider toutes les annonces pour un préfixe",
+      "roa_as0_redundant_help": "This AS0 ROA is redundant because there are one or more other ROAs covering its prefix"
     },
     "download": "Télécharger le fichier au format CSV"
   },

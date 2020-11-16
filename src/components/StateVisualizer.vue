@@ -21,11 +21,38 @@
     <el-tag
       type="warning"
       size="medium"
+      v-if="scope.row.state === 'roa_disallowing'"
+      disable-transitions
+      effect="plain"
+      :title="$t('announcements.state.roa_disallowing_help')"
+      >{{ $t("announcements.state.roa_disallowing") }}</el-tag
+    >
+    <el-tag
+      type="warning"
+      size="medium"
       v-if="scope.row.state === 'roa_as0'"
       disable-transitions
       effect="plain"
-      :title="$t('announcements.state.as0_help')"
-      >{{ $t("announcements.state.as0") }}</el-tag
+      :title="$t('announcements.state.roa_as0_help')"
+      >{{ $t("announcements.state.roa_as0") }}</el-tag
+    >
+    <el-tag
+      type="warning"
+      size="medium"
+      v-if="scope.row.state === 'roa_as0_redundant'"
+      disable-transitions
+      effect="plain"
+      :title="$t('announcements.state.roa_as0_redundant_help')"
+      >{{ $t("announcements.state.roa_as0_redundant") }}</el-tag
+    >
+    <el-tag
+      type="warning"
+      size="medium"
+      v-if="scope.row.state === 'roa_redundant'"
+      disable-transitions
+      effect="plain"
+      :title="$t('announcements.state.roa_redundant_help')"
+      >{{ $t("announcements.state.roa_redundant") }}</el-tag
     >
     <el-tag
       type="success"

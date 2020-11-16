@@ -103,7 +103,7 @@
     "analyseThis": "Analisar minhas ROAs",
     "analysis": "Análise de ROA",
     "suggestions": {
-      "following": "Sugerimos as seguintes alterações em suas ROAs",
+      "following": "Por favor, consulte as seguintes alterações sugeridas para suas ROAs. <a href='https://rpki.readthedocs.io/en/latest/krill/manage-roas.html' target='_blank'>Saiba mais (texto em inglês)...</a>",
       "nochanges": "Não sugerimos alterações neste momento",
       "adding": "Adicionando",
       "removing": "Removendo ROA",
@@ -121,8 +121,11 @@
         "invalid_asn": "ASN inválido",
         "invalid_length": "Comprimento inválido",
         "stale": "Velho",
+        "disallowing": "ROA desautoriza anúncios, e não autoriza nada. Usar AS0 como alternativa?",
         "as0_redundant": "AS0 redundante",
+        "redundant": "Redundante",
         "too_permissive": "Muito permissivo",
+        "specific": "Permitir anúncio específico em uma ROA que pode ser muito permissiva",
         "new": "Novo"
       }
     },
@@ -131,8 +134,8 @@
     "lastExchange": "Última troca",
     "nextExchange": "Próxima troca antes",
     "allResources": "Todos os recursos",
-    "entitlements": "Entitlements",
-    "showEntitlements": "Show Detailed Entitlements",
+    "entitlements": "Permissões",
+    "showEntitlements": "Mostrar Permissões Detalhadas",
     "parentCertificate": "Certificado Pai",
     "published": "Publicado"
   },
@@ -153,14 +156,20 @@
       "announcement_invalid_asn": "ASN INVÁLIDO",
       "roa_no_announcement_info": "SEM INFORMAÇÕES DE ANÚNCIO",
       "roa_too_permissive": "MUITO PERMISSIVO",
-      "as0": "AS0",
+      "roa_disallowing": "DESAUTORIZANDO",
+      "roa_disallowing_help": "Esta ROA só desautoriza anúncios. Caso isso seja intencional, talvez você prefira usar um AS0 como alternativa.",
+      "roa_redundant": "REDUNDANTE",
+      "roa_as0": "AS0",
+      "roa_as0_redundant": "REDUNDANTE",
       "roa_seen_help": "Esta ROA corresponde a anúncios vistos no BGP",
       "announcement_not_found_help": "Este anúncio não está coberto por nenhuma de suas ROAs",
       "roa_unseen_help": "Não vemos nenhum anúncio BGP que corresponda a esta ROA",
       "announcement_invalid_length_help": "Este anúncio não é permitido porque é mais específico do que o prefixo e comprimento máximo autorizado para este ASN",
       "announcement_invalid_asn_help": "Este anúncio não é permitido porque você somente autorizou o prefixo a partir de outro ASN",
       "roa_too_permissive_help": "Esta ROA corresponde a anúncios visto no BGP, mas também permite anúncios não vistos",
-      "as0_help": "Esta ROA serve para não permitir qualquer anúncio por um prefixo"
+      "roa_redundant_help": "Esta ROA é redundante porque já existe uma ou mais ROAs cobrindo este prefixo, comprimento e ASN",
+      "roa_as0_help": "Esta ROA serve para não permitir qualquer anúncio por um prefixo",
+      "roa_as0_redundant_help": "Esta ROA AS0 é redundante porque já existe uma ou mais ROAs cobrindo este prefixo"
     },
     "download": "Download CSV"
   },
@@ -225,7 +234,7 @@
     "addChild": {
       "heading": "Registrar CA",
       "requestXML": {
-        "label": "Child Request XML",
+        "label": "XML Child Request",
         "placeholder": "Cole aqui seu XML <child_request/>"
       },
       "asnresources": {
@@ -263,7 +272,7 @@
     "addPublisher": {
       "heading": "Registrar Publicador",
       "requestXML": {
-        "label": "Publisher Request XML",
+        "label": "XML Publisher Request",
         "placeholder": "Cole aqui seu XML <publisher_request/>"
       },
       "confirm": "Registrar publicador",
