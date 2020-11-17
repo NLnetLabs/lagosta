@@ -91,78 +91,52 @@ export default {
     return apiClient.get("/api/v1/cas").catch(handleError);
   },
   getCA(handle) {
-    return apiClient.get("/api/v1/cas/" + handle);
+    return apiClient.get("/api/v1/cas/" + handle).catch(handleError);
   },
   getROAs(handle) {
-    return apiClient.get("/api/v1/cas/" + handle + "/routes");
+    return apiClient.get("/api/v1/cas/" + handle + "/routes").catch(handleError);
   },
   getRepo(handle) {
-    return apiClient.get("/api/v1/cas/" + handle + "/repo");
+    return apiClient.get("/api/v1/cas/" + handle + "/repo").catch(handleError);
   },
   getRepoStatus(handle) {
-    return apiClient.get("/api/v1/cas/" + handle + "/repo/status");
+    return apiClient.get("/api/v1/cas/" + handle + "/repo/status").catch(handleError);
   },
   getParents(handle) {
-    return apiClient.get("/api/v1/cas/" + handle + "/parents");
+    return apiClient.get("/api/v1/cas/" + handle + "/parents").catch(handleError);
   },
   getParentContact(handle, parent) {
-    return apiClient.get("/api/v1/cas/" + handle + "/parents/" + parent);
+    return apiClient.get("/api/v1/cas/" + handle + "/parents/" + parent).catch(handleError);
   },
   updateROAs(handle, delta, trial) {
-    return apiClient
-      .post("/api/v1/cas/" + handle + "/routes" + (trial ? "/try" : ""), delta)
-      .catch(handleError);
+    return apiClient.post("/api/v1/cas/" + handle + "/routes" + (trial ? "/try" : ""), delta).catch(handleError);
   },
   updateROAsDryRun(handle, delta) {
-    return apiClient.post("/api/v1/cas/" + handle + "/routes/analysis/dryrun", delta);
+    return apiClient.post("/api/v1/cas/" + handle + "/routes/analysis/dryrun", delta).catch(handleError);
   },
   createCA(handle) {
-    return apiClient.post("/api/v1/cas", {
-      handle
-    });
+    return apiClient.post("/api/v1/cas", { handle }).catch(handleError);
   },
   getChildRequestXML(handle) {
-    return apiClient.get("/api/v1/cas/" + handle + "/child_request.xml");
+    return apiClient.get("/api/v1/cas/" + handle + "/child_request.xml").catch(handleError);
   },
   addParentResponse(handle, xml, name) {
-    return apiClient.post("/api/v1/cas/" + handle + "/parents-xml/" + name, xml).catch(error => {
-      if (error.response && error.response.data) {
-        return Promise.reject({
-          data: error.response.data
-        });
-      }
-      return Promise.reject({
-        data: {
-          code: -1
-        }
-      });
-    });
+    return apiClient.post("/api/v1/cas/" + handle + "/parents-xml/" + name, xml).catch(handleError);
   },
   getRepoRequestXML(handle) {
-    return apiClient.get("/api/v1/cas/" + handle + "/repo/request.xml");
+    return apiClient.get("/api/v1/cas/" + handle + "/repo/request.xml").catch(handleError);
   },
   addRepoResponse(handle, xml) {
-    return apiClient.post("/api/v1/cas/" + handle + "/repo", xml).catch(error => {
-      if (error.response && error.response.data) {
-        return Promise.reject({
-          data: error.response.data
-        });
-      }
-      return Promise.reject({
-        data: {
-          code: -1
-        }
-      });
-    });
+    return apiClient.post("/api/v1/cas/" + handle + "/repo", xml).catch(handleError);
   },
   getKrillStats() {
-    return apiClient.get("/stats/info");
+    return apiClient.get("/stats/info").catch(handleError);
   },
   getLatestKrillVersion() {
-    return simpleClient.get("https://api.github.com/repos/nlnetlabs/krill/releases/latest");
+    return simpleClient.get("https://api.github.com/repos/nlnetlabs/krill/releases/latest").catch(handleError);
   },
   getBGPAnalysis(handle) {
-    return apiClient.get("/api/v1/cas/" + handle + "/routes/analysis/full");
+    return apiClient.get("/api/v1/cas/" + handle + "/routes/analysis/full").catch(handleError);
   },
   testbedAddChild(child, asn_res, ipv4_res, ipv6_res, id_cert) {
     return simpleClient.post("/testbed/children", {
@@ -179,40 +153,40 @@ export default {
           id_cert: id_cert
         }
       }
-    });
+    }).catch(handleError);
   },
   testbedGetParentResponseXML(child) {
-    return simpleClient.get("/testbed/children/" + child + "/parent_response.xml");
+    return simpleClient.get("/testbed/children/" + child + "/parent_response.xml").catch(handleError);
   },
   testbedRemoveChild(child) {
-    return simpleClient.delete("/testbed/children/" + child);
+    return simpleClient.delete("/testbed/children/" + child).catch(handleError);
   },
   testbedAddPublisher(publisher_handle, publisher_request_xml) {
     return simpleClient.post("/testbed/publishers", {
       tag: null,
       publisher_handle: publisher_handle,
       id_cert: publisher_request_xml
-    });
+    }).catch(handleError);
   },
   testbedGetRepositoryResponseXML(publisher) {
-    return simpleClient.get("/testbed/publishers/" + publisher + "/response.xml");
+    return simpleClient.get("/testbed/publishers/" + publisher + "/response.xml").catch(handleError);
   },
   testbedRemovePublisher(publisher) {
-    return simpleClient.delete("/testbed/publishers/" + publisher);
+    return simpleClient.delete("/testbed/publishers/" + publisher).catch(handleError);
   },
   testbedEnabled() {
-    return simpleClient.get("/testbed/enabled");
+    return simpleClient.get("/testbed/enabled").catch(handleError);
   },
   getROAsSuggestions(handle) {
-    return apiClient.get("/api/v1/cas/" + handle + "/routes/analysis/suggest");
+    return apiClient.get("/api/v1/cas/" + handle + "/routes/analysis/suggest").catch(handleError);
   },
   syncParents() {
-    return apiClient.post("/api/v1/bulk/cas/sync/parent");
+    return apiClient.post("/api/v1/bulk/cas/sync/parent").catch(handleError);
   },
   syncRepo() {
-    return apiClient.post("/api/v1/bulk/cas/sync/repo");
+    return apiClient.post("/api/v1/bulk/cas/sync/repo").catch(handleError);
   },
   getLoginURL() {
-    return simpleClient.get("/auth/login");
+    return simpleClient.get("/auth/login").catch(handleError);
   }
 };

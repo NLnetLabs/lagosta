@@ -1266,26 +1266,36 @@ export default {
       this.suggestions = [];
       APIService.getROAsSuggestions(this.handle).then(r => {
         this.suggestions = r.data;
+      }).catch(error => {
+        this.parseError(error, true);
       });
     },
     getParents() {
       APIService.getParents(this.handle).then(response => {
         this.parents = response.data;
+      }).catch(error => {
+        this.parseError(error, true);
       });
     },
     syncParents() {
       APIService.syncParents().then(() => {
         this.getParents();
+      }).catch(error => {
+        this.parseError(error, true);
       });
     },
     getRepoStatus() {
       APIService.getRepoStatus(this.handle).then(response => {
         this.repoStatus = response.data;
+      }).catch(error => {
+        this.parseError(error, true);
       });
     },
     syncRepo() {
       APIService.syncRepo().then(() => {
         this.getRepoStatus();
+      }).catch(error => {
+        this.parseError(error, true);
       });
     },
     parseError(error, notify) {
@@ -1339,6 +1349,8 @@ export default {
             }
             APIService.getChildRequestXML(this.handle).then(response => {
               this.initializeParentForm.xml = response.data;
+            }).catch(error => {
+              self.parseError(error, true);
             });
           } else {
             this.getParents();
@@ -1363,12 +1375,15 @@ export default {
           this.activeTab = "repo";
           APIService.getRepoRequestXML(this.handle).then(response => {
             this.initializeRepoForm.xml = response.data;
+          }).catch(error => {
+            self.parseError(error, true);
           });
         });
 
       this.loadCAs();
     },
     getParent(row) {
+      const self = this;
       this.loadingParent = true;
       this.parentDetails = [];
       APIService.getParentContact(this.handle, row.handle).then(response => {
@@ -1389,12 +1404,17 @@ export default {
             }
           ];
         }
+      }).catch(error => {
+        self.parseError(error, true);
       });
     },
     loadCAs() {
+      const self = this;
       APIService.getCAs().then(response => {
         this.loadingCAs = false;
         this.CAs = response.data.cas;
+      }).catch(error => {
+        self.parseError(error, true);
       });
     },
     loadCA(row) {
@@ -1555,10 +1575,13 @@ export default {
       return this.beforeUpload(file, "parent");
     },
     addAdditionalParent() {
+      const self = this;
       this.initializeParentForm.xml = "";
       this.initializeParentForm.response = "";
       APIService.getChildRequestXML(this.handle).then(response => {
         this.initializeParentForm.xml = response.data;
+      }).catch(error => {
+        self.parseError(error, true);
       });
       this.showAddParent = true;
     },
