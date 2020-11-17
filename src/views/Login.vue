@@ -125,10 +125,14 @@ export default {
         window.atob(this.$route.query.role)
       );
       this.postLogin(true);
-    } else if (this.$route.query.withId) {
-      // Configure the login form for id/password mode instead of master token
-      // mode.
-      this.withId = true;
+    } else {
+      if (this.$route.query.withId) {
+        // Configure the login form for id/password mode instead of master token
+        // mode.
+        this.withId = true;
+      }
+      // Ensure the top bar reflects the current (not) logged in state.
+      this.$emit("auth-event");
     }
   },
   methods: {
@@ -166,8 +170,6 @@ export default {
     },
     login() {
       this.submitted = true;
-
-      const self = this;
       this.loading = true;
 
       // Handle username/password based login

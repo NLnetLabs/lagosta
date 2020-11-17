@@ -186,6 +186,7 @@ export default {
     logout() {
       return APIService.logout().then(response => {
         var logout_url = response.data;
+        localStorage.removeItem(LOCALSTORAGE_NAME)
         this.user = null;
         // send the user to the right location to complete the logout process,
         // e.g. at a 3rd party login provider

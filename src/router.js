@@ -67,6 +67,7 @@ router.beforeEach((to, from, next) => {
   if (authRequired) {
     APIService.isAuthorized().then(loggedInOnBackend => {
       if (!loggedInOnFrontend || !loggedInOnBackend) {
+        localStorage.removeItem(LOCALSTORAGE_NAME);
         APIService.getLoginURL().then(response => {
           var login_url = response.data;
           // Detect whether the URL we should direct the user to login at is
