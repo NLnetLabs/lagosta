@@ -4,7 +4,7 @@ import router from "./router";
 import "./plugins/element.js";
 import i18n from "./i18n";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faSignOutAlt, faDownload, faClipboard, faFileCsv, faDiagnoses } from "@fortawesome/free-solid-svg-icons";
+import { faSignOutAlt, faDownload, faClipboard, faFileCsv, faDiagnoses, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import(/* webpackPreload: true */ "typeface-lato/index.css");
 import(/* webpackPreload: true */ "typeface-source-code-pro/index.css");
@@ -30,7 +30,8 @@ library.add({
   faDownload,
   faClipboard,
   faFileCsv,
-  faDiagnoses
+  faDiagnoses,
+  faUser
 });
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 

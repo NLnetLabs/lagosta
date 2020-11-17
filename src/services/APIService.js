@@ -58,8 +58,9 @@ export default {
         localStorage.setItem(
           LOCALSTORAGE_NAME,
           JSON.stringify({
-            id: window.atob(response.data.id),
             authdata: response.data.token,
+            id: response.data.id,
+            role: response.data.role
           })
         );
         return true;
@@ -69,13 +70,14 @@ export default {
         return false;
       });
   },
-  recordLogin(id, token) {
+  recordLogin(id, token, role) {
     apiClient.defaults.headers["Authorization"] = "Bearer " + token;
     localStorage.setItem(
       LOCALSTORAGE_NAME,
       JSON.stringify({
         authdata: token,
-        id: id
+        id: id,
+        role: role
       })
     );
   },

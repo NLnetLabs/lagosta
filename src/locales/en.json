@@ -18,7 +18,16 @@
     "nodata": "No data",
     "copySuccess": "XML copied to your clipboard",
     "edit": "Edit",
-    "welcome": "Logged in as: "
+    "userInfo": {
+      "title": "Login Details",
+      "user": "User:",
+      "role": "Role:",
+      "roles": {
+        "admin": "Admin",
+        "gui_read_only": "Read Only",
+        "gui_read_write": "Read Write"
+      }
+    }
   },
   "login": {
     "password": "Password",

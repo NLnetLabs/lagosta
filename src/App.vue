@@ -10,7 +10,7 @@
               </div>
             </router-link>
           </el-col>
-          <el-col :span="14"><span v-if="user">{{ $t("common.welcome") }} {{ this.user.id }}</span><span v-else>&nbsp;</span></el-col>
+          <el-col :span="14">&nbsp;</el-col>
           <el-col :span="6">
             <div class="toolbar">
               <el-select v-model="$i18n.locale" placeholder="Language" size="small">
@@ -21,6 +21,16 @@
                   :label="lang.label"
                 ></el-option>
               </el-select>
+              <el-popover v-if="user"
+                placement="bottom"
+                :title="$t('common.userInfo.title')"
+                trigger="click">
+                <font-awesome-icon icon="user" class="user" slot="reference" />
+                <table class="userinfo" slot="default">
+                  <tr><td>{{ $t('common.userInfo.user') }}</td><td>{{ user.id }}</td></tr>
+                  <tr><td>{{ $t('common.userInfo.role') }}</td><td>{{ $t('common.userInfo.roles.' + user.role) }}</td></tr>
+                </table>
+              </el-popover>
               <font-awesome-icon icon="sign-out-alt" v-if="user" class="logout" @click="logout" />
             </div>
           </el-col>
@@ -222,7 +232,7 @@ body {
   }
 }
 
-.logout {
+.logout, .user {
   margin-left: 2rem;
   cursor: pointer;
 }
@@ -255,5 +265,9 @@ a {
 
 .valign-top {
   vertical-align: top !important;
+}
+
+.userinfo td:nth-child(1) {
+  font-weight: bold;
 }
 </style>

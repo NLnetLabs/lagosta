@@ -118,10 +118,11 @@ export default {
       this.withLogin = false;
       // Show a retry link in the error message
       this.retryUrl = this.returnUrl;
-    } else if (this.$route.query.id && this.$route.query.token) {
+    } else if (this.$route.query.id && this.$route.query.token && this.$route.query.role) {
       APIService.recordLogin(
         window.atob(this.$route.query.id),
-        this.$route.query.token
+        window.atob(this.$route.query.token),
+        window.atob(this.$route.query.role)
       );
       this.postLogin(true);
     } else if (this.$route.query.withId) {
