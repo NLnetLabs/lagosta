@@ -120,9 +120,9 @@ export default {
       this.retryUrl = this.returnUrl;
     } else if (this.$route.query.id && this.$route.query.token && this.$route.query.role) {
       APIService.recordLogin(
-        window.atob(this.$route.query.id),
-        window.atob(this.$route.query.token),
-        window.atob(this.$route.query.role)
+        this.$route.query.id,
+        this.$route.query.token,
+        this.$route.query.role
       );
       this.postLogin(true);
     } else {
