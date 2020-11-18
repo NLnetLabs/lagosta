@@ -85,7 +85,7 @@ export default {
     localStorage.removeItem(LOCALSTORAGE_NAME);
     // returns the URL to which the user should be sent to complete the logout
     // process, e.g. when using a 3rd party login provider.
-    return simpleClient.post("/auth/logout");
+    return apiClient.post("/auth/logout").catch(handleError);
   },
   getCAs() {
     return apiClient.get("/api/v1/cas").catch(handleError);
