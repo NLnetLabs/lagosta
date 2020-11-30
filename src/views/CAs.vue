@@ -68,11 +68,37 @@ export default {
     this.loadCAs();
   },
   methods: {
+    parseError(error, notify) {
+      let e = error;
+      if (error.data) {
+        e = error.data.label
+          ? this.$t("errors." + error.data.label, error.data.args)
+          : this.$t("errors." + error.data.code);
+        if (e === "errors." + (error.data.label ? error.data.label : error.data.code)) {
+          e = error.data.msg;
+        }
+      }
+
+      this.error = e;
+      if (notify) {
+        this.$notify({
+          title: this.$t("common.error"),
+          message: this.error,
+          type: "error"
+        });
+      }
+    },
     loadCAs() {
-      APIService.getCAs().then(response => {
-        this.loading = false;
-        this.CAs = response.data.cas;
-      });
+      APIService.getCAs()
+        .then(response => {
+          this.loading = false;
+          this.CAs = response.data.cas;
+        })
+        .catch(error => {
+          this.loading = false;
+          this.CAs = [];
+          this.parseError(error, true);
+        });
     },
     loadCA(row) {
       router.push("/cas/" + row.handle);

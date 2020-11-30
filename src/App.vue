@@ -27,8 +27,11 @@
                 trigger="click">
                 <font-awesome-icon icon="user" class="user" slot="reference" id="userinfo" />
                 <table class="userinfo" slot="default" id="userinfo_table">
-                  <tr><td>{{ $t('common.userInfo.user') }}</td><td>{{ user.id }}</td></tr>
-                  <tr><td>{{ $t('common.userInfo.role') }}</td><td>{{ $t('common.userInfo.roles.' + user.role) }}</td></tr>
+                  <tr><td>{{ $t('common.userInfo.user') }}:</td><td>{{ user.id }}</td></tr>
+                  <tr v-for="(item, index) in user.attributes" :key="index">
+                    <td>{{ index }}</td>
+                    <td>{{ item }}</td>
+                  </tr>
                 </table>
               </el-popover>
               <font-awesome-icon icon="sign-out-alt" v-if="user" class="logout" @click="logout" />

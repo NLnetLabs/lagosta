@@ -89,7 +89,8 @@ router.beforeEach((to, from, next) => {
             return next({
               path: login_url,
               query: {
-                returnUrl: to.path
+                returnUrl: to.path,
+                error: loggedInOnFrontend ? 'api-logged-out' : undefined
               }
             });
           }

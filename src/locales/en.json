@@ -20,13 +20,7 @@
     "edit": "Edit",
     "userInfo": {
       "title": "Login Details",
-      "user": "User:",
-      "role": "Role:",
-      "roles": {
-        "admin": "Admin",
-        "gui_read_only": "Read Only",
-        "gui_read_write": "Read Write"
-      }
+      "user": "User"
     }
   },
   "login": {
@@ -229,6 +223,7 @@
     "ca-roa-delta-error": "ROA rejected because of the following issue(s)",
     "api-invalid-role": "Your user has not been granted the right to use Krill. Please contact your administrator.",
     "api-insufficient-rights": "Your user does not have sufficient rights to perform this action. Please contact your administrator.",
+    "api-logged-out": "Your login session has been terminated.",
     "api-missing-credentials": "No login credentials were supplied.",
     "general-error": "Something went wrong. Please contact your administrator."
   },

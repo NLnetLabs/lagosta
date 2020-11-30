@@ -189,6 +189,7 @@ export default {
       }
     },
     postLogin(success, error = undefined) {
+      this.loading = false;
       if (success) {
         this.$emit("auth-event");
         router.push(this.returnUrl);
@@ -198,7 +199,6 @@ export default {
         } else {
           this.error = this.$t("errors." + error);
         }
-        this.loading = false;
       }
     }
   }

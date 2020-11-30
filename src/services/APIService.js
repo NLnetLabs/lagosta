@@ -7,10 +7,23 @@ const apiClient = axios.create({
 });
 
 apiClient.interceptors.response.use(function (response) {
-  // Any status code that lie within the range of 2xx cause this function to trigger
-  // Do something with response data
   if (response.headers["authorization"] !== undefined) {
-    apiClient.defaults.headers["Authorization"] = response.headers["authorization"];
+    // The server generated a new API token for us to use in subsequent requests
+    // e.g. because the current one is about to expire. Use this token for
+    // subsequent API calls in this browser session,
+    apiClient.defaults.headers["Authorization"] = "Bearer " + response.data.token;
+
+    // Save the token so that it will also be used for API calls made in a 
+    // future browser session.
+    let user = JSON.parse(localStorage.getItem(LOCALSTORAGE_NAME));
+    localStorage.setItem(
+      LOCALSTORAGE_NAME,
+      JSON.stringify({
+        authdata: response.data.token,
+        id: user.id,
+        attributes: user.attributes
+      })
+    );
   }
   return response;
 }, function (error) {
@@ -42,7 +55,7 @@ export default {
       .catch(() => false);
   },
   login(token, id = undefined) {
-    apiClient.defaults.headers["Authorization"] = "Bearer " + token;
+    localStorage.removeItem(LOCALSTORAGE_NAME);
 
     // Handle id/password login mode where we have to submit an id and password,
     // not just a token as when in master token mode.
@@ -51,16 +64,24 @@ export default {
       queryParams = "?id=" + id;
     }
 
+    // Use the given token in the login request
+    apiClient.defaults.headers["Authorization"] = "Bearer " + token;
+
     return apiClient
       .post("/auth/login" + queryParams)
       .then(response => {
+        // Set the token to use for subsequent API calls in this browser session,
         apiClient.defaults.headers["Authorization"] = "Bearer " + response.data.token;
+
+        // Save the token to use for API calls in a future browser session.
+        // Save details about the user that we want to display in the UI for the
+        // same duration as the token.
         localStorage.setItem(
           LOCALSTORAGE_NAME,
           JSON.stringify({
             authdata: response.data.token,
             id: response.data.id,
-            role: response.data.role
+            attributes: response.data.attributes
           })
         );
         return true;
@@ -71,6 +92,12 @@ export default {
       });
   },
   recordLogin(id, token, role) {
+    // Set the token to use for subsequent API calls in this browser session,
+    apiClient.defaults.headers["Authorization"] = "Bearer " + token;
+
+    // Save the token to use for API calls in a future browser session.
+    // Save details about the user that we want to display in the UI for the
+    // same duration as the token.
     apiClient.defaults.headers["Authorization"] = "Bearer " + token;
     localStorage.setItem(
       LOCALSTORAGE_NAME,
