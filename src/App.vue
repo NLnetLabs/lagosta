@@ -29,7 +29,7 @@
                 <table class="userinfo" slot="default" id="userinfo_table">
                   <tr><td>{{ $t('common.userInfo.user') }}:</td><td>{{ user.id }}</td></tr>
                   <tr v-for="(item, index) in user.attributes" :key="index">
-                    <td>{{ index }}</td>
+                    <td>{{ index }}:</td>
                     <td>{{ item }}</td>
                   </tr>
                 </table>
