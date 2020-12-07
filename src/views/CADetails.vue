@@ -85,7 +85,7 @@
 
                   <div v-if="!initializeParent && !initializeRepo && emptyResources" class="empty">
                     {{ $t("caDetails.noResourcesYet") }}
-                    <a href="javascript: void(0)" @click="getContent()">{{
+                    <a href="javascript: void(0)" @click="getContent()" id="no_resources_click_to_refresh">{{
                       $t("caDetails.clickToRefresh")
                     }}</a>
                   </div>
@@ -580,7 +580,12 @@
     >
       <el-form :model="addROAForm" :rules="addROAFormRules" ref="addROAForm">
         <el-form-item :label="$t('announcements.asn')" prop="asn">
-          <el-input v-model="addROAForm.asn" autocomplete="off" @change="removeAS()"></el-input>
+          <el-input
+            v-model="addROAForm.asn"
+            autocomplete="off"
+            @change="removeAS()"
+            id="add_roa_asn"
+          ></el-input>
         </el-form-item>
         <el-form-item
           :label="$t('announcements.prefix')"
@@ -591,6 +596,7 @@
             v-model="addROAForm.prefix"
             autocomplete="off"
             @input="updateMaxLength($event)"
+            id="add_roa_prefix"
           ></el-input>
         </el-form-item>
         <el-form-item :label="$t('caDetails.maxLength')" placeholder="ie. 24" prop="maxLength">
@@ -601,6 +607,7 @@
             :readonly="addROAForm.asn === '0'"
             min="4"
             max="64"
+            id="add_roa_maxlength"
           ></el-input>
         </el-form-item>
         <el-alert type="error" v-if="error" :closable="false" class="mb-1">{{ error }}</el-alert>
@@ -1259,26 +1266,36 @@ export default {
       this.suggestions = [];
       APIService.getROAsSuggestions(this.handle).then(r => {
         this.suggestions = r.data;
+      }).catch(error => {
+        this.parseError(error, true);
       });
     },
     getParents() {
       APIService.getParents(this.handle).then(response => {
         this.parents = response.data;
+      }).catch(error => {
+        this.parseError(error, true);
       });
     },
     syncParents() {
       APIService.syncParents().then(() => {
         this.getParents();
+      }).catch(error => {
+        this.parseError(error, true);
       });
     },
     getRepoStatus() {
       APIService.getRepoStatus(this.handle).then(response => {
         this.repoStatus = response.data;
+      }).catch(error => {
+        this.parseError(error, true);
       });
     },
     syncRepo() {
       APIService.syncRepo().then(() => {
         this.getRepoStatus();
+      }).catch(error => {
+        this.parseError(error, true);
       });
     },
     parseError(error, notify) {
@@ -1332,6 +1349,8 @@ export default {
             }
             APIService.getChildRequestXML(this.handle).then(response => {
               this.initializeParentForm.xml = response.data;
+            }).catch(error => {
+              self.parseError(error, true);
             });
           } else {
             this.getParents();
@@ -1356,12 +1375,15 @@ export default {
           this.activeTab = "repo";
           APIService.getRepoRequestXML(this.handle).then(response => {
             this.initializeRepoForm.xml = response.data;
+          }).catch(error => {
+            self.parseError(error, true);
           });
         });
 
       this.loadCAs();
     },
     getParent(row) {
+      const self = this;
       this.loadingParent = true;
       this.parentDetails = [];
       APIService.getParentContact(this.handle, row.handle).then(response => {
@@ -1382,12 +1404,17 @@ export default {
             }
           ];
         }
+      }).catch(error => {
+        self.parseError(error, true);
       });
     },
     loadCAs() {
+      const self = this;
       APIService.getCAs().then(response => {
         this.loadingCAs = false;
         this.CAs = response.data.cas;
+      }).catch(error => {
+        self.parseError(error, true);
       });
     },
     loadCA(row) {
@@ -1548,10 +1575,13 @@ export default {
       return this.beforeUpload(file, "parent");
     },
     addAdditionalParent() {
+      const self = this;
       this.initializeParentForm.xml = "";
       this.initializeParentForm.response = "";
       APIService.getChildRequestXML(this.handle).then(response => {
         this.initializeParentForm.xml = response.data;
+      }).catch(error => {
+        self.parseError(error, true);
       });
       this.showAddParent = true;
     },

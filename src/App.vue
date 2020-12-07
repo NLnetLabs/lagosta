@@ -21,6 +21,19 @@
                   :label="lang.label"
                 ></el-option>
               </el-select>
+              <el-popover v-if="user"
+                placement="bottom"
+                :title="$t('common.userInfo.title')"
+                trigger="click">
+                <font-awesome-icon icon="user" class="user" slot="reference" id="userinfo" />
+                <table class="userinfo" slot="default" id="userinfo_table">
+                  <tr><td>{{ $t('common.userInfo.user') }}:</td><td>{{ user.id }}</td></tr>
+                  <tr v-for="(item, index) in user.attributes" :key="index">
+                    <td>{{ index }}:</td>
+                    <td>{{ item }}</td>
+                  </tr>
+                </table>
+              </el-popover>
               <font-awesome-icon icon="sign-out-alt" v-if="user" class="logout" @click="logout" />
             </div>
           </el-col>
@@ -174,9 +187,17 @@ export default {
       this.user = JSON.parse(localStorage.getItem(LOCALSTORAGE_NAME));
     },
     logout() {
-      return APIService.logout().then(() => {
+      return APIService.logout().then(response => {
+        var logout_url = response.data;
+        localStorage.removeItem(LOCALSTORAGE_NAME)
         this.user = null;
-        router.push("/login");
+        // send the user to the right location to complete the logout process,
+        // e.g. at a 3rd party login provider
+        if (logout_url.indexOf('http') === 0) {
+          window.location.href = logout_url
+        } else {
+          router.push(logout_url);
+        }
       });
     }
   }
@@ -215,7 +236,7 @@ body {
   }
 }
 
-.logout {
+.logout, .user {
   margin-left: 2rem;
   cursor: pointer;
 }
@@ -248,5 +269,9 @@ a {
 
 .valign-top {
   vertical-align: top !important;
+}
+
+.userinfo td:nth-child(1) {
+  font-weight: bold;
 }
 </style>

@@ -21,23 +21,28 @@ export default {
   },
   methods: {
     loadCAs() {
-      APIService.getCAs().then(response => {
-        this.loading = false;
-        if (response.data.cas && response.data.cas.length > 0) {
-          let filtered = response.data.cas.map(ca => ca.handle).filter(ca => ca !== "ta");
-          if (filtered.length > 0) {
-            let handle = filtered[0];
-            if (localStorage.lagostaLastCA) {
-              handle = localStorage.lagostaLastCA;
+      APIService.getCAs()
+        .then(response => {
+          this.loading = false;
+          if (response.data.cas && response.data.cas.length > 0) {
+            let filtered = response.data.cas.map(ca => ca.handle).filter(ca => ca !== "ta");
+            if (filtered.length > 0) {
+              let handle = filtered[0];
+              if (localStorage.lagostaLastCA) {
+                handle = localStorage.lagostaLastCA;
+              }
+              router.push("/cas/" + handle);
+            } else {
+              router.push("/onboarding");
             }
-            router.push("/cas/" + handle);
           } else {
             router.push("/onboarding");
           }
-        } else {
+        })
+        .catch(() => {
+          this.loading = false;
           router.push("/onboarding");
-        }
-      });
+        });
     }
   }
 };

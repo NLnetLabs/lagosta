@@ -6,7 +6,46 @@ const apiClient = axios.create({
   headers: authHeader()
 });
 
+apiClient.interceptors.response.use(function (response) {
+  if (response.headers["authorization"] !== undefined) {
+    // The server generated a new API token for us to use in subsequent requests
+    // e.g. because the current one is about to expire. Use this token for
+    // subsequent API calls in this browser session,
+    apiClient.defaults.headers["Authorization"] = "Bearer " + response.data.token;
+
+    // Save the token so that it will also be used for API calls made in a 
+    // future browser session.
+    let user = JSON.parse(localStorage.getItem(LOCALSTORAGE_NAME));
+    localStorage.setItem(
+      LOCALSTORAGE_NAME,
+      JSON.stringify({
+        authdata: response.data.token,
+        id: user.id,
+        attributes: user.attributes
+      })
+    );
+  }
+  return response;
+}, function (error) {
+  // Any status codes that falls outside the range of 2xx cause this function to trigger
+  // Do something with response error
+  throw error;
+});
+
 const simpleClient = axios.create();
+
+function handleError(error) {
+  if (error.response && error.response.data) {
+    return Promise.reject({
+      data: error.response.data
+    });
+  }
+  return Promise.reject({
+    data: {
+      code: -1
+    }
+  });
+}
 
 export default {
   isAuthorized() {
@@ -15,15 +54,34 @@ export default {
       .then(() => true)
       .catch(() => false);
   },
-  login(token) {
+  login(token, id = undefined) {
+    localStorage.removeItem(LOCALSTORAGE_NAME);
+
+    // Handle id/password login mode where we have to submit an id and password,
+    // not just a token as when in master token mode.
+    let queryParams = "";
+    if (id !== undefined) {
+      queryParams = "?id=" + id;
+    }
+
+    // Use the given token in the login request
     apiClient.defaults.headers["Authorization"] = "Bearer " + token;
+
     return apiClient
-      .get("/api/v1/authorized")
-      .then(() => {
+      .post("/auth/login" + queryParams)
+      .then(response => {
+        // Set the token to use for subsequent API calls in this browser session,
+        apiClient.defaults.headers["Authorization"] = "Bearer " + response.data.token;
+
+        // Save the token to use for API calls in a future browser session.
+        // Save details about the user that we want to display in the UI for the
+        // same duration as the token.
         localStorage.setItem(
           LOCALSTORAGE_NAME,
           JSON.stringify({
-            authdata: window.btoa(token)
+            authdata: response.data.token,
+            id: response.data.id,
+            attributes: response.data.attributes
           })
         );
         return true;
@@ -33,99 +91,79 @@ export default {
         return false;
       });
   },
+  recordLogin(id, token, role) {
+    // Set the token to use for subsequent API calls in this browser session,
+    apiClient.defaults.headers["Authorization"] = "Bearer " + token;
+
+    // Save the token to use for API calls in a future browser session.
+    // Save details about the user that we want to display in the UI for the
+    // same duration as the token.
+    apiClient.defaults.headers["Authorization"] = "Bearer " + token;
+    localStorage.setItem(
+      LOCALSTORAGE_NAME,
+      JSON.stringify({
+        authdata: token,
+        id: id,
+        role: role
+      })
+    );
+  },
   logout() {
     localStorage.removeItem(LOCALSTORAGE_NAME);
-    return new Promise(function(resolve) {
-      resolve("Logged out.");
-    });
+    // returns the URL to which the user should be sent to complete the logout
+    // process, e.g. when using a 3rd party login provider.
+    return apiClient.post("/auth/logout").catch(handleError);
   },
   getCAs() {
-    return apiClient.get("/api/v1/cas");
+    return apiClient.get("/api/v1/cas").catch(handleError);
   },
   getCA(handle) {
-    return apiClient.get("/api/v1/cas/" + handle);
+    return apiClient.get("/api/v1/cas/" + handle).catch(handleError);
   },
   getROAs(handle) {
-    return apiClient.get("/api/v1/cas/" + handle + "/routes");
+    return apiClient.get("/api/v1/cas/" + handle + "/routes").catch(handleError);
   },
   getRepo(handle) {
-    return apiClient.get("/api/v1/cas/" + handle + "/repo");
+    return apiClient.get("/api/v1/cas/" + handle + "/repo").catch(handleError);
   },
   getRepoStatus(handle) {
-    return apiClient.get("/api/v1/cas/" + handle + "/repo/status");
+    return apiClient.get("/api/v1/cas/" + handle + "/repo/status").catch(handleError);
   },
   getParents(handle) {
-    return apiClient.get("/api/v1/cas/" + handle + "/parents");
+    return apiClient.get("/api/v1/cas/" + handle + "/parents").catch(handleError);
   },
   getParentContact(handle, parent) {
-    return apiClient.get("/api/v1/cas/" + handle + "/parents/" + parent);
+    return apiClient.get("/api/v1/cas/" + handle + "/parents/" + parent).catch(handleError);
   },
   updateROAs(handle, delta, trial) {
-    return apiClient
-      .post("/api/v1/cas/" + handle + "/routes" + (trial ? "/try" : ""), delta)
-      .catch(error => {
-        if (error.response && error.response.data) {
-          return Promise.reject({
-            data: error.response.data
-          });
-        }
-        return Promise.reject({
-          data: {
-            code: -1
-          }
-        });
-      });
+    return apiClient.post("/api/v1/cas/" + handle + "/routes" + (trial ? "/try" : ""), delta).catch(handleError);
   },
   updateROAsDryRun(handle, delta) {
-    return apiClient.post("/api/v1/cas/" + handle + "/routes/analysis/dryrun", delta);
+    return apiClient.post("/api/v1/cas/" + handle + "/routes/analysis/dryrun", delta).catch(handleError);
   },
   createCA(handle) {
-    return apiClient.post("/api/v1/cas", {
-      handle
-    });
+    return apiClient.post("/api/v1/cas", { handle }).catch(handleError);
   },
   getChildRequestXML(handle) {
-    return apiClient.get("/api/v1/cas/" + handle + "/child_request.xml");
+    return apiClient.get("/api/v1/cas/" + handle + "/child_request.xml").catch(handleError);
   },
   addParentResponse(handle, xml, name) {
-    return apiClient.post("/api/v1/cas/" + handle + "/parents-xml/" + name, xml).catch(error => {
-      if (error.response && error.response.data) {
-        return Promise.reject({
-          data: error.response.data
-        });
-      }
-      return Promise.reject({
-        data: {
-          code: -1
-        }
-      });
-    });
+    return apiClient.post("/api/v1/cas/" + handle + "/parents-xml/" + name, xml).catch(handleError);
   },
   getRepoRequestXML(handle) {
-    return apiClient.get("/api/v1/cas/" + handle + "/repo/request.xml");
+    return apiClient.get("/api/v1/cas/" + handle + "/repo/request.xml").catch(handleError);
   },
   addRepoResponse(handle, xml) {
-    return apiClient.post("/api/v1/cas/" + handle + "/repo", xml).catch(error => {
-      if (error.response && error.response.data) {
-        return Promise.reject({
-          data: error.response.data
-        });
-      }
-      return Promise.reject({
-        data: {
-          code: -1
-        }
-      });
-    });
+    return apiClient.post("/api/v1/cas/" + handle + "/repo", xml).catch(handleError);
   },
   getKrillStats() {
-    return apiClient.get("/stats/info");
+    return apiClient.get("/stats/info").catch(handleError);
   },
   getLatestKrillVersion() {
-    return simpleClient.get("https://api.github.com/repos/nlnetlabs/krill/releases/latest");
+    return simpleClient.get("https://api.github.com/repos/nlnetlabs/krill/releases/latest").catch(handleError);
   },
   getBGPAnalysis(handle) {
-    return apiClient.get("/api/v1/cas/" + handle + "/routes/analysis/full");
+    return apiClient.get("/api/v1/cas/" + handle + "/routes/analysis/full").catch(handleError);
   },
   testbedAddChild(child, asn_res, ipv4_res, ipv6_res, id_cert) {
     return simpleClient.post("/testbed/children", {
@@ -142,37 +180,40 @@ export default {
           id_cert: id_cert
         }
       }
-    });
+    }).catch(handleError);
   },
   testbedGetParentResponseXML(child) {
-    return simpleClient.get("/testbed/children/" + child + "/parent_response.xml");
+    return simpleClient.get("/testbed/children/" + child + "/parent_response.xml").catch(handleError);
   },
   testbedRemoveChild(child) {
-    return simpleClient.delete("/testbed/children/" + child);
+    return simpleClient.delete("/testbed/children/" + child).catch(handleError);
   },
   testbedAddPublisher(publisher_handle, publisher_request_xml) {
     return simpleClient.post("/testbed/publishers", {
       tag: null,
       publisher_handle: publisher_handle,
       id_cert: publisher_request_xml
-    });
+    }).catch(handleError);
   },
   testbedGetRepositoryResponseXML(publisher) {
-    return simpleClient.get("/testbed/publishers/" + publisher + "/response.xml");
+    return simpleClient.get("/testbed/publishers/" + publisher + "/response.xml").catch(handleError);
   },
   testbedRemovePublisher(publisher) {
-    return simpleClient.delete("/testbed/publishers/" + publisher);
+    return simpleClient.delete("/testbed/publishers/" + publisher).catch(handleError);
   },
   testbedEnabled() {
-    return simpleClient.get("/testbed/enabled");
+    return simpleClient.get("/testbed/enabled").catch(handleError);
   },
   getROAsSuggestions(handle) {
-    return apiClient.get("/api/v1/cas/" + handle + "/routes/analysis/suggest");
+    return apiClient.get("/api/v1/cas/" + handle + "/routes/analysis/suggest").catch(handleError);
   },
   syncParents() {
-    return apiClient.post("/api/v1/bulk/cas/sync/parent");
+    return apiClient.post("/api/v1/bulk/cas/sync/parent").catch(handleError);
   },
   syncRepo() {
-    return apiClient.post("/api/v1/bulk/cas/sync/repo");
+    return apiClient.post("/api/v1/bulk/cas/sync/repo").catch(handleError);
+  },
+  getLoginURL() {
+    return simpleClient.get("/auth/login").catch(handleError);
   }
 };

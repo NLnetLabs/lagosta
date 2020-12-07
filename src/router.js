@@ -67,14 +67,37 @@ router.beforeEach((to, from, next) => {
   if (authRequired) {
     APIService.isAuthorized().then(loggedInOnBackend => {
       if (!loggedInOnFrontend || !loggedInOnBackend) {
-        return next({
-          path: "/login",
-          query: {
-            returnUrl: to.path
+        localStorage.removeItem(LOCALSTORAGE_NAME);
+        APIService.getLoginURL().then(response => {
+          var login_url = response.data;
+          // Detect whether the URL we should direct the user to login at is
+          // part of our single page application (is a relative URL) or is
+          // outside our single page application (is an absolute URL), as the
+          // way to redirect to them differs.
+
+          // Ideally an external login page would only be available via HTTPS,
+          // but permit plain HTTP for the case when using a local OpenID
+          // Connect provider for testing purposes that is exposed over plain
+          // unencrypted HTTP.
+          if (login_url.indexOf('http') === 0) {
+            // tell the browser to send the user to an external login page
+            // served by the OpenID Connect provider as the vue router cannot do
+            // such a redirect for us.
+            window.location.href = login_url;
+          } else {
+            // use the Vue router to "redirect" to an internal login page.
+            return next({
+              path: login_url,
+              query: {
+                returnUrl: to.path,
+                error: loggedInOnFrontend ? 'api-logged-out' : undefined
+              }
+            });
           }
         });
+      } else {
+        next();
       }
-      next();
     });
   } else {
     next();
