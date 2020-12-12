@@ -27,9 +27,12 @@
                 trigger="click">
                 <font-awesome-icon icon="user" class="user" slot="reference" id="userinfo" />
                 <table class="userinfo" slot="default" id="userinfo_table">
-                  <tr><td>{{ $t('common.userInfo.user') }}:</td><td>{{ user.id }}</td></tr>
+                  <tr>
+                    <td class="userattr">{{ $t('common.userInfo.user') }}:</td>
+                    <td>{{ user.id }}</td>
+                  </tr>
                   <tr v-for="(item, index) in user.attributes" :key="index">
-                    <td>{{ index }}:</td>
+                    <td class="userattr">{{ index }}:</td>
                     <td>{{ item }}</td>
                   </tr>
                 </table>
@@ -271,7 +274,9 @@ a {
   vertical-align: top !important;
 }
 
-.userinfo td:nth-child(1) {
+.userattr {
   font-weight: bold;
+  text-transform: capitalize;
 }
+
 </style>
