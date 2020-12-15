@@ -11,7 +11,7 @@ apiClient.interceptors.response.use(function (response) {
     // The server generated a new API token for us to use in subsequent requests
     // e.g. because the current one is about to expire. Use this token for
     // subsequent API calls in this browser session,
-    apiClient.defaults.headers["Authorization"] = "Bearer " + response.data.token;
+    apiClient.defaults.headers["Authorization"] = response.headers["authorization"];
 
     // Save the token so that it will also be used for API calls made in a 
     // future browser session.
@@ -98,7 +98,6 @@ export default {
     // Save the token to use for API calls in a future browser session.
     // Save details about the user that we want to display in the UI for the
     // same duration as the token.
-    apiClient.defaults.headers["Authorization"] = "Bearer " + token;
     localStorage.setItem(
       LOCALSTORAGE_NAME,
       JSON.stringify({
