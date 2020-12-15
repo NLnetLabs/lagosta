@@ -8,10 +8,12 @@ const apiClient = axios.create({
 
 apiClient.interceptors.response.use(function (response) {
   if (response.headers["authorization"] !== undefined) {
+    let new_token = response.headers["authorization"].split("Bearer ")[1];
+
     // The server generated a new API token for us to use in subsequent requests
     // e.g. because the current one is about to expire. Use this token for
     // subsequent API calls in this browser session,
-    apiClient.defaults.headers["Authorization"] = response.headers["authorization"];
+    apiClient.defaults.headers["Authorization"] = "Bearer " + new_token;
 
     // Save the token so that it will also be used for API calls made in a 
     // future browser session.
@@ -19,7 +21,7 @@ apiClient.interceptors.response.use(function (response) {
     localStorage.setItem(
       LOCALSTORAGE_NAME,
       JSON.stringify({
-        authdata: response.data.token,
+        authdata: new_token,
         id: user.id,
         attributes: user.attributes
       })
