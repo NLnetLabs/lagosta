@@ -222,7 +222,8 @@
     "ta-name-reserved": "Name reserved",
     "ca-roa-delta-error": "ROA rejected because of the following issue(s)",
     "api-insufficient-rights": "Your user does not have sufficient rights to perform this action. Please contact your administrator.",
-    "api-missing-credentials": "No login credentials were supplied.",
+    "api-invalid-credentials": "The supplied login credentials were incorrect.",
+    "api-auth-error": "An error occurred while logging you in: {cause}",
     "general-error": "Something went wrong. Please contact your administrator."
   },
   "testbed": {
