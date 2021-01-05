@@ -113,7 +113,7 @@ export default {
     // in user and the token that should be used to authenticat and authorize
     // subsequent API calls.
     if (this.$route.query.error) {
-      this.postLogin(false, this.$route.query.error);
+      this.postLogin(false, JSON.parse(atob(this.$route.query.error)));
       // Hide the usual login form
       this.withLogin = false;
       // Show a retry link in the error message
@@ -197,7 +197,9 @@ export default {
         if (error === undefined) {
           this.error = this.$t("login.error");
         } else {
-          this.error = this.$t("errors." + error);
+          this.error = error.label
+            ? this.$t("errors." + error.label, error.args)
+            : this.$t("errors." + error.code);
         }
       }
     }
