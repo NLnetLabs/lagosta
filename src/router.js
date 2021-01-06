@@ -94,6 +94,15 @@ router.beforeEach((to, from, next) => {
               }
             });
           }
+        })
+        .catch(error => {
+          return next({
+            path: "/login",
+            query: {
+              returnUrl: to.path,
+              error: error.data
+            }
+          });
         });
       } else {
         next();
