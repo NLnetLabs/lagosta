@@ -93,7 +93,7 @@ export default {
         return false;
       });
   },
-  recordLogin(id, token, role) {
+  recordLogin(id, token, attributes) {
     // Set the token to use for subsequent API calls in this browser session,
     apiClient.defaults.headers["Authorization"] = "Bearer " + token;
 
@@ -105,7 +105,7 @@ export default {
       JSON.stringify({
         authdata: token,
         id: id,
-        role: role
+        attributes: attributes
       })
     );
   },
