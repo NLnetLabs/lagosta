@@ -192,8 +192,8 @@ export default {
   testbedAddPublisher(publisher_handle, publisher_request_xml) {
     return simpleClient.post("/testbed/publishers", {
       tag: null,
-      publisher_handle: publisher_handle,
-      id_cert: publisher_request_xml
+      publisher_handle: publisher_handle.trim(),
+      id_cert: publisher_request_xml.trim()
     }).catch(handleError);
   },
   testbedGetRepositoryResponseXML(publisher) {
