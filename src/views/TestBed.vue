@@ -364,20 +364,20 @@ export default {
                             })
                             .catch(error => {
                               self.loading = false;
-                              self.parseError(error.response, true);
+                              self.parseError(error, true);
                             });
                         })
                         .catch(error => {
                           // if 400 ca-child-duplicate retry with random
                           // ca name appendage
-                          if (error.response.data !== undefined &&
-                              error.response.data.label !== undefined &&
-                              error.response.data.label === 'ca-child-duplicate') {
+                          if (error.data !== undefined &&
+                              error.data.label !== undefined &&
+                              error.data.label === 'ca-child-duplicate') {
                             let new_child_handle = child_handle + String(new Date().getTime());
                             doAddChild(new_child_handle, asn_res, ipv4_res, ipv6_res,id_cert);
                           } else {
                             self.loading = false;
-                            self.parseError(error.response, true);
+                            self.parseError(error, true);
                           }
                         });
                     }
@@ -431,7 +431,7 @@ export default {
                   })
                   .catch(error => {
                     self.loading = false;
-                    self.parseError(error.response, true);
+                    self.parseError(error, true);
                   });
               })
               .catch(() => {
@@ -482,20 +482,20 @@ export default {
                             })
                             .catch(error => {
                               self.loading = false;
-                              self.parseError(error.response, true);
+                              self.parseError(error, true);
                             });
                         })
                         .catch(error => {
                           // if 400 pub-duplicate retry with random
                           // publisher name appendage
-                          if (error.response.data !== undefined &&
-                              error.response.data.label !== undefined &&
-                              error.response.data.label === 'pub-duplicate') {
+                          if (error.data !== undefined &&
+                              error.data.label !== undefined &&
+                              error.data.label === 'pub-duplicate') {
                             let new_publisher_handle = publisher_handle + String(new Date().getTime());
                             doAddPublisher(new_publisher_handle, id_cert);
                           } else {
                             self.loading = false;
-                            self.parseError(error.response, true);
+                            self.parseError(error, true);
                           }
                         });
                     }
@@ -544,7 +544,7 @@ export default {
                   })
                   .catch(error => {
                     self.loading = false;
-                    self.parseError(error.response, true);
+                    self.parseError(error, true);
                   });
               })
               .catch(() => {
