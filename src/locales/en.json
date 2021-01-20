@@ -315,8 +315,11 @@
       "missing-xml-attr": "Missing attribute {attr} on element {el}",
       "empty-xml-el": "Element {el} cannot be empty",
       "empty-xml-attr": "Attribute {attr} on element {el} cannot be empty",
+      "non-ascii-xml-el": "Element {el} cannot contain non-ASCII characters",
       "child-handle-required": "Child Handle is required",
-      "publisher-handle-required": "Publisher Handle is required"
+      "publisher-handle-required": "Publisher Handle is required",
+      "non-base64-certificate-xml-el": "Element {el} must contain a correctly Base64 encoded self-signed X.509 BPKI certificate",
+      "invalid-registration-data": "Your registration details could not be parsed correctly"
     }
   }
 }
