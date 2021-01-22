@@ -93,7 +93,7 @@
             </el-form>
           </el-tab-pane>
 
-          <el-tab-pane :label="$t('testbed.removeChild.heading')" name="removeChild">
+          <el-tab-pane :label="$t('testbed.removeChild.heading')" name="removeChild" id="removeChild">
             <el-form :model="removeChildForm" :rules="rules" ref="removeChildForm">
               <el-form-item :label="$t('testbed.childhandle')" prop="child_handle">
                 <el-input
@@ -112,7 +112,7 @@
             </el-form>
           </el-tab-pane>
 
-          <el-tab-pane :label="$t('testbed.addPublisher.heading')" name="addPublisher">
+          <el-tab-pane :label="$t('testbed.addPublisher.heading')" name="addPublisher" id="addPublisher">
             <el-form :model="addPublisherRespForm" :rules="rules" ref="addPublisherRespForm" v-show="addPublisherRespForm.repoRespXML != ''">
               <el-form-item :label="$t('testbed.responseXML')" prop="repoRespXML">
                 <el-link href="https://tools.ietf.org/html/rfc8183#section-5.2.4" target="_blank" icon="el-icon-info">{{ $t('testbed.rfcdoclink') }}</el-link>
@@ -162,7 +162,7 @@
             </el-form>
           </el-tab-pane>
 
-          <el-tab-pane :label="$t('testbed.removePublisher.heading')" name="removePublisher">
+          <el-tab-pane :label="$t('testbed.removePublisher.heading')" name="removePublisher" id="removePublisher">
             <el-form :model="removePublisherForm" :rules="rules" ref="removePublisherForm">
               <el-form-item :label="$t('testbed.publisherhandle')" prop="publisher_handle">
                 <el-input
