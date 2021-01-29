@@ -168,17 +168,17 @@ export default {
   },
   testbedAddChild(child, asn_res, ipv4_res, ipv6_res, id_cert) {
     return simpleClient.post("/testbed/children", {
-      handle: child,
+      handle: child.trim(),
       resources: {
-        asn: typeof asn_res !== "undefined" ? asn_res : "",
-        v4: typeof ipv4_res !== "undefined" ? ipv4_res : "",
-        v6: typeof ipv6_res !== "undefined" ? ipv6_res : ""
+        asn: typeof asn_res !== "undefined" ? asn_res.trim() : "",
+        v4: typeof ipv4_res !== "undefined" ? ipv4_res.trim() : "",
+        v6: typeof ipv6_res !== "undefined" ? ipv6_res.trim() : ""
       },
       auth: {
         rfc8183: {
           tag: null,
-          child_handle: child,
-          id_cert: id_cert
+          child_handle: child.trim(),
+          id_cert: id_cert.trim()
         }
       }
     }).catch(handleError);
@@ -192,8 +192,8 @@ export default {
   testbedAddPublisher(publisher_handle, publisher_request_xml) {
     return simpleClient.post("/testbed/publishers", {
       tag: null,
-      publisher_handle: publisher_handle,
-      id_cert: publisher_request_xml
+      publisher_handle: publisher_handle.trim(),
+      id_cert: publisher_request_xml.trim()
     }).catch(handleError);
   },
   testbedGetRepositoryResponseXML(publisher) {

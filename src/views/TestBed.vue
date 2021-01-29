@@ -21,8 +21,8 @@
 
         <el-alert type="error" v-if="error" :closable="true" show-icon title="Error" style="margin-bottom: 10px;">{{ error }}</el-alert>
 
-        <el-tabs type="border-card">
-          <el-tab-pane :label="$t('testbed.addChild.heading')" name="addChild">
+        <el-tabs type="border-card" value="addChild">
+          <el-tab-pane :label="$t('testbed.addChild.heading')" name="addChild" id="addChild">
             <el-form :model="addChildRespForm" :rules="rules" ref="addChildRespForm" v-show="addChildRespForm.parentRespXML != ''">
               <el-form-item :label="$t('testbed.responseXML')" prop="parentRespXML">
                 <el-link href="https://tools.ietf.org/html/rfc8183#section-5.2.2" target="_blank" icon="el-icon-info">{{ $t('testbed.rfcdoclink') }}</el-link>
@@ -93,7 +93,7 @@
             </el-form>
           </el-tab-pane>
 
-          <el-tab-pane :label="$t('testbed.removeChild.heading')" name="removeChild">
+          <el-tab-pane :label="$t('testbed.removeChild.heading')" name="removeChild" id="removeChild">
             <el-form :model="removeChildForm" :rules="rules" ref="removeChildForm">
               <el-form-item :label="$t('testbed.childhandle')" prop="child_handle">
                 <el-input
@@ -112,7 +112,7 @@
             </el-form>
           </el-tab-pane>
 
-          <el-tab-pane :label="$t('testbed.addPublisher.heading')" name="addPublisher">
+          <el-tab-pane :label="$t('testbed.addPublisher.heading')" name="addPublisher" id="addPublisher">
             <el-form :model="addPublisherRespForm" :rules="rules" ref="addPublisherRespForm" v-show="addPublisherRespForm.repoRespXML != ''">
               <el-form-item :label="$t('testbed.responseXML')" prop="repoRespXML">
                 <el-link href="https://tools.ietf.org/html/rfc8183#section-5.2.4" target="_blank" icon="el-icon-info">{{ $t('testbed.rfcdoclink') }}</el-link>
@@ -162,7 +162,7 @@
             </el-form>
           </el-tab-pane>
 
-          <el-tab-pane :label="$t('testbed.removePublisher.heading')" name="removePublisher">
+          <el-tab-pane :label="$t('testbed.removePublisher.heading')" name="removePublisher" id="removePublisher">
             <el-form :model="removePublisherForm" :rules="rules" ref="removePublisherForm">
               <el-form-item :label="$t('testbed.publisherhandle')" prop="publisher_handle">
                 <el-input
@@ -189,6 +189,37 @@
 <script>
 import APIService from "@/services/APIService.js";
 const xml2js = require("xml2js");
+
+// From https://preview.npmjs.com/package/xml2js:
+//   - trim (default: false): Trim the whitespace at the beginning and end of text nodes.
+//   - normalize (default: false): Trim whitespaces inside text nodes.
+// Krill won't accept Base64 encoded id_cert strings with leading, trailing or embedded whitespace. Enabling these
+// options removes any such whitespace from the input.
+var xmlParser = new xml2js.Parser({ trim: true, normalize: true });
+
+// Based on https://stackoverflow.com/a/14313213:
+function isASCII(str) {
+  // eslint-disable-next-line no-control-regex
+  return /^[\x00-\x7F]*$/.test(str);
+}
+
+function isBase64(str) {
+  try {
+    atob(str);
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+function prepareBase64ForKrill(str) {
+  // Unlike Krill, atob() is happy if the Base64 string is split into multiple lines and so isBase64() can return true
+  // for a Base64 encoded string that Krill will not accept. For Krill to accept it we must remove any surrounding and
+  // embedded whitespace. The { trim: true } xml2js Parser option handles leading and trailing whitespace but doesn't
+  // seem to handle embedded linebreaks. Here we remove any remaining whitespace in the string.
+  return str.replace(/\s+/g, '');
+}
+
 export default {
   data() {
     const checkReqXML = (rule, value, callback) => {
@@ -196,7 +227,7 @@ export default {
         callback(new Error(this.$t("testbed.addChild.required")));
       } else {
         const self = this;
-        xml2js.parseString(value, function(err, json) {
+        xmlParser.parseString(value, function(err, json) {
           if (err) {
             callback(new Error(self.$t('testbed.errors.invalid-xml', { err: err }), true));
           } else {
@@ -210,8 +241,12 @@ export default {
               callback(new Error(self.$t('testbed.errors.empty-xml-attr', { attr: 'child_handle', el: '<child_request>' } )));
             } else if (typeof json.child_request.child_bpki_ta === 'undefined') {
               callback(new Error(self.$t('testbed.errors.missing-xml-child-el', { el: '<child_bpki_ta>', parent: '<child_request>' } )));
-            } else if (json.child_request.child_bpki_ta[0].length == 0) {
+            } else if (json.child_request.child_bpki_ta[0].trim().length == 0) {
               callback(new Error(self.$t('testbed.errors.empty-xml-el', { el: '<child_bpki_ta>' } )));
+            } else if (!isASCII(json.child_request.child_bpki_ta[0])) {
+              callback(new Error(self.$t('testbed.errors.non-ascii-xml-el', { el: '<child_bpki_ta>' } )));
+            } else if (!isBase64(json.child_request.child_bpki_ta[0])) {
+              callback(new Error(self.$t('testbed.errors.non-base64-certificate-xml-el', { el: '<child_bpki_ta>' } )));
             } else {
               callback();
             }
@@ -224,7 +259,7 @@ export default {
         callback(new Error(this.$t("testbed.addPublisher.required")));
       } else {
         const self = this;
-        xml2js.parseString(value, function(err, json) {
+        xmlParser.parseString(value, function(err, json) {
           if (err) {
             callback(new Error(self.$t('testbed.errors.invalid-xml', { err: err } ), true));
           } else {
@@ -238,8 +273,12 @@ export default {
               callback(new Error(self.$t('testbed.errors.empty-xml-attr', { attr: 'publisher_handle', el: '<publisher_request>' } )));
             } else if (typeof json.publisher_request.publisher_bpki_ta === 'undefined') {
               callback(new Error(self.$t('testbed.errors.missing-xml-child-el', { el: '<publisher_bpki_ta>', parent: '<publisher_request>' } )));
-            } else if (json.publisher_request.publisher_bpki_ta[0].length == 0) {
+            } else if (json.publisher_request.publisher_bpki_ta[0].trim().length == 0) {
               callback(new Error(self.$t('testbed.errors.empty-xml-el', { el: '<publisher_bpki_ta>' } )));
+            } else if (!isASCII(json.publisher_request.publisher_bpki_ta[0])) {
+              callback(new Error(self.$t('testbed.errors.non-ascii-xml-el', { el: '<publisher_bpki_ta>' } )));
+            } else if (!isBase64(json.publisher_request.publisher_bpki_ta[0])) {
+              callback(new Error(self.$t('testbed.errors.non-base64-certificate-xml-el', { el: '<publisher_bpki_ta>' } )));
             } else {
               callback();
             }
@@ -345,9 +384,9 @@ export default {
             )
               .then(() => {
                 self.loading = true;
-                xml2js.parseStringPromise(this.addChildForm.childReqXML)
+                xmlParser.parseStringPromise(this.addChildForm.childReqXML)
                   .then(function(result) {
-                    let id_cert = result.child_request.child_bpki_ta[0];
+                    let id_cert = prepareBase64ForKrill(result.child_request.child_bpki_ta[0]);
                     let child_handle = result.child_request.$.child_handle;
                     function doAddChild(child_handle, asn_res, ipv4_res, ipv6_res, id_cert) {
                       APIService.testbedAddChild(child_handle, asn_res, ipv4_res, ipv6_res, id_cert)
@@ -364,21 +403,30 @@ export default {
                             })
                             .catch(error => {
                               self.loading = false;
-                              self.parseError(error.response, true);
+                              self.parseError(error, true);
                             });
                         })
                         .catch(error => {
-                          // if 400 ca-child-duplicate retry with random
-                          // ca name appendage
-                          if (error.response.data !== undefined &&
-                              error.response.data.label !== undefined &&
-                              error.response.data.label === 'ca-child-duplicate') {
-                            let new_child_handle = child_handle + String(new Date().getTime());
-                            doAddChild(new_child_handle, asn_res, ipv4_res, ipv6_res,id_cert);
-                          } else {
-                            self.loading = false;
-                            self.parseError(error.response, true);
+                          self.loading = false;
+                          if (error.data !== undefined && error.data.label !== undefined) {
+                            if (error.data.label === 'api-json') {
+                              // Krill was unable to parse the JSON we sent it. Unfortunately giving the user a message
+                              // like "Invalid JSON: Encoded text cannot have a 6-bit remainder. at line 1 column 1498"
+                              // would be very confusing as the user (a) didn't provide any JSON (we created it from
+                              // the XML and other registration details provided) and (b) this particular example
+                              // actually refers to the Base64 encoding of the ID certificate in the <child_bpki_ta>
+                              // XML element but that's not at all clear from the error message. It's less confusing
+                              // without being less helpful to just say the registration details could not be parsed.
+                              self.parseError(self.$t('testbed.errors.invalid-registration-data', { } ), true);
+                              return
+                            } else if (error.data.label === 'ca-child-duplicate') {
+                              // Retry with random ca name appendage
+                              let new_child_handle = child_handle + String(new Date().getTime());
+                              doAddChild(new_child_handle, asn_res, ipv4_res, ipv6_res,id_cert);
+                              return;
+                              }
                           }
+                          self.parseError(error, true);
                         });
                     }
                     doAddChild(
@@ -431,7 +479,7 @@ export default {
                   })
                   .catch(error => {
                     self.loading = false;
-                    self.parseError(error.response, true);
+                    self.parseError(error, true);
                   });
               })
               .catch(() => {
@@ -463,9 +511,9 @@ export default {
             )
               .then(() => {
                 self.loading = true;
-                xml2js.parseStringPromise(this.addPublisherForm.pubReqXML)
+                xmlParser.parseStringPromise(this.addPublisherForm.pubReqXML)
                   .then(function(result) {
-                    let id_cert = result.publisher_request.publisher_bpki_ta[0];
+                    let id_cert = prepareBase64ForKrill(result.publisher_request.publisher_bpki_ta[0]);
                     let publisher_handle = result.publisher_request.$.publisher_handle;
                     function doAddPublisher(publisher_handle, id_cert) {
                       APIService.testbedAddPublisher(publisher_handle, id_cert)
@@ -482,20 +530,40 @@ export default {
                             })
                             .catch(error => {
                               self.loading = false;
-                              self.parseError(error.response, true);
+                              self.parseError(error, true);
                             });
                         })
                         .catch(error => {
+                          self.loading = false;
+                          if (error.data !== undefined && error.data.label !== undefined) {
+                            if (error.data.label === 'api-json') {
+                              // Krill was unable to parse the JSON we sent it. Unfortunately giving the user a message
+                              // like "Invalid JSON: Encoded text cannot have a 6-bit remainder. at line 1 column 1498"
+                              // would be very confusing as the user (a) didn't provide any JSON (we created it from
+                              // the XML provided) and (b) this particular example actually refers to the Base64
+                              // encoding of the ID certificate in the <publisher_bpki_ta> XML element but that's not at
+                              // all clear from the error message. It's less confusing without being less helpful to
+                              // just say the registration details could not be parsed.
+                              self.parseError(self.$t('testbed.errors.invalid-registration-data', { } ), true);
+                              return
+                            } else if (error.data.label === 'pub-duplicate') {
+                              // Retry with random publisher name appendage
+                              let new_publisher_handle = publisher_handle + String(new Date().getTime());
+                              doAddPublisher(new_publisher_handle, id_cert);
+                              return;
+                              }
+                          }
+                          self.parseError(error, true);
                           // if 400 pub-duplicate retry with random
                           // publisher name appendage
-                          if (error.response.data !== undefined &&
-                              error.response.data.label !== undefined &&
-                              error.response.data.label === 'pub-duplicate') {
+                          if (error.data !== undefined &&
+                              error.data.label !== undefined &&
+                              error.data.label === 'pub-duplicate') {
                             let new_publisher_handle = publisher_handle + String(new Date().getTime());
                             doAddPublisher(new_publisher_handle, id_cert);
                           } else {
                             self.loading = false;
-                            self.parseError(error.response, true);
+                            self.parseError(error, true);
                           }
                         });
                     }
@@ -544,7 +612,7 @@ export default {
                   })
                   .catch(error => {
                     self.loading = false;
-                    self.parseError(error.response, true);
+                    self.parseError(error, true);
                   });
               })
               .catch(() => {
