@@ -41,14 +41,14 @@ if (result.error) {
   };
 
   app.use('/api', proxy(proxyConf));
-
+  app.use('/auth', proxy(proxyConf));
   app.use('/stats', proxy(proxyConf));
 
   app.get('/', (req, res) => {
     res.send('Lagosta should be running by now. If not, shrimp happens.');
   });
 
-  app.listen(3003, () => console.log('Lagosta is listening on port 3003!'));
+  app.listen(3003, () => console.log('Lagosta is listening on port 8081!'));
 }
 
 
