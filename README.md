@@ -54,7 +54,7 @@ Note that you'll have the reroute the `/api`, `/auth` and `/stats` endpoints to 
 
 For example:
 
-```json
+```javascript
 ...
   devServer: {
     // Krill proxy instance (for API calls).
