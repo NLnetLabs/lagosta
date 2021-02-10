@@ -223,7 +223,10 @@
     "ca-roa-delta-error": "ROA rejected because of the following issue(s)",
     "api-insufficient-rights": "Your user does not have sufficient rights to perform this action. Please contact your administrator.",
     "api-invalid-credentials": "The supplied login credentials were incorrect.",
-    "api-auth-error": "An error occurred while logging you in: {cause}",
+    "api-login-error": "An error occurred while logging you in: {cause}",
+    "api-auth-transient-error": "A (temporary) error occured while trying to authenticate your request. Please try again later.",
+    "api-auth-permanent-error": "An error occurred while trying to authenticate your request. Please contact your administrator.",
+    "api-auth-session-expired": "Your login session has expired. Please login again..",
     "general-error": "Something went wrong. Please contact your administrator."
   },
   "testbed": {
