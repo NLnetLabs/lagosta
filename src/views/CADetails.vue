@@ -1072,30 +1072,38 @@ export default {
   computed: {
     properties: function() {
       if (this.repo && this.repoStatus) {
-        if (this.repo.embedded) {
+        if (this.repo.type == "embedded") {
           return [
             {
               type: "Embedded",
               props: [
                 {
                   prop: "Base URI",
-                  value: this.repo.embedded.base_uri
+                  value: this.repo.info.base_uri
                 },
                 {
                   prop: "RPKI Notify",
-                  value: this.repo.embedded.rpki_notify
+                  value: this.repo.info.rpki_notify
                 }
               ]
             }
           ];
-        } else if (this.repo.rfc8181) {
+        } else if (this.repo.type == "rfc8181") {
           return [
             {
               type: "Remote",
               props: [
                 {
+                  prop: "Base URI",
+                  value: this.repo.server_response.repo_info.base_uri
+                },
+                {
+                  prop: "RPKI Notify",
+                  value: this.repo.server_response.repo_info.rpki_notify
+                },
+                {
                   prop: "Service URI",
-                  value: this.repo.rfc8181.service_uri
+                  value: this.repo.server_response.service_uri
                 }
               ]
             }
