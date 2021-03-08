@@ -200,7 +200,7 @@ export default {
         // send the user to the right location to complete the logout process,
         // e.g. at a 3rd party login provider
         if (logout_url.indexOf('http') === 0) {
-          window.location.href = logout_url
+          window.location.href = logout_url;
         } else {
           router.push(logout_url);
         }
