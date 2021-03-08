@@ -204,6 +204,14 @@ export default {
         } else {
           router.push(logout_url);
         }
+      })
+      .catch(error => {
+        router.push({
+          path: "/login",
+          query: {
+            error: error.data
+          }
+        });
       });
     }
   }
