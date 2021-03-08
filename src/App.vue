@@ -191,9 +191,12 @@ export default {
     },
     logout() {
       return APIService.logout().then(response => {
+        // Ensure the top bar reflects the current (not) logged in state.
+        localStorage.removeItem(LOCALSTORAGE_NAME);
+        this.$emit("auth-event");
+
         var logout_url = response.data;
-        localStorage.removeItem(LOCALSTORAGE_NAME)
-        this.user = null;
+
         // send the user to the right location to complete the logout process,
         // e.g. at a 3rd party login provider
         if (logout_url.indexOf('http') === 0) {
