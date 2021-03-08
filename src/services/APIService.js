@@ -18,14 +18,21 @@ apiClient.interceptors.response.use(function (response) {
     // Save the token so that it will also be used for API calls made in a 
     // future browser session.
     let user = JSON.parse(localStorage.getItem(LOCALSTORAGE_NAME));
-    localStorage.setItem(
-      LOCALSTORAGE_NAME,
-      JSON.stringify({
-        authdata: new_token,
-        id: user.id,
-        attributes: user.attributes
-      })
-    );
+
+    // If this somehow crosses over with a logout the localStorage.getItem() call
+    // might return null if the stored item has already been removed, causing
+    // parse() to also return null. In that case we'd fail below when accessing
+    // user.xxx so check first.
+    if (user) {
+      localStorage.setItem(
+        LOCALSTORAGE_NAME,
+        JSON.stringify({
+          authdata: new_token,
+          id: user.id,
+          attributes: user.attributes
+        })
+      );
+    }
   }
   return response;
 }, function (error) {
