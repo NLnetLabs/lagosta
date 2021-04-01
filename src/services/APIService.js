@@ -181,12 +181,10 @@ export default {
         v4: typeof ipv4_res !== "undefined" ? ipv4_res.trim() : "",
         v6: typeof ipv6_res !== "undefined" ? ipv6_res.trim() : ""
       },
-      auth: {
-        rfc8183: {
-          tag: null,
-          child_handle: child.trim(),
-          id_cert: id_cert.trim()
-        }
+      child_request: {
+        tag: null,
+        child_handle: child.trim(),
+        id_cert: id_cert.trim()
       }
     }).catch(handleError);
   },
