@@ -110,16 +110,18 @@ export default {
     this.returnUrl = this.$route.query.returnUrl || "/";
 
     // Handle OpenID Connect post login redirect with the id of the now logged
-    // in user and the token that should be used to authenticat and authorize
+    // in user and the token that should be used to authenticate and authorize
     // subsequent API calls.
     if (this.$route.query.error) {
-      if (this.$route.query.error.label === undefined) {
-        this.postLogin(false, JSON.parse(atob(this.$route.query.error)));
-      } else {
-        this.postLogin(false, this.$route.query.error);
+      let error = this.$route.query.error;
+      if (error.label === undefined) {
+        try { error = JSON.parse(atob(error)); } catch (e) { }
       }
+      this.postLogin(false, error);
+
       // Hide the usual login form
       this.withLogin = false;
+
       // Show a retry link in the error message
       this.retryUrl = this.returnUrl;
     } else if (this.$route.query.id && this.$route.query.token && this.$route.query.attributes) {
