@@ -159,7 +159,7 @@ export default {
     return apiClient.post("/api/v1/cas/" + handle + "/parents-xml/" + name, xml).catch(handleError);
   },
   getRepoRequestXML(handle) {
-    return apiClient.get("/api/v1/cas/" + handle + "/repo/request.xml").catch(handleError);
+    return apiClient.get("/api/v1/cas/" + handle + "/id/publisher_request.xml").catch(handleError);
   },
   addRepoResponse(handle, xml) {
     return apiClient.post("/api/v1/cas/" + handle + "/repo", xml).catch(handleError);
