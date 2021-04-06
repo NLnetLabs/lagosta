@@ -156,7 +156,7 @@ export default {
     return apiClient.get("/api/v1/cas/" + handle + "/id/child_request.xml").catch(handleError);
   },
   addParentResponse(handle, xml, name) {
-    return apiClient.post("/api/v1/cas/" + handle + "/parents-xml/" + name, xml).catch(handleError);
+    return apiClient.post("/api/v1/cas/" + handle + "/parents/" + name, xml).catch(handleError);
   },
   getRepoRequestXML(handle) {
     return apiClient.get("/api/v1/cas/" + handle + "/id/publisher_request.xml").catch(handleError);
