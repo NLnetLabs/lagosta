@@ -115,7 +115,11 @@ export default {
     if (this.$route.query.error) {
       let error = this.$route.query.error;
       if (error.label === undefined) {
-        try { error = JSON.parse(atob(error)); } catch (e) { }
+        try {
+          error = JSON.parse(atob(error));
+        } catch (e) {
+          error = undefined;
+        }
       }
       this.postLogin(false, error);
 
