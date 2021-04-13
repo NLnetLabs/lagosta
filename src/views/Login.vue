@@ -245,4 +245,7 @@ export default {
   top: 40px;
   z-index: 2;
 }
+div.el-form-item {
+  margin-top: 10px;
+}
 </style>
