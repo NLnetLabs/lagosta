@@ -106,3 +106,25 @@ and then run
 ```
 node server.js
 ```
+
+### Building in a Docker container
+
+One-time only, build the Docker image locally:
+
+```
+docker build -t lagosta-builder .
+```
+
+Once you have that you can then do:
+
+```
+docker run -it --rm --name lagosta-builder -v ${PWD}:/tmp/src lagosta-builder /bin/bash
+root@06a45bcc9a3e:/tmp/src# yarn build
+...
+ DONE  Build complete. The dist directory is ready to be deployed.
+ INFO  Check out deployment instructions at https://cli.vuejs.org/guide/deployment.html
+                                  
+Done in 19.66s.
+```
+
+The output will be in the `${PWD}/dist` folder in the host.
