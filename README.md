@@ -119,6 +119,14 @@ Once you have that you can then do:
 
 ```
 docker run -it --rm --name lagosta-builder -v ${PWD}:/tmp/src lagosta-builder /bin/bash
+root@06a45bcc9a3e:/tmp/src# yarn install
+root@06a45bcc9a3e:/tmp/src# exit
+```
+
+Now that your Docker image and local Lagosta build directory are ready, in future you can just run `yarn build` like so:
+
+```
+docker run -it --rm --name lagosta-builder -v ${PWD}:/tmp/src lagosta-builder /bin/bash
 root@06a45bcc9a3e:/tmp/src# yarn build
 ...
  DONE  Build complete. The dist directory is ready to be deployed.
