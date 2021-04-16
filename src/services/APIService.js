@@ -67,7 +67,7 @@ export default {
     localStorage.removeItem(LOCALSTORAGE_NAME);
 
     // Handle id/password login mode where we have to submit an id and password,
-    // not just a token as when in master token mode.
+    // not just a token as when in admin token mode.
     let queryParams = "";
     if (id !== undefined) {
       queryParams = "?id=" + id;

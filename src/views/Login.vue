@@ -4,7 +4,13 @@
       <el-col :span="10">
         <el-card class="box-card" v-if="withLogin">
           <div class="text item">
-            <el-form :model="form" :rules="rules" :inline="inline" ref="loginForm" @submit.prevent.native="submitForm">
+            <el-form
+              :model="form"
+              :rules="rules"
+              :inline="inline"
+              ref="loginForm"
+              @submit.prevent.native="submitForm"
+            >
               <el-form-item v-if="withId" :label="$t('login.id')" prop="id">
                 <el-input
                   type="text"
@@ -42,10 +48,11 @@
     </el-row>
     <el-row type="flex" class="row-index alert-row" justify="center">
       <el-col :span="10">
-        <el-alert type="error" v-if="error" :closable="false">{{ error }}
-          <div style="margin-top:10px;" v-if="retryUrl">
+        <el-alert type="error" v-if="error" :closable="false"
+          >{{ error }}
+          <div style="margin-top: 10px" v-if="retryUrl">
             <i18n v-if="retryUrl" path="login.retry">
-              <router-link :to="retryUrl">{{ $t('login.here') }}</router-link>
+              <router-link :to="retryUrl">{{ $t("login.here") }}</router-link>
             </i18n>
           </div>
         </el-alert>
@@ -61,7 +68,7 @@
 </template>
 
 <script>
-import sha256 from 'crypto-js/sha256';
+import sha256 from "crypto-js/sha256";
 import router from "../router";
 import APIService from "@/services/APIService.js";
 
@@ -70,7 +77,7 @@ export default {
     return {
       form: {
         id: "",
-        token: ""
+        token: "",
       },
       withId: false,
       withLogin: true,
@@ -78,14 +85,14 @@ export default {
       submitted: false,
       loading: false,
       returnUrl: "",
-      error: ""
+      error: "",
     };
   },
   computed: {
-    inline: function() {
-      // Show the form inline (on a single row) when just asking for the master
+    inline: function () {
+      // Show the form inline (on a single row) when just asking for the admin
       // token, but show it on multiple rows when also asking for the login id.
-      return !this.withId
+      return !this.withId;
     },
     rules() {
       // Use dynamic rules so that we only check the entered id when we are
@@ -94,17 +101,17 @@ export default {
         id: [
           {
             required: this.withId,
-            validator: this.checkId
-          }
+            validator: this.checkId,
+          },
         ],
         token: [
           {
             required: true,
-            validator: this.checkToken
-          }
-        ]
-      }
-    }
+            validator: this.checkToken,
+          },
+        ],
+      };
+    },
   },
   created() {
     this.returnUrl = this.$route.query.returnUrl || "/";
@@ -137,7 +144,7 @@ export default {
       this.postLogin(true);
     } else {
       if (this.$route.query.withId) {
-        // Configure the login form for id/password mode instead of master token
+        // Configure the login form for id/password mode instead of admin token
         // mode.
         this.withId = true;
       }
@@ -157,12 +164,7 @@ export default {
       if (value === "") {
         callback(new Error(this.$t("login.required")));
       } else {
-        if (
-          value
-            .toLowerCase()
-            .replace(/-/gi, "")
-            .indexOf("correcthorsebatterystaple") === 0
-        ) {
+        if (value.toLowerCase().replace(/-/gi, "").indexOf("correcthorsebatterystaple") === 0) {
           callback(new Error(this.$t("login.copied")));
         } else {
           callback();
@@ -170,7 +172,7 @@ export default {
       }
     },
     submitForm() {
-      this.$refs["loginForm"].validate(valid => {
+      this.$refs["loginForm"].validate((valid) => {
         if (valid) {
           this.login();
         } else {
@@ -188,13 +190,13 @@ export default {
         // that (shouldn't be but) might be the same password the user uses for
         // other systems.
         let hashedPassword = sha256(this.form.token);
-        APIService.login(hashedPassword, this.form.id).then(success => {
-          this.postLogin(success)
+        APIService.login(hashedPassword, this.form.id).then((success) => {
+          this.postLogin(success);
         });
       } else {
-        // Handle master token based login
-        APIService.login(this.form.token).then(success => {
-          this.postLogin(success)
+        // Handle admin token based login
+        APIService.login(this.form.token).then((success) => {
+          this.postLogin(success);
         });
       }
     },
@@ -212,8 +214,8 @@ export default {
             : this.$t("errors." + error.code);
         }
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
