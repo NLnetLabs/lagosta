@@ -24,6 +24,7 @@
     "ip6addr": "^0.2.3",
     "moment": "^2.27.0",
     "prismjs": "^1.21.0",
+    "scryptsy": "^2.1.0",
     "typeface-lato": "^0.0.54",
     "typeface-source-code-pro": "^0.0.71",
     "vue": "^2.5.21",

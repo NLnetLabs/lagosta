@@ -68,7 +68,7 @@
 </template>
 
 <script>
-import sha256 from "crypto-js/sha256";
+import scrypt from "scryptsy";
 import router from "../router";
 import APIService from "@/services/APIService.js";
 
@@ -189,9 +189,14 @@ export default {
         // Send a hash of the password to avoid storing a password on the server
         // that (shouldn't be but) might be the same password the user uses for
         // other systems.
-        let hashedPassword = sha256(this.form.token);
+        const cost_level = 13;
+        const N = Math.pow(2, cost_level), r = 8, p = 1, dkLen = 32;
+        let salt = "krill-lagosta-" + this.form.id;
+        let pwBuf = this.form.token.normalize('NFKC');
+        let saltBuf = salt.normalize('NFKC');
+        let hashedPassword = scrypt(pwBuf, saltBuf, N, r, p, dkLen).toString('hex');
         APIService.login(hashedPassword, this.form.id).then((success) => {
-          this.postLogin(success);
+          this.postLogin(success)
         });
       } else {
         // Handle admin token based login
