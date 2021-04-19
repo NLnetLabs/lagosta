@@ -67,7 +67,7 @@ export default {
     localStorage.removeItem(LOCALSTORAGE_NAME);
 
     // Handle id/password login mode where we have to submit an id and password,
-    // not just a token as when in master token mode.
+    // not just a token as when in admin token mode.
     let queryParams = "";
     if (id !== undefined) {
       queryParams = "?id=" + id;
@@ -181,11 +181,7 @@ export default {
         v4: typeof ipv4_res !== "undefined" ? ipv4_res.trim() : "",
         v6: typeof ipv6_res !== "undefined" ? ipv6_res.trim() : ""
       },
-      child_request: {
-        tag: null,
-        child_handle: child.trim(),
-        id_cert: id_cert.trim()
-      }
+      id_cert: id_cert.trim()
     }).catch(handleError);
   },
   testbedGetParentResponseXML(child) {

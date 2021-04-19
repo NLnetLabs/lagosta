@@ -4,7 +4,13 @@
       <el-col :span="10">
         <el-card class="box-card" v-if="withLogin">
           <div class="text item">
-            <el-form :model="form" :rules="rules" :inline="inline" ref="loginForm" @submit.prevent.native="submitForm">
+            <el-form
+              :model="form"
+              :rules="rules"
+              :inline="inline"
+              ref="loginForm"
+              @submit.prevent.native="submitForm"
+            >
               <el-form-item v-if="withId" :label="$t('login.id')" prop="id">
                 <el-input
                   type="text"
@@ -42,10 +48,11 @@
     </el-row>
     <el-row type="flex" class="row-index alert-row" justify="center">
       <el-col :span="10">
-        <el-alert type="error" v-if="error" :closable="false">{{ error }}
-          <div style="margin-top:10px;" v-if="retryUrl">
+        <el-alert type="error" v-if="error" :closable="false"
+          >{{ error }}
+          <div style="margin-top: 10px" v-if="retryUrl">
             <i18n v-if="retryUrl" path="login.retry">
-              <router-link :to="retryUrl">{{ $t('login.here') }}</router-link>
+              <router-link :to="retryUrl">{{ $t("login.here") }}</router-link>
             </i18n>
           </div>
         </el-alert>
@@ -70,7 +77,7 @@ export default {
     return {
       form: {
         id: "",
-        token: ""
+        token: "",
       },
       withId: false,
       withLogin: true,
@@ -78,14 +85,14 @@ export default {
       submitted: false,
       loading: false,
       returnUrl: "",
-      error: ""
+      error: "",
     };
   },
   computed: {
-    inline: function() {
-      // Show the form inline (on a single row) when just asking for the master
+    inline: function () {
+      // Show the form inline (on a single row) when just asking for the admin
       // token, but show it on multiple rows when also asking for the login id.
-      return !this.withId
+      return !this.withId;
     },
     rules() {
       // Use dynamic rules so that we only check the entered id when we are
@@ -94,32 +101,38 @@ export default {
         id: [
           {
             required: this.withId,
-            validator: this.checkId
-          }
+            validator: this.checkId,
+          },
         ],
         token: [
           {
             required: true,
-            validator: this.checkToken
-          }
-        ]
-      }
-    }
+            validator: this.checkToken,
+          },
+        ],
+      };
+    },
   },
   created() {
     this.returnUrl = this.$route.query.returnUrl || "/";
 
     // Handle OpenID Connect post login redirect with the id of the now logged
-    // in user and the token that should be used to authenticat and authorize
+    // in user and the token that should be used to authenticate and authorize
     // subsequent API calls.
     if (this.$route.query.error) {
-      if (this.$route.query.error.label === undefined) {
-        this.postLogin(false, JSON.parse(atob(this.$route.query.error)));
-      } else {
-        this.postLogin(false, this.$route.query.error);
+      let error = this.$route.query.error;
+      if (error.label === undefined) {
+        try {
+          error = JSON.parse(atob(error));
+        } catch (e) {
+          error = undefined;
+        }
       }
+      this.postLogin(false, error);
+
       // Hide the usual login form
       this.withLogin = false;
+
       // Show a retry link in the error message
       this.retryUrl = this.returnUrl;
     } else if (this.$route.query.id && this.$route.query.token && this.$route.query.attributes) {
@@ -131,7 +144,7 @@ export default {
       this.postLogin(true);
     } else {
       if (this.$route.query.withId) {
-        // Configure the login form for id/password mode instead of master token
+        // Configure the login form for id/password mode instead of admin token
         // mode.
         this.withId = true;
       }
@@ -151,12 +164,7 @@ export default {
       if (value === "") {
         callback(new Error(this.$t("login.required")));
       } else {
-        if (
-          value
-            .toLowerCase()
-            .replace(/-/gi, "")
-            .indexOf("correcthorsebatterystaple") === 0
-        ) {
+        if (value.toLowerCase().replace(/-/gi, "").indexOf("correcthorsebatterystaple") === 0) {
           callback(new Error(this.$t("login.copied")));
         } else {
           callback();
@@ -164,7 +172,7 @@ export default {
       }
     },
     submitForm() {
-      this.$refs["loginForm"].validate(valid => {
+      this.$refs["loginForm"].validate((valid) => {
         if (valid) {
           this.login();
         } else {
@@ -187,13 +195,13 @@ export default {
         let pwBuf = this.form.token.normalize('NFKC');
         let saltBuf = salt.normalize('NFKC');
         let hashedPassword = scrypt(pwBuf, saltBuf, N, r, p, dkLen).toString('hex');
-        APIService.login(hashedPassword, this.form.id).then(success => {
+        APIService.login(hashedPassword, this.form.id).then((success) => {
           this.postLogin(success)
         });
       } else {
-        // Handle master token based login
-        APIService.login(this.form.token).then(success => {
-          this.postLogin(success)
+        // Handle admin token based login
+        APIService.login(this.form.token).then((success) => {
+          this.postLogin(success);
         });
       }
     },
@@ -211,8 +219,8 @@ export default {
             : this.$t("errors." + error.code);
         }
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
