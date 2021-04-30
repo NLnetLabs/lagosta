@@ -72,7 +72,7 @@
                         >{{ $t("caDetails.addRoa") }}</el-button
                       >
                     </el-col>
-                    <el-col :span="12" style="text-align:right">
+                    <el-col :span="12" style="text-align: right">
                       <el-button
                         class="mt-1"
                         type="text"
@@ -85,9 +85,12 @@
 
                   <div v-if="!initializeParent && !initializeRepo && emptyResources" class="empty">
                     {{ $t("caDetails.noResourcesYet") }}
-                    <a href="javascript: void(0)" @click="getContent()" id="no_resources_click_to_refresh">{{
-                      $t("caDetails.clickToRefresh")
-                    }}</a>
+                    <a
+                      href="javascript: void(0)"
+                      @click="getContent()"
+                      id="no_resources_click_to_refresh"
+                      >{{ $t("caDetails.clickToRefresh") }}</a
+                    >
                   </div>
                 </el-col>
                 <el-col :span="6" :offset="2" class="hidden-sm-only">
@@ -169,10 +172,10 @@
                         >&nbsp;
                         {{ getDate(parents[props.row.handle].last_exchange.timestamp) }}
                         <span v-if="parents[props.row.handle].last_exchange.result === 'Success'"
-                          ><i class="el-icon-success" style="color: #67C23A"></i
+                          ><i class="el-icon-success" style="color: #67c23a"></i
                         ></span>
                         <span v-if="parents[props.row.handle].last_exchange.result !== 'Success'"
-                          ><i class="el-icon-error" style="color: #F56C6C"></i>
+                          ><i class="el-icon-error" style="color: #f56c6c"></i>
                           {{ parents[props.row.handle].last_exchange.result }}
                           <strong>URI</strong> {{ parents[props.row.handle].last_exchange.uri }}
                         </span>
@@ -354,7 +357,7 @@
                 >
                   <el-row class="mt-3" :gutter="10">
                     <el-col :xs="24" :sm="12">
-                      <div style="height:180px">
+                      <div style="height: 180px">
                         <prism-editor
                           v-model="initializeParentForm.response"
                           language="xml"
@@ -445,7 +448,7 @@
                 >
                   <el-row class="mt-3" :gutter="10">
                     <el-col :xs="24" :sm="12">
-                      <div style="height:180px">
+                      <div style="height: 180px">
                         <prism-editor
                           v-model="initializeRepoForm.response"
                           language="xml"
@@ -491,10 +494,10 @@
                         >&nbsp;
                         {{ getDate(repoStatus.last_exchange.timestamp) }}
                         <span v-if="repoStatus.last_exchange.result === 'Success'"
-                          ><i class="el-icon-success" style="color: #67C23A"></i
+                          ><i class="el-icon-success" style="color: #67c23a"></i
                         ></span>
                         <span v-if="repoStatus.last_exchange.result !== 'Success'"
-                          ><i class="el-icon-error" style="color: #F56C6C"></i>
+                          ><i class="el-icon-error" style="color: #f56c6c"></i>
                           {{ repoStatus.last_exchange.result }}
                           <strong>URI</strong> {{ repoStatus.last_exchange.uri }}
                         </span>
@@ -611,7 +614,7 @@
           ></el-input>
         </el-form-item>
         <el-alert type="error" v-if="error" :closable="false" class="mb-1">{{ error }}</el-alert>
-        <jsonErrorVisualizer :json="deltaError" v-if="error && deltaError" ></jsonErrorVisualizer>
+        <jsonErrorVisualizer :json="deltaError" v-if="error && deltaError"></jsonErrorVisualizer>
         <el-row type="flex" class="modal-footer" justify="end">
           <el-form-item>
             <el-button @click="resetAddRoaForm()">{{ $t("common.cancel") }}</el-button>
@@ -664,7 +667,7 @@
             v-if="deltaMine && deltaMine.length"
             :data="deltaMine"
             :default-sort="{ prop: 'asn', order: 'ascending' }"
-            style="width: 100%; border: 2px solid #EBEEF5;"
+            style="width: 100%; border: 2px solid #ebeef5"
             max-height="560"
             :empty-text="$t('common.nodata')"
             @selection-change="handleMineSelectionChange"
@@ -677,7 +680,7 @@
                   effect="dark"
                   :content="
                     $t('caDetails.suggestions.willAdd', {
-                      reason: $t('caDetails.suggestions.reasons.' + scope.row.reason)
+                      reason: $t('caDetails.suggestions.reasons.' + scope.row.reason),
                     })
                   "
                   placement="right"
@@ -695,7 +698,7 @@
                   effect="dark"
                   :content="
                     $t('caDetails.suggestions.willRemove', {
-                      reason: $t('caDetails.suggestions.reasons.' + scope.row.reason)
+                      reason: $t('caDetails.suggestions.reasons.' + scope.row.reason),
                     })
                   "
                   placement="right"
@@ -744,7 +747,7 @@
             v-if="deltaSuggestions && deltaSuggestions.length"
             :data="deltaSuggestions"
             :default-sort="{ prop: 'asn', order: 'ascending' }"
-            style="width: 100%; border: 2px solid #EBEEF5;"
+            style="width: 100%; border: 2px solid #ebeef5"
             max-height="560"
             :empty-text="$t('common.nodata')"
             @selection-change="handleSuggestionSelectionChange"
@@ -757,7 +760,7 @@
                   effect="dark"
                   :content="
                     $t('caDetails.suggestions.willAdd', {
-                      reason: $t('caDetails.suggestions.reasons.' + scope.row.reason)
+                      reason: $t('caDetails.suggestions.reasons.' + scope.row.reason),
                     })
                   "
                   placement="right"
@@ -775,7 +778,7 @@
                   effect="dark"
                   :content="
                     $t('caDetails.suggestions.willRemove', {
-                      reason: $t('caDetails.suggestions.reasons.' + scope.row.reason)
+                      reason: $t('caDetails.suggestions.reasons.' + scope.row.reason),
                     })
                   "
                   placement="right"
@@ -808,17 +811,17 @@
           <h3 class="suggestion-title suggestion-title-nopadding">
             {{ $t("caDetails.suggestions.willResult") }}
           </h3>
-          <simpleROAsTable
-            :announcements="effects"
-            :updated="updatedPreview"
-          ></simpleROAsTable>
+          <simpleROAsTable :announcements="effects" :updated="updatedPreview"></simpleROAsTable>
         </el-col>
       </el-row>
 
       <span slot="footer" class="dialog-footer">
         <el-button
           type="text"
-          @click="resetAddRoaForm();addROASuggestionsVisible = false;"
+          @click="
+            resetAddRoaForm();
+            addROASuggestionsVisible = false;
+          "
           >{{ $t("common.cancel") }}</el-button
         >
         <el-button
@@ -841,10 +844,16 @@
     >
       <el-row>
         <el-col :xs="24">
-          <h3 v-if="deltaSuggestions && deltaSuggestions.length" class="suggestion-title suggestion-title-nopadding suggestion-title-light">
+          <h3
+            v-if="deltaSuggestions && deltaSuggestions.length"
+            class="suggestion-title suggestion-title-nopadding suggestion-title-light"
+          >
             <span v-html="$t('caDetails.suggestions.following')">.</span>
           </h3>
-          <h3 v-if="deltaSuggestions && deltaSuggestions.length === 0" class="suggestion-title suggestion-title-nopadding suggestion-title-light">
+          <h3
+            v-if="deltaSuggestions && deltaSuggestions.length === 0"
+            class="suggestion-title suggestion-title-nopadding suggestion-title-light"
+          >
             {{ $t("caDetails.suggestions.nochanges") }}
           </h3>
           <el-table
@@ -864,7 +873,7 @@
                   size="mini"
                   :title="
                     $t('caDetails.suggestions.willAdd', {
-                      reason: $t('caDetails.suggestions.reasons.' + scope.row.reason)
+                      reason: $t('caDetails.suggestions.reasons.' + scope.row.reason),
                     })
                   "
                   v-if="scope.row.action === 'add'"
@@ -876,7 +885,7 @@
                   size="mini"
                   :title="
                     $t('caDetails.suggestions.willRemove', {
-                      reason: $t('caDetails.suggestions.reasons.' + scope.row.reason)
+                      reason: $t('caDetails.suggestions.reasons.' + scope.row.reason),
                     })
                   "
                   v-if="scope.row.action === 'remove'"
@@ -899,7 +908,9 @@
             </el-table-column>
             <el-table-column label="">
               <template slot-scope="scope">
-                <div class="suggestion-reason">{{ $t('caDetails.suggestions.reasons.' + scope.row.reason) }}</div>
+                <div class="suggestion-reason">
+                  {{ $t("caDetails.suggestions.reasons." + scope.row.reason) }}
+                </div>
               </template>
             </el-table-column>
           </el-table>
@@ -907,9 +918,12 @@
       </el-row>
 
       <span slot="footer" class="dialog-footer">
-        <el-button type="text" @click="analysisDetailsVisible = false" v-if="deltaSuggestions && deltaSuggestions.length">{{
-          $t("common.cancel")
-        }}</el-button>
+        <el-button
+          type="text"
+          @click="analysisDetailsVisible = false"
+          v-if="deltaSuggestions && deltaSuggestions.length"
+          >{{ $t("common.cancel") }}</el-button
+        >
         <el-button
           type="primary"
           v-if="deltaSuggestions && deltaSuggestions.length"
@@ -944,7 +958,7 @@ export default {
   components: {
     announcementsROAs: AnnouncementsROAs,
     simpleROAsTable: SimpleROAsTable,
-    jsonErrorVisualizer: JSONErrorVisualizer
+    jsonErrorVisualizer: JSONErrorVisualizer,
   },
   data() {
     const checkASN = (rule, value, callback) => {
@@ -1007,39 +1021,39 @@ export default {
       deltaMine: [],
       deltaMineCart: {
         added: [],
-        removed: []
+        removed: [],
       },
       deltaSuggestions: [],
       deltaSuggestionsCart: {
         added: [],
-        removed: []
+        removed: [],
       },
       addROAForm: {
         asn: "",
         prefix: "",
-        maxLength: ""
+        maxLength: "",
       },
       addROAFormRules: {
         asn: [
           {
             required: true,
             validator: checkASN,
-            message: this.$t("caDetails.addROAForm.asn_format")
-          }
+            message: this.$t("caDetails.addROAForm.asn_format"),
+          },
         ],
         prefix: [
           {
             validator: checkPrefix,
-            required: true
-          }
-        ]
+            required: true,
+          },
+        ],
       },
       submittingROAForm: false,
       submittingSuggestionForm: false,
       initializeRepo: false,
       initializeRepoForm: {
         xml: "",
-        response: ""
+        response: "",
       },
       showAddParent: false,
       initializeParent: false,
@@ -1047,15 +1061,15 @@ export default {
         xml: "",
         originalXml: "",
         response: "",
-        name: ""
+        name: "",
       },
       initializeParentFormRules: {
         name: [
           {
             required: true,
-            validator: checkHandle
-          }
-        ]
+            validator: checkHandle,
+          },
+        ],
       },
       fileList: [],
       resourcesSearch: "",
@@ -1066,94 +1080,75 @@ export default {
       parents: {},
       repoStatus: {},
       showEntitlements: false,
-      lastModifiedTable: null
+      lastModifiedTable: null,
     };
   },
   computed: {
-    properties: function() {
+    properties: function () {
       if (this.repo && this.repoStatus) {
-        if (this.repo.type == "embedded") {
-          return [
-            {
-              type: "Embedded",
-              props: [
-                {
-                  prop: "Base URI",
-                  value: this.repo.info.base_uri
-                },
-                {
-                  prop: "RPKI Notify",
-                  value: this.repo.info.rpki_notify
-                }
-              ]
-            }
-          ];
-        } else if (this.repo.type == "rfc8181") {
-          return [
-            {
-              type: "Remote",
-              props: [
-                {
-                  prop: "Base URI",
-                  value: this.repo.server_response.repo_info.base_uri
-                },
-                {
-                  prop: "RPKI Notify",
-                  value: this.repo.server_response.repo_info.rpki_notify
-                },
-                {
-                  prop: "Service URI",
-                  value: this.repo.server_response.service_uri
-                }
-              ]
-            }
-          ];
-        }
+        return [
+          {
+            props: [
+              {
+                prop: "Base URI",
+                value: this.repo.repository_response.repo_info.base_uri,
+              },
+              {
+                prop: "RPKI Notify",
+                value: this.repo.repository_response.repo_info.rpki_notify,
+              },
+              {
+                prop: "Service URI",
+                value: this.repo.repository_response.service_uri,
+              },
+            ],
+          },
+        ];
       }
       return [];
     },
-    resourcesArray: function() {
+    resourcesArray: function () {
       let resArray = [];
       if (this.ca) {
         let res = this.ca.resources;
-        Object.keys(res).forEach(k => {
+        Object.keys(res).forEach((k) => {
           resArray.push({
             prop: k,
-            value: res[k].split(", ").join("<br>")
+            value: res[k].split(", ").join("<br>"),
           });
         });
       }
       return resArray;
     },
-    childrenArray: function() {
+    childrenArray: function () {
       return this.ca
-        ? this.ca.children.map(c => {
+        ? this.ca.children.map((c) => {
             return {
-              handle: c
+              handle: c,
             };
           })
         : [];
     },
-    emptyResources: function() {
+    emptyResources: function () {
       let empty = true;
-      this.resourcesArray.forEach(r => {
+      this.resourcesArray.forEach((r) => {
         if (r.value !== "") {
           empty = false;
         }
       });
       return empty;
     },
-    deltaCart: function() {
+    deltaCart: function () {
       return {
         added: this.deltaMineCart.added.concat(this.deltaSuggestionsCart.added),
-        removed: this.deltaMineCart.removed.concat(this.deltaSuggestionsCart.removed)
+        removed: this.deltaMineCart.removed.concat(this.deltaSuggestionsCart.removed),
       };
-    }
+    },
   },
   watch: {
     "initializeParentForm.response"(xml) {
       const self = this;
-      xml2js.parseString(xml, function(err, result) {
+      xml2js.parseString(xml, function (err, result) {
         if (result && result.parent_response) {
           self.initializeParentForm.name = result.parent_response.$.parent_handle;
         }
@@ -1162,24 +1157,24 @@ export default {
     suggestions(suggestions) {
       let delta = [];
 
-      let addToDelta = function(category, isAdd) {
+      let addToDelta = function (category, isAdd) {
         if (suggestions[category]) {
-          suggestions[category].forEach(s => {
+          suggestions[category].forEach((s) => {
             if (category === "too_permissive") {
               delta.push({
                 action: "remove",
                 reason: category,
                 asn: s.current.asn,
                 prefix: s.current.prefix,
-                max_length: s.current.max_length
+                max_length: s.current.max_length,
               });
-              s.new.forEach(n => {
+              s.new.forEach((n) => {
                 delta.push({
                   action: "add",
                   reason: "specific",
                   asn: n.asn,
                   prefix: n.prefix,
-                  max_length: n.prefix ? n.prefix.split("/")[1] * 1 : ""
+                  max_length: n.prefix ? n.prefix.split("/")[1] * 1 : "",
                 });
               });
             } else {
@@ -1188,7 +1183,7 @@ export default {
                 reason: category,
                 asn: s.asn,
                 prefix: s.prefix,
-                max_length: s.prefix ? s.prefix.split("/")[1] * 1 : ""
+                max_length: s.prefix ? s.prefix.split("/")[1] * 1 : "",
               });
             }
           });
@@ -1213,11 +1208,11 @@ export default {
             reason: "new",
             asn: this.addROAForm.asn * 1,
             prefix: this.addROAForm.prefix,
-            max_length: this.addROAForm.maxLength * 1
-          }
+            max_length: this.addROAForm.maxLength * 1,
+          },
         ];
       }
-    }
+    },
   },
   created() {
     moment.locale(this.$i18n.locale);
@@ -1237,7 +1232,7 @@ export default {
       return atob(b64);
     },
     previewUpdates() {
-      APIService.updateROAsDryRun(this.handle, this.deltaCart).then(r => {
+      APIService.updateROAsDryRun(this.handle, this.deltaCart).then((r) => {
         this.effects = r.data.sort((a, b) => (a.state > b.state ? 1 : -1));
         this.updatedPreview = new Date().getTime();
       });
@@ -1245,13 +1240,13 @@ export default {
     handleMineSelectionChange(val) {
       const self = this;
       this.deltaMineCart = {
-        added: val.filter(row => row.action === "add"),
-        removed: val.filter(row => row.action === "remove")
+        added: val.filter((row) => row.action === "add"),
+        removed: val.filter((row) => row.action === "remove"),
       };
       if (this.lastModifiedTable !== "mine" && this.$refs["deltaSuggestionsTable"]) {
         this.$refs["deltaSuggestionsTable"].clearSelection();
       }
-      window.setTimeout(function() {
+      window.setTimeout(function () {
         self.previewUpdates();
       }, 1000);
       this.lastModifiedTable = "mine";
@@ -1259,52 +1254,63 @@ export default {
     handleSuggestionSelectionChange(val) {
       const self = this;
       this.deltaSuggestionsCart = {
-        added: val.filter(row => row.action === "add"),
-        removed: val.filter(row => row.action === "remove")
+        added: val.filter((row) => row.action === "add"),
+        removed: val.filter((row) => row.action === "remove"),
       };
       if (this.lastModifiedTable !== "suggestions" && this.$refs["deltaMineTable"]) {
         this.$refs["deltaMineTable"].clearSelection();
       }
-      window.setTimeout(function() {
+      window.setTimeout(function () {
         self.previewUpdates();
       }, 1000);
       this.lastModifiedTable = "suggestions";
     },
     getROAsSuggestions() {
       this.suggestions = [];
-      APIService.getROAsSuggestions(this.handle).then(r => {
-        this.suggestions = r.data;
-      }).catch(error => {
-        this.parseError(error, true);
-      });
+      APIService.getROAsSuggestions(this.handle)
+        .then((r) => {
+          this.suggestions = r.data;
+        })
+        .catch((error) => {
+          this.parseError(error, true);
+        });
     },
     getParents() {
-      APIService.getParents(this.handle).then(response => {
-        this.parents = response.data;
-      }).catch(error => {
-        this.parseError(error, true);
-      });
+      APIService.getParents(this.handle)
+        .then((response) => {
+          this.parents = response.data;
+        })
+        .catch((error) => {
+          this.parseError(error, true);
+        });
     },
     syncParents() {
-      APIService.syncParents().then(() => {
-        this.getParents();
-      }).catch(error => {
-        this.parseError(error, true);
-      });
+      APIService.syncParents()
+        .then(() => {
+          this.getParents();
+        })
+        .catch((error) => {
+          this.parseError(error, true);
+        });
     },
     getRepoStatus() {
-      APIService.getRepoStatus(this.handle).then(response => {
-        this.repoStatus = response.data;
-      }).catch(error => {
-        this.parseError(error, true);
-      });
+      console.log("Getting repo status!");
+      APIService.getRepoStatus(this.handle)
+        .then((response) => {
+          this.repoStatus = response.data;
+        })
+        .catch((error) => {
+          this.parseError(error, true);
+        });
     },
     syncRepo() {
-      APIService.syncRepo().then(() => {
-        this.getRepoStatus();
-      }).catch(error => {
-        this.parseError(error, true);
-      });
+      APIService.syncRepo()
+        .then(() => {
+          this.getRepoStatus();
+        })
+        .catch((error) => {
+          this.parseError(error, true);
+        });
     },
     parseError(error, notify) {
       let e = error;
@@ -1327,7 +1333,7 @@ export default {
         this.$notify({
           title: this.$t("common.error"),
           message: this.error,
-          type: "error"
+          type: "error",
         });
       }
     },
@@ -1347,7 +1353,7 @@ export default {
       this.parentDetails = [];
       localStorage.lagostaLastCA = this.handle;
       APIService.getCA(this.handle)
-        .then(response => {
+        .then((response) => {
           this.loading = false;
           this.ca = response.data;
           if (!this.ca.parents || this.ca.parents.length === 0) {
@@ -1355,22 +1361,24 @@ export default {
             if (this.activeTab === "roas") {
               this.activeTab = "parents";
             }
-            APIService.getChildRequestXML(this.handle).then(response => {
-              this.initializeParentForm.xml = response.data;
-            }).catch(error => {
-              self.parseError(error, true);
-            });
+            APIService.getChildRequestXML(this.handle)
+              .then((response) => {
+                this.initializeParentForm.xml = response.data;
+              })
+              .catch((error) => {
+                self.parseError(error, true);
+              });
           } else {
             this.getParents();
           }
         })
-        .catch(error => {
+        .catch((error) => {
           self.parseError(error);
           localStorage.removeItem("lagostaLastCA");
           router.push("/interstitial");
         });
       APIService.getRepo(this.handle)
-        .then(response => {
+        .then((response) => {
           this.getRepoStatus();
           this.loadingRepo = false;
           if (this.initializeParent) {
@@ -1381,11 +1389,13 @@ export default {
         .catch(() => {
           this.initializeRepo = true;
           this.activeTab = "repo";
-          APIService.getRepoRequestXML(this.handle).then(response => {
-            this.initializeRepoForm.xml = response.data;
-          }).catch(error => {
-            self.parseError(error, true);
-          });
+          APIService.getRepoRequestXML(this.handle)
+            .then((response) => {
+              this.initializeRepoForm.xml = response.data;
+            })
+            .catch((error) => {
+              self.parseError(error, true);
+            });
         });
 
       this.loadCAs();
@@ -1394,36 +1404,40 @@ export default {
       const self = this;
       this.loadingParent = true;
       this.parentDetails = [];
-      APIService.getParentContact(this.handle, row.handle).then(response => {
-        this.loadingParent = false;
-        if (response.data.rfc6492) {
-          this.parentDetails = [
-            {
-              prop: "Parent handle",
-              value: response.data.rfc6492.parent_handle
-            },
-            {
-              prop: "Child handle",
-              value: response.data.rfc6492.child_handle
-            },
-            {
-              prop: "Service URI",
-              value: response.data.rfc6492.service_uri
-            }
-          ];
-        }
-      }).catch(error => {
-        self.parseError(error, true);
-      });
+      APIService.getParentContact(this.handle, row.handle)
+        .then((response) => {
+          this.loadingParent = false;
+          if (response.data.rfc6492) {
+            this.parentDetails = [
+              {
+                prop: "Parent handle",
+                value: response.data.rfc6492.parent_handle,
+              },
+              {
+                prop: "Child handle",
+                value: response.data.rfc6492.child_handle,
+              },
+              {
+                prop: "Service URI",
+                value: response.data.rfc6492.service_uri,
+              },
+            ];
+          }
+        })
+        .catch((error) => {
+          self.parseError(error, true);
+        });
     },
     loadCAs() {
       const self = this;
-      APIService.getCAs().then(response => {
-        this.loadingCAs = false;
-        this.CAs = response.data.cas;
-      }).catch(error => {
-        self.parseError(error, true);
-      });
+      APIService.getCAs()
+        .then((response) => {
+          this.loadingCAs = false;
+          this.CAs = response.data.cas;
+        })
+        .catch((error) => {
+          self.parseError(error, true);
+        });
     },
     loadCA(row) {
       router.push("/cas/" + row.handle);
@@ -1434,11 +1448,11 @@ export default {
     resetDeltaCarts() {
       this.deltaMineCart = {
         added: [],
-        removed: []
+        removed: [],
       };
       this.deltaSuggestionsCart = {
         added: [],
-        removed: []
+        removed: [],
       };
     },
     addSuggestedROA() {
@@ -1452,11 +1466,11 @@ export default {
           self.$notify({
             title: this.$t("caDetails.confirmation.added"),
             message: this.$t("caDetails.confirmation.addedSuccess"),
-            type: "success"
+            type: "success",
           });
           self.updatedAnnouncements = new Date().getTime();
         })
-        .catch(function(error) {
+        .catch(function (error) {
           self.submittingSuggestionForm = false;
           self.parseError(error);
         });
@@ -1471,14 +1485,14 @@ export default {
             {
               asn: parseInt(this.addROAForm.asn),
               prefix: this.addROAForm.prefix,
-              max_length: parseInt(this.addROAForm.maxLength) || 0
-            }
+              max_length: parseInt(this.addROAForm.maxLength) || 0,
+            },
           ],
-          removed: []
+          removed: [],
         },
         this.bgpShown
       )
-        .then(r => {
+        .then((r) => {
           self.submittingROAForm = false;
           self.addROAFormVisible = false;
           if (r.data) {
@@ -1490,12 +1504,12 @@ export default {
             self.$notify({
               title: this.$t("caDetails.confirmation.added"),
               message: this.$t("caDetails.confirmation.addedSuccess"),
-              type: "success"
+              type: "success",
             });
             self.updatedAnnouncements = new Date().getTime();
           }
         })
-        .catch(function(error) {
+        .catch(function (error) {
           self.submittingROAForm = false;
           self.parseError(error);
         });
@@ -1524,8 +1538,8 @@ export default {
           reason: "new",
           asn: event.remove.asn * 1,
           prefix: event.remove.prefix,
-          max_length: event.remove.maxLength * 1
-        }
+          max_length: event.remove.maxLength * 1,
+        },
       ];
     },
     removeAS() {
@@ -1537,7 +1551,7 @@ export default {
       }
     },
     submitForm(formName) {
-      this.$refs[formName].validate(valid => {
+      this.$refs[formName].validate((valid) => {
         if (valid) {
           this.submittingROAForm = true;
           this.addROA();
@@ -1550,9 +1564,9 @@ export default {
       this.error = "";
       this.addROAFormVisible = false;
       this.submittingROAForm = false;
-      this.$set(this.addROAForm, "asn", null)
-      this.$set(this.addROAForm, "prefix", null)
-      this.$set(this.addROAForm, "maxLength", "")
+      this.$set(this.addROAForm, "asn", null);
+      this.$set(this.addROAForm, "prefix", null);
+      this.$set(this.addROAForm, "maxLength", "");
     },
     updateMaxLength(value) {
       if (value && value.indexOf("/") > -1) {
@@ -1563,8 +1577,8 @@ export default {
       const self = this;
       var reader = new FileReader();
 
-      reader.onload = (function() {
-        return function(e) {
+      reader.onload = (function () {
+        return function (e) {
           if (what === "repo") {
             self.initializeRepoForm.response = atob(e.target.result.substring(21));
           } else {
@@ -1586,11 +1600,13 @@ export default {
       const self = this;
       this.initializeParentForm.xml = "";
       this.initializeParentForm.response = "";
-      APIService.getChildRequestXML(this.handle).then(response => {
-        this.initializeParentForm.xml = response.data;
-      }).catch(error => {
-        self.parseError(error, true);
-      });
+      APIService.getChildRequestXML(this.handle)
+        .then((response) => {
+          this.initializeParentForm.xml = response.data;
+        })
+        .catch((error) => {
+          self.parseError(error, true);
+        });
       this.showAddParent = true;
     },
     addParent() {
@@ -1604,11 +1620,11 @@ export default {
           this.$notify({
             title: this.$t("common.success"),
             message: this.$t("caDetails.parentsTab.addParentSuccess"),
-            type: "success"
+            type: "success",
           });
           this.getContent();
         })
-        .catch(error => {
+        .catch((error) => {
           self.parseError(error, true);
         });
     },
@@ -1619,15 +1635,15 @@ export default {
           this.$notify({
             title: this.$t("common.success"),
             message: this.$t("caDetails.repoTab.addRepoSuccess"),
-            type: "success"
+            type: "success",
           });
           this.getContent();
         })
-        .catch(error => {
+        .catch((error) => {
           self.parseError(error, true);
         });
-    }
-  }
+    },
+  },
 };
 </script>
 
