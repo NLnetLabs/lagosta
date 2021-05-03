@@ -1085,7 +1085,7 @@ export default {
   },
   computed: {
     properties: function () {
-      if (this.repo && this.repoStatus) {
+      if (this.repo.repository_response && this.repoStatus) {
         return [
           {
             props: [
