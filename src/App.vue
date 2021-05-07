@@ -73,7 +73,7 @@
               $t("common.supportcontracts")
             }}</a>
             -
-            <a href="https://rpki.readthedocs.io/en/latest/krill/index.html" target="_blank">{{
+            <a href="https://krill.docs.nlnetlabs.nl/" target="_blank">{{
               $t("common.readthedocs")
             }}</a>
             -

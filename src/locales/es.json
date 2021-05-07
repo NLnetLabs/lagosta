@@ -29,7 +29,7 @@
   },
   "onboarding": {
     "welcome": "Bienvenido a Krill",
-    "welcomeHtml": "Empecemos por crear su Autoridad de Certificación (CA) RPKI. Esta se usará para configurar el RPKI Delegado con una o múltiples CA padre, generalmente su Registro Regional o Nacional de Internet.<br><br>El identificador que escoja identificará a su CA en sus interacciones con las CA padres e hijos. No se publicará en el RPKI. Escoja un identificador que ayude a los demás a reconocer a su organización. Una vez guardado, el identificador no se puede cambiar. <a href='https://rpki.readthedocs.io/en/latest/krill/manage-cas.html#adding-your-ca' target='_blank'>Más información...</a>",
+    "welcomeHtml": "Empecemos por crear su Autoridad de Certificación (CA) RPKI. Esta se usará para configurar el RPKI Delegado con una o múltiples CA padre, generalmente su Registro Regional o Nacional de Internet.<br><br>El identificador que escoja identificará a su CA en sus interacciones con las CA padres e hijos. No se publicará en el RPKI. Escoja un identificador que ayude a los demás a reconocer a su organización. Una vez guardado, el identificador no se puede cambiar. <a href='https://krill.docs.nlnetlabs.nl/en/stable/manage-roas.html#adding-your-ca' target='_blank'>Más información...</a>",
     "addCAForm": {
       "required": "Este campo es obligatorio",
       "format": "Este no es un nombre de CA válido",
