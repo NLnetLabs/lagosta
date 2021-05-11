@@ -1294,7 +1294,6 @@ export default {
         });
     },
     getRepoStatus() {
-      console.log("Getting repo status!");
       APIService.getRepoStatus(this.handle)
         .then((response) => {
           this.repoStatus = response.data;
