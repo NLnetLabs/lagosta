@@ -1,6 +1,6 @@
 # for local development and testing
 # docker build -t lagosta-builder .
-# docker run -it --rm --name lagosta-builder2 -v ${PWD}:/tmp/src lagosta-builder /bin/bash
+# docker run -it --rm --name lagosta-builder -v ${PWD}:/tmp/src lagosta-builder /bin/bash
 # root@461a1df45f20:/tmp/src# yarn build
 
 FROM ubuntu:18.04 as setup
