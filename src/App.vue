@@ -166,9 +166,12 @@ export default {
       APIService.getLatestKrillVersion()
         .then(success => {
           const gh = success.data;
-          this.krillLatestVersion =
-            gh.tag_name.indexOf("v") === 0 ? gh.tag_name.substr(1) : gh.tag_name;
-          this.krillLatestVersionURL = gh.html_url;
+          const tag_name = gh.tag_name.indexOf("v") === 0 ? gh.tag_name.substr(1) : gh.tag_name;
+          const release_ver_re = /^\d+\.\d+\.\d+$/; // excludes dev, rc, etc versions
+          if (release_ver_re.exec(tag_name)) {
+            this.krillLatestVersion = tag_name;
+            this.krillLatestVersionURL = gh.html_url;
+          }
         })
         .catch(() => {});
     },
