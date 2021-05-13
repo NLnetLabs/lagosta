@@ -17,7 +17,11 @@
     "idle": "Έχετε αποσυνδεθεί λόγω αδράνειας.",
     "nodata": "Δεν υπάρχουν δεδομένα",
     "copySuccess": "To XML αρχείο αντιγράφηκε στο πρόχειρο",
-    "edit": "Επεξεργασία"
+    "edit": "Επεξεργασία",
+    "userInfo": {
+      "title": "Login Details",
+      "user": "User"
+    }
   },
   "login": {
     "password": "Κωδικός",
@@ -25,7 +29,12 @@
     "signin": "Είσοδος",
     "required": "Παρακαλώ εισάγετε τον κωδικό σας",
     "error": "Ο κωδικός που χρησιμοποιήσατε δεν είναι σωστός",
-    "copied": "Ο κωδικός σας δεν πρέπει να προέρχεται από <a href='https://xkcd.com/936/' target='_blank'>https://xkcd.com/936/</a>"
+    "copied": "Ο κωδικός σας δεν πρέπει να προέρχεται από <a href='https://xkcd.com/936/' target='_blank'>https://xkcd.com/936/</a>",
+    "id": "Username",
+    "idPlaceholder": "Your username",
+    "idRequired": "Please enter your username",
+    "retry": "Click {0} to return to the login page.",
+    "here": "here"
   },
   "onboarding": {
     "welcome": "Καλωσήρθατε στο Krill",
@@ -211,7 +220,14 @@
     "ca-roa-not-entitled": "Το πρόθεμα ROA '{prefix}' δεν είναι σε κανένα από τα τρέχοντα πιστοποιητικά σας",
     "ta-not-allowed": "Αυτή η λειτουργικότητα δεν υποστηρίζεται από τη δοκιμαστική Άγκυρα Εμπιστοσύνης (Trust Anchor)",
     "ta-name-reserved": "Κατοχυρωμένο όνομα",
-    "ca-roa-delta-error": "Το ROA απορρίφθηκε για τους ακόλουθους λόγους"
+    "ca-roa-delta-error": "Το ROA απορρίφθηκε για τους ακόλουθους λόγους",
+    "api-insufficient-rights": "Your user does not have sufficient rights to perform this action. Please contact your administrator.",
+    "api-invalid-credentials": "The supplied login credentials were incorrect.",
+    "api-login-error": "An error occurred while logging you in: {cause}",
+    "api-auth-transient-error": "A (temporary) error occured while trying to authenticate your request. Please try again later.",
+    "api-auth-permanent-error": "An error occurred while trying to authenticate your request. Please contact your administrator.",
+    "api-auth-session-expired": "Your login session has expired. Please login again..",
+    "general-error": "Something went wrong. Please contact your administrator."
   },
   "testbed": {
     "welcome": "Καλωσήρθατε σε αυτή την πλατφόρμα δοκιμών RPKI",
@@ -302,8 +318,11 @@
       "missing-xml-attr": "Έλλειψη χαρακτηριστικού {attr} στο στοιχείο {el}",
       "empty-xml-el": "Το στοιχείο {el} δεν μπορεί να είναι άδειο",
       "empty-xml-attr": "Το χαρακτηριστικό {attr} στο στοιχείο {el} δεν μπορεί να είναι άδειο",
+      "non-ascii-xml-el": "Element {el} cannot contain non-ASCII characters",
       "child-handle-required": "Η ονομασία CA-παιδιού είναι υποχρεωτική",
-      "publisher-handle-required": "Η ονομασία Εκδότη είναι υποχρεωτική"
+      "publisher-handle-required": "Η ονομασία Εκδότη είναι υποχρεωτική",
+      "non-base64-certificate-xml-el": "Element {el} must contain a correctly Base64 encoded self-signed X.509 BPKI certificate",
+      "invalid-registration-data": "Your registration details could not be parsed correctly"
     }
   }
 }
