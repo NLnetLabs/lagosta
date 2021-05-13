@@ -17,7 +17,11 @@
     "idle": "Sua sessão expirou por inatividade.",
     "nodata": "No data",
     "copySuccess": "XML copiado para a Área de transferência",
-    "edit": "Editar"
+    "edit": "Editar",
+    "userInfo": {
+      "title": "Login Details",
+      "user": "User"
+    }
   },
   "login": {
     "password": "Senha",
@@ -25,7 +29,12 @@
     "signin": "Entrar",
     "required": "Por favor, digite a sua senha",
     "error": "A senha digitada é inválida/incorreta",
-    "copied": "Você não deve utilizar senhas de <a href='https://xkcd.com/936/' target='_blank'>https://xkcd.com/936/</a>"
+    "copied": "Você não deve utilizar senhas de <a href='https://xkcd.com/936/' target='_blank'>https://xkcd.com/936/</a>",
+    "id": "Username",
+    "idPlaceholder": "Your username",
+    "idRequired": "Please enter your username",
+    "retry": "Click {0} to return to the login page.",
+    "here": "here"
   },
   "onboarding": {
     "welcome": "Bem-vindo ao Krill",
@@ -211,7 +220,14 @@
     "ca-roa-not-entitled": "Prefixo da ROA '{prefix}' não pertence a nenhum de seus certificados atuais",
     "ta-not-allowed": "Esta funcionalidade não é suportada pelo Trust Anchor de testes",
     "ta-name-reserved": "Nome reservado",
-    "ca-roa-delta-error": "ROA rejeitada pelas seguintes questões:"
+    "ca-roa-delta-error": "ROA rejeitada pelas seguintes questões:",
+    "api-insufficient-rights": "Your user does not have sufficient rights to perform this action. Please contact your administrator.",
+    "api-invalid-credentials": "The supplied login credentials were incorrect.",
+    "api-login-error": "An error occurred while logging you in: {cause}",
+    "api-auth-transient-error": "A (temporary) error occured while trying to authenticate your request. Please try again later.",
+    "api-auth-permanent-error": "An error occurred while trying to authenticate your request. Please contact your administrator.",
+    "api-auth-session-expired": "Your login session has expired. Please login again..",
+    "general-error": "Something went wrong. Please contact your administrator."
   },
   "testbed": {
     "welcome": "Bem-vindo ao ambiente de testes RPKI",
@@ -303,7 +319,9 @@
       "empty-xml-el": "Elemento {el} não pode ser vazio",
       "empty-xml-attr": "Atributo {attr} do elemento {el} não pode ser vazio",
       "child-handle-required": "Identificador da CA-filha é obrigatório",
-      "publisher-handle-required": "Identificado do Publicador é obrigatório"
+      "publisher-handle-required": "Identificado do Publicador é obrigatório",
+      "non-base64-certificate-xml-el": "Element {el} must contain a correctly Base64 encoded self-signed X.509 BPKI certificate",
+      "invalid-registration-data": "Your registration details could not be parsed correctly"
     }
   }
 }
