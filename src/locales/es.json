@@ -17,7 +17,11 @@
     "idle": "You have been logged out because of inactivity.",
     "nodata": "No data",
     "copySuccess": "El XML se copió a su portapapeles",
-    "edit": "Edit"
+    "edit": "Edit",
+    "userInfo": {
+      "title": "Login Details",
+      "user": "User"
+    }
   },
   "login": {
     "password": "Contraseña",
@@ -25,7 +29,12 @@
     "signin": "Iniciar sesión",
     "required": "Ingrese su contraseña",
     "error": "La contraseña que ingresó es incorrecta",
-    "copied": "NO deberías crear tus claves como en <a href='https://xkcd.com/936/' target='_blank'>https://xkcd.com/936/</a>"
+    "copied": "NO deberías crear tus claves como en <a href='https://xkcd.com/936/' target='_blank'>https://xkcd.com/936/</a>",
+    "id": "Username",
+    "idPlaceholder": "Your username",
+    "idRequired": "Please enter your username",
+    "retry": "Click {0} to return to the login page.",
+    "here": "here"
   },
   "onboarding": {
     "welcome": "Bienvenido a Krill",
@@ -211,7 +220,14 @@
     "ca-roa-not-entitled": "El prefijo '{prefix}' contenido en el ROA no está en ninguno de sus certificados actuales",
     "ta-not-allowed": "Esta funcionalidad no es compatible con el ancla de confianza de prueba",
     "ta-name-reserved": "Nombre reservado",
-    "ca-roa-delta-error": "Este ROA ha sido rechazado debido a los siguientes errores"
+    "ca-roa-delta-error": "Este ROA ha sido rechazado debido a los siguientes errores",
+    "api-insufficient-rights": "Your user does not have sufficient rights to perform this action. Please contact your administrator.",
+    "api-invalid-credentials": "The supplied login credentials were incorrect.",
+    "api-login-error": "An error occurred while logging you in: {cause}",
+    "api-auth-transient-error": "A (temporary) error occured while trying to authenticate your request. Please try again later.",
+    "api-auth-permanent-error": "An error occurred while trying to authenticate your request. Please contact your administrator.",
+    "api-auth-session-expired": "Your login session has expired. Please login again..",
+    "general-error": "Something went wrong. Please contact your administrator."
   },
   "testbed": {
     "welcome": "Welcome to this RPKI testbed",
@@ -303,7 +319,9 @@
       "empty-xml-el": "Element {el} cannot be empty",
       "empty-xml-attr": "Attribute {attr} on element {el} cannot be empty",
       "child-handle-required": "Child Handle is required",
-      "publisher-handle-required": "Publisher Handle is required"
+      "publisher-handle-required": "Publisher Handle is required",
+      "non-base64-certificate-xml-el": "Element {el} must contain a correctly Base64 encoded self-signed X.509 BPKI certificate",
+      "invalid-registration-data": "Your registration details could not be parsed correctly"
     }
   }
 }
