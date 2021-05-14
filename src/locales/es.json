@@ -30,11 +30,11 @@
     "required": "Ingrese su contraseña",
     "error": "La contraseña que ingresó es incorrecta",
     "copied": "NO deberías crear tus claves como en <a href='https://xkcd.com/936/' target='_blank'>https://xkcd.com/936/</a>",
-    "id": "Username",
-    "idPlaceholder": "Your username",
-    "idRequired": "Please enter your username",
-    "retry": "Haz click en {0} para volver a la pagina de login.",
-    "here": "here"
+    "id": "Nombre de usuario",
+    "idPlaceholder": "Su nombre de usuario",
+    "idRequired": "Por favor ingrese su nombre de usuario",
+    "retry": "Haga click en {0} para volver a la pagina de login.",
+    "here": "aqui"
   },
   "onboarding": {
     "welcome": "Bienvenido a Krill",
