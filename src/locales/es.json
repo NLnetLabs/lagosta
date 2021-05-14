@@ -14,8 +14,8 @@
     "newversion": "¡Hay una nueva versión disponible!",
     "supportcontracts": "Contratos de soporte y mantenimiento",
     "warning": "Advertencia",
-    "idle": "You have been logged out because of inactivity.",
-    "nodata": "No data",
+    "idle": "Tu sesion ha caducado debido a inactividad.",
+    "nodata": "Sin datos",
     "copySuccess": "El XML se copió a su portapapeles",
     "edit": "Edit",
     "userInfo": {
@@ -33,7 +33,7 @@
     "id": "Username",
     "idPlaceholder": "Your username",
     "idRequired": "Please enter your username",
-    "retry": "Click {0} to return to the login page.",
+    "retry": "Haz click en {0} para volver a la pagina de login.",
     "here": "here"
   },
   "onboarding": {
@@ -180,7 +180,7 @@
       "roa_as0_help": "Este ROA perimte inhabilitar todo anuncio para un prefijo.",
       "roa_as0_redundant_help": "Este ROA con AS0 es redundante porque ya existen uno o mas ROAs que cubren este prefijo."
     },
-    "download": "Download CSV"
+    "download": "Descargar como CSV"
   },
   "deltaErrors": {
     "duplicates": "Duplicados",
@@ -206,7 +206,7 @@
     "ca-repo-response-invalid-xml": "Se obtuvo un response xml inválido del repositorio",
     "ca-repo-response-wrong-xml": "Se obtuvo una respuesta de padre, no de repositorio",
     "ca-parent-duplicate": "Ya tiene un padre con el nombre '{parent}'",
-    "ca-parent-xml-duplicate": "This response is already used by a parent named '{parent}'",
+    "ca-parent-xml-duplicate": "Esta respuesta ya esta siendo utilizada por un padre llamado '{parent}'",
     "ca-parent-unknown": "No tiene ningún padre con el nombre '{parent}'",
     "ca-parent-issue": "Se recibió un error del padre '{parent}': {cause}",
     "ca-parent-response-invalid-xml": "Se obtuvo un response xml inválido del padre",
@@ -221,13 +221,13 @@
     "ta-not-allowed": "Esta funcionalidad no es compatible con el ancla de confianza de prueba",
     "ta-name-reserved": "Nombre reservado",
     "ca-roa-delta-error": "Este ROA ha sido rechazado debido a los siguientes errores",
-    "api-insufficient-rights": "Your user does not have sufficient rights to perform this action. Please contact your administrator.",
-    "api-invalid-credentials": "The supplied login credentials were incorrect.",
-    "api-login-error": "An error occurred while logging you in: {cause}",
-    "api-auth-transient-error": "A (temporary) error occured while trying to authenticate your request. Please try again later.",
-    "api-auth-permanent-error": "An error occurred while trying to authenticate your request. Please contact your administrator.",
-    "api-auth-session-expired": "Your login session has expired. Please login again..",
-    "general-error": "Something went wrong. Please contact your administrator."
+    "api-insufficient-rights": "Usted no posee privilegios suficientes para realizar esta accion. Ponganse en contacto con el administrador.",
+    "api-invalid-credentials": "Las credenciales suministradas son incorrectas.",
+    "api-login-error": "Ocurrio un error durante el proceso de login: {cause}",
+    "api-auth-transient-error": "Ocurrio un error (quizas temporario) mientras se autenticaba su solicitud. Por favor intente mas tarde.",
+    "api-auth-permanent-error": "Ocurrio un error mientras se intentaba autenticar su solicitud. Pongase en contacto con el administrador.",
+    "api-auth-session-expired": "Su sesion ha caducado. Por favor ingrese nuevamente..",
+    "general-error": "Ocurrio un error inesperado. Por favor pongase en contacto con el administrador."
   },
   "testbed": {
     "welcome": "Welcome to this RPKI testbed",
