@@ -230,7 +230,7 @@
     "general-error": "Er trad een fout op. Neem contact op met uw beheerder."
   },
   "testbed": {
-    "welcome": "Welcome bij de RPKI test omgeving",
+    "welcome": "Welkom bij de RPKI test omgeving",
     "disclaimer": {
       "heading": "Spelregels",
       "body": "Deze test omgeving gebruikt een op zichzelf staande RPKI hierarchie en is bedoeld voor evaluatie doeleinden. U kunt hier uw test CA registreren met eender welke IP en ASN adressen. Er worden geen garanties gegeven over de beschikbaarheid van deze service. Als u problemen ondervindt, <a href='https://github.com/NLnetLabs/krill/issues/new'>laat het ons dan weten</a>."
