@@ -221,11 +221,11 @@
     "ta-not-allowed": "Diese Funktionalität wird vom Test Vertrauensanker nicht unterstützt",
     "ta-name-reserved": "Name reserviert",
     "ca-roa-delta-error": "Das ROA wurde aus den folgenden Gründen zurückgewiesen",
-	"api-insufficient-rights": "Ihr Benutzer hat keine ausreichenden Rechte um die Aktion durchzuführen. Bitte kontaktieren Sie Ihren Administrator.",
-	"api-invalid-credentials": "Die eingegebenen Benutzerdaten waren inkorrekt.",
+    "api-insufficient-rights": "Ihr Benutzer hat keine ausreichenden Rechte um die Aktion durchzuführen. Bitte kontaktieren Sie Ihren Administrator.",
+    "api-invalid-credentials": "Die eingegebenen Benutzerdaten waren inkorrekt.",
     "api-login-error": "Während des Logins ist ein Fehler aufgetreten: {cause}",
-	"api-auth-transient-error": "Bei der Authentifizierung Ihrer Anfrage ist ein (temporärer) Fehler aufgetreten. Bitte versuchen Sie es später erneut.",
-	"api-auth-permanent-error": "Bei der Authentifizierung Ihrer Anfrage ist ein Fehler aufgetreten. Bitte kontaktieren Sie Ihren Administrator.",
+    "api-auth-transient-error": "Bei der Authentifizierung Ihrer Anfrage ist ein (temporärer) Fehler aufgetreten. Bitte versuchen Sie es später erneut.",
+    "api-auth-permanent-error": "Bei der Authentifizierung Ihrer Anfrage ist ein Fehler aufgetreten. Bitte kontaktieren Sie Ihren Administrator.",
     "api-auth-session-expired": "Ihre Sitzung ist abgelaufen. Bitte loggen Sie sich erneut ein..",
     "general-error": "Es ist ein Fehler aufgetreten. Bitte kontaktieren Sie Ihren Administrator."
   },
@@ -320,7 +320,7 @@
       "empty-xml-attr": "Attribut {attr} vom Element {el} darf nicht leer sein",
       "child-handle-required": "Kind Handle wird benötigt",
       "publisher-handle-required": "Publisher Handle wird benötigt",
-	  "non-base64-certificate-xml-el": "Element {el} muss ein korrektes Base64 encodiertes selbst-signiertes X.509 BPKI Zertifikat enthalten",
+      "non-base64-certificate-xml-el": "Element {el} muss ein korrektes Base64 encodiertes selbst-signiertes X.509 BPKI Zertifikat enthalten",
       "invalid-registration-data": "Ihre Registrierungsdaten konnten nicht korrekt verarbeitet werden"
     }
   }
