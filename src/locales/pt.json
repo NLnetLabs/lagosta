@@ -19,8 +19,8 @@
     "copySuccess": "XML copiado para a Área de transferência",
     "edit": "Editar",
     "userInfo": {
-      "title": "Login Details",
-      "user": "User"
+      "title": "Detalhes de autenticação",
+      "user": "Usuário"
     }
   },
   "login": {
@@ -30,11 +30,11 @@
     "required": "Por favor, digite a sua senha",
     "error": "A senha digitada é inválida/incorreta",
     "copied": "Você não deve utilizar senhas de <a href='https://xkcd.com/936/' target='_blank'>https://xkcd.com/936/</a>",
-    "id": "Username",
-    "idPlaceholder": "Your username",
-    "idRequired": "Please enter your username",
-    "retry": "Click {0} to return to the login page.",
-    "here": "here"
+    "id": "Nome de usuário",
+    "idPlaceholder": "Seu nome de usuário",
+    "idRequired": "Por favor, informe seu nome de usuário",
+    "retry": "Clique {0} para retornar para a página de autenticação.",
+    "here": "aqui"
   },
   "onboarding": {
     "welcome": "Bem-vindo ao Krill",
@@ -172,12 +172,12 @@
       "roa_as0_redundant": "REDUNDANTE",
       "roa_seen_help": "Esta ROA corresponde a anúncios vistos no BGP",
       "announcement_not_found_help": "Este anúncio não está coberto por nenhuma de suas ROAs",
-      "roa_unseen_help": "Não vemos nenhum anúncio BGP que corresponda a esta ROA",
+      "roa_unseen_help": "Não identificamos nenhum anúncio BGP que corresponda a esta ROA",
       "announcement_invalid_length_help": "Este anúncio não é permitido porque é mais específico do que o prefixo e comprimento máximo autorizado para este ASN",
-      "announcement_invalid_asn_help": "Este anúncio não é permitido porque você somente autorizou o prefixo a partir de outro ASN",
+      "announcement_invalid_asn_help": "Este anúncio não é permitido, porque você já autorizou o prefixo a partir de outro ASN",
       "roa_too_permissive_help": "Esta ROA corresponde a anúncios visto no BGP, mas também permite anúncios não vistos",
-      "roa_redundant_help": "Esta ROA é redundante porque já existe uma ou mais ROAs cobrindo este prefixo, comprimento e ASN",
-      "roa_as0_help": "Esta ROA serve para não permitir qualquer anúncio por um prefixo",
+      "roa_redundant_help": "Esta ROA é redundante, porque já existe uma ou mais ROAs cobrindo este prefixo, comprimento e ASN",
+      "roa_as0_help": "Esta ROA tem por objetivo NÃO permitir anúncios para um prefixo",
       "roa_as0_redundant_help": "Esta ROA AS0 é redundante porque já existe uma ou mais ROAs cobrindo este prefixo"
     },
     "download": "Download CSV"
@@ -220,14 +220,14 @@
     "ca-roa-not-entitled": "Prefixo da ROA '{prefix}' não pertence a nenhum de seus certificados atuais",
     "ta-not-allowed": "Esta funcionalidade não é suportada pelo Trust Anchor de testes",
     "ta-name-reserved": "Nome reservado",
-    "ca-roa-delta-error": "ROA rejeitada pelas seguintes questões:",
-    "api-insufficient-rights": "Your user does not have sufficient rights to perform this action. Please contact your administrator.",
-    "api-invalid-credentials": "The supplied login credentials were incorrect.",
-    "api-login-error": "An error occurred while logging you in: {cause}",
-    "api-auth-transient-error": "A (temporary) error occured while trying to authenticate your request. Please try again later.",
-    "api-auth-permanent-error": "An error occurred while trying to authenticate your request. Please contact your administrator.",
-    "api-auth-session-expired": "Your login session has expired. Please login again..",
-    "general-error": "Something went wrong. Please contact your administrator."
+    "ca-roa-delta-error": "ROA rejeitada pelos seguintes motivos:",
+    "api-insufficient-rights": "Seu usuário não possui privilégios suficientes para esta operação. Por favor, entre em contato com seu administrador.",
+    "api-invalid-credentials": "As credenciais fornecidas estão incorretas.",
+    "api-login-error": "Um erro ocorreu durante a autenticação: {cause}",
+    "api-auth-transient-error": "Um erro (temporário) ocorreu na tentativa de autenticação. Por favor, tente mais tarde.",
+    "api-auth-permanent-error": "Um erro ocorreu na tentativa de autenticação. Por favor, entre em contato com seu administrador.",
+    "api-auth-session-expired": "Sua sessão expirou. Por favor, autentique-se novamente.",
+    "general-error": "Ocorreu um erro. Por favor, entre em contato com seu administrador."
   },
   "testbed": {
     "welcome": "Bem-vindo ao ambiente de testes RPKI",
@@ -319,9 +319,9 @@
       "empty-xml-el": "Elemento {el} não pode ser vazio",
       "empty-xml-attr": "Atributo {attr} do elemento {el} não pode ser vazio",
       "child-handle-required": "Identificador da CA-filha é obrigatório",
-      "publisher-handle-required": "Identificado do Publicador é obrigatório",
-      "non-base64-certificate-xml-el": "Element {el} must contain a correctly Base64 encoded self-signed X.509 BPKI certificate",
-      "invalid-registration-data": "Your registration details could not be parsed correctly"
+      "publisher-handle-required": "Identificador do Publicador é obrigatório",
+      "non-base64-certificate-xml-el": "Elemento {el} deve conter um certificado X.509 BPKI auto-assinado, no formato Base64",
+      "invalid-registration-data": "As informações em sua solicitação de registro não puderam ser interpretadas corretamente"
     }
   }
 }
