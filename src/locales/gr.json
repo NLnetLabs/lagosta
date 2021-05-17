@@ -17,7 +17,11 @@
     "idle": "Έχετε αποσυνδεθεί λόγω αδράνειας.",
     "nodata": "Δεν υπάρχουν δεδομένα",
     "copySuccess": "To XML αρχείο αντιγράφηκε στο πρόχειρο",
-    "edit": "Επεξεργασία"
+    "edit": "Επεξεργασία",
+    "userInfo": {
+      "title": "Στοιχεία Σύνδεσης",
+      "user": "Χρήστης"
+    }
   },
   "login": {
     "password": "Κωδικός",
@@ -25,7 +29,12 @@
     "signin": "Είσοδος",
     "required": "Παρακαλώ εισάγετε τον κωδικό σας",
     "error": "Ο κωδικός που χρησιμοποιήσατε δεν είναι σωστός",
-    "copied": "Ο κωδικός σας δεν πρέπει να προέρχεται από <a href='https://xkcd.com/936/' target='_blank'>https://xkcd.com/936/</a>"
+    "copied": "Ο κωδικός σας δεν πρέπει να προέρχεται από <a href='https://xkcd.com/936/' target='_blank'>https://xkcd.com/936/</a>",
+    "id": "Όνομα χρήστη",
+    "idPlaceholder": "Το όνομα χρήστη σας",
+    "idRequired": "Παρακαλώ εισάγετε το όνομα χρήστη σας",
+    "retry": "Επιλέξτε {0} για επιστροφή στη σελίδα σύνδεσης.",
+    "here": "εδώ"
   },
   "onboarding": {
     "welcome": "Καλωσήρθατε στο Krill",
@@ -103,7 +112,7 @@
     "analyseThis": "Ανέλυσε τα ROA",
     "analysis": "Ανάλυση ROA",
     "suggestions": {
-      "following": "Please verify the following suggested changes to your ROAs. <a href='https://krill.docs.nlnetlabs.nl/en/stable/manage-roas.html' target='_blank'>Read more..</a>",
+      "following": "Παρακαλώ επαληθεύστε τις ακόλουθες προτεινόμενες αλλαγές στα ROA σας. <a href='https://krill.docs.nlnetlabs.nl/en/stable/manage-roas.html' target='_blank'>Διαβάστε περισσότερα...</a>",
       "nochanges": "Δεν προτείνουμε αλλαγές αυτή τη στιγμή",
       "adding": "Προσθήκη",
       "removing": "Αφαίρεση ROA",
@@ -120,12 +129,12 @@
         "not_found": "Δεν βρέθηκε",
         "invalid_asn": "Άκυρο ASN",
         "invalid_length": "Άκυρο μήκος",
-        "stale": "'Εωλο",
-        "disallowing": "ROA disallows announcements, but authorizes nothing. Use AS0 instead?",
-        "as0_redundant": "Περιττό με AS0",
-        "redundant": "Redundant ROA",
-        "too_permissive": "Πολύ επιτρεπτικό",
-        "specific": "Allow specific announcement in a ROA which may be too permissive",
+        "stale": "Δεν υπάρχουν ορατές ανακοινώσεις για το ROA",
+        "disallowing": "Αυτό το ROA μόνο απαγορεύει ανακοινώσεις. Αν αυτό είναι σκόπιμο μπορείτε να χρησιμοποιήσετε ένα AS0 ROA αντί αυτού.",
+        "as0_redundant": "Περιττό ROA",
+        "redundant": "Περιττό ROA",
+        "too_permissive": "Το ROA επιτρέπει επιπλέον ανακοινώσεις που μπορεί να καταχραστούν για επιθέσεις τύπου path spoofing hijacks",
+        "specific": "Επιτρέψτε συγκεκριμένη ανακοίνωση σε ένα ROA που μπορεί να είναι πολύ επιτρεπτικό",
         "new": "Νέο"
       }
     },
@@ -156,20 +165,20 @@
       "announcement_invalid_asn": "ΑΚΥΡΟ ASN",
       "roa_no_announcement_info": "ΚΑΜΜΙΑ ΠΛΗΡΟΦΟΡΙΑ ΑΝΑΚΟΙΝΩΣΗΣ",
       "roa_too_permissive": "ΠΟΛΥ ΕΠΙΤΡΕΠΤΙΚΗ",
-      "roa_disallowing": "DISALLOWING",
-      "roa_disallowing_help": "This ROA disallows announcements only. If this is intentional you may want to use an AS0 ROA instead.",
-      "roa_redundant": "REDUNDANT",
+      "roa_disallowing": "ΑΠΑΓΟΡΕΥΤΙΚΗ",
+      "roa_disallowing_help": "Αυτό το ROA μόνο απαγορεύει ανακοινώσεις. Αν αυτό είναι σκόπιμο μπορείτε να χρησιμοποιήσετε ένα AS0 ROA αντί αυτού.",
+      "roa_redundant": "ΠΕΡΙΤΤΗ",
       "roa_as0": "AS0",
-      "roa_as0_redundant": "REDUNDANT",
+      "roa_as0_redundant": "ΠΕΡΙΤΤΗ",
       "roa_seen_help": "Υπάρχουν ταιριαστές ανακοινώσεις στο BGP για αυτό το ROA",
       "announcement_not_found_help": "Αυτή η ανακοίνωση δεν καλύπτεται από κανένα ROA σας",
       "roa_unseen_help": "Δεν βλέπουμε καμμία BGP ανακοίνωση που να ταιριάζει με αυτό το ROA",
       "announcement_invalid_length_help": "Αυτή η ανακοίνωση δεν είναι επιτρεπτή καθώς είναι πιο συγκεκριμένη από το πρόθεμα και το μέγιστο μήκος που έχετε εξουσιοδοτήσει για αυτό το ASN",
       "announcement_invalid_asn_help": "Αυτή η ανακοίνωση δεν είναι επιτρεπτή καθώς έχετε εξουσιοδοτήσει το πρόθεμα μόνο από άλλο ASN",
       "roa_too_permissive_help": "Αυτό το ROA ταιριάζει με ανακοινώσιες στο BGP, αλλά επίσης επιτρέπει αφανείς ανακοινώσεις",
-      "roa_redundant_help": "This ROA is redundant because there are one or more other ROAs covering its prefix, length and ASN",
+      "roa_redundant_help": "Αυτό το ROA είναι περιττό καθώς υπάρχουν ένα ή περισσότερα ROA που καλύπτουν το πρόθεμα, μήκος και ASN",
       "roa_as0_help": "Αυτό το ROA χρησιμεύει για να αποτρέπει όλες τις ανακοινώσεις για ένα πρόθεμα",
-      "roa_as0_redundant_help": "This AS0 ROA is redundant because there are one or more other ROAs covering its prefix"
+      "roa_as0_redundant_help": "Αυτό το AS0 ROA είναι περιττό καθώς υπάρχουν ένα ή περισσότερα ROA που καλύπτουν το πρόθεμα"
     },
     "download": "Λήψη CSV"
   },
@@ -211,7 +220,14 @@
     "ca-roa-not-entitled": "Το πρόθεμα ROA '{prefix}' δεν είναι σε κανένα από τα τρέχοντα πιστοποιητικά σας",
     "ta-not-allowed": "Αυτή η λειτουργικότητα δεν υποστηρίζεται από τη δοκιμαστική Άγκυρα Εμπιστοσύνης (Trust Anchor)",
     "ta-name-reserved": "Κατοχυρωμένο όνομα",
-    "ca-roa-delta-error": "Το ROA απορρίφθηκε για τους ακόλουθους λόγους"
+    "ca-roa-delta-error": "Το ROA απορρίφθηκε για τους ακόλουθους λόγους",
+    "api-insufficient-rights": "Ο χρήστης σας δεν έχει επαρκή δικαιώματα για να εκτελέσει αυτή την ενέργεια. Παρακαλώ επικοινωνείστε με το διαχειριστή σας.",
+    "api-invalid-credentials": "Τα παρεχόμενα στοιχεία σύνδεσης είναι λάθος.",
+    "api-login-error": "Προέκυψε σφάλμα κατά τη σύνδεση: {cause}",
+    "api-auth-transient-error": "Προέκυψε (προσωρινό) σφάλμα κατά τη διαδικασία πιστοποίησης της αίτησης. Παρακαλώ προσπαθήστε αργότερα.",
+    "api-auth-permanent-error": "Προέκυψε σφάλμα κατά τη διαδικασία πιστοποίησης της αίτησης. Παρακαλώ επικοινωνείστε με το διαχειριστή σας.",
+    "api-auth-session-expired": "Η συνεδρία σας έχει λήξει. Παρακαλώ συνδεθείτε ξανά...",
+    "general-error": "Κάτι πήγε λάθος. Παρακαλώ επικοινωνείστε με το διαχειριστή σας."
   },
   "testbed": {
     "welcome": "Καλωσήρθατε σε αυτή την πλατφόρμα δοκιμών RPKI",
@@ -302,8 +318,11 @@
       "missing-xml-attr": "Έλλειψη χαρακτηριστικού {attr} στο στοιχείο {el}",
       "empty-xml-el": "Το στοιχείο {el} δεν μπορεί να είναι άδειο",
       "empty-xml-attr": "Το χαρακτηριστικό {attr} στο στοιχείο {el} δεν μπορεί να είναι άδειο",
+      "non-ascii-xml-el": "Το στοιχείο {el} δεν μπορεί να περιέχει χαρακτήρες που δεν είναι ASCII",
       "child-handle-required": "Η ονομασία CA-παιδιού είναι υποχρεωτική",
-      "publisher-handle-required": "Η ονομασία Εκδότη είναι υποχρεωτική"
+      "publisher-handle-required": "Η ονομασία Εκδότη είναι υποχρεωτική",
+      "non-base64-certificate-xml-el": "Το στοιχείο {el} πρέπει να περιέχει ένα σωστά κωδικοποιημένο σε Base64 αυτο-υπογεγραμμένο X.509 BPKI πιστοποιητικό",
+      "invalid-registration-data": "Τα στοιχεία εγγραφής σας δεν μπόρεσαν να αναλυθούν σωστά"
     }
   }
 }
