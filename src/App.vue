@@ -3,15 +3,14 @@
     <el-container>
       <el-header>
         <el-row>
-          <el-col :span="4">
+          <el-col :span="12">
             <router-link :to="{ name: getTlLinkTarget() }">
               <div class="logo">
                 <img src="@/assets/images/krill_logo_white.svg" />
               </div>
             </router-link>
           </el-col>
-          <el-col :span="14">&nbsp;</el-col>
-          <el-col :span="6">
+          <el-col :span="12" class="text-right">
             <div class="toolbar">
               <el-select v-model="$i18n.locale" placeholder="Language" size="small">
                 <el-option
