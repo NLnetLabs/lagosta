@@ -18,6 +18,10 @@
     "nodata": "Geen data",
     "copySuccess": "De XML is naar uw klembord gekopiëerd",
     "edit": "Edit"
+    "userInfo": {
+      "title": "Login Details",
+      "user": "Gebruiker"
+    }
   },
   "login": {
     "password": "Wachtwoord",
@@ -25,7 +29,12 @@
     "signin": "Log In",
     "required": "Voer alstublieft uw wachtwoord in",
     "error": "Het wachtwoord is niet correct",
-    "copied": "Gebruik geen wachtwoorden van <a href='https://xkcd.com/936/' target='_blank'>https://xkcd.com/936/</a>"
+    "copied": "Gebruik geen wachtwoorden van <a href='https://xkcd.com/936/' target='_blank'>https://xkcd.com/936/</a>",
+    "id": "Gebruiker",
+    "idPlaceholder": "Uw gebruikersnaam",
+    "idRequired": "Voer uw gebruikersnaam in",
+    "retry": "Klik {0} om terug te gaan naar de login pagina.",
+    "here": "hier"
   },
   "onboarding": {
     "welcome": "Welkom bij Krill",
@@ -211,10 +220,17 @@
     "ca-roa-not-entitled": "ROA prefix '{prefix}' staat niet op een van uw huidige certificaten",
     "ta-not-allowed": "Deze functionaliteit wordt niet ondersteund door het test-vertrouwensanker",
     "ta-name-reserved": "Naam gereserveerd",
-    "ca-roa-delta-error": "ROA geweigerd om de volgende reden(en):"
+    "ca-roa-delta-error": "ROA geweigerd om de volgende reden(en):",
+    "api-insufficient-rights": "U heeft onvoldoende rechten om deze actie uit te voeren. Neem contact op met uw beheerder.",
+    "api-invalid-credentials": "De ingevoerde login gegegens zijn incorrect.",
+    "api-login-error": "Er trad een fout op tijdens het inloggen: {cause}",
+    "api-auth-transient-error": "Er trad een tijdelijke fout op bij het verifiëren van uw verzoek. Probeert u het later nog eens.",
+    "api-auth-permanent-error": "Er trad een fout op bij het verifiëren van uw verzoek. Neem contact op met uw beheerder.",
+    "api-auth-session-expired": "Uw sessie is verlopen. Gelieve opnieuw in te loggen.",
+    "general-error": "Er trad een fout op. Neem contact op met uw beheerder."
   },
   "testbed": {
-    "welcome": "Welcome bij de RPKI test omgeving",
+    "welcome": "Welkom bij de RPKI test omgeving",
     "disclaimer": {
       "heading": "Spelregels",
       "body": "Deze test omgeving gebruikt een op zichzelf staande RPKI hierarchie en is bedoeld voor evaluatie doeleinden. U kunt hier uw test CA registreren met eender welke IP en ASN adressen. Er worden geen garanties gegeven over de beschikbaarheid van deze service. Als u problemen ondervindt, <a href='https://github.com/NLnetLabs/krill/issues/new'>laat het ons dan weten</a>."
@@ -303,7 +319,9 @@
       "empty-xml-el": "Element {el} cannot be empty",
       "empty-xml-attr": "Attribute {attr} on element {el} cannot be empty",
       "child-handle-required": "CA naam is vereist",
-      "publisher-handle-required": "Publisher naam is vereist"
+      "publisher-handle-required": "Publisher naam is vereist",
+      "non-base64-certificate-xml-el": "Element {el} must contain a correctly Base64 encoded self-signed X.509 BPKI certificate",
+      "invalid-registration-data": "Your registration details could not be parsed correctly"
     }
   }
 }
