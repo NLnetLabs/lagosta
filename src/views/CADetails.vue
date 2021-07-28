@@ -53,7 +53,6 @@
                     :updated="updatedAnnouncements"
                     @trigger-add-ROA="triggerAddROA($event)"
                     @trigger-error="triggerError($event)"
-                    @trigger-show-BGP="triggerShowBGP($event)"
                     @trigger-suggestions="triggerSuggestions($event)"
                     v-if="!initializeRepo && !initializeParent && !emptyResources"
                   />
@@ -811,7 +810,6 @@
           <h3 class="suggestion-title suggestion-title-nopadding">
             {{ $t("caDetails.suggestions.willResult") }}
           </h3>
-          <simpleROAsTable :announcements="effects" :updated="updatedPreview"></simpleROAsTable>
         </el-col>
       </el-row>
 
@@ -944,7 +942,6 @@
 
 <script>
 import AnnouncementsROAs from "../components/AnnouncementsROAs.vue";
-import SimpleROAsTable from "../components/SimpleROAsTable.vue";
 import JSONErrorVisualizer from "../components/JSONErrorVisualizer.vue";
 
 import "element-ui/lib/theme-chalk/display.css";
@@ -957,7 +954,6 @@ import * as moment from "moment";
 export default {
   components: {
     announcementsROAs: AnnouncementsROAs,
-    simpleROAsTable: SimpleROAsTable,
     jsonErrorVisualizer: JSONErrorVisualizer,
   },
   data() {
@@ -1521,9 +1517,6 @@ export default {
       this.addROAForm.prefix = row.prefix;
       this.updateMaxLength(row.prefix);
       this.addROAFormVisible = true;
-    },
-    triggerShowBGP(val) {
-      this.bgpShown = val;
     },
     triggerSuggestions(event) {
       this.removeROASuggestions = true;

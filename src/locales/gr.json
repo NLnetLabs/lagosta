@@ -151,7 +151,6 @@
   "announcements": {
     "noRoasOrAnnouncements": "Δεν βρέθηκαν ROA ή Ανακοινώσεις.",
     "search": "Αναζήτηση για ASN, πρόθεμα, κατάσταση...",
-    "showBGPInfo": "Εμφάνιση BGP πληροφοριών",
     "authorizes": "Εξουσιοδοτεί {number} ανακοινώσεις",
     "disallows": "Απαγορεύει {number} ανακοινώσεις",
     "asn": "ASN",

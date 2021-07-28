@@ -151,7 +151,6 @@
   "announcements": {
     "noRoasOrAnnouncements": "ROAs ou Anúncios não encontrados.",
     "search": "Pesquisar por ASN, prefixos, estados...",
-    "showBGPInfo": "Mostrar informações BGP",
     "authorizes": "Autoriza {number} anúncio(s)",
     "disallows": "Desabilita {number} anúncio(s)",
     "asn": "ASN",

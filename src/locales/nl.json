@@ -151,7 +151,6 @@
   "announcements": {
     "noRoasOrAnnouncements": "Geen ROAs of BGP-aankondigingen gevonden.",
     "search": "Zoek naar ASN, prefix, status...",
-    "showBGPInfo": "Toon BGP info",
     "authorizes": "Autoriseert {number} aankondigingen",
     "disallows": "Weigert {number} aankondigingen",
     "asn": "ASN",

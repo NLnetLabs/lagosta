@@ -1,5 +1,5 @@
 <template>
-  <div :class="!showBGP ? 'remove-expanded' : ''">
+  <div>
     <i class="el-icon-loading" v-if="loadingAnnouncements"></i>
 
     <div v-if="!loadingAnnouncements && announcements.length === 0" class="empty">
@@ -24,7 +24,7 @@
         <div class="show-bgp">
           <download-csv
             class="download-csv"
-            :fields="['asn', 'prefix', 'max_length', showBGP ? 'state' : null]"
+            :fields="['asn', 'prefix', 'max_length', 'state']"
             :data="filteredAnnouncements"
             :name="handle + '.csv'"
           >
@@ -32,7 +32,6 @@
               <font-awesome-icon icon="file-csv" /> {{ $t("announcements.download") }}
             </el-button>
           </download-csv>
-          <el-switch v-model="showBGP" :active-text="$t('announcements.showBGPInfo')"> </el-switch>
         </div>
       </el-col>
     </el-row>
@@ -50,26 +49,22 @@
       :empty-text="$t('common.nodata')"
       @sort-change="sortChange"
     >
-      <el-table-column type="expand" :class-name="!showBGP ? 'expandable' : ''">
+      <el-table-column type="expand">
         <template slot-scope="scope">
-          <el-row
-            align="middle"
-            v-if="showBGP && (scope.row.authorizes || scope.row.disallows)"
-            :gutter="20"
-          >
+          <el-row align="middle" v-if="scope.row.authorizes || scope.row.disallows" :gutter="20">
             <el-col :xs="24" :sm="12">
               <h4 class="popover-title">
                 <span
                   v-t="{
                     path: 'announcements.authorizes',
-                    args: { number: scope.row.authorizes ? scope.row.authorizes.length : '0' }
+                    args: { number: scope.row.authorizes ? scope.row.authorizes.length : '0' },
                   }"
                 ></span>
               </h4>
               <el-table
                 size="small"
                 :data="scope.row.authorizes"
-                style="width: 100%;margin-bottom:2rem"
+                style="width: 100%; margin-bottom: 2rem"
                 :empty-text="$t('common.nodata')"
               >
                 <el-table-column prop="asn" :label="$t('announcements.asn')"></el-table-column>
@@ -84,7 +79,7 @@
                 <span
                   v-t="{
                     path: 'announcements.disallows',
-                    args: { number: scope.row.disallows ? scope.row.disallows.length : '0' }
+                    args: { number: scope.row.disallows ? scope.row.disallows.length : '0' },
                   }"
                 ></span>
               </h4>
@@ -127,7 +122,7 @@
           {{ scope.row.prefix }}{{ scope.row.max_length ? "-" + scope.row.max_length : "" }}
         </template>
       </el-table-column>
-      <el-table-column prop="state" :label="$t('announcements.stateLabel')" sortable v-if="showBGP">
+      <el-table-column prop="state" :label="$t('announcements.stateLabel')" sortable>
         <template slot-scope="scope">
           <stateVisualizer :scope="scope"></stateVisualizer>
         </template>
@@ -142,8 +137,8 @@
             @click="triggerAddROA(scope.row)"
             v-if="
               scope.row.state === 'announcement_not_found' ||
-                scope.row.state === 'announcement_invalid_asn' ||
-                scope.row.state === 'announcement_invalid_length'
+              scope.row.state === 'announcement_invalid_asn' ||
+              scope.row.state === 'announcement_invalid_length'
             "
           ></el-button>
 
@@ -154,7 +149,7 @@
             round
             v-if="scope.row.state !== 'announcement_not_found' && scope.row.max_length"
             @click="deleteROA(scope.row)"
-            style="margin-left:4px"
+            style="margin-left: 4px"
           ></el-button>
         </template>
       </el-table-column>
@@ -163,9 +158,9 @@
     <el-pagination
       v-if="
         !loadingAnnouncements &&
-          !loadingTable &&
-          announcements.length > 0 &&
-          filteredAnnouncements.length > 0
+        !loadingTable &&
+        announcements.length > 0 &&
+        filteredAnnouncements.length > 0
       "
       background
       :current-page.sync="currentPage"
@@ -182,17 +177,15 @@
 <script>
 import APIService from "@/services/APIService.js";
 import ip6addr from "ip6addr";
-const LOCALSTORAGE_BGP = "lagosta_showbgp";
 import StateVisualizer from "./StateVisualizer.vue";
 
 export default {
   components: {
-    stateVisualizer: StateVisualizer
+    stateVisualizer: StateVisualizer,
   },
   props: ["handle", "initializeParent", "initializeRepo", "updated"],
   data() {
     return {
-      showBGP: localStorage.getItem(LOCALSTORAGE_BGP) !== "hide",
       announcements: [],
       filteredAnnouncements: [],
       loadingAnnouncements: false,
@@ -203,16 +196,10 @@ export default {
       pageSize: 25,
       totalRecords: 0,
       debounceTimeout: -1,
-      currentSort: { order: "ascending", prop: "asn" }
+      currentSort: { order: "ascending", prop: "asn" },
     };
   },
   watch: {
-    showBGP(val) {
-      localStorage.setItem(LOCALSTORAGE_BGP, val ? "show" : "hide");
-      this.$emit("trigger-show-BGP", val);
-      this.currentPage = 1;
-      this.preFilterAnnouncements();
-    },
     updated() {
       this.loadAnnouncements();
     },
@@ -222,12 +209,11 @@ export default {
     },
     pageSize() {
       this.preFilterAnnouncements();
-    }
+    },
   },
   created() {
     this.loadingAnnouncements = true;
     this.loadAnnouncements();
-    this.$emit("trigger-show-BGP", this.showBGP);
   },
   methods: {
     debounce(func, wait = 100) {
@@ -261,60 +247,37 @@ export default {
             return 0;
         }
       });
-      let filtered = this.announcements.filter(function(ann) {
+      let filtered = this.announcements.filter(function (ann) {
         let inAuth = false;
         if (ann.authorizes) {
-          inAuth =
-            JSON.stringify(ann.authorizes)
-              .replace(reg, "")
-              .indexOf(src) > -1;
+          inAuth = JSON.stringify(ann.authorizes).replace(reg, "").indexOf(src) > -1;
         }
         let inDis = false;
         if (ann.disallows) {
-          inDis =
-            JSON.stringify(ann.disallows)
-              .replace(reg, "")
-              .indexOf(src) > -1;
-        }
-        let notFound = ann.state !== "announcement_not_found";
-        if (self.showBGP) {
-          notFound = true;
+          inDis = JSON.stringify(ann.disallows).replace(reg, "").indexOf(src) > -1;
         }
 
-        let invalid = true;
-        if (!self.showBGP) {
-          invalid = ann.state.indexOf("invalid") === -1;
-        }
+        // We should skip 'valid announcement' entries because they are already
+        // shown as roa_seen lines.
+        let is_valid_announcement = ann.state === "announcement_valid";
 
         let stateLabel = true;
         if (self.$t("announcements.state")[ann.state]) {
           stateLabel =
-            self
-              .$t("announcements.state")[ann.state].toLowerCase()
-              .replace(reg, "")
-              .indexOf(src) > -1;
+            self.$t("announcements.state")[ann.state].toLowerCase().replace(reg, "").indexOf(src) >
+            -1;
         } else {
           stateLabel = false;
         }
 
         return (
-          ((ann.asn + "")
-            .toLowerCase()
-            .replace(reg, "")
-            .indexOf(src) > -1 ||
-            ann.prefix
-              .toLowerCase()
-              .replace(reg, "")
-              .indexOf(src) > -1 ||
-            ann.state
-              .toLowerCase()
-              .replace(reg, "")
-              .indexOf(src) > -1 ||
+          ((ann.asn + "").toLowerCase().replace(reg, "").indexOf(src) > -1 ||
+            ann.prefix.toLowerCase().replace(reg, "").indexOf(src) > -1 ||
+            ann.state.toLowerCase().replace(reg, "").indexOf(src) > -1 ||
             stateLabel ||
             inAuth ||
             inDis) &&
-          notFound &&
-          invalid
+          !is_valid_announcement
         );
       });
       this.totalRecords = filtered.length;
@@ -329,7 +292,7 @@ export default {
       this.filterAnnouncements();
     },
     getRowClass(data) {
-      if (this.showBGP && data.row.max_length) {
+      if (data.row.max_length) {
         if (data.row.state === "roa_as0" && !data.row.authorizes && !data.row.disallows) {
           return "row-as0";
         }
@@ -341,9 +304,9 @@ export default {
       return "row-announcement";
     },
     loadAnnouncements() {
-      APIService.getBGPAnalysis(this.handle).then(r => {
+      APIService.getBGPAnalysis(this.handle).then((r) => {
         const filtered = r.data.filter(
-          ann =>
+          (ann) =>
             typeof ann.max_length !== "undefined" ||
             ann.state === "announcement_not_found" ||
             ann.state.indexOf("invalid_") > -1
@@ -364,37 +327,33 @@ export default {
         this.$t("caDetails.confirmation.title"),
         {
           confirmButtonText: this.$t("common.ok"),
-          cancelButtonText: this.$t("common.cancel")
+          cancelButtonText: this.$t("common.cancel"),
         }
       )
         .then(() => {
-          APIService.updateROAs(
-            this.handle,
-            {
-              added: [],
-              removed: [row]
-            },
-            this.showBGP
-          )
-            .then(r => {
+          APIService.updateROAs(this.handle, {
+            added: [],
+            removed: [row],
+          })
+            .then((r) => {
               if (r.data) {
                 self.$emit("trigger-suggestions", { remove: row, data: r.data });
               } else {
                 self.$notify({
                   title: this.$t("caDetails.confirmation.retired"),
                   message: this.$t("caDetails.confirmation.retiredSuccess"),
-                  type: "success"
+                  type: "success",
                 });
                 self.loadAnnouncements();
               }
             })
-            .catch(error => {
+            .catch((error) => {
               self.$emit("trigger-error", error);
             });
         })
         .catch(() => {});
-    }
-  }
+    },
+  },
 };
 </script>
 

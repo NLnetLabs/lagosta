@@ -143,7 +143,6 @@
   "announcements": {
     "noRoasOrAnnouncements": "Aucun ROAs ou Annonces trouvés.",
     "search": "Rechercher un ASN, préfixe, statut...",
-    "showBGPInfo": "Montrez les infos BGP",
     "authorizes": "Autoriser {number} annonces",
     "disallows": "Refuser {number} annonces",
     "asn": "ASN",
