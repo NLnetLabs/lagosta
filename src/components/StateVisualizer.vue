@@ -55,6 +55,15 @@
       >{{ $t("announcements.state.roa_redundant") }}</el-tag
     >
     <el-tag
+      type="danger"
+      size="medium"
+      v-if="scope.row.state === 'roa_not_held'"
+      disable-transitions
+      effect="plain"
+      :title="$t('announcements.state.roa_not_held_help')"
+      >{{ $t("announcements.state.roa_not_held") }}</el-tag
+    >
+    <el-tag
       type="success"
       size="mini"
       v-if="scope.row.authorizes && scope.row.authorizes.length"
@@ -117,7 +126,7 @@
 
 <script>
 export default {
-  props: ["scope"]
+  props: ["scope"],
 };
 </script>
 

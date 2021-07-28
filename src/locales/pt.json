@@ -161,6 +161,8 @@
       "roa_seen_help": "Esta ROA corresponde a anúncios vistos no BGP",
       "roa_unseen": "NÃO VISTO",
       "roa_unseen_help": "Não identificamos nenhum anúncio BGP que corresponda a esta ROA",
+      "roa_not_held": "PREFIX REMOVED",
+      "roa_not_held_help": "The prefix is no longer on your certificate(s), the ROA will not be published",
       "roa_no_announcement_info": "SEM INFORMAÇÕES DE ANÚNCIO",
       "roa_too_permissive": "MUITO PERMISSIVO",
       "roa_too_permissive_help": "Esta ROA corresponde a anúncios visto no BGP, mas também permite anúncios não vistos",

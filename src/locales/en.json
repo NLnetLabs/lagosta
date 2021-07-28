@@ -161,6 +161,8 @@
       "roa_seen_help": "This ROA matches announcements seen in BGP",
       "roa_unseen": "NOT SEEN",
       "roa_unseen_help": "We do not see any BGP announcements matching this ROA",
+      "roa_not_held": "PREFIX REMOVED",
+      "roa_not_held_help": "The prefix is no longer on your certificate(s), the ROA will not be published",
       "roa_no_announcement_info": "NO ANNOUNCEMENT INFO",
       "roa_too_permissive": "TOO PERMISSIVE",
       "roa_too_permissive_help": "This ROA matches announcements in BGP, but also allows unseen announcements",

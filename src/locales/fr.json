@@ -153,6 +153,8 @@
       "roa_seen_help": "Ce ROA correspond aux annonces vues dans BGP",
       "roa_unseen": "INTROUVABLE",
       "roa_unseen_help": "Aucune annonce BGP correspondant à ce ROA trouvée",
+      "roa_not_held": "PREFIX REMOVED",
+      "roa_not_held_help": "The prefix is no longer on your certificate(s), the ROA will not be published",
       "roa_no_announcement_info": "AUCUNE INFORMATION D'ANNONCE",
       "roa_too_permissive": "TROP PERMISSIF",
       "roa_too_permissive_help": "Ce ROA correspond aux annonces en BGP, mais aussi à des annonces introuvables",

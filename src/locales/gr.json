@@ -161,6 +161,8 @@
       "roa_seen_help": "Υπάρχουν ταιριαστές ανακοινώσεις στο BGP για αυτό το ROA",
       "roa_unseen": "ΑΦΑΝΗΣ",
       "roa_unseen_help": "Δεν βλέπουμε καμμία BGP ανακοίνωση που να ταιριάζει με αυτό το ROA",
+      "roa_not_held": "PREFIX REMOVED",
+      "roa_not_held_help": "The prefix is no longer on your certificate(s), the ROA will not be published",
       "roa_no_announcement_info": "ΚΑΜΜΙΑ ΠΛΗΡΟΦΟΡΙΑ ΑΝΑΚΟΙΝΩΣΗΣ",
       "roa_too_permissive": "ΠΟΛΥ ΕΠΙΤΡΕΠΤΙΚΗ",
       "roa_too_permissive_help": "Αυτό το ROA ταιριάζει με ανακοινώσιες στο BGP, αλλά επίσης επιτρέπει αφανείς ανακοινώσεις",

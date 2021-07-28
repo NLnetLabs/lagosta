@@ -299,7 +299,13 @@ export default {
         if (data.row.state === "roa_no_announcement_info") {
           return "row-no-announcement";
         }
-        return data.row.state === "roa_unseen" ? "row-unseen" : "row-dark";
+        if (data.row.state === "roa_unseen") {
+          return "row-unseen";
+        }
+        if (data.row.state === "roa_not_held") {
+          return "row-not-held";
+        }
+        return "row-dark";
       }
       return "row-announcement";
     },
@@ -396,6 +402,7 @@ export default {
 
 .row-announcement,
 .row-unseen,
+.row-not-held,
 .row-no-announcement,
 .row-as0 {
   .el-table__expand-column .cell,

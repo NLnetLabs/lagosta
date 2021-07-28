@@ -161,6 +161,8 @@
       "roa_seen_help": "Deze ROA komt overeen met aankondigingen gezien in BGP",
       "roa_unseen": "NIET ZICHTBAAR",
       "roa_unseen_help": "We zien geen BGP aankondigingen overeenkomstig met deze ROA",
+      "roa_not_held": "PREFIX VERWIJDERD",
+      "roa_not_held_help": "Deze prefix staat niet meer op uw certifica(a)t(en), de ROA wordt niet gepubliceerd",
       "roa_no_announcement_info": "GEEN AANKONDIGINGSINFORMATIE",
       "roa_too_permissive": "TE VEROORLOVEND",
       "roa_too_permissive_help": "Deze ROA komt overeen met aankondigingen gezien in BGP, maar staat ook additionele aankodigingen toe",

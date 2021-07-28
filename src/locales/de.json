@@ -161,6 +161,8 @@
       "roa_seen_help": "Dieses ROA stimmt mit BGP Ankündigungen überein",
       "roa_unseen": "NICHT SICHTBAR",
       "roa_unseen_help": "Wir sehen keine BGP Ankündigungen welche mit dem ROA übereinstimmen",
+      "roa_not_held": "PREFIX REMOVED",
+      "roa_not_held_help": "The prefix is no longer on your certificate(s), the ROA will not be published",
       "roa_no_announcement_info": "KEINE BGP-ANKÜNDIGUNG INFORMATION",
       "roa_too_permissive": "NICHT RESTRIKTIV GENUG",
       "roa_too_permissive_help": "Dieses ROA stimmt mit BGP Ankündigungen überein, erlaubt darüber hinaus aber auch noch weitere BGP Ankündigungen",
