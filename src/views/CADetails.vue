@@ -75,7 +75,7 @@
                       <el-button
                         class="mt-1"
                         type="text"
-                        v-if="!initializeParent && !initializeRepo && !emptyResources && bgpShown"
+                        v-if="!initializeParent && !initializeRepo && !emptyResources"
                         @click="analysisDetailsVisible = true"
                         >{{ $t("caDetails.analyseThis") }}</el-button
                       >
@@ -1071,7 +1071,6 @@ export default {
       resourcesSearch: "",
       updatedAnnouncements: 0,
       updatedPreview: 0,
-      bgpShown: false,
       analysisDetailsVisible: false,
       parents: {},
       repoStatus: {},
@@ -1192,6 +1191,7 @@ export default {
 
       addToDelta("stale", false);
       addToDelta("as0_redundant", false);
+      addToDelta("not_held", false);
       addToDelta("redundant", false);
       addToDelta("too_permissive", false);
       addToDelta("disallowing", false);
@@ -1473,20 +1473,16 @@ export default {
     addROA() {
       const self = this;
       this.removeROASuggestions = false;
-      APIService.updateROAs(
-        this.handle,
-        {
-          added: [
-            {
-              asn: parseInt(this.addROAForm.asn),
-              prefix: this.addROAForm.prefix,
-              max_length: parseInt(this.addROAForm.maxLength) || 0,
-            },
-          ],
-          removed: [],
-        },
-        this.bgpShown
-      )
+      APIService.updateROAs(this.handle, {
+        added: [
+          {
+            asn: parseInt(this.addROAForm.asn),
+            prefix: this.addROAForm.prefix,
+            max_length: parseInt(this.addROAForm.maxLength) || 0,
+          },
+        ],
+        removed: [],
+      })
         .then((r) => {
           self.submittingROAForm = false;
           self.addROAFormVisible = false;

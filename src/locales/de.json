@@ -127,6 +127,7 @@
       "willRemove": "Entferne dieses ROA, da ({reason})",
       "reasons": {
         "not_found": "Nicht gefunden",
+        "not_held": "ROA cannot be published, its prefix is no longer on your certificate(s)",
         "invalid_asn": "Ungültiges ASN",
         "invalid_length": "Ungültige Länge",
         "stale": "Nicht sichtbar",

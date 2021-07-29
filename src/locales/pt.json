@@ -127,6 +127,7 @@
       "willRemove": "Removerá esta ROA ({reason})",
       "reasons": {
         "not_found": "Não encontrado",
+        "not_held": "ROA cannot be published, its prefix is no longer on your certificate(s)",
         "invalid_asn": "ASN inválido",
         "invalid_length": "Comprimento inválido",
         "stale": "Velho",

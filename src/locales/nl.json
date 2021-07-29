@@ -127,6 +127,7 @@
       "willRemove": "Verwijder deze ROA vanwege status ({reason})",
       "reasons": {
         "not_found": "Niet gevonden",
+        "not_held": "ROA kan niet gepubliceerd worden, de prefix staat niet meer op uw certifica(a)t(en)",
         "invalid_asn": "Ongeldig ASN",
         "invalid_length": "Ongeldige lengte",
         "stale": "Niet zichtbaar",

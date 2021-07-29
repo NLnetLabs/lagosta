@@ -127,6 +127,7 @@
       "willRemove": "Eliminaremos este ROA ({reason})",
       "reasons": {
         "not_found": "No encontrado",
+        "not_held": "ROA cannot be published, its prefix is no longer on your certificate(s)",
         "invalid_asn": "ASN Invalido",
         "invalid_length": "Largo de prefijo inválido",
         "stale": "rancio/viejo",

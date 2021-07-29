@@ -127,6 +127,7 @@
       "willRemove": "Will remove this ROA ({reason})",
       "reasons": {
         "not_found": "Allow announcement not covered by any of your ROAs",
+        "not_held": "ROA cannot be published, its prefix is no longer on your certificate(s)",
         "invalid_asn": "Allow announcement from new ASN",
         "invalid_length": "Allow more specific announcement for ASN",
         "stale": "No announcements seen for ROA",

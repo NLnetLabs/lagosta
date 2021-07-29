@@ -127,6 +127,7 @@
       "willRemove": "Αφαίρεση αυτού του ROA ({reason})",
       "reasons": {
         "not_found": "Δεν βρέθηκε",
+        "not_held": "ROA cannot be published, its prefix is no longer on your certificate(s)",
         "invalid_asn": "Άκυρο ASN",
         "invalid_length": "Άκυρο μήκος",
         "stale": "Δεν υπάρχουν ορατές ανακοινώσεις για το ROA",
