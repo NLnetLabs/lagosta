@@ -53,7 +53,6 @@
                     :updated="updatedAnnouncements"
                     @trigger-add-ROA="triggerAddROA($event)"
                     @trigger-error="triggerError($event)"
-                    @trigger-show-BGP="triggerShowBGP($event)"
                     @trigger-suggestions="triggerSuggestions($event)"
                     v-if="!initializeRepo && !initializeParent && !emptyResources"
                   />
@@ -76,7 +75,7 @@
                       <el-button
                         class="mt-1"
                         type="text"
-                        v-if="!initializeParent && !initializeRepo && !emptyResources && bgpShown"
+                        v-if="!initializeParent && !initializeRepo && !emptyResources"
                         @click="analysisDetailsVisible = true"
                         >{{ $t("caDetails.analyseThis") }}</el-button
                       >
@@ -811,7 +810,6 @@
           <h3 class="suggestion-title suggestion-title-nopadding">
             {{ $t("caDetails.suggestions.willResult") }}
           </h3>
-          <simpleROAsTable :announcements="effects" :updated="updatedPreview"></simpleROAsTable>
         </el-col>
       </el-row>
 
@@ -944,7 +942,6 @@
 
 <script>
 import AnnouncementsROAs from "../components/AnnouncementsROAs.vue";
-import SimpleROAsTable from "../components/SimpleROAsTable.vue";
 import JSONErrorVisualizer from "../components/JSONErrorVisualizer.vue";
 
 import "element-ui/lib/theme-chalk/display.css";
@@ -957,7 +954,6 @@ import * as moment from "moment";
 export default {
   components: {
     announcementsROAs: AnnouncementsROAs,
-    simpleROAsTable: SimpleROAsTable,
     jsonErrorVisualizer: JSONErrorVisualizer,
   },
   data() {
@@ -1075,7 +1071,6 @@ export default {
       resourcesSearch: "",
       updatedAnnouncements: 0,
       updatedPreview: 0,
-      bgpShown: false,
       analysisDetailsVisible: false,
       parents: {},
       repoStatus: {},
@@ -1196,6 +1191,7 @@ export default {
 
       addToDelta("stale", false);
       addToDelta("as0_redundant", false);
+      addToDelta("not_held", false);
       addToDelta("redundant", false);
       addToDelta("too_permissive", false);
       addToDelta("disallowing", false);
@@ -1477,20 +1473,16 @@ export default {
     addROA() {
       const self = this;
       this.removeROASuggestions = false;
-      APIService.updateROAs(
-        this.handle,
-        {
-          added: [
-            {
-              asn: parseInt(this.addROAForm.asn),
-              prefix: this.addROAForm.prefix,
-              max_length: parseInt(this.addROAForm.maxLength) || 0,
-            },
-          ],
-          removed: [],
-        },
-        this.bgpShown
-      )
+      APIService.updateROAs(this.handle, {
+        added: [
+          {
+            asn: parseInt(this.addROAForm.asn),
+            prefix: this.addROAForm.prefix,
+            max_length: parseInt(this.addROAForm.maxLength) || 0,
+          },
+        ],
+        removed: [],
+      })
         .then((r) => {
           self.submittingROAForm = false;
           self.addROAFormVisible = false;
@@ -1521,9 +1513,6 @@ export default {
       this.addROAForm.prefix = row.prefix;
       this.updateMaxLength(row.prefix);
       this.addROAFormVisible = true;
-    },
-    triggerShowBGP(val) {
-      this.bgpShown = val;
     },
     triggerSuggestions(event) {
       this.removeROASuggestions = true;
