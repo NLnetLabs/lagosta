@@ -180,11 +180,6 @@
                         </span>
                       </p>
                       <p>
-                        <strong>{{ $t("caDetails.nextExchange") }}</strong
-                        >&nbsp;
-                        {{ getDate(parents[props.row.handle].next_exchange_before) }}
-                      </p>
-                      <p>
                         <el-row>
                           <el-col :span="2"
                             ><strong>{{ $t("caDetails.allResources") }}</strong></el-col
