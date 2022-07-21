@@ -407,79 +407,37 @@
                 row-class-name="row-dark"
                 :show-header="false"
               >
-                <el-table-column type="expand">
-                  <template>
-                    <div v-if="repoStatus">
-                      <p v-if="repoStatus.last_exchange">
-                        <strong>{{ $t("caDetails.lastExchange") }}</strong
-                        >&nbsp;
-                        {{ getDate(repoStatus.last_exchange.timestamp) }}
-                        <span v-if="repoStatus.last_exchange.result === 'Success'"
-                          ><i class="el-icon-success" style="color: #67c23a"></i
-                        ></span>
-                        <span v-if="repoStatus.last_exchange.result !== 'Success'"
-                          ><i class="el-icon-error" style="color: #f56c6c"></i>
-                          {{ repoStatus.last_exchange.result }}
-                          <strong>URI</strong> {{ repoStatus.last_exchange.uri }}
-                        </span>
-                      </p>
-                      <p>
-                        <strong>{{ $t("caDetails.nextExchange") }}</strong
-                        >&nbsp;
-                        {{ getDate(repoStatus.next_exchange_before) }}
-                      </p>
-                      <p>
-                        <el-row>
-                          <el-col :span="2"
-                            ><strong>{{ $t("caDetails.published") }}</strong></el-col
-                          >
-                          <el-col :span="22">
-                            <p
-                              :key="pub.uri"
-                              v-for="pub in repoStatus.published"
-                              style="margin-top: 0"
-                            >
-                              <el-row>
-                                <el-col :span="12"
-                                  >{{ pub.uri.split("/").pop() }}
-                                  <el-button
-                                    type="text"
-                                    size="mini"
-                                    class="mini-download"
-                                    :title="$t('common.copy')"
-                                    @click="$copyText(pub.uri)"
-                                  >
-                                    <font-awesome-icon icon="clipboard" />
-                                  </el-button>
-                                  <el-button
-                                    type="text"
-                                    size="mini"
-                                    class="mini-download"
-                                    style="padding-left: 0"
-                                    :title="$t('common.download')"
-                                    @click="
-                                      $emit(
-                                        'download-file',
-                                        convertB64(pub.base64),
-                                        pub.uri.split('/').pop()
-                                      )
-                                    "
-                                  >
-                                    <font-awesome-icon icon="download" />
-                                  </el-button>
-                                </el-col>
-                              </el-row>
-                            </p>
-                          </el-col>
-                        </el-row>
-                      </p>
+                <el-table-column>
+                    <div v-if="repoStatus.last_exchange">
+                        <p>
+                          <el-row>
+                            <el-col :span="2">
+                              <strong>{{ $t("caDetails.exchangeUri") }}</strong>
+                            </el-col>
+                            <el-col :span="22">
+                              {{ repoStatus.last_exchange.uri }}
+                            </el-col>
+                          </el-row>
+                        </p>
+
+                        <p>
+                          <el-row>
+                            <el-col :span="2">
+                              <strong>{{ $t("caDetails.lastExchange") }}</strong>
+                            </el-col>
+                            <el-col :span="22">
+                              {{ getDate(repoStatus.last_exchange.timestamp) }}
+                              <span v-if="repoStatus.last_exchange.result === 'Success'"
+                                ><i class="el-icon-success" style="color: #67c23a"></i
+                              ></span>
+                              <span v-if="repoStatus.last_exchange.result !== 'Success'"
+                                ><i class="el-icon-error" style="color: #f56c6c"></i>
+                                {{ repoStatus.last_exchange.result }}
+                              </span>
+                            </el-col>
+                        </p>
+                      
                     </div>
-                  </template>
-                </el-table-column>
-                <el-table-column prop="type" :label="$t('caDetails.type')">
-                  <template>
-                    {{ $t("caDetails.repo") }}
-                  </template>
                 </el-table-column>
               </el-table>
 
@@ -1002,21 +960,21 @@ export default {
   },
   computed: {
     properties: function () {
-      if (this.repo.repository_response && this.repoStatus) {
+      if (this.repo && this.repoStatus) {
         return [
           {
             props: [
               {
                 prop: "Base URI",
-                value: this.repo.repository_response.repo_info.sia_base,
+                value: this.repo.repo_info.sia_base,
               },
               {
                 prop: "RPKI Notify",
-                value: this.repo.repository_response.repo_info.rrdp_notification_uri,
+                value: this.repo.repo_info.rrdp_notification_uri,
               },
               {
                 prop: "Service URI",
-                value: this.repo.repository_response.service_uri,
+                value: this.repo.server_info.service_uri,
               },
             ],
           },
