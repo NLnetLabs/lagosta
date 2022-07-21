@@ -167,18 +167,38 @@
                   <template slot-scope="props">
                     <div v-if="parents && parents[props.row.handle]">
                       <p>
-                        <strong>{{ $t("caDetails.lastExchange") }}</strong
-                        >&nbsp;
-                        {{ getDate(parents[props.row.handle].last_exchange.timestamp) }}
-                        <span v-if="parents[props.row.handle].last_exchange.result === 'Success'"
-                          ><i class="el-icon-success" style="color: #67c23a"></i
-                        ></span>
-                        <span v-if="parents[props.row.handle].last_exchange.result !== 'Success'"
-                          ><i class="el-icon-error" style="color: #f56c6c"></i>
-                          {{ parents[props.row.handle].last_exchange.result }}
-                          <strong>URI</strong> {{ parents[props.row.handle].last_exchange.uri }}
-                        </span>
+                        <el-row>
+                          <el-col :span="2">
+                            <strong>{{ $t("caDetails.exchangeUri") }}</strong>
+                          </el-col>
+                          <el-col :span="22">
+                            {{ parents[props.row.handle].last_exchange.uri }}
+                          </el-col>
+                        </el-row>
                       </p>
+
+                      <p>
+                        <el-row>
+                          <el-col :span="2">
+                            <strong>{{ $t("caDetails.lastExchange") }}</strong>
+                          </el-col>
+                          <el-col :span="22">
+                            {{ getDate(parents[props.row.handle].last_exchange.timestamp) }}
+                            <span
+                              v-if="parents[props.row.handle].last_exchange.result === 'Success'"
+                            >
+                              <i class="el-icon-success" style="color: #67c23a"></i>
+                            </span>
+                            <span
+                              v-if="parents[props.row.handle].last_exchange.result !== 'Success'"
+                            >
+                              <i class="el-icon-error" style="color: #f56c6c"></i>
+                              {{ parents[props.row.handle].last_exchange.result }}
+                            </span>
+                          </el-col>
+                        </el-row>
+                      </p>
+
                       <p>
                         <el-row>
                           <el-col :span="2"

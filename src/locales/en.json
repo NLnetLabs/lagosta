@@ -142,6 +142,7 @@
     "syncParents": "Refresh Parents",
     "syncRepo": "Refresh Repository",
     "lastExchange": "Last Exchange",
+    "exchangeUri": "URI",
     "nextExchange": "Next Exchange Before",
     "allResources": "All Resources",
     "entitlements": "Entitlements",
