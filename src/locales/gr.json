@@ -198,7 +198,7 @@
     "repo-not-set": "Πρώτα πρέπει να ρυθμιστεί ένα αποθετήριο (repository)",
     "pub-unknown": "Ο εκδότης '{publisher}' είναι άγνωστος",
     "pub-duplicate": "Ο εκδότης '{publisher}' έχει ήδη αρχικοποιηθεί",
-    "pub-outside-jail": "Το URI '{uri}' του εκδότη είναι εκτός του URI '{base_uri}' του αποθετηρίου (repository)",
+    "pub-outside-jail": "Το URI '{uri}' του εκδότη είναι εκτός του URI '{sia_base}' του αποθετηρίου (repository)",
     "pub-uri-no-slash": "Το URI '{uri}' του εκδότη πρέπει να τελειώνει με '/'",
     "pub-no-embedded-repo": "Δεν έχει ρυθμιστεί ενσωματωμένο αποθετήριο (repository)",
     "ca-duplicate": "Η Αρχή Πιστοποίησης (CA) '{ca}' έχει ήδη αρχικοποιηθεί",

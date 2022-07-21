@@ -198,7 +198,7 @@
     "repo-not-set": "Sie müssen erst eine Datenbank (Repository) konfigurieren",
     "pub-unknown": "Publisher '{publisher}' unbekannt",
     "pub-duplicate": "Publisher '{publisher}' wurde bereits initialisiert",
-    "pub-outside-jail": "Publisher uri '{uri}' außerhalb der Datenbank (Repository) uri '{base_uri}'",
+    "pub-outside-jail": "Publisher uri '{uri}' außerhalb der Datenbank (Repository) uri '{sia_base}'",
     "pub-uri-no-slash": "Publisher uri '{uri}' muss mit einen Slash enden",
     "pub-no-embedded-repo": "Keine integrierte Datenbank (Repository) konfiguriert",
     "ca-duplicate": "Die Zertifizierungsstelle '{ca}' wurde bereits initialisiert",

@@ -190,7 +190,7 @@
     "repo-not-set": "Vous devez d'abord configurer un dépôt",
     "pub-unknown": "Publisher '{publisher}' est inconnu",
     "pub-duplicate": "Publisher '{publisher}' était déjà initialisé",
-    "pub-outside-jail": "Publisher uri '{uri}' en dehors du dépôt uri '{base_uri}'",
+    "pub-outside-jail": "Publisher uri '{uri}' en dehors du dépôt uri '{sia_base}'",
     "pub-uri-no-slash": "Publisher uri '{uri}' doit avoir une barre oblique à la fin",
     "pub-no-embedded-repo": "Pas de dépôt imbriqué configuré",
     "ca-duplicate": "AC '{ca}' déjà initialisée",

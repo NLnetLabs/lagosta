@@ -198,7 +198,7 @@
     "repo-not-set": "Primero debe configurar su repositorio",
     "pub-unknown": "El publicador '{publisher}' es desconocido",
     "pub-duplicate": "El publicador '{publisher}' ya se inicializó",
-    "pub-outside-jail": "Publicador uri '{uri}' fuera del repositorio uri '{base_uri}'",
+    "pub-outside-jail": "Publicador uri '{uri}' fuera del repositorio uri '{sia_base}'",
     "pub-uri-no-slash": "El publicador uri '{uri}' debe tener una barra diagonal al final",
     "pub-no-embedded-repo": "No se configuró ningún repositorio integrado",
     "ca-duplicate": "La CA '{ca}' ya se inicializó",

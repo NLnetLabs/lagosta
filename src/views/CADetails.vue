@@ -1008,11 +1008,11 @@ export default {
             props: [
               {
                 prop: "Base URI",
-                value: this.repo.repository_response.repo_info.base_uri,
+                value: this.repo.repository_response.repo_info.sia_base,
               },
               {
                 prop: "RPKI Notify",
-                value: this.repo.repository_response.repo_info.rpki_notify,
+                value: this.repo.repository_response.repo_info.rrdp_notification_uri,
               },
               {
                 prop: "Service URI",

@@ -199,7 +199,7 @@
     "repo-not-set": "You must configure a repository first",
     "pub-unknown": "Publisher '{publisher}' is unknown",
     "pub-duplicate": "Publisher '{publisher}' was already initialised",
-    "pub-outside-jail": "Publisher uri '{uri}' outside repository uri '{base_uri}'",
+    "pub-outside-jail": "Publisher uri '{uri}' outside repository uri '{sia_base}'",
     "pub-uri-no-slash": "Publisher uri '{uri}' must have a trailing slash",
     "pub-no-embedded-repo": "No embedded repository configured",
     "ca-duplicate": "CA '{ca}' was already initialised",

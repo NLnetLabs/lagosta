@@ -198,7 +198,7 @@
     "repo-not-set": "Você deve configurar um repositório primeiro",
     "pub-unknown": "Publicador '{publisher}' desconhecido",
     "pub-duplicate": "Publicador '{publisher}' já inicializado",
-    "pub-outside-jail": "URI do publicador '{uri}' não pertence à URI do repositório '{base_uri}'",
+    "pub-outside-jail": "URI do publicador '{uri}' não pertence à URI do repositório '{sia_base}'",
     "pub-uri-no-slash": "URI do publicador '{uri}' deve ser finalizado com um caracter '/'",
     "pub-no-embedded-repo": "Nenhum repositório embarcado configurado",
     "ca-duplicate": "CA '{ca}' já inicializada",

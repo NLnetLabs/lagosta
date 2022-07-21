@@ -198,7 +198,7 @@
     "repo-not-set": "U dient eerst een databank (repository) te configureren",
     "pub-unknown": "Publisher '{publisher}' is niet bekend",
     "pub-duplicate": "Publisher '{publisher}' is al geïnitialiseerd",
-    "pub-outside-jail": "Publisher uri '{uri}' ligt buiten de repository uri '{base_uri}'",
+    "pub-outside-jail": "Publisher uri '{uri}' ligt buiten de repository uri '{sia_base}'",
     "pub-uri-no-slash": "Publisher uri '{uri}' moet eindigen met een slash",
     "pub-no-embedded-repo": "Geen geïntegreerde databank (repository) geconfigureerd",
     "ca-duplicate": "CA '{ca}' is reeds geïnitialiseerd",
