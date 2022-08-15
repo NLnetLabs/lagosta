@@ -435,6 +435,7 @@
                                 {{ repoStatus.last_exchange.result }}
                               </span>
                             </el-col>
+                          </el-row>
                         </p>
                       
                     </div>
