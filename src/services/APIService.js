@@ -144,25 +144,25 @@ export default {
     return apiClient.get("/api/v1/cas/" + handle + "/parents/" + parent).catch(handleError);
   },
   updateROAs(handle, delta, trial) {
-    return apiClient.post("/api/v1/cas/" + handle + "/routes" + (trial ? "/try" : ""), delta).catch(handleError);
+    return apiClient.post("/api/v1/cas/" + handle + "/routes" + (trial ? "/try" : ""), delta, {headers: {'content-type': 'application/json'}}).catch(handleError);
   },
   updateROAsDryRun(handle, delta) {
-    return apiClient.post("/api/v1/cas/" + handle + "/routes/analysis/dryrun", delta).catch(handleError);
+    return apiClient.post("/api/v1/cas/" + handle + "/routes/analysis/dryrun", delta, {headers: {'content-type': 'application/json'}}).catch(handleError);
   },
   createCA(handle) {
-    return apiClient.post("/api/v1/cas", { handle }).catch(handleError);
+    return apiClient.post("/api/v1/cas", { handle }, {headers: {'content-type': 'application/json'}}).catch(handleError);
   },
   getChildRequestXML(handle) {
     return apiClient.get("/api/v1/cas/" + handle + "/id/child_request.xml").catch(handleError);
   },
   addParentResponse(handle, xml, name) {
-    return apiClient.post("/api/v1/cas/" + handle + "/parents/" + name, xml).catch(handleError);
+    return apiClient.post("/api/v1/cas/" + handle + "/parents/" + name, xml, {headers: {'content-type': 'application/xml'}}).catch(handleError);
   },
   getRepoRequestXML(handle) {
     return apiClient.get("/api/v1/cas/" + handle + "/id/publisher_request.xml").catch(handleError);
   },
   addRepoResponse(handle, xml) {
-    return apiClient.post("/api/v1/cas/" + handle + "/repo", xml).catch(handleError);
+    return apiClient.post("/api/v1/cas/" + handle + "/repo", xml, {headers: {'content-type': 'application/xml'}}).catch(handleError);
   },
   getKrillStats() {
     return apiClient.get("/stats/info").catch(handleError);
@@ -182,7 +182,8 @@ export default {
         v6: typeof ipv6_res !== "undefined" ? ipv6_res.trim() : ""
       },
       id_cert: id_cert.trim()
-    }).catch(handleError);
+    },
+    {headers: {'content-type': 'application/json'}}).catch(handleError);
   },
   testbedGetParentResponseXML(child) {
     return simpleClient.get("/testbed/children/" + child + "/parent_response.xml").catch(handleError);
@@ -195,7 +196,8 @@ export default {
       tag: null,
       publisher_handle: publisher_handle.trim(),
       id_cert: publisher_request_xml.trim()
-    }).catch(handleError);
+    },
+    {headers: {'content-type': 'application/json'}}).catch(handleError);
   },
   testbedGetRepositoryResponseXML(publisher) {
     return simpleClient.get("/testbed/publishers/" + publisher + "/response.xml").catch(handleError);
