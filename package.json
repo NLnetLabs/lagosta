@@ -22,7 +22,7 @@
     "dot-prop": "^5.1.1",
     "dotenv": "^8.2.0",
     "element-ui": "^2.9.1",
-    "eventsource": "1.1.2",
+    "eventsource": "1.1.1",
     "express": "^4.17.1",
     "express-http-proxy": "^1.6.0",
     "glob-parent": "5.1.2",
