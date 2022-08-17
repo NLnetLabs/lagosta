@@ -15,7 +15,7 @@
     "acorn": "^6.4.1",
     "ansi-regex": "5.0.1",
     "async": "2.6.4",
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "cidr-regex": "^2.0.10",
     "core-js": "^3.12.1",
     "crypto-js": "^4.0.0",
